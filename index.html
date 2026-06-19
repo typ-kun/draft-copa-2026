@@ -26,9 +26,9 @@
             <label>Quantidade de participantes</label>
 
             <select id="playerCount">
-                <option value="1">1 jogador</option>
+                <option value="1" selected>1 jogador</option>
                 <option value="2">2 jogadores</option>
-                <option value="3" selected>3 jogadores</option>
+                <option value="3">3 jogadores</option>
                 <option value="4">4 jogadores</option>
                 <option value="5">5 jogadores</option>
                 <option value="6">6 jogadores</option>
@@ -78,10 +78,6 @@
                 max="20"
             >
 
-            <button id="createPlayers">
-                Continuar
-            </button>
-
             <div id="playerNames"></div>
 
         </div>
@@ -118,10 +114,16 @@
                 </div>
 
                 <button id="refreshBtn">
-                    ↺ NOVO POOL
+                    ↺ ATUALIZAR POOL
                 </button>
 
                 <div id="poolList"></div>
+
+                <div class="pool-footer">
+                    <button id="restartDraft">
+                        Recomeçar Draft
+                    </button>
+                </div>
 
             </section>
 
@@ -133,12 +135,6 @@
 
             </section>
 
-        </div>
-
-        <div class="draft-footer">
-            <button id="restartDraft">
-                Recomeçar Draft
-            </button>
         </div>
 
     </div>

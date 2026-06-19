@@ -194,33 +194,12 @@ function atualizarRefreshes() {
             jogadorAtual
         ];
 
-    let texto =
-        "Refreshes: ";
-
-    for (
-        let i = 0;
-        i < restantes;
-        i++
-    ) {
-
-        texto += "● ";
-
-    }
-
-    if (
-        restantes === 0
-    ) {
-
-        texto += "(0)";
-
-    }
-
     document
         .getElementById(
             "refreshes"
         )
         .innerText =
-        texto;
+        `Refreshes: ${restantes}`;
 
 }
 
@@ -247,61 +226,71 @@ function atualizarStatus() {
 // CRIAR PARTICIPANTES
 // ======================
 
+// ======================
+// GERAR INPUTS DE NOMES
+// ======================
+
+function gerarInputsNomes() {
+
+    const quantidade =
+        parseInt(
+            document.getElementById(
+                "playerCount"
+            ).value
+        );
+
+    const container =
+        document.getElementById(
+            "playerNames"
+        );
+
+    container.innerHTML = "";
+
+    for (
+        let i = 1;
+        i <= quantidade;
+        i++
+    ) {
+
+        container.innerHTML += `
+            <div>
+                <input
+                    id="playerName${i}"
+                    placeholder="Nome Jogador ${i}"
+                >
+            </div>
+        `;
+
+    }
+
+    container.innerHTML += `
+        <button id="startDraft">
+            Iniciar Draft
+        </button>
+    `;
+
+    document
+        .getElementById(
+            "startDraft"
+        )
+        .addEventListener(
+            "click",
+            iniciarDraft
+        );
+
+}
+
+// Mostrar inputs já com o valor padrão
+gerarInputsNomes();
+
+// Atualizar ao mudar a quantidade
 document
     .getElementById(
-        "createPlayers"
+        "playerCount"
     )
     .addEventListener(
-        "click",
-        () => {
-
-            const quantidade =
-                parseInt(
-                    document.getElementById(
-                        "playerCount"
-                    ).value
-                );
-
-            const container =
-                document.getElementById(
-                    "playerNames"
-                );
-
-            container.innerHTML = "";
-
-            for (
-                let i = 1;
-                i <= quantidade;
-                i++
-            ) {
-
-                container.innerHTML += `
-                    <div style="margin-bottom:10px;">
-                        <input
-                            id="playerName${i}"
-                            placeholder="Nome Jogador ${i}"
-                        >
-                    </div>
-                `;
-
-            }
-
-            container.innerHTML += `
-                <button id="startDraft">
-                    Iniciar Draft
-                </button>
-            `;
-
-            document
-                .getElementById(
-                    "startDraft"
-                )
-                .addEventListener(
-                    "click",
-                    iniciarDraft
-                );
-
-        }
+        "change",
+        gerarInputsNomes
     );
 
 // ======================

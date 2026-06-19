@@ -324,9 +324,10 @@ section.pool {
     border-top: none;
     border-left: none;
     border-bottom: none;
-    min-height: calc(100dvh - 80px);
+    min-height: calc(100dvh - 70px);
     position: sticky;
     top: 0;
+    overflow: hidden;
 }
 
 section.pool h2 {
@@ -354,7 +355,33 @@ section.pool h2 {
     flex-direction: column;
     border: 2px solid var(--line);
     box-shadow: var(--hard-shadow);
+    flex: 1 1 auto;
+    overflow-y: auto;
+    min-height: 0;
 }
+
+.pool-footer {
+    flex-shrink: 0;
+    padding-top: 4px;
+}
+
+.pool-footer #restartDraft {
+    background: transparent;
+    color: var(--muted);
+    border: 2px solid var(--line);
+    font-size: 11px;
+    padding: 8px 16px;
+    width: 100%;
+    letter-spacing: 0.08em;
+    font-family: var(--body);
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.pool-footer #restartDraft:hover { color: var(--accent); border-color: var(--accent); background: transparent; }
 
 /* ====================== */
 /* CARDS DO POOL           */
@@ -562,13 +589,6 @@ section.teams {
 /* ====================== */
 /* FOOTER DO DRAFT         */
 /* ====================== */
-
-.draft-footer {
-    padding: 10px clamp(14px, 2.5vw, 20px) 20px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    align-items: center;
-}
 
 /* ====================== */
 /* RESULTADOS FINAIS       */
