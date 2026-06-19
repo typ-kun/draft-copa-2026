@@ -700,6 +700,130 @@ section.teams {
 }
 
 /* ====================== */
+/* SELEÇÃO DE PAÍSES       */
+/* ====================== */
+
+.cs-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 24px 56px;
+}
+
+.cs-header {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.cs-eyebrow {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+
+.cs-header h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    text-transform: uppercase;
+    color: var(--ink);
+    text-shadow: 4px 4px 0 var(--accent-2);
+    margin-bottom: 10px;
+}
+
+.cs-turn {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+.cs-player {
+    font-family: var(--display);
+    font-size: clamp(22px, 3.5vw, 30px);
+    font-weight: var(--display-weight);
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-left: 4px;
+}
+
+.country-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fill, minmax(130px, 1fr)
+    );
+    gap: 12px;
+}
+
+.country-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 12px 14px;
+    border: 2px solid var(--ink);
+    background: var(--surface-2);
+    box-shadow: var(--hard-shadow);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s, transform 0.12s, box-shadow 0.12s;
+    border-radius: 2px;
+    min-height: 100px;
+    text-align: center;
+}
+
+.country-card:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--ink);
+}
+
+.country-card:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--line);
+}
+
+.country-card .flag {
+    width: 40px;
+    height: 30px;
+    margin-right: 0;
+}
+
+.country-card .country-name {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    line-height: 1.15;
+    word-break: break-word;
+}
+
+.country-card:hover .country-name {
+    color: #fff;
+}
+
+.country-card.is-taken {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none;
+}
+
+.country-card.is-taken:hover {
+    background: var(--surface-2);
+    color: var(--ink);
+}
+
+.country-card.is-taken .country-name {
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+/* ====================== */
 /* MODAL DE CONFIRMAÇÃO    */
 /* ====================== */
 

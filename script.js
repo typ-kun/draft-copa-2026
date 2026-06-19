@@ -17,6 +17,10 @@ let pickAtual = 1;
 
 let direcaoSnake = 1;
 
+let paisParticipante = [];
+let ordemSelecao = [];
+let indiceSelecao = 0;
+
 // ======================
 // CONFIGURAÇÕES
 // ======================
@@ -410,9 +414,183 @@ function iniciarDraft() {
         "setup"
     ).style.display = "none";
 
+    paisParticipante = [];
+
+    indiceSelecao = 0;
+
+    iniciarSelecaoPaises();
+
+}
+
+// ======================
+// SELEÇÃO DE PAÍSES
+// ======================
+
+function iniciarSelecaoPaises() {
+
+    // Extrair lista única de países do JSON
+    const paisesUnicos = [
+        ...new Set(
+            jogadoresBase.map(
+                j => j.pais
+            )
+        )
+    ].sort();
+
+    // Embaralhar ordem de seleção (circular)
+    const ordemOriginal = [];
+
+    for (
+        let i = 0;
+        i < nomesJogadores.length;
+        i++
+    ) {
+
+        ordemOriginal.push(i);
+
+    }
+
+    ordemSelecao =
+        ordemOriginal;
+
+    indiceSelecao = 0;
+
+    // Mostrar tela de seleção
+    document.getElementById(
+        "countrySelection"
+    ).style.display =
+        "block";
+
+    renderizarGridPaises(
+        paisesUnicos
+    );
+
+}
+
+function renderizarGridPaises(
+    paises
+) {
+
+    const grid =
+        document.getElementById(
+            "countryGrid"
+        );
+
+    const turno =
+        document.getElementById(
+            "csTurn"
+        );
+
+    const jogadorIdx =
+        ordemSelecao[
+            indiceSelecao
+        ];
+
+    turno.innerHTML =
+        `Vez de: <span class="cs-player">${nomesJogadores[jogadorIdx]}</span>`;
+
+    grid.innerHTML = "";
+
+    paises.forEach(
+        pais => {
+
+            const jaEscolhido =
+                paisParticipante.includes(
+                    pais
+                );
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "country-card" +
+                (jaEscolhido
+                    ? " is-taken"
+                    : "");
+
+            const urlBandeira =
+                bandeira(pais);
+
+            card.innerHTML = `
+                ${urlBandeira}
+                <span class="country-name">${pais}</span>
+            `;
+
+            if (!jaEscolhido) {
+
+                card.addEventListener(
+                    "click",
+                    () =>
+                        selecionarPais(
+                            pais,
+                            paises
+                        )
+                );
+
+            }
+
+            grid.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+function selecionarPais(
+    pais,
+    paises
+) {
+
+    const jogadorIdx =
+        ordemSelecao[
+            indiceSelecao
+        ];
+
+    paisParticipante[
+        jogadorIdx
+    ] = pais;
+
+    indiceSelecao++;
+
+    if (
+        indiceSelecao >=
+        nomesJogadores.length
+    ) {
+
+        prosseguirParaDraft();
+        return;
+
+    }
+
+    renderizarGridPaises(
+        paises
+    );
+
+}
+
+function prosseguirParaDraft() {
+
+    document.getElementById(
+        "countrySelection"
+    ).style.display =
+        "none";
+
     document.getElementById(
         "draftArea"
-    ).style.display = "block";
+    ).style.display =
+        "block";
+
+    jogadorAtual =
+        participantesAtivos[0] ??
+        0;
+
+    pickAtual = 1;
+
+    direcaoSnake = 1;
 
     atualizarRefreshes();
 
