@@ -356,51 +356,6 @@ function iniciarDraft() {
 
     }
 
-    const teamsSection =
-        document.querySelector(
-            ".teams"
-        );
-
-    teamsSection.innerHTML = "";
-
-    participantesAtivos.forEach(
-        (idx, posicao) => {
-
-            const nome =
-                nomesJogadores[idx];
-
-            const pais =
-                paisParticipante[idx];
-
-            const bandPais =
-                pais
-                    ? bandeira(pais)
-                    : "";
-
-            teamsSection.innerHTML += `
-    <div class="team-card" data-jogador="${idx}">
-
-        <h2>${bandPais}${nome}</h2>
-
-        <div>
-            <strong id="count${idx + 1}">
-                0/${config.playersPerTeam}
-            </strong>
-        </div>
-
-        <div class="team-pais">
-            ${pais ?? ""}
-        </div>
-
-        <ul id="team${idx + 1}">
-        </ul>
-
-    </div>
-`;
-
-        }
-    );
-
     // Embaralhar ordem dos picks
     function embaralhar(
         lista
@@ -586,7 +541,58 @@ function selecionarPais(
 
 }
 
+function renderizarTeamCards() {
+
+    const teamsSection =
+        document.querySelector(
+            ".teams"
+        );
+
+    teamsSection.innerHTML = "";
+
+    participantesAtivos.forEach(
+        (idx, posicao) => {
+
+            const nome =
+                nomesJogadores[idx];
+
+            const pais =
+                paisParticipante[idx];
+
+            const bandPais =
+                pais
+                    ? bandeira(pais)
+                    : "";
+
+            teamsSection.innerHTML += `
+    <div class="team-card" data-jogador="${idx}">
+
+        <h2>${bandPais}${nome}</h2>
+
+        <div>
+            <strong id="count${idx + 1}">
+                0/${config.playersPerTeam}
+            </strong>
+        </div>
+
+        <div class="team-pais">
+            ${pais ?? ""}
+        </div>
+
+        <ul id="team${idx + 1}">
+        </ul>
+
+    </div>
+`;
+
+        }
+    );
+
+}
+
 function prosseguirParaDraft() {
+
+    renderizarTeamCards();
 
     document.getElementById(
         "countrySelection"
