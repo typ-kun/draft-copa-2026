@@ -1272,11 +1272,10 @@ document
 // ======================
 
 const camposNota = [
-    { id: "playerCount",  nota: "note-qtd" },
-    { id: "draftMode",    nota: "note-formato" },
+    { id: "draftMode",      nota: "note-formato" },
     { id: "goalkeeperRule", nota: "note-goleiros" },
     { id: "playersPerTeam", nota: "note-elenco" },
-    { id: "refreshCount",  nota: "note-refreshes" },
+    { id: "refreshCount",   nota: "note-refreshes" },
 ];
 
 function mostrarNota(idNota) {
@@ -1302,9 +1301,6 @@ function mostrarNota(idNota) {
     }
 
 }
-
-// Mostrar primeira nota por padrão
-mostrarNota("note-qtd");
 
 // Mostrar nota ao focar ou mudar o campo
 camposNota.forEach(c => {
@@ -1332,5 +1328,29 @@ camposNota.forEach(c => {
     );
 
 });
+
+// Esconder nota ao clicar fora
+document.addEventListener(
+    "click",
+    (e) => {
+
+        const dentro = e.target.closest(
+            ".setting-row"
+        );
+
+        if (!dentro) {
+
+            document.querySelectorAll(
+                ".setting-note"
+            ).forEach(n =>
+                n.classList.remove(
+                    "is-visible"
+                )
+            );
+
+        }
+
+    }
+);
 
 carregarJogadores();

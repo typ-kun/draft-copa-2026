@@ -147,10 +147,11 @@ h1, h2, h3 {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 24px;
-    padding: 16px 0;
+    padding: 18px 16px;
     border-top: 2px solid var(--ink);
     flex-wrap: wrap;
+    max-width: 580px;
+    margin: 0 auto;
 }
 
 .steps-item {
