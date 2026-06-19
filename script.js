@@ -603,9 +603,11 @@ function renderizarPool() {
                 "pointer";
 
             card.innerHTML = `
-                <span class="pool-num">${index + 1}</span>
-                <span class="pool-name">${jogador.nome}</span>
-                <span class="pool-info">${POSICOES_ABREV[jogador.posicao]} · ${bandeira(jogador.pais)}${jogador.pais}</span>
+                <span class="pool-inner pos-${jogador.posicao.toLowerCase()}">
+                    <span class="pool-num">${index + 1}</span>
+                    <span class="pool-name">${bandeira(jogador.pais)}${jogador.nome}</span>
+                    <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span>
+                </span>
             `;
 
             card.addEventListener(
@@ -937,17 +939,138 @@ document
 // INICIAR SISTEMA
 // ======================
 
+// ======================
+// MODAL DE CONFIRMAÇÃO
+// ======================
+
+function mostrarModal() {
+
+    const overlay =
+        document.getElementById(
+            "modalOverlay"
+        );
+
+    overlay.style.display =
+        "flex";
+
+    return new Promise(
+        resolve => {
+
+            const confirmar =
+                document.getElementById(
+                    "modalConfirm"
+                );
+
+            const cancelar =
+                document.getElementById(
+                    "modalCancel"
+                );
+
+            const fechar =
+                document.getElementById(
+                    "modalClose"
+                );
+
+            function limpar() {
+
+                overlay.style.display =
+                    "none";
+
+                confirmar.removeEventListener(
+                    "click", onConfirm
+                );
+
+                cancelar.removeEventListener(
+                    "click", onCancel
+                );
+
+                fechar.removeEventListener(
+                    "click", onCancel
+                );
+
+                overlay.removeEventListener(
+                    "click", onOverlay
+                );
+
+                document.removeEventListener(
+                    "keydown", onEscape
+                );
+
+            }
+
+            function onEscape(e) {
+
+                if (
+                    e.key === "Escape"
+                ) {
+
+                    onCancel();
+
+                }
+
+            }
+
+            function onConfirm() {
+
+                limpar();
+                resolve(true);
+
+            }
+
+            function onCancel() {
+
+                limpar();
+                resolve(false);
+
+            }
+
+            function onOverlay(e) {
+
+                if (
+                    e.target === overlay
+                ) {
+
+                    onCancel();
+
+                }
+
+            }
+
+            confirmar.addEventListener(
+                "click", onConfirm
+            );
+
+            cancelar.addEventListener(
+                "click", onCancel
+            );
+
+            fechar.addEventListener(
+                "click", onCancel
+            );
+
+            overlay.addEventListener(
+                "click", onOverlay
+            );
+
+            document.addEventListener(
+                "keydown", onEscape
+            );
+
+        }
+    );
+
+}
+
 document
     .getElementById("restartDraft")
     .addEventListener(
         "click",
-        () => {
+        async () => {
 
-            if (
-                !confirm(
-                    "Tem certeza que deseja reiniciar?"
-                )
-            ) return;
+            const confirmou =
+                await mostrarModal();
+
+            if (!confirmou) return;
 
             location.href =
                 "index.html";
