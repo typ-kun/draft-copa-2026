@@ -275,11 +275,12 @@ button:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
     text-transform: uppercase;
     color: var(--ink);
     text-shadow: 3px 3px 0 var(--accent-2);
-    flex-shrink: 0;
+    flex: 1;
+    text-align: center;
+    min-width: 0;
 }
 
 #status {
-    margin-left: auto;
     font-family: var(--body);
     font-weight: 800;
     font-size: clamp(12px, 1.6vw, 14px);
@@ -287,6 +288,16 @@ button:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
     color: var(--muted);
     text-transform: uppercase;
     white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.header-spacer {
+    flex-shrink: 0;
+    width: 140px;
+}
+
+@media (max-width: 720px) {
+    .header-spacer { display: none; }
 }
 
 .current-player {
@@ -344,7 +355,7 @@ section.pool h2 {
 #refreshes {
     font-family: var(--body);
     font-weight: 800;
-    font-size: 13px;
+    font-size: 15px;
     letter-spacing: 0.04em;
     color: var(--muted);
     text-transform: uppercase;
@@ -453,7 +464,7 @@ section.pool h2 {
 
 .pool-inner .pos-label {
     font-weight: 800;
-    font-size: 9px;
+    font-size: 11px;
     color: var(--muted);
     letter-spacing: 0.04em;
     flex-shrink: 0;

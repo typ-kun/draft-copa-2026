@@ -372,7 +372,35 @@ function iniciarDraft() {
         }
     );
 
-    jogadorAtual = 0;
+    // Embaralhar ordem dos picks
+    function embaralhar(
+        lista
+    ) {
+
+        for (
+            let i = lista.length - 1;
+            i > 0;
+            i--
+        ) {
+
+            const j = Math.floor(
+                Math.random() *
+                (i + 1)
+            );
+
+            [ lista[i], lista[j] ] =
+                [ lista[j], lista[i] ];
+
+        }
+
+        return lista;
+
+    }
+    embaralhar(participantesAtivos);
+
+    jogadorAtual =
+        participantesAtivos[0] ??
+        0;
 
     pickAtual = 1;
 
