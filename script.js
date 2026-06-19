@@ -690,16 +690,25 @@ function gerarPool() {
     let disponiveis =
         [...jogadoresDisponiveis];
 
-    const precisaGoleiro =
-        config.goalkeeperRule &&
+    const gksDoJogador =
         contarGoleiros(
             jogadorAtual
-        ) < 2;
+        );
+
+    const restantes =
+        config.playersPerTeam -
+        times[jogadorAtual].length;
 
     const jaTemDoisGoleiros =
-        contarGoleiros(
-            jogadorAtual
-        ) >= 2;
+        gksDoJogador >= 2;
+
+    const forcandoGK =
+        config.goalkeeperRule && (
+            (gksDoJogador === 0 &&
+                restantes <= 2) ||
+            (gksDoJogador === 1 &&
+                restantes <= 1)
+        );
 
     // Se já tem 2 goleiros, filtra todos
     if (jaTemDoisGoleiros) {
@@ -712,8 +721,28 @@ function gerarPool() {
 
     }
 
-    // Precisa de goleiro: coloca 1 no topo da pool
-    if (precisaGoleiro) {
+    // Últimas rodadas: só goleiros
+    if (forcandoGK) {
+
+        const soGoleiros =
+            disponiveis.filter(
+                j => j.posicao === "GK"
+            );
+
+        poolAtual = soGoleiros.slice(
+            0, 5
+        );
+
+        renderizarPool();
+        return;
+
+    }
+
+    // Precisa de goleiro: coloca 1 no topo
+    if (
+        config.goalkeeperRule &&
+        gksDoJogador < 2
+    ) {
 
         const goleiros =
             disponiveis.filter(
