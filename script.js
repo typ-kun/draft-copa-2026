@@ -21,6 +21,8 @@ let paisParticipante = [];
 let ordemSelecao = [];
 let indiceSelecao = 0;
 
+let goleirosPickados = 0;
+
 // ======================
 // CONFIGURAÇÕES
 // ======================
@@ -398,6 +400,8 @@ function iniciarDraft() {
 
     indiceSelecao = 0;
 
+    goleirosPickados = 0;
+
     iniciarSelecaoPaises();
 
 }
@@ -685,51 +689,33 @@ function gerarPool() {
 
     let disponiveis =
         [...jogadoresDisponiveis];
-const jaTemDoisGoleiros =
-    contarGoleiros(
-        jogadorAtual
-    ) >= 2;
 
-if (jaTemDoisGoleiros) {
-
-    disponiveis =
-        disponiveis.filter(
-            jogador =>
-                jogador.posicao !== "GK"
-        );
-
-}
-    const precisaGoleiro =
+    // Até 2 goleiros pickados no total,
+    // no máximo 1 goleiro aparece por pool
+    if (
         config.goalkeeperRule &&
-        contarGoleiros(
-            jogadorAtual
-        ) < 2;
+        goleirosPickados < 2
+    ) {
 
-    if (precisaGoleiro) {
-
-        const goleiros =
+        const goleirosDisponiveis =
             disponiveis.filter(
-                jogador =>
-                    jogador.posicao === "GK"
+                j => j.posicao === "GK"
             );
 
         if (
-            goleiros.length > 0
+            goleirosDisponiveis.length > 0
         ) {
 
             const goleiro =
                 aleatorio(
-                    goleiros
+                    goleirosDisponiveis
                 );
 
-            poolAtual.push(
-                goleiro
-            );
+            poolAtual.push(goleiro);
 
             disponiveis =
                 disponiveis.filter(
-                    jogador =>
-                        jogador !== goleiro
+                    p => p !== goleiro
                 );
 
         }
@@ -906,6 +892,14 @@ function selecionarJogador(
     ].push(
         jogador
     );
+
+    if (
+        jogador.posicao === "GK"
+    ) {
+
+        goleirosPickados++;
+
+    }
 
     jogadoresDisponiveis =
         jogadoresDisponiveis.filter(
