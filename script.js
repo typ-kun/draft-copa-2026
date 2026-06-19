@@ -1268,51 +1268,67 @@ document
     );
 
 // ======================
-// INFO BOXES DO SETUP
+// NOTAS DAS CONFIGURAÇÕES
 // ======================
 
-document.querySelectorAll(
-    ".info-btn"
-).forEach(btn => {
+const camposNota = [
+    { id: "playerCount",  nota: "note-qtd" },
+    { id: "draftMode",    nota: "note-formato" },
+    { id: "goalkeeperRule", nota: "note-goleiros" },
+    { id: "playersPerTeam", nota: "note-elenco" },
+    { id: "refreshCount",  nota: "note-refreshes" },
+];
 
-    btn.addEventListener(
-        "click",
-        () => {
+function mostrarNota(idNota) {
 
-            const infoId =
-                "info-" +
-                btn.dataset.info;
+    document.querySelectorAll(
+        ".setting-note"
+    ).forEach(n =>
+        n.classList.remove(
+            "is-visible"
+        )
+    );
 
-            const box =
-                document.getElementById(
-                    infoId
-                );
+    const nota = document.getElementById(
+        idNota
+    );
 
-            if (!box) return;
+    if (nota) {
 
-            const isOpen =
-                box.classList.contains(
-                    "is-open"
-                );
+        nota.classList.add(
+            "is-visible"
+        );
 
-            // Fechar todas as outras
-            document.querySelectorAll(
-                ".info-box.is-open"
-            ).forEach(b =>
-                b.classList.remove(
-                    "is-open"
-                )
-            );
+    }
 
-            if (!isOpen) {
+}
 
-                box.classList.add(
-                    "is-open"
-                );
+// Mostrar primeira nota por padrão
+mostrarNota("note-qtd");
 
-            }
+// Mostrar nota ao focar ou mudar o campo
+camposNota.forEach(c => {
 
-        }
+    const campo = document.getElementById(
+        c.id
+    );
+
+    if (!campo) return;
+
+    function ativar() {
+
+        mostrarNota(
+            c.nota
+        );
+
+    }
+
+    campo.addEventListener(
+        "focus", ativar
+    );
+
+    campo.addEventListener(
+        "change", ativar
     );
 
 });

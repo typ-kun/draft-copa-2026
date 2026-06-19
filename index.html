@@ -19,124 +19,96 @@
 
     <div id="setup">
 
-        <!-- PASSO A PASSO -->
-
-        <div class="home-steps">
-
-            <div class="how-step">
-                <span class="step-no">1</span>
-                <div class="step-txt">
-                    <span class="step-t">Configurar</span>
-                    <span class="step-d">Defina participantes, regras e formato</span>
-                </div>
-            </div>
-
-            <div class="how-step">
-                <span class="step-no">2</span>
-                <div class="step-txt">
-                    <span class="step-t">Escolher</span>
-                    <span class="step-d">Cada um escolhe sua seleção nacional</span>
-                </div>
-            </div>
-
-            <div class="how-step">
-                <span class="step-no">3</span>
-                <div class="step-txt">
-                    <span class="step-t">Draft</span>
-                    <span class="step-d">Selecione os jogadores para seu elenco</span>
-                </div>
-            </div>
-
-            <div class="how-step">
-                <span class="step-no">4</span>
-                <div class="step-txt">
-                    <span class="step-t">Completar</span>
-                    <span class="step-d">Monte o time completo e veja o resultado</span>
-                </div>
-            </div>
-
-        </div>
-
         <h1>Draft Copa do Mundo 2026</h1>
 
         <div class="setup-card">
 
-            <label>
-                Quantidade de participantes
-                <span class="info-btn" data-info="qtd">ⓘ</span>
-                <span class="info-box" id="info-qtd">Número de pessoas que participarão do draft. Cada uma montará seu próprio elenco.</span>
-            </label>
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Quantidade de participantes</label>
+                    <select id="playerCount">
+                        <option value="1" selected>1 jogador</option>
+                        <option value="2">2 jogadores</option>
+                        <option value="3">3 jogadores</option>
+                        <option value="4">4 jogadores</option>
+                        <option value="5">5 jogadores</option>
+                        <option value="6">6 jogadores</option>
+                    </select>
+                </div>
+                <div class="setting-note" id="note-qtd">Número de pessoas que participarão do draft. Cada uma montará seu próprio elenco.</div>
+            </div>
 
-            <select id="playerCount">
-                <option value="1" selected>1 jogador</option>
-                <option value="2">2 jogadores</option>
-                <option value="3">3 jogadores</option>
-                <option value="4">4 jogadores</option>
-                <option value="5">5 jogadores</option>
-                <option value="6">6 jogadores</option>
-            </select>
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Formato do Draft</label>
+                    <select id="draftMode">
+                        <option value="snake" selected>Snake Draft</option>
+                        <option value="normal">Circular</option>
+                    </select>
+                </div>
+                <div class="setting-note" id="note-formato"><b>Snake:</b> A ordem inverte a cada rodada (1→2→3→3→2→1).<br><b>Circular:</b> A ordem se mantém (1→2→3→1→2→3).</div>
+            </div>
 
-            <label>
-                Formato do Draft
-                <span class="info-btn" data-info="formato">ⓘ</span>
-                <span class="info-box" id="info-formato"><b>Snake:</b> A ordem inverte a cada rodada (1→2→3→3→2→1).<br><b>Circular:</b> A ordem se mantém (1→2→3→1→2→3).</span>
-            </label>
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Regra dos Goleiros</label>
+                    <select id="goalkeeperRule">
+                        <option value="on" selected>Ativada</option>
+                        <option value="off">Desativada</option>
+                    </select>
+                </div>
+                <div class="setting-note" id="note-goleiros">Quando ativada, cada elenco deve ter no mínimo 2 goleiros. O pool sempre oferecerá goleiros até atingir essa meta.</div>
+            </div>
 
-            <select id="draftMode">
-                <option value="snake" selected>
-                    Snake Draft
-                </option>
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Jogadores por elenco</label>
+                    <input type="number" id="playersPerTeam" value="18" min="1" max="30">
+                </div>
+                <div class="setting-note" id="note-elenco">Total de jogadores que cada participante deve selecionar para completar seu time.</div>
+            </div>
 
-                <option value="normal">
-                    Circular
-                </option>
-            </select>
-
-            <label>
-                Regra dos Goleiros
-                <span class="info-btn" data-info="goleiros">ⓘ</span>
-                <span class="info-box" id="info-goleiros">Quando ativada, cada elenco deve ter no mínimo 2 goleiros. O pool sempre oferecerá goleiros até atingir essa meta.</span>
-            </label>
-
-            <select id="goalkeeperRule">
-                <option value="on" selected>
-                    Ativada
-                </option>
-
-                <option value="off">
-                    Desativada
-                </option>
-            </select>
-
-            <label>
-                Jogadores por elenco
-                <span class="info-btn" data-info="elenco">ⓘ</span>
-                <span class="info-box" id="info-elenco">Total de jogadores que cada participante deve selecionar para completar seu time.</span>
-            </label>
-
-            <input
-                type="number"
-                id="playersPerTeam"
-                value="18"
-                min="1"
-                max="30"
-            >
-
-            <label>
-                Refreshes por participante
-                <span class="info-btn" data-info="refreshes">ⓘ</span>
-                <span class="info-box" id="info-refreshes">Cada refresh permite gerar um novo pool de jogadores caso as opções atuais não sejam interessantes.</span>
-            </label>
-
-            <input
-                type="number"
-                id="refreshCount"
-                value="2"
-                min="0"
-                max="20"
-            >
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Refreshes por participante</label>
+                    <input type="number" id="refreshCount" value="2" min="0" max="20">
+                </div>
+                <div class="setting-note" id="note-refreshes">Cada refresh permite gerar um novo pool de jogadores caso as opções atuais não sejam interessantes.</div>
+            </div>
 
             <div id="playerNames"></div>
+
+        </div>
+
+        <!-- PASSO A PASSO -->
+
+        <div class="steps-bar">
+
+            <div class="steps-item">
+                <span class="steps-num">1</span>
+                <span class="steps-t">Configurar</span>
+            </div>
+
+            <span class="steps-arrow">→</span>
+
+            <div class="steps-item">
+                <span class="steps-num">2</span>
+                <span class="steps-t">Escolher</span>
+            </div>
+
+            <span class="steps-arrow">→</span>
+
+            <div class="steps-item">
+                <span class="steps-num">3</span>
+                <span class="steps-t">Draft</span>
+            </div>
+
+            <span class="steps-arrow">→</span>
+
+            <div class="steps-item">
+                <span class="steps-num">4</span>
+                <span class="steps-t">Completar</span>
+            </div>
 
         </div>
 
