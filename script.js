@@ -408,6 +408,8 @@ function iniciarDraft() {
 
 function iniciarSelecaoPaises() {
 
+    setActiveStep(2);
+
     // Extrair lista única de países do JSON
     const paisesUnicos = [
         ...new Set(
@@ -591,6 +593,8 @@ function renderizarTeamCards() {
 }
 
 function prosseguirParaDraft() {
+
+    setActiveStep(3);
 
     renderizarTeamCards();
 
@@ -959,6 +963,8 @@ function selecionarJogador(
 // ======================
 
 function mostrarResultadoFinal() {
+
+    setActiveStep(4);
 
     document.getElementById(
         "draftArea"
@@ -1350,5 +1356,32 @@ document.addEventListener(
 
     }
 );
+
+// ======================
+// ATUALIZAR ETAPA ATIVA
+// ======================
+
+function setActiveStep(step) {
+
+    document.querySelectorAll(
+        ".steps-item"
+    ).forEach(item => {
+
+        const num =
+            parseInt(
+                item.dataset.step
+            );
+
+        item.classList.toggle(
+            "is-active",
+            num === step
+        );
+
+    });
+
+}
+
+// Etapa inicial: Configurar (1)
+setActiveStep(1);
 
 carregarJogadores();
