@@ -462,21 +462,10 @@ function iniciarSelecaoPaises() {
         )
     ].sort();
 
-    // Embaralhar ordem de seleção (circular)
-    const ordemOriginal = [];
-
-    for (
-        let i = 0;
-        i < nomesJogadores.length;
-        i++
-    ) {
-
-        ordemOriginal.push(i);
-
-    }
-
-    ordemSelecao =
-        ordemOriginal;
+    // Mesma ordem aleatória do draft (já sorteada em iniciarDraft)
+    ordemSelecao = [
+        ...participantesAtivos
+    ];
 
     indiceSelecao = 0;
 

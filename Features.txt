@@ -1,0 +1,2 @@
+Na pagina principal do "7a1.com.br", tem o passo a passo do jogo, gostaria de me inspirar e ter o mesmo no meu.
+Quero que na hora que eu clique no formato do draft, uma box abra explicando o que cada um dos tipos formatos é. Quero o mesmo para Regra dos Goleiros, Jogadores por elenco, Refreshes por participante.

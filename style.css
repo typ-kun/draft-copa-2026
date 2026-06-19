@@ -586,6 +586,16 @@ section.teams {
     flex-shrink: 0;
 }
 
+/* Bandeira no mesmo tamanho do texto ao lado */
+.current-player .flag,
+.team-card h2 .flag,
+.pool-name .flag {
+    width: auto;
+    height: 1.1em;
+    margin-right: 6px;
+    border-radius: 1px;
+}
+
 /* Cores por posição: GK=laranja, DF=amarelo, MF=verde, FW=azul */
 :root {
     --pos-gk: #E87722;
