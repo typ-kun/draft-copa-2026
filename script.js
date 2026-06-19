@@ -353,21 +353,36 @@ function iniciarDraft() {
 
     teamsSection.innerHTML = "";
 
-    nomesJogadores.forEach(
-        (nome, index) => {
+    participantesAtivos.forEach(
+        (idx, posicao) => {
+
+            const nome =
+                nomesJogadores[idx];
+
+            const pais =
+                paisParticipante[idx];
+
+            const bandPais =
+                pais
+                    ? bandeira(pais)
+                    : "";
 
             teamsSection.innerHTML += `
-    <div class="team-card">
+    <div class="team-card" data-jogador="${idx}">
 
-        <h2>${nome}</h2>
+        <h2>${bandPais}${nome}</h2>
 
         <div>
-            <strong id="count${index + 1}">
+            <strong id="count${idx + 1}">
                 0/${config.playersPerTeam}
             </strong>
         </div>
 
-        <ul id="team${index + 1}">
+        <div class="team-pais">
+            ${pais ?? ""}
+        </div>
+
+        <ul id="team${idx + 1}">
         </ul>
 
     </div>
