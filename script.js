@@ -187,6 +187,16 @@ function atualizarRefreshes() {
 
 function atualizarStatus() {
 
+    const paisJogador =
+        paisParticipante[
+            jogadorAtual
+        ];
+
+    const bandPais =
+        paisJogador
+            ? bandeira(paisJogador)
+            : "";
+
     document
         .getElementById(
             "status"
@@ -195,7 +205,7 @@ function atualizarStatus() {
             ·
             Vez de:
             <span class="current-player">
-                ${nomesJogadores[jogadorAtual]}
+                ${bandPais}${nomesJogadores[jogadorAtual]}
             </span>
         `;
 

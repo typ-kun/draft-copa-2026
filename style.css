@@ -741,7 +741,7 @@ section.teams {
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 10px;
+    margin-bottom: 18px;
 }
 
 .cs-header h1 {
