@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Draft Copa do Mundo 2026</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;600;700;800;900&family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CONFIGURAÇÃO -->
+
+    <div id="setup">
+
+        <h1>Draft Copa do Mundo 2026</h1>
+
+        <div class="setup-card">
+
+            <label>Quantidade de participantes</label>
+
+            <select id="playerCount">
+                <option value="1">1 jogador</option>
+                <option value="2">2 jogadores</option>
+                <option value="3" selected>3 jogadores</option>
+                <option value="4">4 jogadores</option>
+                <option value="5">5 jogadores</option>
+                <option value="6">6 jogadores</option>
+            </select>
+
+            <label>Formato do Draft</label>
+
+            <select id="draftMode">
+                <option value="snake" selected>
+                    Snake Draft
+                </option>
+
+                <option value="normal">
+                    Circular
+                </option>
+            </select>
+
+            <label>Regra dos Goleiros</label>
+
+            <select id="goalkeeperRule">
+                <option value="on" selected>
+                    Ativada
+                </option>
+
+                <option value="off">
+                    Desativada
+                </option>
+            </select>
+
+            <label>Jogadores por elenco</label>
+
+            <input
+                type="number"
+                id="playersPerTeam"
+                value="18"
+                min="1"
+                max="30"
+            >
+
+            <label>Refreshes por participante</label>
+
+            <input
+                type="number"
+                id="refreshCount"
+                value="2"
+                min="0"
+                max="20"
+            >
+
+            <button id="createPlayers">
+                Continuar
+            </button>
+
+            <div id="playerNames"></div>
+
+        </div>
+
+    </div>
+
+    <!-- DRAFT -->
+
+    <div
+        id="draftArea"
+        style="display:none;"
+    >
+
+        <header>
+
+            <h1>Draft Copa do Mundo 2026</h1>
+
+            <div id="status">
+                Pick 1
+            </div>
+
+        </header>
+
+        <div class="layout">
+
+            <!-- POOL -->
+
+            <section class="pool">
+
+                <h2>Pool Atual</h2>
+
+                <div id="refreshes">
+                    Refreshes
+                </div>
+
+                <button id="refreshBtn">
+                    ↺ NOVO POOL
+                </button>
+
+                <div id="poolList"></div>
+
+            </section>
+
+            <!-- TIMES -->
+
+            <section class="teams">
+
+                <!-- Gerado dinamicamente -->
+
+            </section>
+
+        </div>
+
+        <div class="draft-footer">
+            <button id="restartDraft">
+                Recomeçar Draft
+            </button>
+        </div>
+
+    </div>
+
+    <!-- RESULTADO FINAL -->
+
+    <div
+        id="resultsArea"
+        style="display:none;"
+    >
+
+        <h1>Draft Finalizado</h1>
+
+        <div id="finalResults"></div>
+
+        <div class="result-actions">
+            <button id="copyResults">
+                Copiar Resultado
+            </button>
+
+            <button class="btn-novo-draft" onclick="location.reload()">
+                Novo Draft
+            </button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

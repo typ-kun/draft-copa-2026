@@ -1,0 +1,641 @@
+/* ====================== */
+/* VARIÁVEIS               */
+/* ====================== */
+
+:root {
+    --surface:       #F3ECD8;
+    --surface-2:     #FFFFFF;
+    --ink:           #1B1A17;
+    --muted:         #6B6452;
+    --accent:        #E8462B;
+    --accent-2:      #C8A24B;
+    --line:          #D8CFB4;
+    --win:           #2F7D4F;
+    --display:       'Anton', sans-serif;
+    --display-weight: 400;
+    --body:          'Hanken Grotesk', sans-serif;
+    --numeral:       'Archivo', sans-serif;
+    --numeral-weight: 900;
+    --hard-shadow:     3px 3px 0 var(--line);
+    --hard-shadow-ink: 3px 3px 0 #1B1A17;
+}
+
+/* ====================== */
+/* RESET & BASE            */
+/* ====================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; overflow-x: hidden; }
+
+body {
+    font-family: var(--body);
+    color: var(--ink);
+    background: var(--surface);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+    font-family: var(--display);
+    font-weight: var(--display-weight);
+    margin: 0;
+    line-height: 0.92;
+}
+
+/* ====================== */
+/* SETUP                   */
+/* ====================== */
+
+#setup {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 40px 16px 56px;
+}
+
+#setup h1 {
+    font-size: clamp(36px, 9vw, 60px);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+    color: var(--ink);
+    text-shadow: 4px 4px 0 var(--accent-2);
+}
+
+.setup-card {
+    border: 2px solid var(--ink);
+    background: var(--surface-2);
+    box-shadow: var(--hard-shadow-ink);
+    padding: 22px 24px 28px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.setup-card label {
+    display: block;
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+.setup-card select,
+.setup-card input[type="number"] {
+    width: 100%;
+    padding: 9px 11px;
+    border: 2px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 700;
+    outline: none;
+    border-radius: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color 0.15s;
+}
+
+.setup-card select:focus,
+.setup-card input[type="number"]:focus {
+    border-color: var(--ink);
+}
+
+/* Inputs de nome dos participantes */
+#playerNames {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+#playerNames div { margin-bottom: 0 !important; }
+
+#playerNames input {
+    width: 100%;
+    padding: 9px 11px;
+    border: 2px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 16px;
+    outline: none;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    transition: border-color 0.15s;
+}
+
+#playerNames input::placeholder {
+    color: var(--muted);
+    opacity: 0.5;
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+#playerNames input:focus { border-color: var(--ink); }
+
+/* ====================== */
+/* BOTÕES — BASE           */
+/* ====================== */
+
+button {
+    font-family: var(--display);
+    font-weight: var(--display-weight);
+    letter-spacing: 0.04em;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    border-radius: 2px;
+}
+
+button:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+
+/* Botão primário (continuar / iniciar) */
+#createPlayers,
+#startDraft {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: var(--hard-shadow-ink);
+    font-size: 18px;
+    padding: 13px 20px;
+    width: 100%;
+    margin-top: 14px;
+}
+
+#createPlayers:active,
+#startDraft:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #1B1A17;
+}
+
+#startDraft {
+    background: var(--ink);
+    color: var(--surface);
+    box-shadow: 3px 3px 0 var(--accent-2);
+    margin-top: 6px;
+}
+
+#startDraft:active { box-shadow: 1px 1px 0 var(--accent-2); }
+
+/* Botão de refresh do pool */
+#refreshBtn {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    box-shadow: var(--hard-shadow);
+    font-size: 14px;
+    padding: 10px 14px;
+    width: 100%;
+    font-family: var(--body);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+#refreshBtn:hover { background: var(--accent); color: #fff; border-color: var(--ink); }
+#refreshBtn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--line); }
+
+/* Botão reiniciar */
+#restartDraft {
+    background: transparent;
+    color: var(--muted);
+    border: 2px solid var(--line);
+    font-size: 11px;
+    padding: 8px 16px;
+    width: auto;
+    letter-spacing: 0.08em;
+    font-family: var(--body);
+    font-weight: 800;
+}
+
+#restartDraft:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Botões da tela de resultado */
+#copyResults {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: var(--hard-shadow-ink);
+    font-size: 16px;
+    padding: 12px 24px;
+    width: auto;
+}
+
+#copyResults:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #1B1A17; }
+
+.btn-novo-draft {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    box-shadow: var(--hard-shadow);
+    font-size: 16px;
+    padding: 12px 24px;
+    width: auto;
+}
+
+.btn-novo-draft:hover { background: var(--ink); color: var(--surface); }
+.btn-novo-draft:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--line); }
+
+/* ====================== */
+/* DRAFT — ESTRUTURA       */
+/* ====================== */
+
+#draftArea {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+}
+
+/* Header */
+#draftArea header {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 2vw, 18px);
+    padding: clamp(10px, 1.8vw, 16px) clamp(16px, 4vw, 28px);
+    border-bottom: 3px solid var(--ink);
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+#draftArea header h1 {
+    font-size: clamp(18px, 3vw, 32px);
+    text-transform: uppercase;
+    color: var(--ink);
+    text-shadow: 3px 3px 0 var(--accent-2);
+    flex-shrink: 0;
+}
+
+#status {
+    margin-left: auto;
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: clamp(12px, 1.6vw, 14px);
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.current-player {
+    font-family: var(--display);
+    font-size: clamp(22px, 3.5vw, 36px);
+    font-weight: var(--display-weight);
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-left: 4px;
+    letter-spacing: 0;
+}
+
+/* ====================== */
+/* DRAFT — LAYOUT          */
+/* ====================== */
+
+.layout {
+    display: grid;
+    grid-template-columns: minmax(260px, 320px) 1fr;
+    align-items: start;
+    flex: 1;
+}
+
+/* ====================== */
+/* PAINEL DO POOL          */
+/* ====================== */
+
+section.pool {
+    border-right: 2px solid var(--line);
+    padding: clamp(14px, 2.5vw, 20px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
+    min-height: calc(100dvh - 80px);
+    position: sticky;
+    top: 0;
+}
+
+section.pool h2 {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 5px 0;
+    margin: 0;
+}
+
+#refreshes {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+#poolList {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--line);
+    box-shadow: var(--hard-shadow);
+}
+
+/* ====================== */
+/* CARDS DO POOL           */
+/* ====================== */
+
+.player-card {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-2);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+    min-height: 52px;
+    border-radius: 0;
+    box-shadow: none;
+    font-family: var(--body);
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.player-card:last-child { border-bottom: none; }
+
+.player-card:hover { background: var(--accent); color: #fff; }
+.player-card:active { transform: none; box-shadow: none; }
+
+/* Spans injetados pelo JS */
+.pool-num {
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.pool-name {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pool-info {
+    font-family: var(--body);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+}
+
+.player-card:hover .pool-name,
+.player-card:hover .pool-info,
+.player-card:hover .pool-num { color: #fff; }
+
+/* ====================== */
+/* TIMES                   */
+/* ====================== */
+
+section.teams {
+    padding: clamp(14px, 2.5vw, 20px);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    align-content: start;
+    border: none;
+    border-radius: 0;
+}
+
+.team-card {
+    border: 2px solid var(--ink);
+    background: var(--surface-2);
+    box-shadow: var(--hard-shadow);
+    padding: 14px;
+    border-radius: 2px;
+}
+
+.team-card h2 {
+    font-size: clamp(14px, 2vw, 19px);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 8px;
+}
+
+.team-card > div { margin-bottom: 6px; }
+
+.team-card strong {
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    font-size: 22px;
+    color: var(--accent);
+    display: block;
+    line-height: 0.9;
+}
+
+.team-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.team-card li {
+    font-family: var(--body);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink);
+    padding: 3px 8px;
+    border-left: 2px solid var(--line);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.team-card li .pos-label {
+    font-weight: 400;
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: 2px;
+}
+
+/* Bandeiras */
+.flag {
+    display: inline-block;
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+    vertical-align: middle;
+    margin-right: 5px;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 1px;
+    flex-shrink: 0;
+}
+
+/* Cores por posição: GK=laranja, DF=amarelo, MF=verde, FW=azul */
+:root {
+    --pos-gk: #E87722;
+    --pos-df: #D4A017;
+    --pos-mf: #2F7D4F;
+    --pos-fw: #1A6BBF;
+}
+
+.team-card li.pos-gk,
+.team-card li.pos-df,
+.team-card li.pos-mf,
+.team-card li.pos-fw {
+    border-left-width: 5px;
+}
+
+.team-card li.pos-gk { border-left-color: var(--pos-gk); }
+.team-card li.pos-df { border-left-color: var(--pos-df); }
+.team-card li.pos-mf { border-left-color: var(--pos-mf); }
+.team-card li.pos-fw { border-left-color: var(--pos-fw); }
+
+#finalResults .player-entry {
+    border-left-width: 5px;
+}
+
+#finalResults .player-entry.pos-gk { border-left-color: var(--pos-gk); }
+#finalResults .player-entry.pos-df { border-left-color: var(--pos-df); }
+#finalResults .player-entry.pos-mf { border-left-color: var(--pos-mf); }
+#finalResults .player-entry.pos-fw { border-left-color: var(--pos-fw); }
+
+/* ====================== */
+/* FOOTER DO DRAFT         */
+/* ====================== */
+
+.draft-footer {
+    padding: 10px clamp(14px, 2.5vw, 20px) 20px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+}
+
+/* ====================== */
+/* RESULTADOS FINAIS       */
+/* ====================== */
+
+#resultsArea {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 64px;
+}
+
+#resultsArea > h1 {
+    font-size: clamp(30px, 6vw, 52px);
+    text-transform: uppercase;
+    color: var(--ink);
+    text-shadow: 4px 4px 0 var(--accent-2);
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 14px;
+    margin-bottom: 28px;
+}
+
+#finalResults h2 {
+    font-size: clamp(20px, 3.5vw, 32px);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    margin: 28px 0 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--ink);
+}
+
+#finalResults h3 {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 4px 0;
+    margin: 12px 0 4px;
+    border-bottom: 1px solid var(--line);
+}
+
+#finalResults .player-entry {
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    padding: 4px 8px;
+    border-left: 2px solid var(--line);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#finalResults hr {
+    border: none;
+    border-top: 3px solid var(--ink);
+    margin: 24px 0;
+}
+
+.result-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+}
+
+/* ====================== */
+/* RESPONSIVO              */
+/* ====================== */
+
+@media (max-width: 720px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    section.pool {
+        border-right: none;
+        border-bottom: 2px solid var(--line);
+        min-height: auto;
+        position: static;
+    }
+
+    section.teams {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    section.teams {
+        grid-template-columns: 1fr;
+    }
+
+    #draftArea header h1 { display: none; }
+}

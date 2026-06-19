@@ -1,0 +1,6242 @@
+[
+  {
+    "nome": "MASTIL Melvin",
+    "pais": "Argélia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MANDI Aissa",
+    "pais": "Argélia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ABADA Achref",
+    "pais": "Argélia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TOUGAI Mohamed Amine",
+    "pais": "Argélia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BELAID Zineddine",
+    "pais": "Argélia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ZERROUKI Ramiz",
+    "pais": "Argélia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MAHREZ Riyad",
+    "pais": "Argélia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AOUAR Houssem",
+    "pais": "Argélia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GOUIRI Amine",
+    "pais": "Argélia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CHAIBI Fares",
+    "pais": "Argélia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HADJ MOUSSA Anis",
+    "pais": "Argélia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BENBOUALI Nadhir",
+    "pais": "Argélia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "HADJAM Jaouen",
+    "pais": "Argélia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BOUDAOUI Hicham",
+    "pais": "Argélia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AIT-NOURI Rayan",
+    "pais": "Argélia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BENBOT Oussama",
+    "pais": "Argélia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "BELGHALI Ra«k",
+    "pais": "Argélia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "AMOURA Mohamed",
+    "pais": "Argélia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BENTALEB Nabil",
+    "pais": "Argélia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BOULBINA Adil",
+    "pais": "Argélia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BENSEBAINI Ramy",
+    "pais": "Argélia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MAZA Ibrahim",
+    "pais": "Argélia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ZIDANE Luca",
+    "pais": "Argélia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "TITRAOUI Yassine",
+    "pais": "Argélia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GHEDJEMIS Fares",
+    "pais": "Argélia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CHERGUI Samir",
+    "pais": "Argélia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MUSSO Juan",
+    "pais": "Argentina",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SENESI Marcos",
+    "pais": "Argentina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TAGLIAFICO Nicolas",
+    "pais": "Argentina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MONTIEL Gonzalo",
+    "pais": "Argentina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "PAREDES Leandro",
+    "pais": "Argentina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MARTINEZ Lisandro",
+    "pais": "Argentina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DE PAUL Rodrigo",
+    "pais": "Argentina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BARCO Valentin",
+    "pais": "Argentina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ALVAREZ Julian",
+    "pais": "Argentina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MESSI Lionel",
+    "pais": "Argentina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "LO CELSO Giovani",
+    "pais": "Argentina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RULLI Geronimo",
+    "pais": "Argentina",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ROMERO Cristian",
+    "pais": "Argentina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "PALACIOS Exequiel",
+    "pais": "Argentina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GONZALEZ Nico",
+    "pais": "Argentina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ALMADA Thiago",
+    "pais": "Argentina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SIMEONE Giuliano",
+    "pais": "Argentina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PAZ Nico",
+    "pais": "Argentina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "OTAMENDI Nicolas",
+    "pais": "Argentina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MAC ALLISTER Alexis",
+    "pais": "Argentina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LOPEZ Jose Manuel",
+    "pais": "Argentina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MARTINEZ Lautaro",
+    "pais": "Argentina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MARTINEZ Emiliano",
+    "pais": "Argentina",
+    "posicao": "GK"
+  },
+  {
+    "nome": "FERNANDEZ Enzo",
+    "pais": "Argentina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MEDINA Facundo",
+    "pais": "Argentina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOLINA Nahuel",
+    "pais": "Argentina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RYAN Mathew",
+    "pais": "Austrália",
+    "posicao": "GK"
+  },
+  {
+    "nome": "DEGENEK Milos",
+    "pais": "Austrália",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CIRCATI Alessandro",
+    "pais": "Austrália",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ITALIANO Jacob",
+    "pais": "Austrália",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BOS Jordan",
+    "pais": "Austrália",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GERIA Jason",
+    "pais": "Austrália",
+    "posicao": "DF"
+  },
+  {
+    "nome": "LECKIE Mathew",
+    "pais": "Austrália",
+    "posicao": "FW"
+  },
+  {
+    "nome": "METCALFE Connor",
+    "pais": "Austrália",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TOURE Mohamed",
+    "pais": "Austrália",
+    "posicao": "FW"
+  },
+  {
+    "nome": "HRUSTIC Ajdin",
+    "pais": "Austrália",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MABIL Awer",
+    "pais": "Austrália",
+    "posicao": "FW"
+  },
+  {
+    "nome": "IZZO Paul",
+    "pais": "Austrália",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ONEILL Aiden",
+    "pais": "Austrália",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DEVLIN Cameron",
+    "pais": "Austrália",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TREWIN Kai",
+    "pais": "Austrália",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BEHICH Aziz",
+    "pais": "Austrália",
+    "posicao": "DF"
+  },
+  {
+    "nome": "IRANKUNDA Nestory",
+    "pais": "Austrália",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BEACH Patrick",
+    "pais": "Austrália",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SOUTTAR Harry",
+    "pais": "Austrália",
+    "posicao": "DF"
+  },
+  {
+    "nome": "VOLPATO Cristian",
+    "pais": "Austrália",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BURGESS Cameron",
+    "pais": "Austrália",
+    "posicao": "DF"
+  },
+  {
+    "nome": "IRVINE Jackson",
+    "pais": "Austrália",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VELUPILLAY Nishan",
+    "pais": "Austrália",
+    "posicao": "FW"
+  },
+  {
+    "nome": "OKON-ENGSTLER Paul",
+    "pais": "Austrália",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HERRINGTON Lucas",
+    "pais": "Austrália",
+    "posicao": "DF"
+  },
+  {
+    "nome": "YENGI Tete",
+    "pais": "Austrália",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SCHLAGER Alexander",
+    "pais": "Áustria",
+    "posicao": "GK"
+  },
+  {
+    "nome": "AFFENGRUBER David",
+    "pais": "Áustria",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DANSO Kevin",
+    "pais": "Áustria",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SCHLAGER Xaver",
+    "pais": "Áustria",
+    "posicao": "MF"
+  },
+  {
+    "nome": "POSCH Stefan",
+    "pais": "Áustria",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SEIWALD Nicolas",
+    "pais": "Áustria",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ARNAUTOVIC Marko",
+    "pais": "Áustria",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ALABA David",
+    "pais": "Áustria",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SABITZER Marcel",
+    "pais": "Áustria",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GRILLITSCH Florian",
+    "pais": "Áustria",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GREGORITSCH Michael",
+    "pais": "Áustria",
+    "posicao": "FW"
+  },
+  {
+    "nome": "WIEGELE Florian",
+    "pais": "Áustria",
+    "posicao": "GK"
+  },
+  {
+    "nome": "PENTZ Patrick",
+    "pais": "Áustria",
+    "posicao": "GK"
+  },
+  {
+    "nome": "KALAJDZIC Sasa",
+    "pais": "Áustria",
+    "posicao": "FW"
+  },
+  {
+    "nome": "LIENHART Philipp",
+    "pais": "Áustria",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MWENE Phillip",
+    "pais": "Áustria",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CHUKWUEMEKA Carney",
+    "pais": "Áustria",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SCHMID Romano",
+    "pais": "Áustria",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LJUBICIC Dejan",
+    "pais": "Áustria",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LAIMER Konrad",
+    "pais": "Áustria",
+    "posicao": "MF"
+  },
+  {
+    "nome": "WIMMER Patrick",
+    "pais": "Áustria",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PRASS Alexander",
+    "pais": "Áustria",
+    "posicao": "MF"
+  },
+  {
+    "nome": "FRIEDL Marco",
+    "pais": "Áustria",
+    "posicao": "DF"
+  },
+  {
+    "nome": "WANNER Paul",
+    "pais": "Áustria",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SVOBODA Michael",
+    "pais": "Áustria",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SCHOEPF Alessandro",
+    "pais": "Áustria",
+    "posicao": "MF"
+  },
+  {
+    "nome": "COURTOIS Thibaut",
+    "pais": "Bélgica",
+    "posicao": "GK"
+  },
+  {
+    "nome": "DEBAST Zeno",
+    "pais": "Bélgica",
+    "posicao": "DF"
+  },
+  {
+    "nome": "THEATE Arthur",
+    "pais": "Bélgica",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MECHELE Brandon",
+    "pais": "Bélgica",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DE CUYPER Maxim",
+    "pais": "Bélgica",
+    "posicao": "DF"
+  },
+  {
+    "nome": "WITSEL Axel",
+    "pais": "Bélgica",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DE BRUYNE Kevin",
+    "pais": "Bélgica",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TIELEMANS Youri",
+    "pais": "Bélgica",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LUKAKU Romelu",
+    "pais": "Bélgica",
+    "posicao": "FW"
+  },
+  {
+    "nome": "TROSSARD Leandro",
+    "pais": "Bélgica",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DOKU Jeremy",
+    "pais": "Bélgica",
+    "posicao": "FW"
+  },
+  {
+    "nome": "LAMMENS Senne",
+    "pais": "Bélgica",
+    "posicao": "GK"
+  },
+  {
+    "nome": "PENDERS Mike",
+    "pais": "Bélgica",
+    "posicao": "GK"
+  },
+  {
+    "nome": "LUKEBAKIO Dodi",
+    "pais": "Bélgica",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MEUNIER Thomas",
+    "pais": "Bélgica",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DE WINTER Koni",
+    "pais": "Bélgica",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DE KETELAERE Charles",
+    "pais": "Bélgica",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SEYS Joaquin",
+    "pais": "Bélgica",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOREIRA Diego",
+    "pais": "Bélgica",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VANAKEN Hans",
+    "pais": "Bélgica",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CASTAGNE Timothy",
+    "pais": "Bélgica",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SAELEMAEKERS Alexis",
+    "pais": "Bélgica",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RASKIN Nicolas",
+    "pais": "Bélgica",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ONANA Amadou",
+    "pais": "Bélgica",
+    "posicao": "MF"
+  },
+  {
+    "nome": "NGOY Nathan",
+    "pais": "Bélgica",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FERNANDEZ-PARDO Matias",
+    "pais": "Bélgica",
+    "posicao": "FW"
+  },
+  {
+    "nome": "VASILJ Nikola",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MUJAKIC Nihad",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HADZIKADUNIC Dennis",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MUHAREMOVIC Tarik",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KOLASINAC Sead",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TAHIROVIC Benjamin",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DEDIC Amar",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GIGOVIC Armin",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BAZDAR Samed",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DEMIROVIC Ermedin",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DZEKO Edin",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "JURKAS Mladen",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "GK"
+  },
+  {
+    "nome": "BASIC Ivan",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SUNJIC Ivan",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MEMIC Amar",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HADZIAHMETOVIC Amir",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BURNIC Dzenis",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KATIC Nikola",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ALAJBEGOVIC Kerim",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BAJRAKTAREVIC Esmir",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "RADELJIC Stjepan",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ZLOMISLIC Martin",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "GK"
+  },
+  {
+    "nome": "TABAKOVIC Haris",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MALIC Arjan",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "DF"
+  },
+  {
+    "nome": "LUKIC Jovo",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MAHMIC Ermin",
+    "pais": "Bósnia e Herzegovina",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ALISSON",
+    "pais": "Brasil",
+    "posicao": "GK"
+  },
+  {
+    "nome": "EDERSON SILVA",
+    "pais": "Brasil",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GABRIEL MAGALHAES",
+    "pais": "Brasil",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MARQUINHOS",
+    "pais": "Brasil",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CASEMIRO",
+    "pais": "Brasil",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ALEX SANDRO",
+    "pais": "Brasil",
+    "posicao": "DF"
+  },
+  {
+    "nome": "VINICIUS JUNIOR",
+    "pais": "Brasil",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BRUNO GUIMARAES",
+    "pais": "Brasil",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MATHEUS CUNHA",
+    "pais": "Brasil",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NEYMAR JR",
+    "pais": "Brasil",
+    "posicao": "FW"
+  },
+  {
+    "nome": "RAPHINHA",
+    "pais": "Brasil",
+    "posicao": "FW"
+  },
+  {
+    "nome": "WEVERTON",
+    "pais": "Brasil",
+    "posicao": "GK"
+  },
+  {
+    "nome": "DANILO",
+    "pais": "Brasil",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BREMER",
+    "pais": "Brasil",
+    "posicao": "DF"
+  },
+  {
+    "nome": "LEO PEREIRA",
+    "pais": "Brasil",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DOUGLAS SANTOS",
+    "pais": "Brasil",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FABINHO",
+    "pais": "Brasil",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DANILO SANTOS",
+    "pais": "Brasil",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ENDRICK",
+    "pais": "Brasil",
+    "posicao": "FW"
+  },
+  {
+    "nome": "LUCAS PAQUETA",
+    "pais": "Brasil",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LUIZ HENRIQUE",
+    "pais": "Brasil",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GABRIEL MARTINELLI",
+    "pais": "Brasil",
+    "posicao": "FW"
+  },
+  {
+    "nome": "EDERSON",
+    "pais": "Brasil",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ROGER IBANEZ",
+    "pais": "Brasil",
+    "posicao": "DF"
+  },
+  {
+    "nome": "IGOR THIAGO",
+    "pais": "Brasil",
+    "posicao": "FW"
+  },
+  {
+    "nome": "RAYAN",
+    "pais": "Brasil",
+    "posicao": "FW"
+  },
+  {
+    "nome": "VOZINHA",
+    "pais": "Cabo Verde",
+    "posicao": "GK"
+  },
+  {
+    "nome": "STOPIRA",
+    "pais": "Cabo Verde",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DINEY BORGES",
+    "pais": "Cabo Verde",
+    "posicao": "DF"
+  },
+  {
+    "nome": "PICO LOPES",
+    "pais": "Cabo Verde",
+    "posicao": "DF"
+  },
+  {
+    "nome": "LOGAN COSTA",
+    "pais": "Cabo Verde",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KEVIN PINA",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "JOVANE CABRAL",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "JOAO PAULO",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GILSON BENCHIMOL",
+    "pais": "Cabo Verde",
+    "posicao": "FW"
+  },
+  {
+    "nome": "JAMIRO MONTEIRO",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GARRY RODRIGUES",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MARCIO ROSA",
+    "pais": "Cabo Verde",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SIDNY LOPES CABRAL",
+    "pais": "Cabo Verde",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DEROY DUARTE",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LAROS DUARTE",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "YANNICK SEMEDO",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "WILLY SEMEDO",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TELMO ARCANJO",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DAILON LIVRAMENTO",
+    "pais": "Cabo Verde",
+    "posicao": "FW"
+  },
+  {
+    "nome": "RYAN MENDES",
+    "pais": "Cabo Verde",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NUNO DA COSTA",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "STEVEN MOREIRA",
+    "pais": "Cabo Verde",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CJ DOS SANTOS",
+    "pais": "Cabo Verde",
+    "posicao": "GK"
+  },
+  {
+    "nome": "WAGNER PINA",
+    "pais": "Cabo Verde",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KELVIN PIRES",
+    "pais": "Cabo Verde",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HELIO VARELA",
+    "pais": "Cabo Verde",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ST. CLAIR Dayne",
+    "pais": "Canadá",
+    "posicao": "GK"
+  },
+  {
+    "nome": "JOHNSTON Alistair",
+    "pais": "Canadá",
+    "posicao": "DF"
+  },
+  {
+    "nome": "JONES Al«e",
+    "pais": "Canadá",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DE FOUGEROLLES Luc",
+    "pais": "Canadá",
+    "posicao": "DF"
+  },
+  {
+    "nome": "WATERMAN Joel",
+    "pais": "Canadá",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CHOINIERE Mathieu",
+    "pais": "Canadá",
+    "posicao": "MF"
+  },
+  {
+    "nome": "EUSTAQUIO Stephen",
+    "pais": "Canadá",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KONE Ismael",
+    "pais": "Canadá",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LARIN Cyle",
+    "pais": "Canadá",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DAVID Jonathan",
+    "pais": "Canadá",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MILLAR Liam",
+    "pais": "Canadá",
+    "posicao": "MF"
+  },
+  {
+    "nome": "OLUWASEYI Tani",
+    "pais": "Canadá",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CORNELIUS Derek",
+    "pais": "Canadá",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SHAFFELBURG Jacob",
+    "pais": "Canadá",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BOMBITO Moise",
+    "pais": "Canadá",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CREPEAU Maxime",
+    "pais": "Canadá",
+    "posicao": "GK"
+  },
+  {
+    "nome": "BUCHANAN Tajon",
+    "pais": "Canadá",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GOODMAN Owen",
+    "pais": "Canadá",
+    "posicao": "GK"
+  },
+  {
+    "nome": "DAVIES Alphonso",
+    "pais": "Canadá",
+    "posicao": "DF"
+  },
+  {
+    "nome": "AHMED Ali",
+    "pais": "Canadá",
+    "posicao": "FW"
+  },
+  {
+    "nome": "OSORIO Jonathan",
+    "pais": "Canadá",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LARYEA Richie",
+    "pais": "Canadá",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SIGUR Niko",
+    "pais": "Canadá",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DAVID Promise",
+    "pais": "Canadá",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SALIBA Nathan",
+    "pais": "Canadá",
+    "posicao": "MF"
+  },
+  {
+    "nome": "NELSON Jayden",
+    "pais": "Canadá",
+    "posicao": "FW"
+  },
+  {
+    "nome": "OSPINA David",
+    "pais": "Colômbia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MUNOZ Daniel",
+    "pais": "Colômbia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "LUCUMI Jhon",
+    "pais": "Colômbia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ARIAS Santiago",
+    "pais": "Colômbia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CASTANO Kevin",
+    "pais": "Colômbia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RIOS Richard",
+    "pais": "Colômbia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DIAZ Luis",
+    "pais": "Colômbia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CARRASCAL Jorge",
+    "pais": "Colômbia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CORDOBA Jhon",
+    "pais": "Colômbia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "RODRIGUEZ James",
+    "pais": "Colômbia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ARIAS Jhon",
+    "pais": "Colômbia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VARGAS Camilo",
+    "pais": "Colômbia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MINA Yerry",
+    "pais": "Colômbia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "PUERTA Gustavo",
+    "pais": "Colômbia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "PORTILLA Juan",
+    "pais": "Colômbia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LERMA Jefferson",
+    "pais": "Colômbia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MOJICA Johan",
+    "pais": "Colômbia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DITTA Willer",
+    "pais": "Colômbia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HERNANDEZ Cucho",
+    "pais": "Colômbia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "QUINTERO Juan",
+    "pais": "Colômbia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CAMPAZ Jaminton",
+    "pais": "Colômbia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MACHADO Deiver",
+    "pais": "Colômbia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SANCHEZ Davinson",
+    "pais": "Colômbia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MONTERO Alvaro",
+    "pais": "Colômbia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SUAREZ Luis",
+    "pais": "Colômbia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GOMEZ Andres",
+    "pais": "Colômbia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MPASI Lionel",
+    "pais": "RD Congo",
+    "posicao": "GK"
+  },
+  {
+    "nome": "WAN-BISSAKA Aaron",
+    "pais": "RD Congo",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KAPUADI Steve",
+    "pais": "RD Congo",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TUANZEBE Axel",
+    "pais": "RD Congo",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BATUBINSIKA Dylan",
+    "pais": "RD Congo",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MUKAU Ngalayel",
+    "pais": "RD Congo",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MBUKU Nathanael",
+    "pais": "RD Congo",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MOUTOUSSAMY Samuel",
+    "pais": "RD Congo",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CIPENGA Brian",
+    "pais": "RD Congo",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BONGONDA Theo",
+    "pais": "RD Congo",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KAKUTA Gael",
+    "pais": "RD Congo",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KAYEMBE Joris",
+    "pais": "RD Congo",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ELIA Meschack",
+    "pais": "RD Congo",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SADIKI Noah",
+    "pais": "RD Congo",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TSHIBOLA Aaron",
+    "pais": "RD Congo",
+    "posicao": "MF"
+  },
+  {
+    "nome": "FAYULU Timothy",
+    "pais": "RD Congo",
+    "posicao": "GK"
+  },
+  {
+    "nome": "BAKAMBU Cedric",
+    "pais": "RD Congo",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PICKEL Charles",
+    "pais": "RD Congo",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MAYELE Fiston",
+    "pais": "RD Congo",
+    "posicao": "FW"
+  },
+  {
+    "nome": "WISSA Yoane",
+    "pais": "RD Congo",
+    "posicao": "FW"
+  },
+  {
+    "nome": "EPOLO Matthieu",
+    "pais": "RD Congo",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MBEMBA Chancel",
+    "pais": "RD Congo",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BANZA Simon",
+    "pais": "RD Congo",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KALULU Gedeon",
+    "pais": "RD Congo",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KAYEMBE Edo",
+    "pais": "RD Congo",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MASUAKU Arthur",
+    "pais": "RD Congo",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FOFANA Yahia",
+    "pais": "Costa do Marfim",
+    "posicao": "GK"
+  },
+  {
+    "nome": "DIOMANDE Ousmane",
+    "pais": "Costa do Marfim",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KONAN Ghislain",
+    "pais": "Costa do Marfim",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SERI Jean Michael",
+    "pais": "Costa do Marfim",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SINGO Wilfried",
+    "pais": "Costa do Marfim",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FOFANA Seko",
+    "pais": "Costa do Marfim",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KOSSOUNOU Odilon",
+    "pais": "Costa do Marfim",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KESSIE Franck",
+    "pais": "Costa do Marfim",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BONNY Ange-Yoan",
+    "pais": "Costa do Marfim",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ADINGRA Simon",
+    "pais": "Costa do Marfim",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DIOMANDE Yan",
+    "pais": "Costa do Marfim",
+    "posicao": "FW"
+  },
+  {
+    "nome": "WAHI Elye",
+    "pais": "Costa do Marfim",
+    "posicao": "FW"
+  },
+  {
+    "nome": "OPERI Christopher",
+    "pais": "Costa do Marfim",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DIAKITE Oumar",
+    "pais": "Costa do Marfim",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DIALLO Amad",
+    "pais": "Costa do Marfim",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KONE Mohamed",
+    "pais": "Costa do Marfim",
+    "posicao": "GK"
+  },
+  {
+    "nome": "DOUE Guela",
+    "pais": "Costa do Marfim",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SANGARE Ibrahim",
+    "pais": "Costa do Marfim",
+    "posicao": "MF"
+  },
+  {
+    "nome": "PEPE Nicolas",
+    "pais": "Costa do Marfim",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AGBADOU Emmanuel",
+    "pais": "Costa do Marfim",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NDICKA Evan",
+    "pais": "Costa do Marfim",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GUESSAND Evann",
+    "pais": "Costa do Marfim",
+    "posicao": "FW"
+  },
+  {
+    "nome": "LAFONT Alban",
+    "pais": "Costa do Marfim",
+    "posicao": "GK"
+  },
+  {
+    "nome": "TOURE Bazoumana",
+    "pais": "Costa do Marfim",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GUIAGON Parfait",
+    "pais": "Costa do Marfim",
+    "posicao": "MF"
+  },
+  {
+    "nome": "OULAI Christ Inao",
+    "pais": "Costa do Marfim",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LIVAKOVIC Dominik",
+    "pais": "Croatia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "STANISIC Josip",
+    "pais": "Croatia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "PONGRACIC Marin",
+    "pais": "Croatia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GVARDIOL Josko",
+    "pais": "Croatia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CALETA-CAR Duje",
+    "pais": "Croatia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SUTALO Josip",
+    "pais": "Croatia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MORO Nikola",
+    "pais": "Croatia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KOVACIC Mateo",
+    "pais": "Croatia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KRAMARIC Andrej",
+    "pais": "Croatia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MODRIC Luka",
+    "pais": "Croatia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BUDIMIR Ante",
+    "pais": "Croatia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PANDUR Ivor",
+    "pais": "Croatia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "VLASIC Nikola",
+    "pais": "Croatia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "PERISIC Ivan",
+    "pais": "Croatia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PASALIC Mario",
+    "pais": "Croatia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BATURINA Martin",
+    "pais": "Croatia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SUCIC Petar",
+    "pais": "Croatia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "JAKIC Kristijan",
+    "pais": "Croatia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FRUK Toni",
+    "pais": "Croatia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MATANOVIC Igor",
+    "pais": "Croatia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SUCIC Luka",
+    "pais": "Croatia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VUSKOVIC Luka",
+    "pais": "Croatia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KOTARSKI Dominik",
+    "pais": "Croatia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "PASALIC Marco",
+    "pais": "Croatia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ERLIC Martin",
+    "pais": "Croatia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MUSA Petar",
+    "pais": "Croatia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ROOM Eloy",
+    "pais": "Curaçao",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SAMBO Shurandy",
+    "pais": "Curaçao",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GAARI Jurien",
+    "pais": "Curaçao",
+    "posicao": "DF"
+  },
+  {
+    "nome": "VAN EIJMA Roshon",
+    "pais": "Curaçao",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FLORANUS Sherel",
+    "pais": "Curaçao",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ROEMERATOE Godfried",
+    "pais": "Curaçao",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BACUNA Juninho",
+    "pais": "Curaçao",
+    "posicao": "MF"
+  },
+  {
+    "nome": "COMENENCIA Livano",
+    "pais": "Curaçao",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LOCADIA Juergen",
+    "pais": "Curaçao",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BACUNA Leandro",
+    "pais": "Curaçao",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ANTONISSE Jeremy",
+    "pais": "Curaçao",
+    "posicao": "FW"
+  },
+  {
+    "nome": "HANSEN Sontje",
+    "pais": "Curaçao",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NOSLIN Tyrese",
+    "pais": "Curaçao",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GORRE Kenji",
+    "pais": "Curaçao",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MARTHA Arjany",
+    "pais": "Curaçao",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MARGARITHA Jearl",
+    "pais": "Curaçao",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KUWAS Brandley",
+    "pais": "Curaçao",
+    "posicao": "FW"
+  },
+  {
+    "nome": "OBISPO Armando",
+    "pais": "Curaçao",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KASTANEER Gervane",
+    "pais": "Curaçao",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BRENET Joshua",
+    "pais": "Curaçao",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CHONG Tahith",
+    "pais": "Curaçao",
+    "posicao": "MF"
+  },
+  {
+    "nome": "FELIDA Kevin",
+    "pais": "Curaçao",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BAZOER Riechedly",
+    "pais": "Curaçao",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FONVILLE Deveron",
+    "pais": "Curaçao",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BODAK Tyrick",
+    "pais": "Curaçao",
+    "posicao": "GK"
+  },
+  {
+    "nome": "DOORNBUSCH Trevor",
+    "pais": "Curaçao",
+    "posicao": "GK"
+  },
+  {
+    "nome": "KOVAR Matej",
+    "pais": "Czechia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ZIMA David",
+    "pais": "Czechia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HOLES Tomas",
+    "pais": "Czechia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HRANAC Robin",
+    "pais": "Czechia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "COUFAL Vladimir",
+    "pais": "Czechia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CHALOUPEK Stepan",
+    "pais": "Czechia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KREJCI Ladislav",
+    "pais": "Czechia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DARIDA Vladimir",
+    "pais": "Czechia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HLOZEK Adam",
+    "pais": "Czechia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SCHICK Patrik",
+    "pais": "Czechia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KUCHTA Jan",
+    "pais": "Czechia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CERV Lukas",
+    "pais": "Czechia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CHYTIL Mojmir",
+    "pais": "Czechia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "JURASEK David",
+    "pais": "Czechia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SULC Pavel",
+    "pais": "Czechia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "STANEK Jindrich",
+    "pais": "Czechia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "PROVOD Lukas",
+    "pais": "Czechia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SADILEK Michal",
+    "pais": "Czechia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CHORY Tomas",
+    "pais": "Czechia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ZELENY Jaroslav",
+    "pais": "Czechia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DOUDERA David",
+    "pais": "Czechia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SOUCEK Tomas",
+    "pais": "Czechia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HORNICEK Lukas",
+    "pais": "Czechia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SOJKA Alexandr",
+    "pais": "Czechia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SOCHUREK Hugo",
+    "pais": "Czechia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VISINSKY Denis",
+    "pais": "Czechia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GALINDEZ Hernan",
+    "pais": "Ecuador",
+    "posicao": "GK"
+  },
+  {
+    "nome": "TORRES Felix",
+    "pais": "Ecuador",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HINCAPIE Piero",
+    "pais": "Ecuador",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ORDONEZ Joel",
+    "pais": "Ecuador",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ALCIVAR Jordy",
+    "pais": "Ecuador",
+    "posicao": "MF"
+  },
+  {
+    "nome": "PACHO Willian",
+    "pais": "Ecuador",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ESTUPINAN Pervis",
+    "pais": "Ecuador",
+    "posicao": "DF"
+  },
+  {
+    "nome": "VALENCIA Anthony",
+    "pais": "Ecuador",
+    "posicao": "MF"
+  },
+  {
+    "nome": "YEBOAH John",
+    "pais": "Ecuador",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PAEZ Kendry",
+    "pais": "Ecuador",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RODRIGUEZ Kevin",
+    "pais": "Ecuador",
+    "posicao": "FW"
+  },
+  {
+    "nome": "RAMIREZ Moises",
+    "pais": "Ecuador",
+    "posicao": "GK"
+  },
+  {
+    "nome": "VALENCIA Enner",
+    "pais": "Ecuador",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MINDA Alan",
+    "pais": "Ecuador",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VITE Pedro",
+    "pais": "Ecuador",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CAICEDO Jordy",
+    "pais": "Ecuador",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PRECIADO Angelo",
+    "pais": "Ecuador",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CASTILLO Denil",
+    "pais": "Ecuador",
+    "posicao": "MF"
+  },
+  {
+    "nome": "PLATA Gonzalo",
+    "pais": "Ecuador",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ANGULO Nilson",
+    "pais": "Ecuador",
+    "posicao": "FW"
+  },
+  {
+    "nome": "FRANCO Alan",
+    "pais": "Ecuador",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VALLE Gonzalo",
+    "pais": "Ecuador",
+    "posicao": "GK"
+  },
+  {
+    "nome": "CAICEDO Moises",
+    "pais": "Ecuador",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AREVALO Jeremy",
+    "pais": "Ecuador",
+    "posicao": "FW"
+  },
+  {
+    "nome": "POROZO Jackson",
+    "pais": "Ecuador",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MEDINA Yaimar",
+    "pais": "Ecuador",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOHAMED ELSHENAWY",
+    "pais": "Egypt",
+    "posicao": "GK"
+  },
+  {
+    "nome": "YASSER IBRAHIM",
+    "pais": "Egypt",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOHAMED HANY",
+    "pais": "Egypt",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HOSSAM ABDELMAGUID",
+    "pais": "Egypt",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RAMY RABIA",
+    "pais": "Egypt",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOHAMED ABDELMONEIM",
+    "pais": "Egypt",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TREZEGUET",
+    "pais": "Egypt",
+    "posicao": "FW"
+  },
+  {
+    "nome": "EMAM ASHOUR",
+    "pais": "Egypt",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HAMZA ABDELKARIM",
+    "pais": "Egypt",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MOHAMED SALAH",
+    "pais": "Egypt",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MOSTAFA ZICO",
+    "pais": "Egypt",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HAISSEM HASSAN",
+    "pais": "Egypt",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AHMED FATOUH",
+    "pais": "Egypt",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HAMDY FATHY",
+    "pais": "Egypt",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KARIM HAFEZ",
+    "pais": "Egypt",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MAHDY SOLIMAN",
+    "pais": "Egypt",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MOHANAD LASHIN",
+    "pais": "Egypt",
+    "posicao": "MF"
+  },
+  {
+    "nome": "NABIL DONGA",
+    "pais": "Egypt",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MARAWAN ATTIA",
+    "pais": "Egypt",
+    "posicao": "MF"
+  },
+  {
+    "nome": "IBRAHIM ADEL",
+    "pais": "Egypt",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MAHMOUD SABER",
+    "pais": "Egypt",
+    "posicao": "MF"
+  },
+  {
+    "nome": "OMAR MARMOUSH",
+    "pais": "Egypt",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MOSTAFA SHOUBIR",
+    "pais": "Egypt",
+    "posicao": "GK"
+  },
+  {
+    "nome": "TAREK ALAA",
+    "pais": "Egypt",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ZIZO",
+    "pais": "Egypt",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MOHAMED ALAA",
+    "pais": "Egypt",
+    "posicao": "GK"
+  },
+  {
+    "nome": "PICKFORD Jordan",
+    "pais": "England",
+    "posicao": "GK"
+  },
+  {
+    "nome": "KONSA Ezri",
+    "pais": "England",
+    "posicao": "DF"
+  },
+  {
+    "nome": "OREILLY Nico",
+    "pais": "England",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RICE Declan",
+    "pais": "England",
+    "posicao": "MF"
+  },
+  {
+    "nome": "STONES John",
+    "pais": "England",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GUEHI Marc",
+    "pais": "England",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SAKA Bukayo",
+    "pais": "England",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ANDERSON Elliot",
+    "pais": "England",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KANE Harry",
+    "pais": "England",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BELLINGHAM Jude",
+    "pais": "England",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RASHFORD Marcus",
+    "pais": "England",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CHALOBAH Trevoh",
+    "pais": "England",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HENDERSON Dean",
+    "pais": "England",
+    "posicao": "GK"
+  },
+  {
+    "nome": "HENDERSON Jordan",
+    "pais": "England",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BURN Dan",
+    "pais": "England",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MAINOO Kobbie",
+    "pais": "England",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ROGERS Morgan",
+    "pais": "England",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GORDON Anthony",
+    "pais": "England",
+    "posicao": "FW"
+  },
+  {
+    "nome": "WATKINS Ollie",
+    "pais": "England",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MADUEKE Noni",
+    "pais": "England",
+    "posicao": "FW"
+  },
+  {
+    "nome": "EZE Eberechi",
+    "pais": "England",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TONEY Ivan",
+    "pais": "England",
+    "posicao": "FW"
+  },
+  {
+    "nome": "TRAFFORD James",
+    "pais": "England",
+    "posicao": "GK"
+  },
+  {
+    "nome": "JAMES Reece",
+    "pais": "England",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SPENCE Djed",
+    "pais": "England",
+    "posicao": "DF"
+  },
+  {
+    "nome": "QUANSAH Jarell",
+    "pais": "England",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SAMBA Brice",
+    "pais": "France",
+    "posicao": "GK"
+  },
+  {
+    "nome": "GUSTO Malo",
+    "pais": "France",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DIGNE Lucas",
+    "pais": "France",
+    "posicao": "DF"
+  },
+  {
+    "nome": "UPAMECANO Dayot",
+    "pais": "France",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KOUNDE Jules",
+    "pais": "France",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KONE Manu",
+    "pais": "France",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DEMBELE Ousmane",
+    "pais": "France",
+    "posicao": "FW"
+  },
+  {
+    "nome": "TCHOUAMENI Aurelien",
+    "pais": "France",
+    "posicao": "MF"
+  },
+  {
+    "nome": "THURAM Marcus",
+    "pais": "France",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MBAPPE Kylian",
+    "pais": "France",
+    "posicao": "FW"
+  },
+  {
+    "nome": "OLISE Michael",
+    "pais": "France",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BARCOLA Bradley",
+    "pais": "France",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KANTE Ngolo",
+    "pais": "France",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RABIOT Adrien",
+    "pais": "France",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KONATE Ibrahima",
+    "pais": "France",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MAIGNAN Mike",
+    "pais": "France",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SALIBA William",
+    "pais": "France",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ZAIRE-EMERY Warren",
+    "pais": "France",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HERNANDEZ Theo",
+    "pais": "France",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DOUE Desire",
+    "pais": "France",
+    "posicao": "FW"
+  },
+  {
+    "nome": "HERNANDEZ Lucas",
+    "pais": "France",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MATETA Jean-Philippe",
+    "pais": "France",
+    "posicao": "FW"
+  },
+  {
+    "nome": "RISSER Robin",
+    "pais": "France",
+    "posicao": "GK"
+  },
+  {
+    "nome": "CHERKI Rayan",
+    "pais": "France",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AKLIOUCHE Maghnes",
+    "pais": "France",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LACROIX Maxence",
+    "pais": "France",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NEUER Manuel",
+    "pais": "Germany",
+    "posicao": "GK"
+  },
+  {
+    "nome": "RUEDIGER Antonio",
+    "pais": "Germany",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ANTON Waldemar",
+    "pais": "Germany",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TAH Jonathan",
+    "pais": "Germany",
+    "posicao": "DF"
+  },
+  {
+    "nome": "PAVLOVIC Aleksandar",
+    "pais": "Germany",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KIMMICH Joshua",
+    "pais": "Germany",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HAVERTZ Kai",
+    "pais": "Germany",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GORETZKA Leon",
+    "pais": "Germany",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LEWELING Jamie",
+    "pais": "Germany",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MUSIALA Jamal",
+    "pais": "Germany",
+    "posicao": "MF"
+  },
+  {
+    "nome": "WOLTEMADE Nick",
+    "pais": "Germany",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BAUMANN Oliver",
+    "pais": "Germany",
+    "posicao": "GK"
+  },
+  {
+    "nome": "GROSS Pascal",
+    "pais": "Germany",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BEIER Maximilian",
+    "pais": "Germany",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SCHLOTTERBECK Nico",
+    "pais": "Germany",
+    "posicao": "DF"
+  },
+  {
+    "nome": "STILLER Angelo",
+    "pais": "Germany",
+    "posicao": "MF"
+  },
+  {
+    "nome": "WIRTZ Florian",
+    "pais": "Germany",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BROWN Nathaniel",
+    "pais": "Germany",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SANE Leroy",
+    "pais": "Germany",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AMIRI Nadiem",
+    "pais": "Germany",
+    "posicao": "MF"
+  },
+  {
+    "nome": "NUEBEL Alexander",
+    "pais": "Germany",
+    "posicao": "GK"
+  },
+  {
+    "nome": "RAUM David",
+    "pais": "Germany",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NMECHA Felix",
+    "pais": "Germany",
+    "posicao": "MF"
+  },
+  {
+    "nome": "THIAW Malick",
+    "pais": "Germany",
+    "posicao": "DF"
+  },
+  {
+    "nome": "OUEDRAOGO Assan",
+    "pais": "Germany",
+    "posicao": "MF"
+  },
+  {
+    "nome": "UNDAV Deniz",
+    "pais": "Germany",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ZIGI Lawrence Ati",
+    "pais": "Ghana",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SEIDU Alidu",
+    "pais": "Ghana",
+    "posicao": "DF"
+  },
+  {
+    "nome": "YIRENKYI Caleb",
+    "pais": "Ghana",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ADJETEY Jonas",
+    "pais": "Ghana",
+    "posicao": "DF"
+  },
+  {
+    "nome": "PARTEY Thomas",
+    "pais": "Ghana",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MUMIN Abdul",
+    "pais": "Ghana",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FATAWU Abdul",
+    "pais": "Ghana",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SIBO Kwasi",
+    "pais": "Ghana",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AYEW Jordan",
+    "pais": "Ghana",
+    "posicao": "FW"
+  },
+  {
+    "nome": "THOMAS-ASANTE Brandon",
+    "pais": "Ghana",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SEMENYO Antoine",
+    "pais": "Ghana",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ANANG Joseph",
+    "pais": "Ghana",
+    "posicao": "GK"
+  },
+  {
+    "nome": "BONSU BAAH Christopher",
+    "pais": "Ghana",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MENSAH Gideon",
+    "pais": "Ghana",
+    "posicao": "DF"
+  },
+  {
+    "nome": "OWUSU Elisha",
+    "pais": "Ghana",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ASARE Benjamin",
+    "pais": "Ghana",
+    "posicao": "GK"
+  },
+  {
+    "nome": "RAHMAN Baba",
+    "pais": "Ghana",
+    "posicao": "DF"
+  },
+  {
+    "nome": "OPOKU Jerome",
+    "pais": "Ghana",
+    "posicao": "DF"
+  },
+  {
+    "nome": "WILLIAMS Inaki",
+    "pais": "Ghana",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BOAKYE Augustine",
+    "pais": "Ghana",
+    "posicao": "MF"
+  },
+  {
+    "nome": "OPPONG Kojo Peprah",
+    "pais": "Ghana",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SULEMANA Kamaldeen",
+    "pais": "Ghana",
+    "posicao": "FW"
+  },
+  {
+    "nome": "LUCKASSEN Derrick",
+    "pais": "Ghana",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NUAMAH Ernest",
+    "pais": "Ghana",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ADU Prince",
+    "pais": "Ghana",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SENAYA Marvin",
+    "pais": "Ghana",
+    "posicao": "DF"
+  },
+  {
+    "nome": "PLACIDE Johny",
+    "pais": "Haiti",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ARCUS Carlens",
+    "pais": "Haiti",
+    "posicao": "DF"
+  },
+  {
+    "nome": "THERMONCY Keeto",
+    "pais": "Haiti",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ADE Ricardo",
+    "pais": "Haiti",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DELCROIX Hannes",
+    "pais": "Haiti",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SAINTE Carl",
+    "pais": "Haiti",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ETIENNE Derrick",
+    "pais": "Haiti",
+    "posicao": "FW"
+  },
+  {
+    "nome": "EXPERIENCE Martin",
+    "pais": "Haiti",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NAZON Duckens",
+    "pais": "Haiti",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BELLEGARDE Jean-Ricner",
+    "pais": "Haiti",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DEEDSON Louicius",
+    "pais": "Haiti",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PIERRE Alexandre",
+    "pais": "Haiti",
+    "posicao": "GK"
+  },
+  {
+    "nome": "LACROIX Markhus",
+    "pais": "Haiti",
+    "posicao": "DF"
+  },
+  {
+    "nome": "METUSALA Garven",
+    "pais": "Haiti",
+    "posicao": "DF"
+  },
+  {
+    "nome": "PROVIDENCE Ruben",
+    "pais": "Haiti",
+    "posicao": "FW"
+  },
+  {
+    "nome": "JOSEPH Lenny",
+    "pais": "Haiti",
+    "posicao": "FW"
+  },
+  {
+    "nome": "JEAN JACQUES Danley",
+    "pais": "Haiti",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ISIDOR Wilson",
+    "pais": "Haiti",
+    "posicao": "FW"
+  },
+  {
+    "nome": "FORTUNE Yassin",
+    "pais": "Haiti",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PIERROT Frantzdy",
+    "pais": "Haiti",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CASIMIR Josue",
+    "pais": "Haiti",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DUVERNE Jean-Kevin",
+    "pais": "Haiti",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DUVERGER Josue",
+    "pais": "Haiti",
+    "posicao": "GK"
+  },
+  {
+    "nome": "PAUGAIN Wilguens",
+    "pais": "Haiti",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SIMON Dominique",
+    "pais": "Haiti",
+    "posicao": "MF"
+  },
+  {
+    "nome": "PIERRE Woodensky",
+    "pais": "Haiti",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BEIRANVAND Alireza",
+    "pais": "IR Iran",
+    "posicao": "GK"
+  },
+  {
+    "nome": "HARDANI Saleh",
+    "pais": "IR Iran",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HAJISAFI Ehsan",
+    "pais": "IR Iran",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KHALILZADEH Shoja",
+    "pais": "IR Iran",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOHAMMADI Milad",
+    "pais": "IR Iran",
+    "posicao": "DF"
+  },
+  {
+    "nome": "EZATOLAHI Saeid",
+    "pais": "IR Iran",
+    "posicao": "MF"
+  },
+  {
+    "nome": "JAHANBAKHSH Alireza",
+    "pais": "IR Iran",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MOHEBBI Mohammad",
+    "pais": "IR Iran",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TAREMI Mehdi",
+    "pais": "IR Iran",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GHAYEDI Mehdi",
+    "pais": "IR Iran",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ALIPOUR Ali",
+    "pais": "IR Iran",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NIAZMAND Payam",
+    "pais": "IR Iran",
+    "posicao": "GK"
+  },
+  {
+    "nome": "KANANI Hossein",
+    "pais": "IR Iran",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GHODDOS Saman",
+    "pais": "IR Iran",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CHESHMI Roozbeh",
+    "pais": "IR Iran",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TORABI Mehdi",
+    "pais": "IR Iran",
+    "posicao": "MF"
+  },
+  {
+    "nome": "YOUSEFI Arya",
+    "pais": "IR Iran",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HOSSEINZADEH Amirhossein",
+    "pais": "IR Iran",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NEMATI Ali",
+    "pais": "IR Iran",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOGHANLOO Shahriyar",
+    "pais": "IR Iran",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GHORBANI Mohammad",
+    "pais": "IR Iran",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HOSSEINI Hossein",
+    "pais": "IR Iran",
+    "posicao": "GK"
+  },
+  {
+    "nome": "REZAEIAN Ramin",
+    "pais": "IR Iran",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DARGAHI Dennis",
+    "pais": "IR Iran",
+    "posicao": "FW"
+  },
+  {
+    "nome": "IRI Danial",
+    "pais": "IR Iran",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RAZAGHINIA Amirmohammad",
+    "pais": "IR Iran",
+    "posicao": "MF"
+  },
+  {
+    "nome": "FAHAD TALIB",
+    "pais": "Iraq",
+    "posicao": "GK"
+  },
+  {
+    "nome": "REBIN SULAKA",
+    "pais": "Iraq",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HUSSEIN ALI",
+    "pais": "Iraq",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ZAID TAHSEEN",
+    "pais": "Iraq",
+    "posicao": "DF"
+  },
+  {
+    "nome": "AKAM HASHIM",
+    "pais": "Iraq",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MUNAF YOUNUS",
+    "pais": "Iraq",
+    "posicao": "DF"
+  },
+  {
+    "nome": "YOUSSEF AMYN",
+    "pais": "Iraq",
+    "posicao": "MF"
+  },
+  {
+    "nome": "IBRAHIM BAYESH",
+    "pais": "Iraq",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ALI ALHAMADI",
+    "pais": "Iraq",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MOHANAD ALI",
+    "pais": "Iraq",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AHMED QASEM",
+    "pais": "Iraq",
+    "posicao": "FW"
+  },
+  {
+    "nome": "JALAL HASSAN",
+    "pais": "Iraq",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ALI YOUSIF",
+    "pais": "Iraq",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ZIDANE IQBAL",
+    "pais": "Iraq",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AHMED MAKNAZI",
+    "pais": "Iraq",
+    "posicao": "DF"
+  },
+  {
+    "nome": "AMIR ALAMMARI",
+    "pais": "Iraq",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ALI JASIM",
+    "pais": "Iraq",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AYMEN HUSSEIN",
+    "pais": "Iraq",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KEVIN YAKOB",
+    "pais": "Iraq",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AIMAR SHER",
+    "pais": "Iraq",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MARKO FARJI",
+    "pais": "Iraq",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AHMED BASIL",
+    "pais": "Iraq",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MERCHAS DOSKI",
+    "pais": "Iraq",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ZAID ISMAEL",
+    "pais": "Iraq",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MUSTAFA SAADOON",
+    "pais": "Iraq",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FRANS PUTROS",
+    "pais": "Iraq",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SUZUKI Zion",
+    "pais": "Japan",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SUGAWARA Yukinari",
+    "pais": "Japan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TANIGUCHI Shogo",
+    "pais": "Japan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ITAKURA Kou",
+    "pais": "Japan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NAGATOMO Yuto",
+    "pais": "Japan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MACHINO Shuto",
+    "pais": "Japan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "TANAKA Ao",
+    "pais": "Japan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KUBO Takefusa",
+    "pais": "Japan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GOTO Keisuke",
+    "pais": "Japan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DOAN Ritsu",
+    "pais": "Japan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MAEDA Daizen",
+    "pais": "Japan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "OSAKO Keisuke",
+    "pais": "Japan",
+    "posicao": "GK"
+  },
+  {
+    "nome": "NAKAMURA Keito",
+    "pais": "Japan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ITO Junya",
+    "pais": "Japan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KAMADA Daichi",
+    "pais": "Japan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "WATANABE Tsuyoshi",
+    "pais": "Japan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SUZUKI Yuito",
+    "pais": "Japan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "UEDA Ayase",
+    "pais": "Japan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "OGAWA Koki",
+    "pais": "Japan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SEKO Ayumu",
+    "pais": "Japan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ITO Hiroki",
+    "pais": "Japan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TOMIYASU Takehiro",
+    "pais": "Japan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HAYAKAWA Tomoki",
+    "pais": "Japan",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SANO Kaishu",
+    "pais": "Japan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SUZUKI Junnosuke",
+    "pais": "Japan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SHIOGAI Kento",
+    "pais": "Japan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "YAZEED ABULAILA",
+    "pais": "Jordan",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MOHAMMAD ABUHASHEESH",
+    "pais": "Jordan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ABDALLAH NASIB",
+    "pais": "Jordan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HUSAM ABUDAHAB",
+    "pais": "Jordan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "YAZAN ALARAB",
+    "pais": "Jordan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "AMER JAMOUS",
+    "pais": "Jordan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MOHAMMAD ABUZRAIQ",
+    "pais": "Jordan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NOOR ALRAWABDEH",
+    "pais": "Jordan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ALI OLWAN",
+    "pais": "Jordan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MOUSA ALTAMARI",
+    "pais": "Jordan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ODEH FAKHOURY",
+    "pais": "Jordan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NOUR BANIATEYAH",
+    "pais": "Jordan",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MAHMOUD ALMARDI",
+    "pais": "Jordan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "RAJAEI AYED",
+    "pais": "Jordan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "IBRAHIM SADEH",
+    "pais": "Jordan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MOHAMMAD ABUALNADI",
+    "pais": "Jordan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SALEEM OBAID",
+    "pais": "Jordan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOHAMMAD ABUGHOUSH",
+    "pais": "Jordan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SAED ALROSAN",
+    "pais": "Jordan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOHANNAD ABUTAHA",
+    "pais": "Jordan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "NIZAR ALRASHDAN",
+    "pais": "Jordan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ABDALLAH ALFAKHORI",
+    "pais": "Jordan",
+    "posicao": "GK"
+  },
+  {
+    "nome": "EHSAN HADDAD",
+    "pais": "Jordan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ALI AZAIZEH",
+    "pais": "Jordan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MOHAMMAD ALDAOUD",
+    "pais": "Jordan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ANAS BADAWI",
+    "pais": "Jordan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KIM Seunggyu",
+    "pais": "Korea Republic",
+    "posicao": "GK"
+  },
+  {
+    "nome": "LEE Hanbeom",
+    "pais": "Korea Republic",
+    "posicao": "DF"
+  },
+  {
+    "nome": "LEE Gihyuk",
+    "pais": "Korea Republic",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KIM Minjae",
+    "pais": "Korea Republic",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KIM Taehyeon",
+    "pais": "Korea Republic",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HWANG Inbeom",
+    "pais": "Korea Republic",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SON Heungmin",
+    "pais": "Korea Republic",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PAIK Seungho",
+    "pais": "Korea Republic",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CHO Guesung",
+    "pais": "Korea Republic",
+    "posicao": "FW"
+  },
+  {
+    "nome": "LEE Jaesung",
+    "pais": "Korea Republic",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HWANG Heechan",
+    "pais": "Korea Republic",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SONG Bumkeun",
+    "pais": "Korea Republic",
+    "posicao": "GK"
+  },
+  {
+    "nome": "LEE Taeseok",
+    "pais": "Korea Republic",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CHO Wije",
+    "pais": "Korea Republic",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KIM Moonhwan",
+    "pais": "Korea Republic",
+    "posicao": "DF"
+  },
+  {
+    "nome": "PARK Jinseob",
+    "pais": "Korea Republic",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BAE Junho",
+    "pais": "Korea Republic",
+    "posicao": "MF"
+  },
+  {
+    "nome": "OH Hyeongyu",
+    "pais": "Korea Republic",
+    "posicao": "FW"
+  },
+  {
+    "nome": "LEE Kangin",
+    "pais": "Korea Republic",
+    "posicao": "MF"
+  },
+  {
+    "nome": "YANG Hyunjun",
+    "pais": "Korea Republic",
+    "posicao": "MF"
+  },
+  {
+    "nome": "JO Hyeonwoo",
+    "pais": "Korea Republic",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SEOL Youngwoo",
+    "pais": "Korea Republic",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CASTROP Jens",
+    "pais": "Korea Republic",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KIM Jingyu",
+    "pais": "Korea Republic",
+    "posicao": "MF"
+  },
+  {
+    "nome": "EOM Jisung",
+    "pais": "Korea Republic",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LEE Donggyeong",
+    "pais": "Korea Republic",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RANGEL Raul",
+    "pais": "Mexico",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SANCHEZ Jorge",
+    "pais": "Mexico",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MONTES Cesar",
+    "pais": "Mexico",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ALVAREZ Edson",
+    "pais": "Mexico",
+    "posicao": "DF"
+  },
+  {
+    "nome": "VASQUEZ Johan",
+    "pais": "Mexico",
+    "posicao": "DF"
+  },
+  {
+    "nome": "LIRA Erik",
+    "pais": "Mexico",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ROMO Luis",
+    "pais": "Mexico",
+    "posicao": "MF"
+  },
+  {
+    "nome": "FIDALGO Alvaro",
+    "pais": "Mexico",
+    "posicao": "MF"
+  },
+  {
+    "nome": "JIMENEZ Raul",
+    "pais": "Mexico",
+    "posicao": "FW"
+  },
+  {
+    "nome": "VEGA Alexis",
+    "pais": "Mexico",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GIMENEZ Santiago",
+    "pais": "Mexico",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ACEVEDO Carlos",
+    "pais": "Mexico",
+    "posicao": "GK"
+  },
+  {
+    "nome": "OCHOA Guillermo",
+    "pais": "Mexico",
+    "posicao": "GK"
+  },
+  {
+    "nome": "GONZALEZ Armando",
+    "pais": "Mexico",
+    "posicao": "FW"
+  },
+  {
+    "nome": "REYES Israel",
+    "pais": "Mexico",
+    "posicao": "DF"
+  },
+  {
+    "nome": "QUINONES Julian",
+    "pais": "Mexico",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PINEDA Orbelin",
+    "pais": "Mexico",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VARGAS Obed",
+    "pais": "Mexico",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MORA Gilberto",
+    "pais": "Mexico",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CHAVEZ Mateo",
+    "pais": "Mexico",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HUERTA Cesar",
+    "pais": "Mexico",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MARTINEZ Guillermo",
+    "pais": "Mexico",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GALLARDO Jesus",
+    "pais": "Mexico",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CHAVEZ Luis",
+    "pais": "Mexico",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ALVARADO Roberto",
+    "pais": "Mexico",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GUTIERREZ Brian",
+    "pais": "Mexico",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BOUNOU Yassine",
+    "pais": "Morocco",
+    "posicao": "GK"
+  },
+  {
+    "nome": "HAKIMI Achraf",
+    "pais": "Morocco",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MAZRAOUI Noussair",
+    "pais": "Morocco",
+    "posicao": "DF"
+  },
+  {
+    "nome": "AMRABAT Sofyan",
+    "pais": "Morocco",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SAADANE Marwane",
+    "pais": "Morocco",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BOUADDI Ayyoub",
+    "pais": "Morocco",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TALBI Chemsdine",
+    "pais": "Morocco",
+    "posicao": "MF"
+  },
+  {
+    "nome": "OUNAHI Azzedine",
+    "pais": "Morocco",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RAHIMI Sou«ane",
+    "pais": "Morocco",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DIAZ Brahim",
+    "pais": "Morocco",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SAIBARI Ismael",
+    "pais": "Morocco",
+    "posicao": "MF"
+  },
+  {
+    "nome": "EL KAJOUI Munir",
+    "pais": "Morocco",
+    "posicao": "GK"
+  },
+  {
+    "nome": "EL OUAHDI Zakaria",
+    "pais": "Morocco",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DIOP Issa",
+    "pais": "Morocco",
+    "posicao": "DF"
+  },
+  {
+    "nome": "EL MOURABET Samir",
+    "pais": "Morocco",
+    "posicao": "MF"
+  },
+  {
+    "nome": "YASSINE Gessime",
+    "pais": "Morocco",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SBAI Amine",
+    "pais": "Morocco",
+    "posicao": "FW"
+  },
+  {
+    "nome": "RIAD Chadi",
+    "pais": "Morocco",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BELAMMARI Youssef",
+    "pais": "Morocco",
+    "posicao": "DF"
+  },
+  {
+    "nome": "EL KAABI Ayoub",
+    "pais": "Morocco",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AMAIMOUNI Ayoube",
+    "pais": "Morocco",
+    "posicao": "FW"
+  },
+  {
+    "nome": "TAGNAOUTI Ahmed Reda",
+    "pais": "Morocco",
+    "posicao": "GK"
+  },
+  {
+    "nome": "EL KHANNOUSS Bilal",
+    "pais": "Morocco",
+    "posicao": "MF"
+  },
+  {
+    "nome": "EL AYNAOUI Neil",
+    "pais": "Morocco",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HALHAL Redouane",
+    "pais": "Morocco",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SALAH EDDINE Anass",
+    "pais": "Morocco",
+    "posicao": "DF"
+  },
+  {
+    "nome": "VERBRUGGEN Bart",
+    "pais": "Netherlands",
+    "posicao": "GK"
+  },
+  {
+    "nome": "GEERTRUIDA Lutsharel",
+    "pais": "Netherlands",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DE ROON Marten",
+    "pais": "Netherlands",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VAN DIJK Virgil",
+    "pais": "Netherlands",
+    "posicao": "DF"
+  },
+  {
+    "nome": "AKE Nathan",
+    "pais": "Netherlands",
+    "posicao": "DF"
+  },
+  {
+    "nome": "VAN HECKE Jan Paul",
+    "pais": "Netherlands",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KLUIVERT Justin",
+    "pais": "Netherlands",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GRAVENBERCH Ryan",
+    "pais": "Netherlands",
+    "posicao": "MF"
+  },
+  {
+    "nome": "WEGHORST Wout",
+    "pais": "Netherlands",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DEPAY Memphis",
+    "pais": "Netherlands",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GAKPO Cody",
+    "pais": "Netherlands",
+    "posicao": "FW"
+  },
+  {
+    "nome": "WIEFFER Mats",
+    "pais": "Netherlands",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ROEFS Robin",
+    "pais": "Netherlands",
+    "posicao": "GK"
+  },
+  {
+    "nome": "REIJNDERS Tijjani",
+    "pais": "Netherlands",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VAN DE VEN Micky",
+    "pais": "Netherlands",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TIL Guus",
+    "pais": "Netherlands",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LANG Noa",
+    "pais": "Netherlands",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MALEN Donyell",
+    "pais": "Netherlands",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BROBBEY Brian",
+    "pais": "Netherlands",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KOOPMEINERS Teun",
+    "pais": "Netherlands",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DE JONG Frenkie",
+    "pais": "Netherlands",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DUMFRIES Denzel",
+    "pais": "Netherlands",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FLEKKEN Mark",
+    "pais": "Netherlands",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SUMMERVILLE Crysencio",
+    "pais": "Netherlands",
+    "posicao": "FW"
+  },
+  {
+    "nome": "HATO Jorrel",
+    "pais": "Netherlands",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TIMBER Quinten",
+    "pais": "Netherlands",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CROCOMBE Max",
+    "pais": "New Zealand",
+    "posicao": "GK"
+  },
+  {
+    "nome": "PAYNE Tim",
+    "pais": "New Zealand",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DE VRIES Francis",
+    "pais": "New Zealand",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BINDON Tyler",
+    "pais": "New Zealand",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BOXALL Michael",
+    "pais": "New Zealand",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BELL Joe",
+    "pais": "New Zealand",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ROGERSON Logan",
+    "pais": "New Zealand",
+    "posicao": "FW"
+  },
+  {
+    "nome": "STAMENIC Marko",
+    "pais": "New Zealand",
+    "posicao": "MF"
+  },
+  {
+    "nome": "WOOD Chris",
+    "pais": "New Zealand",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SINGH Sarpreet",
+    "pais": "New Zealand",
+    "posicao": "MF"
+  },
+  {
+    "nome": "JUST Elijah",
+    "pais": "New Zealand",
+    "posicao": "MF"
+  },
+  {
+    "nome": "PAULSEN Alex",
+    "pais": "New Zealand",
+    "posicao": "GK"
+  },
+  {
+    "nome": "CACACE Liberato",
+    "pais": "New Zealand",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RUFER Alex",
+    "pais": "New Zealand",
+    "posicao": "MF"
+  },
+  {
+    "nome": "PIJNAKER Nando",
+    "pais": "New Zealand",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SURMAN Finn",
+    "pais": "New Zealand",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BARBAROUSES Kosta",
+    "pais": "New Zealand",
+    "posicao": "FW"
+  },
+  {
+    "nome": "WAINE Ben",
+    "pais": "New Zealand",
+    "posicao": "FW"
+  },
+  {
+    "nome": "OLD Ben",
+    "pais": "New Zealand",
+    "posicao": "MF"
+  },
+  {
+    "nome": "McCOWATT Callum",
+    "pais": "New Zealand",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RANDALL Jesse",
+    "pais": "New Zealand",
+    "posicao": "FW"
+  },
+  {
+    "nome": "WOUD Michael",
+    "pais": "New Zealand",
+    "posicao": "GK"
+  },
+  {
+    "nome": "THOMAS Ryan",
+    "pais": "New Zealand",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ELLIOT Callan",
+    "pais": "New Zealand",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BAYLISS Lachlan",
+    "pais": "New Zealand",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SMITH Tommy",
+    "pais": "New Zealand",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NYLAND Orjan",
+    "pais": "Norway",
+    "posicao": "GK"
+  },
+  {
+    "nome": "THORSBY Morten",
+    "pais": "Norway",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AJER Kristoffer",
+    "pais": "Norway",
+    "posicao": "DF"
+  },
+  {
+    "nome": "OSTIGARD Leo",
+    "pais": "Norway",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOLLER WOLFE David",
+    "pais": "Norway",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BERG Patrick",
+    "pais": "Norway",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SORLOTH Alexander",
+    "pais": "Norway",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BERGE Sander",
+    "pais": "Norway",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HAALAND Erling",
+    "pais": "Norway",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ODEGAARD Martin",
+    "pais": "Norway",
+    "posicao": "MF"
+  },
+  {
+    "nome": "STRAND LARSEN Jorgen",
+    "pais": "Norway",
+    "posicao": "FW"
+  },
+  {
+    "nome": "TANGVIK Sander",
+    "pais": "Norway",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SELVIK Egil",
+    "pais": "Norway",
+    "posicao": "GK"
+  },
+  {
+    "nome": "AURSNES Fredrik",
+    "pais": "Norway",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BJORKAN Fredrik Andre",
+    "pais": "Norway",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HOLMGREN PEDERSEN Marcus",
+    "pais": "Norway",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HEGGEM Torbjorn",
+    "pais": "Norway",
+    "posicao": "DF"
+  },
+  {
+    "nome": "THORSTVEDT Kristian",
+    "pais": "Norway",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AASGAARD Thelo",
+    "pais": "Norway",
+    "posicao": "MF"
+  },
+  {
+    "nome": "NUSA Antonio",
+    "pais": "Norway",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SCHJELDERUP Andreas",
+    "pais": "Norway",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BOBB Oscar",
+    "pais": "Norway",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HAUGE Jens Petter",
+    "pais": "Norway",
+    "posicao": "MF"
+  },
+  {
+    "nome": "LANGAS Sondre",
+    "pais": "Norway",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FALCHENER Henrik",
+    "pais": "Norway",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RYERSON Julian",
+    "pais": "Norway",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MEJIA Luis",
+    "pais": "Panama",
+    "posicao": "GK"
+  },
+  {
+    "nome": "BLACKMAN Cesar",
+    "pais": "Panama",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CORDOBA Jose",
+    "pais": "Panama",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ESCOBAR Fidel",
+    "pais": "Panama",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FARINA Edgardo",
+    "pais": "Panama",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MARTINEZ Cristian",
+    "pais": "Panama",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RODRIGUEZ Jose Luis",
+    "pais": "Panama",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CARRASQUILLA Adalberto",
+    "pais": "Panama",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RODRIGUEZ Tomas",
+    "pais": "Panama",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DIAZ Ismael",
+    "pais": "Panama",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BARCENAS Edgar Yoel",
+    "pais": "Panama",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SAMUDIO Cesar",
+    "pais": "Panama",
+    "posicao": "GK"
+  },
+  {
+    "nome": "RAMOS Jiovany",
+    "pais": "Panama",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HARVEY Carlos",
+    "pais": "Panama",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DAVIS Eric",
+    "pais": "Panama",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ANDRADE Andres",
+    "pais": "Panama",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FAJARDO Jose",
+    "pais": "Panama",
+    "posicao": "FW"
+  },
+  {
+    "nome": "WATERMAN Cecilio",
+    "pais": "Panama",
+    "posicao": "FW"
+  },
+  {
+    "nome": "QUINTERO Alberto",
+    "pais": "Panama",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GODOY Anibal",
+    "pais": "Panama",
+    "posicao": "MF"
+  },
+  {
+    "nome": "YANIS Cesar",
+    "pais": "Panama",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MOSQUERA Orlando",
+    "pais": "Panama",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MURILLO Amir",
+    "pais": "Panama",
+    "posicao": "DF"
+  },
+  {
+    "nome": "LONDONO Azarias",
+    "pais": "Panama",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MILLER Roderick",
+    "pais": "Panama",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GUTIERREZ Jorge",
+    "pais": "Panama",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FERNANDEZ Gatito",
+    "pais": "Paraguay",
+    "posicao": "GK"
+  },
+  {
+    "nome": "VELAZQUEZ Gustavo",
+    "pais": "Paraguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ALDERETE Omar",
+    "pais": "Paraguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CACERES Juan Jose",
+    "pais": "Paraguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BALBUENA Fabian",
+    "pais": "Paraguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ALONSO Junior",
+    "pais": "Paraguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SOSA Ramon",
+    "pais": "Paraguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GOMEZ Diego",
+    "pais": "Paraguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SANABRIA Antonio",
+    "pais": "Paraguay",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ALMIRON Miguel",
+    "pais": "Paraguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MAURICIO",
+    "pais": "Paraguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GILL Orlando",
+    "pais": "Paraguay",
+    "posicao": "GK"
+  },
+  {
+    "nome": "CANALE Jose",
+    "pais": "Paraguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CUBAS Andres",
+    "pais": "Paraguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GOMEZ Gustavo",
+    "pais": "Paraguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BOBADILLA Damian",
+    "pais": "Paraguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ROMERO GAMARRA Alejandro",
+    "pais": "Paraguay",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ARCE Alex",
+    "pais": "Paraguay",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ENCISO Julio",
+    "pais": "Paraguay",
+    "posicao": "FW"
+  },
+  {
+    "nome": "OJEDA Braian",
+    "pais": "Paraguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AVALOS Gabriel",
+    "pais": "Paraguay",
+    "posicao": "FW"
+  },
+  {
+    "nome": "OLVEIRA Gaston",
+    "pais": "Paraguay",
+    "posicao": "GK"
+  },
+  {
+    "nome": "GALARZA Matias",
+    "pais": "Paraguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CABALLERO Gustavo",
+    "pais": "Paraguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "PITTA Isidro",
+    "pais": "Paraguay",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MAIDANA Alexandro",
+    "pais": "Paraguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DIOGO COSTA",
+    "pais": "Portugal",
+    "posicao": "GK"
+  },
+  {
+    "nome": "NELSON SEMEDO",
+    "pais": "Portugal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RUBEN DIAS",
+    "pais": "Portugal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TOMAS ARAUJO",
+    "pais": "Portugal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DIOGO DALOT",
+    "pais": "Portugal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MATHEUS NUNES",
+    "pais": "Portugal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CRISTIANO RONALDO",
+    "pais": "Portugal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BRUNO FERNANDES",
+    "pais": "Portugal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GONCALO RAMOS",
+    "pais": "Portugal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BERNARDO SILVA",
+    "pais": "Portugal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "JOAO FELIX",
+    "pais": "Portugal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "JOSE SA",
+    "pais": "Portugal",
+    "posicao": "GK"
+  },
+  {
+    "nome": "RENATO VEIGA",
+    "pais": "Portugal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GONCALO INACIO",
+    "pais": "Portugal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "JOAO NEVES",
+    "pais": "Portugal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "FRANCISCO TRINCAO",
+    "pais": "Portugal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "RAFAEL LEAO",
+    "pais": "Portugal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PEDRO NETO",
+    "pais": "Portugal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GONCALO GUEDES",
+    "pais": "Portugal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "JOAO CANCELO",
+    "pais": "Portugal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RUBEN NEVES",
+    "pais": "Portugal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RUI SILVA",
+    "pais": "Portugal",
+    "posicao": "GK"
+  },
+  {
+    "nome": "VITINHA",
+    "pais": "Portugal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SAMU COSTA",
+    "pais": "Portugal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NUNO MENDES",
+    "pais": "Portugal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FRANCISCO CONCEICAO",
+    "pais": "Portugal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MAHMOUD ABUNADA",
+    "pais": "Qatar",
+    "posicao": "GK"
+  },
+  {
+    "nome": "PEDRO MIGUEL",
+    "pais": "Qatar",
+    "posicao": "DF"
+  },
+  {
+    "nome": "LUCAS MENDES",
+    "pais": "Qatar",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ISSA LAYE",
+    "pais": "Qatar",
+    "posicao": "DF"
+  },
+  {
+    "nome": "JASSEM GABER",
+    "pais": "Qatar",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ABDULAZIZ HATEM",
+    "pais": "Qatar",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AHMED ALAAELDIN",
+    "pais": "Qatar",
+    "posicao": "FW"
+  },
+  {
+    "nome": "EDMILSON JUNIOR",
+    "pais": "Qatar",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MOHAMMED MUNTARI",
+    "pais": "Qatar",
+    "posicao": "FW"
+  },
+  {
+    "nome": "HASSAN ALHAYDOS",
+    "pais": "Qatar",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AKRAM AFIF",
+    "pais": "Qatar",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KARIM BOUDIAF",
+    "pais": "Qatar",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AYOUB ALOUI",
+    "pais": "Qatar",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HOMAM AHMED",
+    "pais": "Qatar",
+    "posicao": "DF"
+  },
+  {
+    "nome": "YUSUF ABDURISAG",
+    "pais": "Qatar",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BOUALEM KHOUKHI",
+    "pais": "Qatar",
+    "posicao": "DF"
+  },
+  {
+    "nome": "AHMED ALGANEHI",
+    "pais": "Qatar",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SULTAN ALBRAKE",
+    "pais": "Qatar",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ALMOEZ ALI",
+    "pais": "Qatar",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AHMED FATHY",
+    "pais": "Qatar",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SALAH ZAKARIA",
+    "pais": "Qatar",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MESHAAL BARSHAM",
+    "pais": "Qatar",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ASSIM MADIBO",
+    "pais": "Qatar",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TAHSIN MOHAMMED",
+    "pais": "Qatar",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ALHASHMI ALHUSSEIN",
+    "pais": "Qatar",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOHAMED MANAI",
+    "pais": "Qatar",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NAWAF ALAQIDI",
+    "pais": "Saudi Arabia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ALI MAJRASHI",
+    "pais": "Saudi Arabia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ALI LAJAMI",
+    "pais": "Saudi Arabia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ABDULELAH ALAMRI",
+    "pais": "Saudi Arabia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HASSAN ALTAMBAKTI",
+    "pais": "Saudi Arabia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NASSER ALDAWSARI",
+    "pais": "Saudi Arabia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MUSAB ALJUWAYR",
+    "pais": "Saudi Arabia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AIMAN YAHYA",
+    "pais": "Saudi Arabia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "FERAS ALBRIKAN",
+    "pais": "Saudi Arabia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SALEM ALDAWSARI",
+    "pais": "Saudi Arabia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SALEH ALSHEHRI",
+    "pais": "Saudi Arabia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SAUD ABDULHAMID",
+    "pais": "Saudi Arabia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NAWAF BU WASHL",
+    "pais": "Saudi Arabia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HASSAN KADISH",
+    "pais": "Saudi Arabia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ABDULLAH ALKHAIBARI",
+    "pais": "Saudi Arabia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ZIYAD ALJOHANI",
+    "pais": "Saudi Arabia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KHALID ALGHANNAM",
+    "pais": "Saudi Arabia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ALA ALHAJJI",
+    "pais": "Saudi Arabia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ABDULLAH ALHAMDDAN",
+    "pais": "Saudi Arabia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SULTAN MANDASH",
+    "pais": "Saudi Arabia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MOHAMMED ALOWAIS",
+    "pais": "Saudi Arabia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "AHMED ALKASSAR",
+    "pais": "Saudi Arabia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MOHAMED KANNO",
+    "pais": "Saudi Arabia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MOTEB ALHARBI",
+    "pais": "Saudi Arabia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "JEHAD THIKRI",
+    "pais": "Saudi Arabia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOHAMMED ABU ALSHAMAT",
+    "pais": "Saudi Arabia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GUNN Angus",
+    "pais": "Scotland",
+    "posicao": "GK"
+  },
+  {
+    "nome": "HICKEY Aaron",
+    "pais": "Scotland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ROBERTSON Andy",
+    "pais": "Scotland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "McTOMINAY Scott",
+    "pais": "Scotland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HANLEY Grant",
+    "pais": "Scotland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TIERNEY Kieran",
+    "pais": "Scotland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "McGINN John",
+    "pais": "Scotland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "FLETCHER Tyler",
+    "pais": "Scotland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DYKES Lyndon",
+    "pais": "Scotland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ADAMS Che",
+    "pais": "Scotland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CHRISTIE Ryan",
+    "pais": "Scotland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KELLY Liam",
+    "pais": "Scotland",
+    "posicao": "GK"
+  },
+  {
+    "nome": "HENDRY Jack",
+    "pais": "Scotland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "STEWART Ross",
+    "pais": "Scotland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SOUTTAR John",
+    "pais": "Scotland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HYAM Dominic",
+    "pais": "Scotland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GANNON-DOAK Ben",
+    "pais": "Scotland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "HIRST George",
+    "pais": "Scotland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "FERGUSON Lewis",
+    "pais": "Scotland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SHANKLAND Lawrence",
+    "pais": "Scotland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GORDON Craig",
+    "pais": "Scotland",
+    "posicao": "GK"
+  },
+  {
+    "nome": "PATTERSON Nathan",
+    "pais": "Scotland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "McLEAN Kenny",
+    "pais": "Scotland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RALSTON Anthony",
+    "pais": "Scotland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CURTIS Findlay",
+    "pais": "Scotland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "McKENNA Scott",
+    "pais": "Scotland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DIOUF Yehvann",
+    "pais": "Senegal",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SARR Mamadou",
+    "pais": "Senegal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KOULIBALY Kalidou",
+    "pais": "Senegal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SECK Abdoulaye",
+    "pais": "Senegal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GUEYE Idrissa Gana",
+    "pais": "Senegal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CISS Pathe",
+    "pais": "Senegal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DIAO Assane",
+    "pais": "Senegal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CAMARA Lamine",
+    "pais": "Senegal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DIENG Bamba",
+    "pais": "Senegal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MANE Sadio",
+    "pais": "Senegal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "JACKSON Nicolas",
+    "pais": "Senegal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NDIAYE Cherif",
+    "pais": "Senegal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NDIAYE Iliman",
+    "pais": "Senegal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "JAKOBS Ismail",
+    "pais": "Senegal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DIATTA Krepin",
+    "pais": "Senegal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MENDY Edouard",
+    "pais": "Senegal",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SARR Pape Matar",
+    "pais": "Senegal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SARR Ismaila",
+    "pais": "Senegal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NIAKHATE Moussa",
+    "pais": "Senegal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MBAYE Ibrahim",
+    "pais": "Senegal",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DIARRA Habib",
+    "pais": "Senegal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "NDIAYE Bara Sapoko",
+    "pais": "Senegal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DIAW Mory",
+    "pais": "Senegal",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MENDY Antoine",
+    "pais": "Senegal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DIOUF El Hadji Malick",
+    "pais": "Senegal",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GUEYE Pape",
+    "pais": "Senegal",
+    "posicao": "MF"
+  },
+  {
+    "nome": "WILLIAMS Ronwen",
+    "pais": "South Africa",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MATULUDI Thabang",
+    "pais": "South Africa",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NDAMANE Khulumani",
+    "pais": "South Africa",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOKOENA Teboho",
+    "pais": "South Africa",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MBATHA Thalente",
+    "pais": "South Africa",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MODIBA Aubrey",
+    "pais": "South Africa",
+    "posicao": "DF"
+  },
+  {
+    "nome": "APPOLLIS Oswin",
+    "pais": "South Africa",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MOREMI Tshepang",
+    "pais": "South Africa",
+    "posicao": "FW"
+  },
+  {
+    "nome": "FOSTER Lyle",
+    "pais": "South Africa",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MOFOKENG Relebohile",
+    "pais": "South Africa",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ZWANE Themba",
+    "pais": "South Africa",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MASEKO Thapelo",
+    "pais": "South Africa",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SITHOLE Sphephelo",
+    "pais": "South Africa",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MBOKAZI Mbekezeli",
+    "pais": "South Africa",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RAYNERS Iqraam",
+    "pais": "South Africa",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CHAINE Sipho",
+    "pais": "South Africa",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MAKGOPA Evidence",
+    "pais": "South Africa",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KABINI Samukele",
+    "pais": "South Africa",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SIBISI Nkosinathi",
+    "pais": "South Africa",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MUDAU Khuliso",
+    "pais": "South Africa",
+    "posicao": "DF"
+  },
+  {
+    "nome": "OKON Ime",
+    "pais": "South Africa",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GOSS Ricardo",
+    "pais": "South Africa",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ADAMS Jayden",
+    "pais": "South Africa",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MAKHANYA Olwethu",
+    "pais": "South Africa",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SEBELEBELE Kamogelo",
+    "pais": "South Africa",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CROSS Bradley",
+    "pais": "South Africa",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RAYA David",
+    "pais": "Spain",
+    "posicao": "GK"
+  },
+  {
+    "nome": "PUBILL Marc",
+    "pais": "Spain",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GRIMALDO Alex",
+    "pais": "Spain",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GARCIA Eric",
+    "pais": "Spain",
+    "posicao": "DF"
+  },
+  {
+    "nome": "LLORENTE Marcos",
+    "pais": "Spain",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MERINO Mikel",
+    "pais": "Spain",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TORRES Ferran",
+    "pais": "Spain",
+    "posicao": "FW"
+  },
+  {
+    "nome": "RUIZ Fabian",
+    "pais": "Spain",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GAVI",
+    "pais": "Spain",
+    "posicao": "MF"
+  },
+  {
+    "nome": "OLMO Dani",
+    "pais": "Spain",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PINO Yeremy",
+    "pais": "Spain",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PORRO Pedro",
+    "pais": "Spain",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GARCIA Joan",
+    "pais": "Spain",
+    "posicao": "GK"
+  },
+  {
+    "nome": "LAPORTE Aymeric",
+    "pais": "Spain",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BAENA Alex",
+    "pais": "Spain",
+    "posicao": "MF"
+  },
+  {
+    "nome": "RODRI",
+    "pais": "Spain",
+    "posicao": "MF"
+  },
+  {
+    "nome": "WILLIAMS Nico",
+    "pais": "Spain",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ZUBIMENDI Martin",
+    "pais": "Spain",
+    "posicao": "MF"
+  },
+  {
+    "nome": "YAMAL Lamine",
+    "pais": "Spain",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PEDRI",
+    "pais": "Spain",
+    "posicao": "MF"
+  },
+  {
+    "nome": "OYARZABAL Mikel",
+    "pais": "Spain",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CUBARSI Pau",
+    "pais": "Spain",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SIMON Unai",
+    "pais": "Spain",
+    "posicao": "GK"
+  },
+  {
+    "nome": "CUCURELLA Marc",
+    "pais": "Spain",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MUNOZ Victor",
+    "pais": "Spain",
+    "posicao": "FW"
+  },
+  {
+    "nome": "IGLESIAS Borja",
+    "pais": "Spain",
+    "posicao": "FW"
+  },
+  {
+    "nome": "WIDELL ZETTERSTROM Jacob",
+    "pais": "Sweden",
+    "posicao": "GK"
+  },
+  {
+    "nome": "LAGERBIELKE Gustaf",
+    "pais": "Sweden",
+    "posicao": "DF"
+  },
+  {
+    "nome": "LINDELOF Victor",
+    "pais": "Sweden",
+    "posicao": "DF"
+  },
+  {
+    "nome": "HIEN Isak",
+    "pais": "Sweden",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GUDMUNDSSON Gabriel",
+    "pais": "Sweden",
+    "posicao": "DF"
+  },
+  {
+    "nome": "JOHANSSON Herman",
+    "pais": "Sweden",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BERGVALL Lucas",
+    "pais": "Sweden",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SVENSSON Daniel",
+    "pais": "Sweden",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ISAK Alexander",
+    "pais": "Sweden",
+    "posicao": "FW"
+  },
+  {
+    "nome": "NYGREN Benjamin",
+    "pais": "Sweden",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ELANGA Anthony",
+    "pais": "Sweden",
+    "posicao": "FW"
+  },
+  {
+    "nome": "JOHANSSON Viktor",
+    "pais": "Sweden",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SEMA Ken",
+    "pais": "Sweden",
+    "posicao": "MF"
+  },
+  {
+    "nome": "EKDAL Hjalmar",
+    "pais": "Sweden",
+    "posicao": "DF"
+  },
+  {
+    "nome": "STARFELT Carl",
+    "pais": "Sweden",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KARLSTROM Jesper",
+    "pais": "Sweden",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GYOKERES Viktor",
+    "pais": "Sweden",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AYARI Yasin",
+    "pais": "Sweden",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SVANBERG Mattias",
+    "pais": "Sweden",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SMITH Eric",
+    "pais": "Sweden",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BERNHARDSSON Alexander",
+    "pais": "Sweden",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ZENELI Besfort",
+    "pais": "Sweden",
+    "posicao": "MF"
+  },
+  {
+    "nome": "NORDFELDT Kristoffer",
+    "pais": "Sweden",
+    "posicao": "GK"
+  },
+  {
+    "nome": "STROUD Elliot",
+    "pais": "Sweden",
+    "posicao": "DF"
+  },
+  {
+    "nome": "NILSSON Gustaf",
+    "pais": "Sweden",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ALI Taha",
+    "pais": "Sweden",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KOBEL Gregor",
+    "pais": "Switzerland",
+    "posicao": "GK"
+  },
+  {
+    "nome": "MUHEIM Miro",
+    "pais": "Switzerland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "WIDMER Silvan",
+    "pais": "Switzerland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ELVEDI Nico",
+    "pais": "Switzerland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "AKANJI Manuel",
+    "pais": "Switzerland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ZAKARIA Denis",
+    "pais": "Switzerland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "EMBOLO Breel",
+    "pais": "Switzerland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "FREULER Remo",
+    "pais": "Switzerland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MANZAMBI Johan",
+    "pais": "Switzerland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "XHAKA Granit",
+    "pais": "Switzerland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "NDOYE Dan",
+    "pais": "Switzerland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MVOGO Yvon",
+    "pais": "Switzerland",
+    "posicao": "GK"
+  },
+  {
+    "nome": "RODRIGUEZ Ricardo",
+    "pais": "Switzerland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "JASHARI Ardon",
+    "pais": "Switzerland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SOW Djibril",
+    "pais": "Switzerland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "FASSNACHT Christian",
+    "pais": "Switzerland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "VARGAS Ruben",
+    "pais": "Switzerland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "COEMERT Eray",
+    "pais": "Switzerland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "OKAFOR Noah",
+    "pais": "Switzerland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AEBISCHER Michel",
+    "pais": "Switzerland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KELLER Marvin",
+    "pais": "Switzerland",
+    "posicao": "GK"
+  },
+  {
+    "nome": "RIEDER Fabian",
+    "pais": "Switzerland",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AMDOUNI Zeki",
+    "pais": "Switzerland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AMENDA Aurele",
+    "pais": "Switzerland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "JAQUEZ Luca",
+    "pais": "Switzerland",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ITTEN Cedric",
+    "pais": "Switzerland",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CHAMAKH Mouhib",
+    "pais": "Tunisia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ABDI Ali",
+    "pais": "Tunisia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TALBI Montassar",
+    "pais": "Tunisia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "REKIK Omar",
+    "pais": "Tunisia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "AROUS Adam",
+    "pais": "Tunisia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BRONN Dylan",
+    "pais": "Tunisia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ACHOURI Elias",
+    "pais": "Tunisia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SAAD Elias",
+    "pais": "Tunisia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MASTOURI Hazem",
+    "pais": "Tunisia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MEJBRI Hannibal",
+    "pais": "Tunisia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GHARBI Ismael",
+    "pais": "Tunisia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BEN OUANES Mortadha",
+    "pais": "Tunisia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KHEDIRA Rani",
+    "pais": "Tunisia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AYARI Khalil",
+    "pais": "Tunisia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "HADJ MAHMOUD Mohamed",
+    "pais": "Tunisia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DAHMEN Aymen",
+    "pais": "Tunisia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "SKHIRI Ellyes",
+    "pais": "Tunisia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ELLOUMI Rayan",
+    "pais": "Tunisia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CHAOUAT Firas",
+    "pais": "Tunisia",
+    "posicao": "FW"
+  },
+  {
+    "nome": "VALERY Yan",
+    "pais": "Tunisia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BEN HMIDA Mohamed Amine",
+    "pais": "Tunisia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BEN HESSEN Sabri",
+    "pais": "Tunisia",
+    "posicao": "GK"
+  },
+  {
+    "nome": "NEFFATI Moutaz",
+    "pais": "Tunisia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CHIKHAOUI Raed",
+    "pais": "Tunisia",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SLIMANE Anis",
+    "pais": "Tunisia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TOUNEKTI Sebastian",
+    "pais": "Tunisia",
+    "posicao": "MF"
+  },
+  {
+    "nome": "GUNOK Mert",
+    "pais": "Türkiye",
+    "posicao": "GK"
+  },
+  {
+    "nome": "CELIK Zeki",
+    "pais": "Türkiye",
+    "posicao": "DF"
+  },
+  {
+    "nome": "DEMIRAL Merih",
+    "pais": "Türkiye",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SOYUNCU Caglar",
+    "pais": "Türkiye",
+    "posicao": "DF"
+  },
+  {
+    "nome": "OZCAN Salih",
+    "pais": "Türkiye",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KOKCU Orkun",
+    "pais": "Türkiye",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AKTURKOGLU Kerem",
+    "pais": "Türkiye",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GULER Arda",
+    "pais": "Türkiye",
+    "posicao": "FW"
+  },
+  {
+    "nome": "GUL Deniz",
+    "pais": "Türkiye",
+    "posicao": "FW"
+  },
+  {
+    "nome": "CALHANOGLU Hakan",
+    "pais": "Türkiye",
+    "posicao": "MF"
+  },
+  {
+    "nome": "YILDIZ Kenan",
+    "pais": "Türkiye",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BAYINDIR Altay",
+    "pais": "Türkiye",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ELMALI Eren",
+    "pais": "Türkiye",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BARDAKCI Abdulkerim",
+    "pais": "Türkiye",
+    "posicao": "DF"
+  },
+  {
+    "nome": "KABAK Ozan",
+    "pais": "Türkiye",
+    "posicao": "DF"
+  },
+  {
+    "nome": "YUKSEK Ismail",
+    "pais": "Türkiye",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KAHVECI Irfan Can",
+    "pais": "Türkiye",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MULDUR Mert",
+    "pais": "Türkiye",
+    "posicao": "DF"
+  },
+  {
+    "nome": "AKGUN Yunus",
+    "pais": "Türkiye",
+    "posicao": "FW"
+  },
+  {
+    "nome": "KADIOGLU Ferdi",
+    "pais": "Türkiye",
+    "posicao": "DF"
+  },
+  {
+    "nome": "YILMAZ Baris Alper",
+    "pais": "Türkiye",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AYHAN Kaan",
+    "pais": "Türkiye",
+    "posicao": "MF"
+  },
+  {
+    "nome": "CAKIR Ugurcan",
+    "pais": "Türkiye",
+    "posicao": "GK"
+  },
+  {
+    "nome": "AYDIN Oguz",
+    "pais": "Türkiye",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AKAYDIN Samet",
+    "pais": "Türkiye",
+    "posicao": "DF"
+  },
+  {
+    "nome": "UZUN Can",
+    "pais": "Türkiye",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ROCHET Sergio",
+    "pais": "Uruguay",
+    "posicao": "GK"
+  },
+  {
+    "nome": "GIMENEZ Jose Maria",
+    "pais": "Uruguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CACERES Sebastian",
+    "pais": "Uruguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ARAUJO Ronald",
+    "pais": "Uruguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "UGARTE Manuel",
+    "pais": "Uruguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "BENTANCUR Rodrigo",
+    "pais": "Uruguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "DE LA CRUZ Nicolas",
+    "pais": "Uruguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VALVERDE Federico",
+    "pais": "Uruguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "NUNEZ Darwin",
+    "pais": "Uruguay",
+    "posicao": "FW"
+  },
+  {
+    "nome": "DE ARRASCAETA Giorgian",
+    "pais": "Uruguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "PELLISTRI Facundo",
+    "pais": "Uruguay",
+    "posicao": "FW"
+  },
+  {
+    "nome": "MELE Santiago",
+    "pais": "Uruguay",
+    "posicao": "GK"
+  },
+  {
+    "nome": "VARELA Guillermo",
+    "pais": "Uruguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "CANOBBIO Agustin",
+    "pais": "Uruguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MARTINEZ Emiliano",
+    "pais": "Uruguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "OLIVERA Mathias",
+    "pais": "Uruguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "VINA Matias",
+    "pais": "Uruguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RODRIGUEZ Brian",
+    "pais": "Uruguay",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AGUIRRE Rodrigo",
+    "pais": "Uruguay",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ARAUJO Maxi",
+    "pais": "Uruguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "VINAS Federico",
+    "pais": "Uruguay",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PIQUEREZ Joaquin",
+    "pais": "Uruguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "MUSLERA Fernando",
+    "pais": "Uruguay",
+    "posicao": "GK"
+  },
+  {
+    "nome": "BUENO Santiago",
+    "pais": "Uruguay",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SANABRIA Juan Manuel",
+    "pais": "Uruguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ZALAZAR Rodrigo",
+    "pais": "Uruguay",
+    "posicao": "MF"
+  },
+  {
+    "nome": "TURNER Matt",
+    "pais": "USA",
+    "posicao": "GK"
+  },
+  {
+    "nome": "DEST Sergino",
+    "pais": "USA",
+    "posicao": "DF"
+  },
+  {
+    "nome": "RICHARDS Chris",
+    "pais": "USA",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ADAMS Tyler",
+    "pais": "USA",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ROBINSON Antonee",
+    "pais": "USA",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TRUSTY Auston",
+    "pais": "USA",
+    "posicao": "DF"
+  },
+  {
+    "nome": "REYNA Giovanni",
+    "pais": "USA",
+    "posicao": "MF"
+  },
+  {
+    "nome": "McKENNIE Weston",
+    "pais": "USA",
+    "posicao": "MF"
+  },
+  {
+    "nome": "PEPI Ricardo",
+    "pais": "USA",
+    "posicao": "FW"
+  },
+  {
+    "nome": "PULISIC Christian",
+    "pais": "USA",
+    "posicao": "FW"
+  },
+  {
+    "nome": "AARONSON Brenden",
+    "pais": "USA",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ROBINSON Miles",
+    "pais": "USA",
+    "posicao": "DF"
+  },
+  {
+    "nome": "REAM Tim",
+    "pais": "USA",
+    "posicao": "DF"
+  },
+  {
+    "nome": "BERHALTER Sebastian",
+    "pais": "USA",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ROLDAN Cristian",
+    "pais": "USA",
+    "posicao": "MF"
+  },
+  {
+    "nome": "FREEMAN Alex",
+    "pais": "USA",
+    "posicao": "DF"
+  },
+  {
+    "nome": "TILLMAN Malik",
+    "pais": "USA",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ARFSTEN Max",
+    "pais": "USA",
+    "posicao": "DF"
+  },
+  {
+    "nome": "WRIGHT Haji",
+    "pais": "USA",
+    "posicao": "FW"
+  },
+  {
+    "nome": "BALOGUN Folarin",
+    "pais": "USA",
+    "posicao": "FW"
+  },
+  {
+    "nome": "WEAH Timothy",
+    "pais": "USA",
+    "posicao": "FW"
+  },
+  {
+    "nome": "McKENZIE Mark",
+    "pais": "USA",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SCALLY Joe",
+    "pais": "USA",
+    "posicao": "DF"
+  },
+  {
+    "nome": "FREESE Matt",
+    "pais": "USA",
+    "posicao": "GK"
+  },
+  {
+    "nome": "BRADY Chris",
+    "pais": "USA",
+    "posicao": "GK"
+  },
+  {
+    "nome": "ZENDEJAS Alex",
+    "pais": "USA",
+    "posicao": "FW"
+  },
+  {
+    "nome": "YUSUPOV Utkir",
+    "pais": "Uzbekistan",
+    "posicao": "GK"
+  },
+  {
+    "nome": "KHUSANOV Abdukodir",
+    "pais": "Uzbekistan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ALIJONOV Khojiakbar",
+    "pais": "Uzbekistan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SAYFIEV Farrukh",
+    "pais": "Uzbekistan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ASHURMATOV Rustam",
+    "pais": "Uzbekistan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "MOZGOVOY Akmal",
+    "pais": "Uzbekistan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "SHUKUROV Otabek",
+    "pais": "Uzbekistan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ISKANDEROV Jamshid",
+    "pais": "Uzbekistan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "XAMROBEKOV Odiljon",
+    "pais": "Uzbekistan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "JIYANOV Ruslanbek",
+    "pais": "Uzbekistan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "URUNOV Oston",
+    "pais": "Uzbekistan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "NEMATOV Abduvohid",
+    "pais": "Uzbekistan",
+    "posicao": "GK"
+  },
+  {
+    "nome": "NASRULLAEV Sherzod",
+    "pais": "Uzbekistan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "SHOMURODOV Eldor",
+    "pais": "Uzbekistan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "ESHMURODOV Umar",
+    "pais": "Uzbekistan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ERGASHEV Botirali",
+    "pais": "Uzbekistan",
+    "posicao": "GK"
+  },
+  {
+    "nome": "KHAMDAMOV Dostonbek",
+    "pais": "Uzbekistan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ABDULLAEV Abdulla",
+    "pais": "Uzbekistan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "GANIEV Azizjon",
+    "pais": "Uzbekistan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "AMONOV Azizbek",
+    "pais": "Uzbekistan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "SERGEEV Igor",
+    "pais": "Uzbekistan",
+    "posicao": "FW"
+  },
+  {
+    "nome": "FAYZULLAEV Abbosbek",
+    "pais": "Uzbekistan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "ESANOV Sherzod",
+    "pais": "Uzbekistan",
+    "posicao": "MF"
+  },
+  {
+    "nome": "KARIMOV Behruzjon",
+    "pais": "Uzbekistan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "ULMASALIYEV Avazbek",
+    "pais": "Uzbekistan",
+    "posicao": "DF"
+  },
+  {
+    "nome": "UROZOV Jakhongir",
+    "pais": "Uzbekistan",
+    "posicao": "DF"
+  }
+]
