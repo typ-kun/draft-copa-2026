@@ -724,10 +724,29 @@ function gerarPool() {
     // Últimas rodadas: só goleiros
     if (forcandoGK) {
 
-        const soGoleiros =
+        let soGoleiros =
             disponiveis.filter(
                 j => j.posicao === "GK"
             );
+
+        // Embaralhar para não vir sempre os mesmos
+        for (
+            let i = soGoleiros.length - 1;
+            i > 0;
+            i--
+        ) {
+
+            const j = Math.floor(
+                Math.random() *
+                (i + 1)
+            );
+
+            [ soGoleiros[i],
+              soGoleiros[j] ] =
+              [ soGoleiros[j],
+                soGoleiros[i] ];
+
+        }
 
         poolAtual = soGoleiros.slice(
             0, 5
