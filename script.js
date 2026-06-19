@@ -49,65 +49,76 @@ const POSICOES = {
 
 };
 
+const POSICOES_ABREV = {
+    GK: "GK",
+    DF: "DEF",
+    MF: "MEI",
+    FW: "ATA"
+};
+
 // ======================
 // BANDEIRAS
 // ======================
 
-const CODIGOS_PAIS = {
-    "Argentina":            "ar",
-    "Argélia":              "dz",
-    "Austrália":            "au",
-    "Brasil":               "br",
-    "Bélgica":              "be",
-    "Bósnia e Herzegovina": "ba",
-    "Cabo Verde":           "cv",
-    "Canadá":               "ca",
-    "Colômbia":             "co",
-    "Costa do Marfim":      "ci",
-    "Croatia":              "hr",
-    "Curaçao":              "cw",
-    "Czechia":              "cz",
-    "Ecuador":              "ec",
-    "Egypt":                "eg",
-    "England":              "gb-eng",
-    "France":               "fr",
-    "Germany":              "de",
-    "Ghana":                "gh",
-    "Haiti":                "ht",
-    "IR Iran":              "ir",
-    "Iraq":                 "iq",
-    "Japan":                "jp",
-    "Jordan":               "jo",
-    "Korea Republic":       "kr",
-    "Mexico":               "mx",
-    "Morocco":              "ma",
-    "Netherlands":          "nl",
-    "New Zealand":          "nz",
-    "Norway":               "no",
-    "Panama":               "pa",
-    "Paraguay":             "py",
-    "Portugal":             "pt",
-    "Qatar":                "qa",
-    "RD Congo":             "cd",
-    "Saudi Arabia":         "sa",
-    "Scotland":             "gb-sct",
-    "Senegal":              "sn",
-    "South Africa":         "za",
-    "Spain":                "es",
-    "Sweden":               "se",
-    "Switzerland":          "ch",
-    "Tunisia":              "tn",
-    "Türkiye":              "tr",
-    "USA":                  "us",
-    "Uruguay":              "uy",
-    "Uzbekistan":           "uz",
-    "Áustria":              "at",
+// ======================
+// BANDEIRAS
+// ======================
+
+const BANDEIRAS_ARQUIVOS = {
+    "Argentina":            "argentina.png",
+    "Argélia":              "argelia.png",
+    "Austrália":            "australia.png",
+    "Brasil":               "brasil.png",
+    "Bélgica":              "belgica.png",
+    "Bósnia e Herzegovina": "bosnia-e-herzegovina.png",
+    "Cabo Verde":           "cabo-verde.png",
+    "Canadá":               "canada.png",
+    "Colômbia":             "colombia.png",
+    "Costa do Marfim":      "costa-do-marfim.png",
+    "Croatia":              "croatia.png",
+    "Curaçao":              "curacao.png",
+    "Czechia":              "czechia.png",
+    "Ecuador":              "ecuador.png",
+    "Egypt":                "egypt.png",
+    "England":              "england.png",
+    "France":               "france.png",
+    "Germany":              "germany.png",
+    "Ghana":                "ghana.png",
+    "Haiti":                "haiti.png",
+    "IR Iran":              "ir-iran.png",
+    "Iraq":                 "iraq.png",
+    "Japan":                "japan.png",
+    "Jordan":               "jordan.png",
+    "Korea Republic":       "korea-republic.png",
+    "Mexico":               "mexico.png",
+    "Morocco":              "morocco.png",
+    "Netherlands":          "netherlands.png",
+    "New Zealand":          "new-zealand.png",
+    "Norway":               "norway.png",
+    "Panama":               "panama.png",
+    "Paraguay":             "paraguay.png",
+    "Portugal":             "portugal.png",
+    "Qatar":                "qatar.png",
+    "RD Congo":             "rd-congo.png",
+    "Saudi Arabia":         "saudiarabia.png",
+    "Scotland":             "scotland.png",
+    "Senegal":              "senegal.png",
+    "South Africa":         "south-africa.png",
+    "Spain":                "spain.png",
+    "Sweden":               "sweden.png",
+    "Switzerland":          "switzerland.png",
+    "Tunisia":              "tunisia.png",
+    "Türkiye":              "turkiye.png",
+    "USA":                  "usa.png",
+    "Uruguay":              "uruguay.png",
+    "Uzbekistan":           "uzbekistan.png",
+    "Áustria":              "austria.png",
 };
 
 function bandeira(pais) {
-    const codigo = CODIGOS_PAIS[pais];
-    if (!codigo) return "";
-    return `<img class="flag" src="https://flagcdn.com/20x15/${codigo}.png" alt="${pais}" loading="lazy">`;
+    const arquivo = BANDEIRAS_ARQUIVOS[pais];
+    if (!arquivo) return "";
+    return `<img class="flag" src="flags/${arquivo}" alt="${pais}" loading="lazy">`;
 }
 
 // ======================
@@ -457,7 +468,7 @@ const timeOrdenado =
                     .map(
                         jogador => {
                             return `<li class="pos-${jogador.posicao.toLowerCase()}">
-                                ${bandeira(jogador.pais)}${jogador.nome}<span class="pos-label">${POSICOES[jogador.posicao]}</span>
+                                <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span> ${bandeira(jogador.pais)}${jogador.nome}
                             </li>`;
                         }
                     )
@@ -598,7 +609,7 @@ function renderizarPool() {
             card.innerHTML = `
                 <span class="pool-num">${index + 1}</span>
                 <span class="pool-name">${jogador.nome}</span>
-                <span class="pool-info">${bandeira(jogador.pais)}${jogador.pais} · ${POSICOES[jogador.posicao]}</span>
+                <span class="pool-info">${POSICOES_ABREV[jogador.posicao]} · ${bandeira(jogador.pais)}${jogador.pais}</span>
             `;
 
             card.addEventListener(
@@ -854,8 +865,7 @@ function mostrarResultadoFinal() {
 
                             html += `
                                 <div class="player-entry pos-${jogador.posicao.toLowerCase()}">
-                                    ${bandeira(jogador.pais)}${jogador.nome}
-                                    <span class="pos-label">${POSICOES[jogador.posicao]}</span>
+                                    <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span> ${bandeira(jogador.pais)}${jogador.nome}
                                 </div>
                             `;
 
