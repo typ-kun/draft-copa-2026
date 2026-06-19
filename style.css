@@ -147,11 +147,35 @@ h1, h2, h3 {
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 18px 16px;
+    padding: 12px 16px;
     border-top: 2px solid var(--ink);
     flex-wrap: wrap;
     max-width: 660px;
     margin: 0 auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    z-index: 100;
+    box-shadow: 0 -2px 0 var(--ink);
+}
+
+/* Espaço para o footer fixo não cobrir conteúdo */
+#setup {
+    padding-bottom: 80px;
+}
+
+#countrySelection .cs-wrap {
+    padding-bottom: 80px;
+}
+
+#draftArea {
+    padding-bottom: 70px;
+}
+
+#resultsArea {
+    padding-bottom: 80px;
 }
 
 .steps-item {
