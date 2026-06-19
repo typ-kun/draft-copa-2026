@@ -1267,4 +1267,54 @@ document
         }
     );
 
+// ======================
+// INFO BOXES DO SETUP
+// ======================
+
+document.querySelectorAll(
+    ".info-btn"
+).forEach(btn => {
+
+    btn.addEventListener(
+        "click",
+        () => {
+
+            const infoId =
+                "info-" +
+                btn.dataset.info;
+
+            const box =
+                document.getElementById(
+                    infoId
+                );
+
+            if (!box) return;
+
+            const isOpen =
+                box.classList.contains(
+                    "is-open"
+                );
+
+            // Fechar todas as outras
+            document.querySelectorAll(
+                ".info-box.is-open"
+            ).forEach(b =>
+                b.classList.remove(
+                    "is-open"
+                )
+            );
+
+            if (!isOpen) {
+
+                box.classList.add(
+                    "is-open"
+                );
+
+            }
+
+        }
+    );
+
+});
+
 carregarJogadores();

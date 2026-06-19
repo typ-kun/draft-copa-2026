@@ -19,11 +19,53 @@
 
     <div id="setup">
 
+        <!-- PASSO A PASSO -->
+
+        <div class="home-steps">
+
+            <div class="how-step">
+                <span class="step-no">1</span>
+                <div class="step-txt">
+                    <span class="step-t">Configurar</span>
+                    <span class="step-d">Defina participantes, regras e formato</span>
+                </div>
+            </div>
+
+            <div class="how-step">
+                <span class="step-no">2</span>
+                <div class="step-txt">
+                    <span class="step-t">Escolher</span>
+                    <span class="step-d">Cada um escolhe sua seleção nacional</span>
+                </div>
+            </div>
+
+            <div class="how-step">
+                <span class="step-no">3</span>
+                <div class="step-txt">
+                    <span class="step-t">Draft</span>
+                    <span class="step-d">Selecione os jogadores para seu elenco</span>
+                </div>
+            </div>
+
+            <div class="how-step">
+                <span class="step-no">4</span>
+                <div class="step-txt">
+                    <span class="step-t">Completar</span>
+                    <span class="step-d">Monte o time completo e veja o resultado</span>
+                </div>
+            </div>
+
+        </div>
+
         <h1>Draft Copa do Mundo 2026</h1>
 
         <div class="setup-card">
 
-            <label>Quantidade de participantes</label>
+            <label>
+                Quantidade de participantes
+                <span class="info-btn" data-info="qtd">ⓘ</span>
+                <span class="info-box" id="info-qtd">Número de pessoas que participarão do draft. Cada uma montará seu próprio elenco.</span>
+            </label>
 
             <select id="playerCount">
                 <option value="1" selected>1 jogador</option>
@@ -34,7 +76,11 @@
                 <option value="6">6 jogadores</option>
             </select>
 
-            <label>Formato do Draft</label>
+            <label>
+                Formato do Draft
+                <span class="info-btn" data-info="formato">ⓘ</span>
+                <span class="info-box" id="info-formato"><b>Snake:</b> A ordem inverte a cada rodada (1→2→3→3→2→1).<br><b>Circular:</b> A ordem se mantém (1→2→3→1→2→3).</span>
+            </label>
 
             <select id="draftMode">
                 <option value="snake" selected>
@@ -46,7 +92,11 @@
                 </option>
             </select>
 
-            <label>Regra dos Goleiros</label>
+            <label>
+                Regra dos Goleiros
+                <span class="info-btn" data-info="goleiros">ⓘ</span>
+                <span class="info-box" id="info-goleiros">Quando ativada, cada elenco deve ter no mínimo 2 goleiros. O pool sempre oferecerá goleiros até atingir essa meta.</span>
+            </label>
 
             <select id="goalkeeperRule">
                 <option value="on" selected>
@@ -58,7 +108,11 @@
                 </option>
             </select>
 
-            <label>Jogadores por elenco</label>
+            <label>
+                Jogadores por elenco
+                <span class="info-btn" data-info="elenco">ⓘ</span>
+                <span class="info-box" id="info-elenco">Total de jogadores que cada participante deve selecionar para completar seu time.</span>
+            </label>
 
             <input
                 type="number"
@@ -68,7 +122,11 @@
                 max="30"
             >
 
-            <label>Refreshes por participante</label>
+            <label>
+                Refreshes por participante
+                <span class="info-btn" data-info="refreshes">ⓘ</span>
+                <span class="info-box" id="info-refreshes">Cada refresh permite gerar um novo pool de jogadores caso as opções atuais não sejam interessantes.</span>
+            </label>
 
             <input
                 type="number"

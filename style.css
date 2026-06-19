@@ -61,6 +61,117 @@ h1, h2, h3 {
     text-shadow: 4px 4px 0 var(--accent-2);
 }
 
+/* ====================== */
+/* PASSO A PASSO           */
+/* ====================== */
+
+.home-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    margin-bottom: 28px;
+    border: 2px solid var(--ink);
+    background: var(--surface-2);
+    box-shadow: var(--hard-shadow);
+}
+
+.how-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 14px;
+    border-bottom: 2px solid var(--line);
+    border-right: 2px solid var(--line);
+}
+
+.how-step:nth-child(2n) { border-right: none; }
+.how-step:nth-last-child(-n+2) { border-bottom: none; }
+
+.step-no {
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    font-size: 30px;
+    color: var(--accent);
+    flex-shrink: 0;
+    width: 36px;
+    text-align: center;
+    line-height: 1;
+}
+
+.step-txt {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+
+.step-t {
+    font-family: var(--display);
+    font-weight: var(--display-weight);
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--ink);
+}
+
+.step-d {
+    font-family: var(--body);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    line-height: 1.25;
+}
+
+/* ====================== */
+/* INFO BUTTONS            */
+/* ====================== */
+
+.setup-card label {
+    display: block;
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+.info-btn {
+    font-family: var(--body);
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.15s;
+    line-height: 1;
+    margin-left: 2px;
+    vertical-align: middle;
+}
+
+.info-btn:hover { color: var(--accent); }
+
+.info-box {
+    display: none;
+    width: 100%;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--ink);
+    background: var(--surface);
+    border: 2px solid var(--accent-2);
+    border-radius: 2px;
+    padding: 8px 10px;
+    margin-top: 2px;
+    margin-bottom: -4px;
+}
+
+.info-box.is-open {
+    display: block;
+}
+
 .setup-card {
     border: 2px solid var(--ink);
     background: var(--surface-2);
