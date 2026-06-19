@@ -61,57 +61,31 @@ const POSICOES_ABREV = {
 // ======================
 
 const CODIGOS_HLTV = {
-    "Argentina":            "AR",
-    "Argélia":              "DZ",
-    "Austrália":            "AU",
-    "Brasil":               "BR",
-    "Bélgica":              "BE",
-    "Bósnia e Herzegovina": "BA",
-    "Cabo Verde":           "CV",
-    "Canadá":               "CA",
-    "Colômbia":             "CO",
-    "Costa do Marfim":      "CI",
-    "Croatia":              "HR",
-    "Curaçao":              "CW",
-    "Czechia":              "CZ",
-    "Ecuador":              "EC",
-    "Egypt":                "EG",
-    "England":              "GB",
-    "France":               "FR",
-    "Germany":              "DE",
-    "Ghana":                "GH",
-    "Haiti":                "HT",
-    "IR Iran":              "IR",
-    "Iraq":                 "IQ",
-    "Japan":                "JP",
-    "Jordan":               "JO",
-    "Korea Republic":       "KR",
-    "Mexico":               "MX",
-    "Morocco":              "MA",
-    "Netherlands":          "NL",
-    "New Zealand":          "NZ",
-    "Norway":               "NO",
-    "Panama":               "PA",
-    "Paraguay":             "PY",
-    "Portugal":             "PT",
-    "Qatar":                "QA",
-    "RD Congo":             "CD",
-    "Saudi Arabia":         "SA",
-    "Scotland":             "GB",
-    "Senegal":              "SN",
-    "South Africa":         "ZA",
-    "Spain":                "ES",
-    "Sweden":               "SE",
-    "Switzerland":          "CH",
-    "Tunisia":              "TN",
-    "Türkiye":              "TR",
-    "USA":                  "US",
-    "Uruguay":              "UY",
-    "Uzbekistan":           "UZ",
-    "Áustria":              "AT",
+    "Argentina":            "AR", "Argélia":           "DZ", "Austrália":         "AU",
+    "Brasil":               "BR", "Bélgica":           "BE", "Bósnia e Herzegovina":"BA",
+    "Cabo Verde":           "CV", "Canadá":            "CA", "Colômbia":          "CO",
+    "Costa do Marfim":      "CI", "Croatia":           "HR", "Curaçao":           "CW",
+    "Czechia":              "CZ", "Ecuador":           "EC", "Egypt":             "EG",
+    "England":              "GB", "France":            "FR", "Germany":           "DE",
+    "Ghana":                "GH", "Haiti":             "HT", "IR Iran":           "IR",
+    "Iraq":                 "IQ", "Japan":             "JP", "Jordan":            "JO",
+    "Korea Republic":       "KR", "Mexico":            "MX", "Morocco":           "MA",
+    "Netherlands":          "NL", "New Zealand":       "NZ", "Norway":            "NO",
+    "Panama":               "PA", "Paraguay":          "PY", "Portugal":          "PT",
+    "Qatar":                "QA", "RD Congo":          "CD", "Saudi Arabia":      "SA",
+    "Scotland":             "GB", "Senegal":           "SN", "South Africa":      "ZA",
+    "Spain":                "ES", "Sweden":            "SE", "Switzerland":       "CH",
+    "Tunisia":              "TN", "Türkiye":           "TR", "USA":               "US",
+    "Uruguay":              "UY", "Uzbekistan":        "UZ", "Áustria":           "AT",
 };
 
+// Curaçao não tem bandeira na HLTV, usa flagcdn como fallback
+const BANDEIRA_CURACAO = "cw";
+
 function bandeira(pais) {
+    if (pais === "Curaçao") {
+        return `<img class="flag" src="https://flagcdn.com/20x15/${BANDEIRA_CURACAO}.png" alt="Curaçao" loading="lazy">`;
+    }
     const codigo = CODIGOS_HLTV[pais];
     if (!codigo) return "";
     return `<img class="flag" src="https://www.hltv.org/img/static/flags/30x20/${codigo}.gif" alt="${pais}" loading="lazy" onerror="this.style.display='none'">`;
