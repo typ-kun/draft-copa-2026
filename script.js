@@ -738,7 +738,7 @@ function gerarPool() {
 
     }
 
-    // Precisa de goleiro: coloca 1 no topo
+    // Precisa de goleiro: coloca 1 e remove os demais
     if (
         config.goalkeeperRule &&
         gksDoJogador < 2
@@ -758,9 +758,12 @@ function gerarPool() {
 
             poolAtual.push(goleiro);
 
+            // Remove todos os goleiros do disponiveis
+            // para garantir no máximo 1 por pool
             disponiveis =
                 disponiveis.filter(
-                    p => p !== goleiro
+                    j =>
+                        j.posicao !== "GK"
                 );
 
         }
@@ -1410,7 +1413,7 @@ function setActiveStep(step) {
 
 }
 
-// Etapa inicial: Configurar (1)
-setActiveStep(1);
-
 carregarJogadores();
+
+// Etapa inicial: Configurar (1)
+setTimeout(() => setActiveStep(1), 50);
