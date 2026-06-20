@@ -62,10 +62,6 @@ h1, h2, h3 {
 }
 
 /* ====================== */
-/* PASSO A PASSO           */
-/* ====================== */
-
-/* ====================== */
 /* SETTINGS EM LINHA       */
 /* ====================== */
 
@@ -403,6 +399,10 @@ button:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
     letter-spacing: 0.08em;
     font-family: var(--body);
     font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
 
 #restartDraft:hover { color: var(--accent); border-color: var(--accent); }
@@ -779,6 +779,14 @@ section.teams {
     border-radius: 1px;
 }
 
+/* Bandeiras menores no bracket */
+.mata-bracket-visual .flag {
+    width: auto;
+    height: 0.9em;
+    margin-right: 3px;
+    border: none;
+}
+
 /* Cores por posição: GK=laranja, DF=amarelo, MF=verde, FW=azul */
 :root {
     --pos-gk: #E87722;
@@ -928,6 +936,7 @@ section.teams {
 }
 
 .cs-eyebrow {
+    display: block;
     font-family: var(--body);
     font-weight: 800;
     font-size: 11px;
@@ -1056,7 +1065,7 @@ section.teams {
 
 @keyframes modalFadeIn {
     0% { opacity: 0; }
-    to { opacity: 1; }
+    100% { opacity: 1; }
 }
 
 .modal-card {
@@ -1072,7 +1081,7 @@ section.teams {
 
 @keyframes modalCardIn {
     0% { opacity: 0; transform: translateY(28px) scale(0.97); }
-    to { opacity: 1; transform: none; }
+    100% { opacity: 1; transform: none; }
 }
 
 .modal-head {
@@ -1183,3 +1192,720 @@ section.teams {
 }
 
 .btn-secondary:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--line); }
+
+/* ====================== */
+/* MATA-MATA (ETAPA 5)    */
+/* ====================== */
+
+/* Header do Mata-mata */
+.mata-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 3px solid var(--ink);
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.mata-back {
+    background: transparent;
+    color: var(--muted);
+    border: 2px solid var(--line);
+    font-size: 13px;
+    padding: 8px 16px;
+    width: auto;
+    font-family: var(--body);
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--hard-shadow);
+}
+
+.mata-back:hover { color: var(--accent); border-color: var(--accent); }
+
+.mata-header div:nth-child(2) {
+    text-align: center;
+    flex: 1;
+}
+
+.mata-eyebrow {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+
+.mata-header h1 {
+    font-size: clamp(24px, 5vw, 42px);
+    text-transform: uppercase;
+    color: var(--ink);
+    text-shadow: 4px 4px 0 var(--accent-2);
+}
+
+.mata-actions {
+    display: flex;
+    gap: 12px;
+}
+
+#sortearMataMata {
+    background: var(--ink);
+    color: var(--surface);
+    box-shadow: 3px 3px 0 var(--accent-2);
+    font-size: 14px;
+    padding: 10px 16px;
+}
+
+#resetarTudo {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    font-size: 14px;
+    padding: 10px 16px;
+    box-shadow: var(--hard-shadow);
+}
+
+#resetarTudo:hover { background: var(--accent); color: #fff; }
+
+/* Resumo da fase */
+.mata-summary {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+    background: var(--surface-2);
+    border-bottom: 2px solid var(--line);
+}
+
+.mata-summary div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.mata-summary-label {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.mata-summary strong {
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    font-size: 20px;
+    color: var(--ink);
+}
+
+/* Painel de Resultados (Controle) */
+.mata-results-panel {
+    background: var(--surface-2);
+    border: 2px solid var(--ink);
+    box-shadow: var(--hard-shadow-ink);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 500px;
+    margin: 0 auto 40px;
+}
+
+.mata-results-head {
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.mata-results-eyebrow {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.mata-results-head h2 {
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.mata-results-head span {
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    font-size: 14px;
+    color: var(--accent);
+}
+
+.mata-results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.mata-result-row {
+    background: var(--surface);
+    border: 2px solid var(--line);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mata-result-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 8px;
+}
+
+.mata-result-match {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+}
+
+.mata-result-team {
+    display: flex;
+    align-items: center;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.mata-result-team-right { justify-content: flex-end; }
+
+.mata-result-score {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    font-size: 20px;
+}
+
+.mata-result-score input {
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    border: 2px solid var(--ink);
+    background: var(--surface-2);
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    font-size: 20px;
+    outline: none;
+    border-radius: 4px;
+}
+
+.mata-result-save {
+    width: 100%;
+    background: var(--ink);
+    color: var(--surface);
+    padding: 12px;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.mata-results-empty {
+    text-align: center;
+    padding: 20px;
+    font-family: var(--body);
+    font-weight: 700;
+    color: var(--muted);
+    font-style: italic;
+}
+
+/* Cabeçalho dos cards de partida (modo linear / sorteio) */
+.mata-game-head {
+    font-size: 9px;
+    color: var(--muted);
+    font-weight: 800;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Competitor Component */
+.mata-competitor {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mata-country-code {
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+}
+
+.mata-human-tag {
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+}
+
+.mata-empty {
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+}
+
+.mata-winner {
+    margin-top: 4px;
+    border-top: 1px dashed var(--line);
+    padding-top: 2px;
+    font-size: 10px;
+    color: var(--win);
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* ====================== */
+/* BRACKET HLTV           */
+/* ====================== */
+
+.bracket-hltv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 8px;
+    position: relative;
+    padding: 24px 16px 8px;
+    background: var(--surface-2);
+    border: 2px solid var(--ink);
+    box-shadow: var(--hard-shadow);
+    overflow-x: auto;
+    margin-bottom: 40px;
+}
+
+.bracket-hltv-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+}
+
+.bracket-hltv-line {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.bracket-hltv-col {
+    display: grid;
+    grid-template-rows: repeat(var(--rows, 16), 1fr);
+    align-items: stretch;
+    z-index: 1;
+    min-width: 0;
+    position: relative;
+    padding-top: 22px;
+}
+
+.bracket-hltv-title {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.bracket-hltv-card {
+    background: var(--surface-2);
+    border: 1.5px solid var(--ink);
+    width: 150px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    grid-column: 1;
+    align-self: center;
+}
+
+.bracket-hltv-card.is-done {
+    border-color: var(--win);
+}
+
+.bracket-hltv-card.is-final {
+    width: 170px;
+    border-width: 2px;
+}
+
+.bracket-hltv-card.is-final.is-done {
+    border-color: var(--accent-2);
+    box-shadow: 0 0 0 1px var(--accent-2);
+}
+
+.bracket-hltv-team {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+}
+
+.bracket-hltv-team + .bracket-hltv-team {
+    border-top: 1px solid var(--line);
+}
+
+.bracket-hltv-team.is-winner {
+    color: var(--win);
+}
+
+.bracket-hltv-team .flag {
+    width: auto;
+    height: 1em;
+    border: none;
+    margin-right: 2px;
+    flex-shrink: 0;
+}
+
+.bracket-hltv-team .mata-country-code {
+    font-size: 9px;
+    flex-shrink: 0;
+}
+
+.bracket-hltv-score {
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    font-size: 12px;
+    color: var(--ink);
+    margin-left: auto;
+    padding-left: 6px;
+}
+
+/* Painel de resultados — aumentar bandeira e abreviação */
+.mata-result-team {
+    font-size: 20px !important;
+}
+
+.mata-result-team .mata-country-code {
+    font-size: 18px !important;
+}
+
+.mata-result-team .flag {
+    width: auto;
+    height: 2em !important;
+    margin-right: 8px !important;
+}
+
+/* Final column (flex em vez de grid) */
+.bracket-hltv-final {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    padding-top: 0;
+}
+
+.bracket-hltv-final .bracket-hltv-title {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.bracket-hltv-final .bracket-hltv-card {
+    flex-shrink: 0;
+    width: 170px;
+}
+
+.bracket-hltv-champion {
+    background: linear-gradient(135deg, #fff8e1, #fffdf0);
+    border: 3px solid var(--accent-2);
+    padding: 10px 16px;
+    width: 180px;
+    text-align: center;
+    box-shadow: 4px 4px 0 var(--accent-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.bracket-hltv-trophy {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.bracket-hltv-champion-label {
+    color: var(--accent-2);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+}
+
+.bracket-hltv-champion-team {
+    margin-top: 2px;
+}
+
+.bracket-hltv-champion-team .mata-competitor {
+    gap: 8px;
+}
+
+.bracket-hltv-champion-team .mata-country-code {
+    font-size: 11px;
+    color: var(--ink);
+}
+
+.bracket-hltv-champion-team .flag {
+    height: 1.3em;
+}
+
+.bracket-hltv-runnerup {
+    margin-top: 6px;
+    padding: 6px 16px;
+    width: 170px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.bracket-hltv-runnerup-label {
+    color: var(--muted);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+}
+
+.bracket-hltv-runnerup-team .mata-competitor {
+    gap: 6px;
+}
+
+.bracket-hltv-runnerup-team .mata-country-code {
+    font-size: 9px;
+}
+
+/* ====================== */
+/* RESPONSIVO             */
+/* ====================== */
+
+@media (max-width: 1600px) {
+    .bracket-hltv-card { width: 125px; }
+    .bracket-hltv-card.is-final { width: 145px; }
+    .bracket-hltv-team { font-size: 10px; padding: 3px 6px; }
+    .bracket-hltv-team .mata-country-code { font-size: 8px; }
+    .bracket-hltv-champion { width: 155px; padding: 8px 12px; }
+    .bracket-hltv-runnerup { width: 145px; }
+}
+
+@media (max-width: 1200px) {
+    .bracket-hltv { gap: 4px; padding: 16px 8px 4px; }
+    .bracket-hltv-card { width: 110px; }
+    .bracket-hltv-card.is-final { width: 130px; }
+    .bracket-hltv-team { font-size: 9px; padding: 2px 4px; gap: 2px; }
+    .bracket-hltv-team .mata-country-code { font-size: 7px; }
+    .bracket-hltv-title { font-size: 8px; }
+    .bracket-hltv-champion { width: 135px; padding: 6px 10px; }
+    .bracket-hltv-runnerup { width: 125px; }
+    .bracket-hltv-champion-label { font-size: 9px; }
+    .bracket-hltv-trophy { font-size: 20px; }
+}
+
+@media (max-width: 720px) {
+    .bracket-hltv { gap: 3px; padding: 12px 4px 2px; }
+    .bracket-hltv-card { width: 90px; }
+    .bracket-hltv-card.is-final { width: 110px; }
+    .bracket-hltv-team { font-size: 8px; padding: 2px 3px; }
+    .bracket-hltv-team .mata-country-code { font-size: 6px; }
+    .bracket-hltv-title { font-size: 7px; }
+    .bracket-hltv-champion { width: 115px; }
+    .bracket-hltv-runnerup { width: 105px; }
+}
+
+@media (max-width: 720px) {
+    .mata-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .mata-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .mata-results-panel {
+        margin: 0 16px 40px;
+    }
+}
+
+/* Adicionando estilos para a fase linear (fallback) */
+.mata-phase {
+    padding: 12px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mata-games {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Grid responsiva para o sorteio — aproveita largura da tela */
+.mata-games-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    padding: 0;
+}
+
+.mata-games-grid .tree-game {
+    padding: 10px 12px;
+    max-width: none;
+    margin: 0;
+}
+
+.mata-games-grid .mata-game-head {
+    font-size: 9px;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--line);
+}
+
+.mata-games-grid .mata-matchup {
+    gap: 6px;
+}
+
+.mata-games-grid .mata-matchup .mata-team {
+    font-size: 14px;
+    gap: 4px;
+}
+
+.mata-games-grid .mata-matchup .mata-team .flag {
+    width: auto;
+    height: 1.2em;
+    margin-right: 3px;
+    border: none;
+}
+
+.mata-games-grid .mata-score span {
+    font-size: 18px !important;
+}
+
+@media (max-width: 1400px) {
+    .mata-games-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 1100px) {
+    .mata-games-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .mata-games-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.tree-game {
+    background: var(--surface-2);
+    border: 2px solid var(--ink);
+    box-shadow: var(--hard-shadow);
+    padding: 10px 12px;
+}
+
+.mata-matchup {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.mata-matchup .mata-team {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--display);
+    font-weight: 700;
+}
+
+.mata-matchup .mata-team-right {
+    justify-content: flex-end;
+}
+
+.mata-score {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--numeral);
+    font-weight: 900;
+}
+
+.mata-score input {
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    border: 2px solid var(--ink);
+    background: var(--surface);
+    font-family: var(--numeral);
+    font-size: 18px;
+}
+
+.mata-winner {
+    margin-top: 8px;
+    padding-top: 4px;
+    border-top: 1px dashed var(--line);
+    font-size: 12px;
+    color: var(--win);
+    font-weight: 800;
+}
+
+.btn-confirm {
+    margin-top: 10px;
+    width: 100%;
+    background: var(--ink);
+    color: var(--surface);
+    padding: 8px;
+    font-size: 12px;
+}

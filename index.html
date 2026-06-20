@@ -19,7 +19,7 @@
 
     <div id="setup">
 
-        <h1>Draft Copa do Mundo 2026</h1>
+        <h1><img src="assets/logo.svg" alt="Draft Copa do Mundo 2026" class="logo"></h1>
 
         <div class="setup-card">
 
@@ -46,6 +46,20 @@
                     </select>
                 </div>
                 <div class="setting-note" id="note-formato"><b>Snake:</b> A ordem inverte a cada rodada (1→2→3→3→2→1).<br><b>Circular:</b> A ordem se mantém (1→2→3→1→2→3).</div>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Etapa inicial do campeonato</label>
+                    <select id="startingPhase">
+                        <option value="round32" selected>Dezesseis-avos de final: 32 competidores (16 jogos)</option>
+                        <option value="round16">Oitavas de final: 16 competidores (8 jogos)</option>
+                        <option value="quarterfinals">Quartas de final: 8 competidores (4 jogos)</option>
+                        <option value="semifinals">Semifinal: 4 competidores (2 jogos)</option>
+                        <option value="final">Final: 2 competidores (1 jogo)</option>
+                    </select>
+                </div>
+                <div class="setting-note" id="note-starting-phase">Define em qual etapa o mata-mata começa.</div>
             </div>
 
             <div class="setting-row">
@@ -183,10 +197,66 @@
                 Copiar Resultado
             </button>
 
+            <button id="goToMataMata">
+                Ir para Mata-mata
+            </button>
+
+            <button id="backToDraft">
+                Voltar ao Draft
+            </button>
+
             <button class="btn-novo-draft" onclick="location.reload()">
                 Novo Draft
             </button>
         </div>
+
+    </div>
+
+    <!-- MATA-MATA -->
+
+    <div
+        id="mataMataArea"
+        style="display:none;"
+    >
+
+        <header class="mata-header">
+
+            <button id="backToResults" class="mata-back">
+                ← Voltar aos elencos
+            </button>
+
+            <div>
+                <div class="mata-eyebrow">Etapa 5</div>
+                <h1>Mata-mata Copa do Mundo 2026</h1>
+            </div>
+
+            <div class="mata-actions">
+                <button id="sortearMataMata">
+                    Sortear novamente
+                </button>
+                <button id="resetarTudo" class="btn-reset">
+                    Recomeçar tudo
+                </button>
+            </div>
+
+        </header>
+
+        <section class="mata-summary">
+            <div>
+                <span class="mata-summary-label">Fase inicial</span>
+                <strong id="mataFaseInicial">16 avos de final</strong>
+            </div>
+            <div>
+                <span class="mata-summary-label">Competidores</span>
+                <strong id="mataCompetidores">32</strong>
+            </div>
+            <div>
+                <span class="mata-summary-label">Humanos</span>
+                <strong id="mataHumanos">0</strong>
+            </div>
+        </section>
+
+        <section id="mataMataBracket" class="mata-bracket"></section>
 
     </div>
 
@@ -203,8 +273,8 @@
                 <p class="modal-msg">Todo o progresso atual será perdido e um novo draft será iniciado.</p>
             </div>
             <div class="modal-footer">
-                <button id="modalCancel" class="btn-secondary">Cancelar</button>
-                <button id="modalConfirm" class="btn-primary">Sim, reiniciar</button>
+                <button id="modalCancel" class="btn-secondary"><span class="modal-cancel-text">Cancelar</span></button>
+                <button id="modalConfirm" class="btn-primary"><span class="modal-confirm-text">Sim, reiniciar</span></button>
             </div>
         </div>
     </div>
@@ -250,6 +320,16 @@
             <div class="steps-text">
                 <span class="steps-t">Completar</span>
                 <span class="steps-d">Veja o resultado final do draft</span>
+            </div>
+        </div>
+
+        <span class="steps-arrow">→</span>
+
+        <div class="steps-item" data-step="5">
+            <span class="steps-num">5</span>
+            <div class="steps-text">
+                <span class="steps-t">Mata-mata</span>
+                <span class="steps-d">Sorteie e jogue o eliminatório</span>
             </div>
         </div>
 

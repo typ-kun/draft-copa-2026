@@ -1,2 +1,17 @@
+# Diretórios de referência / backup
 Referencias CSS/
+Referencias etapa 5/
+backups/
+_archive/
+
+# Configuração do Claude
 .claude/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
