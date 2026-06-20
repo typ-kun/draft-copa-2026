@@ -1174,15 +1174,26 @@ function mostrarResultadoFinal() {
 
     let html = "";
 
+    // Botão de toggle
+    html += `<div class="result-toggle-wrap">
+        <button id="togglePlayersBtn" class="result-toggle-btn">🔽 Reduzir tudo</button>
+    </div>`;
+
+    let todosExpandidos = localStorage.getItem( "draftResultsExpandido" ) !== "false";
+    const classeToggle = todosExpandidos ? "player-detail is-open" : "player-detail";
+
     nomesJogadores.forEach(
         (
             nome,
             index
         ) => {
 
+            const total = times[ index ].length;
+
             html += `
-                <h2>
-                    ${nome}
+                <h2 class="player-team-head" data-team="${index}">
+                    ${nome} <span class="player-count">(${total} jogadores)</span>
+                    <span class="player-toggle-icon">${todosExpandidos ? "▲" : "▼"}</span>
                 </h2>
             `;
 
@@ -1213,6 +1224,8 @@ function mostrarResultadoFinal() {
                         j.posicao ===
                         "FW"
                 );
+
+            html += `<div class="${classeToggle}" data-detail="${index}">`;
 
             [
                 [
@@ -1257,13 +1270,46 @@ function mostrarResultadoFinal() {
                 }
             );
 
+            html += `</div>`;
             html += "<hr>";
 
         }
     );
 
-    area.innerHTML =
-        html;
+    area.innerHTML = html;
+
+    // Toggle individual por time
+    area.querySelectorAll( ".player-team-head" ).forEach( h2 => {
+        h2.addEventListener( "click", () => {
+            const idx = h2.dataset.team;
+            const detail = area.querySelector( `.player-detail[data-detail="${idx}"]` );
+            if ( detail ) {
+                detail.classList.toggle( "is-open" );
+                h2.querySelector( ".player-toggle-icon" ).textContent =
+                    detail.classList.contains( "is-open" ) ? "▲" : "▼";
+            }
+        } );
+    } );
+
+    // Toggle global
+    document.getElementById( "togglePlayersBtn" ).addEventListener( "click", () => {
+        const details = area.querySelectorAll( ".player-detail" );
+        const algumaAberta = Array.from( details ).some( d => d.classList.contains( "is-open" ) );
+        const novaAberta = !algumaAberta;
+
+        details.forEach( d => {
+            d.classList.toggle( "is-open", novaAberta );
+        } );
+
+        area.querySelectorAll( ".player-toggle-icon" ).forEach( icon => {
+            icon.textContent = novaAberta ? "▲" : "▼";
+        } );
+
+        document.getElementById( "togglePlayersBtn" ).textContent =
+            novaAberta ? "🔽 Reduzir tudo" : "▶ Expandir tudo";
+
+        localStorage.setItem( "draftResultsExpandido", novaAberta );
+    } );
 
     document
         .getElementById(
@@ -2985,7 +3031,28 @@ document
     .getElementById("backToDraft")
     .addEventListener(
         "click",
-        () => {
+        async () => {
+
+            const confirmou = await mostrarModal( {
+                title: "Reiniciar Draft?",
+                message: "Os picks atuais serão perdidos e o draft será reiniciado.",
+                confirmText: "Sim, reiniciar",
+                cancelText: "Cancelar",
+                eyebrow: "Draft"
+            } );
+
+            if ( !confirmou ) return;
+
+            // Resetar o estado do draft
+            times = times.map( () => [] );
+            jogadoresDisponiveis = [ ...jogadoresBase ];
+            poolAtual = [];
+            participantesAtivos = nomesJogadores.map( ( _, idx ) => idx );
+            jogadorAtual = participantesAtivos[ 0 ] ?? 0;
+            pickAtual = 1;
+            direcaoSnake = 1;
+            refreshesPorJogador = nomesJogadores.map( () => config.refreshCount );
+
             document.getElementById(
                 "resultsArea"
             ).style.display = "none";
@@ -2998,6 +3065,10 @@ document
                 "draftArea"
             ).style.display = "block";
 
+            renderizarTeamCards();
+            atualizarStatus();
+            atualizarRefreshes();
+            gerarPool();
             setActiveStep( 3 );
         }
     );

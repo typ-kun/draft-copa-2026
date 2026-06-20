@@ -883,6 +883,73 @@ section.teams {
     margin: 24px 0;
 }
 
+/* Toggle expandir / reduzir */
+.result-toggle-wrap {
+    margin-bottom: 12px;
+}
+
+.result-toggle-btn {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--line);
+    font-size: 12px;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-family: var(--body);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.result-toggle-btn:hover {
+    background: var(--ink);
+    color: var(--surface);
+    border-color: var(--ink);
+}
+
+.player-team-head {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.15s;
+}
+
+.player-team-head:hover {
+    opacity: 0.7;
+}
+
+.player-count {
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.player-toggle-icon {
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: auto;
+}
+
+.player-detail {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
+    margin: 0;
+}
+
+.player-detail.is-open {
+    max-height: 2000px;
+    opacity: 1;
+    margin: 8px 0 0;
+}
+
 .result-actions {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
