@@ -1605,9 +1605,14 @@ function renderizarModoSorteio() {
                 </div>
 
                 ${restantes > 0 ? `
-                    <button id="btnSortearProximo" class="btn-primary" style="font-size:22px;padding:20px 32px;width:100%;max-width:400px;box-shadow:4px 4px 0 var(--ink);">
-                        🎲 SORTEAR PRÓXIMO TIME
-                    </button>
+                    <div style="display:flex;gap:10px;width:100%;max-width:500px;">
+                        <button id="btnSortearProximo" class="btn-primary" style="font-size:18px;padding:16px 24px;flex:1;box-shadow:4px 4px 0 var(--ink);">
+                            🎲 SORTEAR UM
+                        </button>
+                        <button id="btnSortearTodos" class="btn-primary" style="font-size:18px;padding:16px 24px;flex:1;background:var(--ink);box-shadow:4px 4px 0 var(--accent-2);">
+                            ⚡ SORTEAR TODOS
+                        </button>
+                    </div>
                 ` : `
                     <button id="btnFinalizarSorteio" class="btn-primary" style="font-size:18px;padding:16px 32px;width:100%;max-width:400px;background:var(--win);">
                         ✅ FINALIZAR E VER CHAVEAMENTO
@@ -1658,6 +1663,17 @@ function renderizarModoSorteio() {
         btnSortear.addEventListener(
             "click",
             sortearProximoTime
+        );
+    }
+
+    const btnTodos = document.getElementById(
+        "btnSortearTodos"
+    );
+
+    if ( btnTodos ) {
+        btnTodos.addEventListener(
+            "click",
+            sortearTodosTimes
         );
     }
 
@@ -1733,6 +1749,39 @@ function finalizarSorteio() {
 
     if ( !mataMata ) {
         return;
+    }
+
+    mataMata.emSorteio = false;
+    salvarMataMata();
+    renderizarMataMata();
+
+}
+
+function sortearTodosTimes() {
+
+    if ( !mataMata || !mataMata.emSorteio || !mataMata.poolSorteio || mataMata.poolSorteio.length === 0 ) {
+        return;
+    }
+
+    const faseInicial = FASES_MATA_MATA.find(
+        fase => fase.key === mataMata.faseInicial
+    ) || FASES_MATA_MATA[0];
+
+    const jogos = mataMata.rodadas[ faseInicial.key ] || [];
+    const totalSlots = jogos.length * 2;
+
+    while ( mataMata.indiceSorteio < totalSlots && mataMata.poolSorteio.length > 0 ) {
+        const drawn = aleatorio( mataMata.poolSorteio );
+        mataMata.poolSorteio = mataMata.poolSorteio.filter( c => c !== drawn );
+        const slotIndex = mataMata.indiceSorteio;
+        const matchIndex = Math.floor( slotIndex / 2 );
+        if ( slotIndex % 2 === 0 ) {
+            jogos[ matchIndex ].a = drawn;
+        } else {
+            jogos[ matchIndex ].b = drawn;
+        }
+        mataMata.competidores.push( drawn );
+        mataMata.indiceSorteio++;
     }
 
     mataMata.emSorteio = false;
@@ -1926,6 +1975,7 @@ function recalcularFasesPosteriores(
                 jogo.golsB = null;
                 jogo.vencedor = null;
                 jogo.concluido = false;
+                jogo._cpuFeito = false;
             }
         );
 
@@ -1973,9 +2023,13 @@ function randomizarResultadosCpuCpu() {
                         jogo.concluido ||
                         !jogo.a ||
                         !jogo.b ||
-                        jogo.a.humano ||
-                        jogo.b.humano
+                        jogo._cpuFeito
                     ) {
+                        return;
+                    }
+
+                    const eHumano = jogo.a.humano === true || jogo.b.humano === true;
+                    if ( eHumano ) {
                         return;
                     }
 
@@ -1987,6 +2041,7 @@ function randomizarResultadosCpuCpu() {
                         ? jogo.a
                         : jogo.b;
                     jogo.concluido = true;
+                    jogo._cpuFeito = true;
                     alterado = true;
                 }
             );
@@ -2012,7 +2067,6 @@ function renderizarMataMata() {
 
     garantirConfrontosIniciais();
     sincronizarProximasFases();
-    randomizarResultadosCpuCpu();
 
     const area = document.getElementById(
         "mataMataBracket"
@@ -2067,29 +2121,42 @@ function renderizarPainelResultados(
     fases
 ) {
 
-    const jogosPendentes = [];
+    // Encontrar a primeira fase que ainda tem partidas pendentes
+    let faseAtiva = null;
+    const todosJogos = [];
 
     fases.forEach(
         fase => {
-            ( mataMata.rodadas[fase.key] || [] ).forEach(
-                ( jogo, index ) => {
-                    if (
-                        jogo.a &&
-                        jogo.b &&
-                        !jogo.concluido
-                    ) {
-                        jogosPendentes.push(
-                            {
-                                fase,
-                                jogo,
-                                index
-                            }
-                        );
-                    }
-                }
+            const jogos = ( mataMata.rodadas[fase.key] || [] ).filter(
+                j => j.a && j.b && ( j.a.humano || j.b.humano )
             );
+            if ( jogos.length > 0 && faseAtiva === null ) {
+                const pendentes = jogos.filter( j => !j.concluido );
+                if ( pendentes.length > 0 ) {
+                    faseAtiva = fase;
+                }
+            }
+            jogos.forEach( j => todosJogos.push( { fase, jogo: j } ) );
         }
     );
+
+    // Só mostrar partidas da fase ativa (a primeira incompleta)
+    const jogosPendentes = [];
+
+    if ( faseAtiva ) {
+        ( mataMata.rodadas[ faseAtiva.key ] || [] ).forEach(
+            ( jogo, index ) => {
+                if (
+                    jogo.a &&
+                    jogo.b &&
+                    !jogo.concluido &&
+                    ( jogo.a.humano || jogo.b.humano )
+                ) {
+                    jogosPendentes.push( { fase: faseAtiva, jogo, index } );
+                }
+            }
+        );
+    }
 
     return `
         <section class="mata-results-panel">
@@ -2135,7 +2202,7 @@ function renderizarLinhaResultado(
                         type="number"
                         min="0"
                         inputmode="numeric"
-                        value="${jogo.golsA ?? ""}"
+                        value="${jogo.golsA ?? 0}"
                         data-team="a"
                         data-game="${jogo.id}"
                         aria-label="Gols de ${jogo.a?.pais || "casa"}"
@@ -2145,7 +2212,7 @@ function renderizarLinhaResultado(
                         type="number"
                         min="0"
                         inputmode="numeric"
-                        value="${jogo.golsB ?? ""}"
+                        value="${jogo.golsB ?? 0}"
                         data-team="b"
                         data-game="${jogo.id}"
                         aria-label="Gols de ${jogo.b?.pais || "visitante"}"
@@ -2205,8 +2272,8 @@ function renderizarBracketHLTV( fases ) {
         jogos.forEach( jogo => {
             const v = jogo.vencedor;
             html += `<div class="bracket-hltv-card ${jogo.concluido ? "is-done" : ""}" data-game="${jogo.id}" style="grid-row: span ${span};">
-                <div class="bracket-hltv-team ${v === jogo.a ? "is-winner" : ""}">${renderizarCompetidorMataMata( jogo.a, false )}${jogo.concluido ? `<span class="bracket-hltv-score">${jogo.golsA}</span>` : ""}</div>
-                <div class="bracket-hltv-team ${v === jogo.b ? "is-winner" : ""}">${renderizarCompetidorMataMata( jogo.b, false )}${jogo.concluido ? `<span class="bracket-hltv-score">${jogo.golsB}</span>` : ""}</div>
+                <div class="bracket-hltv-team ${v && v === jogo.a ? "is-winner" : (jogo.concluido ? "is-loser" : "")}">${renderizarCompetidorMataMata( jogo.a, false )}${jogo.concluido ? `<span class="bracket-hltv-score">${jogo.golsA}</span>` : ""}</div>
+                <div class="bracket-hltv-team ${v && v === jogo.b ? "is-winner" : (jogo.concluido ? "is-loser" : "")}">${renderizarCompetidorMataMata( jogo.b, false )}${jogo.concluido ? `<span class="bracket-hltv-score">${jogo.golsB}</span>` : ""}</div>
             </div>`;
         } );
         html += `</div>`;
@@ -2224,8 +2291,8 @@ function renderizarBracketHLTV( fases ) {
     if ( jogoFinal ) {
         const v = jogoFinal.vencedor;
         html += `<div class="bracket-hltv-card ${jogoFinal.concluido ? "is-done" : ""} is-final" data-game="${jogoFinal.id}" style="grid-row: span ${spanFinal};">
-            <div class="bracket-hltv-team ${v === jogoFinal.a ? "is-winner" : ""}">${renderizarCompetidorMataMata( jogoFinal.a, false )}${jogoFinal.concluido ? `<span class="bracket-hltv-score">${jogoFinal.golsA}</span>` : ""}</div>
-            <div class="bracket-hltv-team ${v === jogoFinal.b ? "is-winner" : ""}">${renderizarCompetidorMataMata( jogoFinal.b, false )}${jogoFinal.concluido ? `<span class="bracket-hltv-score">${jogoFinal.golsB}</span>` : ""}</div>
+            <div class="bracket-hltv-team ${v && v === jogoFinal.a ? "is-winner" : (jogoFinal.concluido ? "is-loser" : "")}">${renderizarCompetidorMataMata( jogoFinal.a, false )}${jogoFinal.concluido ? `<span class="bracket-hltv-score">${jogoFinal.golsA}</span>` : ""}</div>
+            <div class="bracket-hltv-team ${v && v === jogoFinal.b ? "is-winner" : (jogoFinal.concluido ? "is-loser" : "")}">${renderizarCompetidorMataMata( jogoFinal.b, false )}${jogoFinal.concluido ? `<span class="bracket-hltv-score">${jogoFinal.golsB}</span>` : ""}</div>
         </div>`;
     }
 
@@ -2259,8 +2326,8 @@ function renderizarBracketHLTV( fases ) {
         jogos.forEach( jogo => {
             const v = jogo.vencedor;
             html += `<div class="bracket-hltv-card ${jogo.concluido ? "is-done" : ""}" data-game="${jogo.id}" style="grid-row: span ${span};">
-                <div class="bracket-hltv-team ${v === jogo.a ? "is-winner" : ""}">${renderizarCompetidorMataMata( jogo.a, false )}${jogo.concluido ? `<span class="bracket-hltv-score">${jogo.golsA}</span>` : ""}</div>
-                <div class="bracket-hltv-team ${v === jogo.b ? "is-winner" : ""}">${renderizarCompetidorMataMata( jogo.b, false )}${jogo.concluido ? `<span class="bracket-hltv-score">${jogo.golsB}</span>` : ""}</div>
+                <div class="bracket-hltv-team ${v && v === jogo.a ? "is-winner" : (jogo.concluido ? "is-loser" : "")}">${renderizarCompetidorMataMata( jogo.a, false )}${jogo.concluido ? `<span class="bracket-hltv-score">${jogo.golsA}</span>` : ""}</div>
+                <div class="bracket-hltv-team ${v && v === jogo.b ? "is-winner" : (jogo.concluido ? "is-loser" : "")}">${renderizarCompetidorMataMata( jogo.b, false )}${jogo.concluido ? `<span class="bracket-hltv-score">${jogo.golsB}</span>` : ""}</div>
             </div>`;
         } );
         html += `</div>`;
@@ -2495,11 +2562,25 @@ function renderizarCompetidorMataMata(
         ? `<span class="mata-human-tag">${competidor.nomePessoa}</span>`
         : "";
 
+    const tagCpu = !competidor.humano && competidor.id?.startsWith( "cpu-" )
+        ? `<span class="mata-cpu-tag">CPU</span>`
+        : "";
+
+    if ( tagCpu && mostrarHumano === false ) {
+        return `
+            <span class="mata-competitor">
+                <span class="mata-country-code">${abreviacaoPais( competidor.pais )}</span>
+                ${bandeira( competidor.pais )}
+            </span>
+            ${tagCpu}
+        `;
+    }
+
     return `
         <span class="mata-competitor">
             <span class="mata-country-code">${abreviacaoPais( competidor.pais )}</span>
             ${bandeira( competidor.pais )}
-            ${tagHumano}
+            ${tagHumano}${tagCpu}
         </span>
     `;
 
@@ -2611,6 +2692,7 @@ function confirmarPlacar(
     jogo.concluido = true;
 
     recalcularFasesPosteriores( indiceFase );
+    randomizarResultadosCpuCpu();
     salvarMataMata();
     renderizarMataMata();
 
@@ -2650,9 +2732,13 @@ function mostrarMataMata() {
 
 async function resetarTudo() {
 
-    const confirmou = await mostrarModalComMsg(
-        "Recomeçar tudo do zero? Todo o draft e mata-mata atuais serão apagados."
-    );
+    const confirmou = await mostrarModal( {
+        title: "Recomeçar tudo?",
+        message: "Todo o draft e mata-mata atuais serão apagados.",
+        confirmText: "Sim, recomeçar",
+        cancelText: "Cancelar",
+        eyebrow: "Mata-mata"
+    } );
 
     if ( !confirmou ) {
         return;
@@ -2960,6 +3046,38 @@ document
             confirmarPlacar(
                 botao.dataset.game
             );
+        }
+    );
+
+// Salvar valores dos inputs no objeto jogo conforme o usuário digita
+document
+    .getElementById("mataMataBracket")
+    .addEventListener(
+        "change",
+        ( evento ) => {
+            const input = evento.target.closest(
+                "input[data-game][data-team]"
+            );
+            if ( !input ) return;
+
+            const fases = fasesAPartir( mataMata.faseInicial );
+            const jogo = fases.reduce(
+                ( encontrado, fase ) => {
+                    return encontrado || ( mataMata.rodadas[ fase.key ] || [] ).find(
+                        j => j.id === input.dataset.game
+                    );
+                },
+                null
+            );
+
+            if ( jogo && !jogo.concluido ) {
+                const valor = Math.max( 0, parseInt( input.value ) || 0 );
+                if ( input.dataset.team === "a" ) {
+                    jogo.golsA = valor;
+                } else {
+                    jogo.golsB = valor;
+                }
+            }
         }
     );
 

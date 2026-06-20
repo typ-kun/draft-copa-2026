@@ -884,11 +884,59 @@ section.teams {
 }
 
 .result-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
     margin-top: 28px;
-    flex-wrap: wrap;
+}
+
+#copyResults,
+#goToMataMata,
+#backToDraft {
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    padding: 12px 16px;
+    width: 100%;
+    border: none;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+#copyResults:active,
+#goToMataMata:active,
+#backToDraft:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--ink);
+}
+
+#copyResults:hover,
+#goToMataMata:hover,
+#backToDraft:hover {
+    background: #d03d24;
+}
+
+.btn-novo-draft {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--line);
+    font-size: 14px;
+    padding: 12px 16px;
+    width: 100%;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn-novo-draft:hover {
+    background: var(--ink);
+    color: var(--surface);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--line);
+}
+
+.btn-novo-draft:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--line);
 }
 
 /* ====================== */
@@ -1307,17 +1355,17 @@ section.teams {
     background: var(--surface-2);
     border: 2px solid var(--ink);
     box-shadow: var(--hard-shadow-ink);
-    padding: 20px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    max-width: 500px;
-    margin: 0 auto 40px;
+    gap: 12px;
+    max-width: 620px;
+    margin: 0 auto 28px;
 }
 
 .mata-results-head {
     border-bottom: 2px solid var(--line);
-    padding-bottom: 16px;
+    padding-bottom: 12px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -1333,7 +1381,7 @@ section.teams {
 }
 
 .mata-results-head h2 {
-    font-size: 24px;
+    font-size: 20px;
     text-transform: uppercase;
 }
 
@@ -1345,9 +1393,15 @@ section.teams {
 }
 
 .mata-results-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+}
+
+@media (max-width: 800px) {
+    .mata-results-list {
+        grid-template-columns: 1fr;
+    }
 }
 
 .mata-result-row {
@@ -1463,6 +1517,16 @@ section.teams {
     text-transform: uppercase;
 }
 
+.mata-cpu-tag {
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 8px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.6;
+}
+
 .mata-empty {
     font-family: var(--body);
     font-weight: 700;
@@ -1560,7 +1624,7 @@ section.teams {
 }
 
 .bracket-hltv-card.is-done {
-    border-color: var(--win);
+    /* borda permanece preta (padrão) */
 }
 
 .bracket-hltv-card.is-final {
@@ -1592,6 +1656,14 @@ section.teams {
 
 .bracket-hltv-team.is-winner {
     color: var(--win);
+    border-left: 4px solid var(--win);
+    padding-left: 4px;
+}
+
+.bracket-hltv-team.is-loser {
+    color: var(--muted);
+    border-left: 4px solid var(--accent);
+    padding-left: 4px;
 }
 
 .bracket-hltv-team .flag {
@@ -1616,19 +1688,38 @@ section.teams {
     padding-left: 6px;
 }
 
-/* Painel de resultados — aumentar bandeira e abreviação */
+/* Painel de resultados — compacto */
 .mata-result-team {
-    font-size: 20px !important;
+    font-size: 14px;
 }
 
 .mata-result-team .mata-country-code {
-    font-size: 18px !important;
+    font-size: 11px;
 }
 
 .mata-result-team .flag {
     width: auto;
-    height: 2em !important;
-    margin-right: 8px !important;
+    height: 1.2em;
+    margin-right: 4px;
+}
+
+.mata-result-team {
+    flex-wrap: wrap;
+    align-self: flex-start;
+    padding-top: 8px;
+}
+
+.mata-result-team-right {
+    align-self: flex-start;
+    padding-top: 8px;
+}
+
+.mata-result-team .mata-cpu-tag {
+    width: 100%;
+    font-size: 7px;
+    line-height: 1.2;
+    opacity: 0.6;
+    letter-spacing: 0.06em;
 }
 
 /* Final column (flex em vez de grid) */
