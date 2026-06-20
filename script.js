@@ -2292,7 +2292,7 @@ function renderizarBracketHLTV( fases ) {
     // Determinar total de linhas do grid baseado na fase inicial
     const primeiraFase = fases[ 0 ];
     const cardsPorLado = ( mataMata.rodadas[ primeiraFase.key ] || [] ).length / 2;
-    const totalLinhas = cardsPorLado * 2;
+    const totalLinhas = cardsPorLado * 3;
 
     const fasesTree = fases.filter(
         f => [ "round32", "round16", "quarterfinals", "semifinals", "final" ].includes( f.key )

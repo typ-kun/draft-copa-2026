@@ -1625,7 +1625,7 @@ section.teams {
     position: relative;
     padding: 24px 16px 8px;
     background: var(--surface-2);
-    border: 2px solid var(--ink);
+        border: 2px solid var(--ink);
     box-shadow: var(--hard-shadow);
     overflow-x: auto;
     margin-bottom: 40px;
@@ -1688,6 +1688,7 @@ section.teams {
     position: relative;
     grid-column: 1;
     align-self: center;
+    margin: 3px 0;
 }
 
 .bracket-hltv-card.is-done {
