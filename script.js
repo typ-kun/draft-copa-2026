@@ -3388,6 +3388,13 @@ document
     );
 
 document
+    .getElementById("resetFromResults")
+    .addEventListener(
+        "click",
+        resetarTudo
+    );
+
+document
     .getElementById("mataMataBracket")
     .addEventListener(
         "click",
