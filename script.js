@@ -383,13 +383,23 @@ function carregarEstadoDraft() {
         }
 
         if (etapa >= 2 && paisParticipante.length) {
-            document.getElementById("countrySelection").style.display = "block";
-            // Re-renderizar grid de países se ainda estamos selecionando
-            if (indiceSelecao < nomesJogadores.length && etapa === 2) {
-                const paisesRestantes = [...new Set(jogadoresBase.map(j => j.pais))].sort();
-                renderizarGridPaises(paisesRestantes);
+            // Se todos os países já foram pickados, avança direto pro draft
+            if (indiceSelecao >= nomesJogadores.length) {
+                document.getElementById("countrySelection").style.display = "none";
+                document.getElementById("draftArea").style.display = "block";
+                renderizarTeamCards();
+                atualizarRefreshes();
+                atualizarStatus();
+                gerarPool();
+                setActiveStep(3);
+            } else {
+                document.getElementById("countrySelection").style.display = "block";
+                if (etapa === 2) {
+                    const paisesRestantes = [...new Set(jogadoresBase.map(j => j.pais))].sort();
+                    renderizarGridPaises(paisesRestantes);
+                }
+                setActiveStep(2);
             }
-            setActiveStep(2);
         }
 
         if (etapa >= 3) {
