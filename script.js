@@ -1380,9 +1380,10 @@ function mostrarResultadoFinal() {
 
     let html = "";
 
-    // Botão de toggle
+    // Botão de toggle + copiar
     html += `<div class="result-toggle-wrap">
-        <button id="togglePlayersBtn" class="result-toggle-btn">🔽 Reduzir tudo</button>
+        <button id="togglePlayersBtn" class="result-toggle-btn">${todosExpandidos ? "▼" : "▶"} ${todosExpandidos ? "Reduzir tudo" : "Expandir tudo"}</button>
+        <button id="copyResults" class="result-copy-btn" title="Copiar lista">📋</button>
     </div>`;
 
     let todosExpandidos = localStorage.getItem( "draftResultsExpandido" ) !== "false";
@@ -1466,7 +1467,7 @@ function mostrarResultadoFinal() {
 
                             html += `
                                 <div class="player-entry pos-${jogador.posicao.toLowerCase()}">
-                                    <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span> ${bandeira(jogador.pais)}${jogador.nome}
+                                    <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span> ${bandeira(jogador.pais)}<span class="player-pais-sigla">${abreviacaoPais(jogador.pais)}</span> ${jogador.nome}
                                 </div>
                             `;
 
@@ -1512,7 +1513,7 @@ function mostrarResultadoFinal() {
         } );
 
         document.getElementById( "togglePlayersBtn" ).textContent =
-            novaAberta ? "🔽 Reduzir tudo" : "▶ Expandir tudo";
+            novaAberta ? "▼ Reduzir tudo" : "▶ Expandir tudo";
 
         localStorage.setItem( "draftResultsExpandido", novaAberta );
     } );
