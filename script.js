@@ -191,6 +191,17 @@ async function carregarJogadores() {
             throw new Error( "Arquivo de jogadores vazio ou mal formatado." );
         }
 
+        // Mapear campos: abrev -> nome, manter compatibilidade
+        jogadoresBase = jogadoresBase.map(
+            j => ( {
+                nome: j.abrev || j.nome,
+                pais: j.pais,
+                posicao: j.posicao,
+                playerid: j.playerid || null,
+                nomeCompleto: j.nome_completo || null
+            } )
+        );
+
         paisesCpu = [
             ...new Set(
                 jogadoresBase.map(
