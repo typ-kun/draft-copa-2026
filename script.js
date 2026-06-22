@@ -2,6 +2,16 @@
 // DRAFT COPA DO MUNDO V2
 // ======================
 
+let _toastTimer = null;
+function toast(msg, duration = 2500) {
+    const el = document.getElementById("toast");
+    if (!el) return;
+    clearTimeout(_toastTimer);
+    el.textContent = msg;
+    el.classList.add("show");
+    _toastTimer = setTimeout(() => el.classList.remove("show"), duration);
+}
+
 let jogadoresBase = [];
 let jogadoresDisponiveis = [];
 let poolAtual = [];
@@ -192,13 +202,28 @@ async function carregarJogadores() {
         }
 
         // Mapear campos: abrev -> nome, manter compatibilidade
+        const titleCase = s => s.replace(/\S+/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase());
+        const inverterNome = nc => {
+            if (!nc) return nc;
+            const partes = nc.trim().split(/\s+/);
+            if (partes.length < 2) return titleCase(nc);
+            // Se TODAS as palavras sao maiusculas, e commonname em ordem correta (ex: "RAFAEL LEAO")
+            if (partes.every(p => p === p.toUpperCase())) return titleCase(nc);
+            // Formato FIFA: "SOBRENOME Primeiro" -> "Primeiro SOBRENOME"
+            let i = 0;
+            while (i < partes.length - 1 && partes[i] === partes[i].toUpperCase()) i++;
+            if (i === 0) return nc;
+            const sobrenome = partes.slice(0, i).join(" ");
+            const primeiro = partes.slice(i).join(" ");
+            return `${primeiro} ${sobrenome}`;
+        };
         jogadoresBase = jogadoresBase.map(
             j => ( {
                 nome: j.abrev || j.nome,
                 pais: j.pais,
                 posicao: j.posicao,
                 playerid: j.playerid || null,
-                nomeCompleto: j.nome_completo || null
+                nomeCompleto: inverterNome(j.nome_completo) || null
             } )
         );
 
@@ -998,7 +1023,7 @@ function renderizarPool() {
             card.innerHTML = `
                 <span class="pool-inner pos-${jogador.posicao.toLowerCase()}">
                     <span class="pool-num">${index + 1}</span>
-                    <span class="pool-name">${bandeira(jogador.pais)}${jogador.nome}</span>
+                    <span class="pool-name">${bandeira(jogador.pais)}${jogador.nomeCompleto || jogador.nome}</span>
                     <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span>
                 </span>
             `;
@@ -1336,9 +1361,7 @@ function mostrarResultadoFinal() {
                         area.innerText
                     );
 
-                alert(
-                    "Resultado copiado!"
-                );
+                toast("Resultado copiado!");
 
             }
         );
@@ -1416,9 +1439,7 @@ function mostrarResultadoFinal() {
                     url
                 );
 
-                alert(
-                    "Elencos exportados com sucesso!"
-                );
+                toast("Elencos exportados com sucesso!");
 
             }
         );
@@ -2778,7 +2799,7 @@ function confirmarPlacar(
     );
 
     if ( !jogo || !jogo.a || !jogo.b ) {
-        alert( "Este jogo ainda não tem os dois times definidos." );
+        toast( "Este jogo ainda não tem os dois times definidos." );
         return;
     }
 
@@ -2795,7 +2816,7 @@ function confirmarPlacar(
     );
 
     if ( !inputA || !inputB ) {
-        alert( "Não foi possível encontrar o placar deste jogo." );
+        toast( "Não foi possível encontrar o placar deste jogo." );
         return;
     }
 
@@ -2808,12 +2829,12 @@ function confirmarPlacar(
         golsA < 0 ||
         golsB < 0
     ) {
-        alert( "Digite o placar com números válidos." );
+        toast( "Digite o placar com números válidos." );
         return;
     }
 
     if ( golsA === golsB ) {
-        alert( "Não pode haver empate no mata-mata. Defina um vencedor no placar." );
+        toast( "Não pode haver empate no mata-mata. Defina um vencedor no placar." );
         return;
     }
 
@@ -3354,3 +3375,318 @@ carregarJogadores();
 
 // Etapa inicial: Configurar (1)
 setTimeout(() => setActiveStep(1), 50);
+
+// ─── CONVERSOR RDBM ──────────────────────────────────────────────────────────
+
+(function () {
+
+    const CV_TRAD = {
+        "alemanha": "Germany", "argentina": "Argentina",
+        "argélia": "Algeria", "arábia saudita": "Saudi Arabia",
+        "austrália": "Australia", "bélgica": "Belgium",
+        "bósnia e herzegovina": "Bosnia & Herzegovina",
+        "brasil": "Brazil", "cabo verde": "Cabo Verde",
+        "canadá": "Canada", "catar": "Qatar",
+        "colômbia": "Colombia", "coreia do sul": "Korea Republic",
+        "costa do marfim": "Ivory Coast", "croácia": "Croatia",
+        "curaçao": "Curaçao", "egito": "Egypt",
+        "equador": "Ecuador", "escócia": "Scotland",
+        "espanha": "Spain", "estados unidos": "United States",
+        "frança": "France", "gana": "Ghana", "haiti": "Haiti",
+        "holanda": "Holland", "inglaterra": "England",
+        "iraque": "Iraq", "irã": "Iran",
+        "japão": "Japan", "jordânia": "Jordan",
+        "marrocos": "Morocco", "méxico": "Mexico",
+        "noruega": "Norway", "nova zelândia": "New Zealand",
+        "panamá": "Panamá", "paraguai": "Paraguay",
+        "portugal": "Portugal", "rd congo": "Congo DR",
+        "república tcheca": "Czech Republic", "senegal": "Senegal",
+        "suécia": "Sweden", "suíça": "Switzerland",
+        "tunísia": "Tunisia", "turquia": "Türkiye",
+        "uruguai": "Uruguay", "uzbequistão": "Uzbekistan",
+        "áfrica do sul": "South Africa", "áustria": "Austria",
+    };
+
+    const CV_POS = { GK: "0", DF: "1", MF: "2", FW: "3" };
+
+    const cvS = { tpl: null, teams: null, leagues: null };
+
+    // ── Abrir / fechar ────────────────────────────────────────────────────────
+
+    document.getElementById("openConversor").addEventListener("click", () => {
+        document.getElementById("conversorOverlay").style.display = "flex";
+        cvRenderPreview();
+    });
+
+    document.getElementById("conversorClose").addEventListener("click", () => {
+        document.getElementById("conversorOverlay").style.display = "none";
+    });
+
+    document.getElementById("conversorOverlay").addEventListener("click", e => {
+        if (e.target === document.getElementById("conversorOverlay"))
+            document.getElementById("conversorOverlay").style.display = "none";
+    });
+
+    // ── Helpers UTF-16 ───────────────────────────────────────────────────────
+
+    function cvDecode(buf) {
+        const b  = new Uint8Array(buf);
+        const sl = (b[0] === 0xFF && b[1] === 0xFE) ? buf.slice(2) : buf;
+        return new TextDecoder("utf-16le").decode(sl);
+    }
+
+    function cvEncode(str) {
+        const bom  = new Uint8Array([0xFF, 0xFE]);
+        const buf  = new ArrayBuffer(str.length * 2);
+        const view = new DataView(buf);
+        for (let i = 0; i < str.length; i++)
+            view.setUint16(i * 2, str.charCodeAt(i), true);
+        const out = new Uint8Array(bom.length + buf.byteLength);
+        out.set(bom, 0);
+        out.set(new Uint8Array(buf), bom.length);
+        return out;
+    }
+
+    function cvFindCol(header, name) {
+        return header.findIndex(c => c.trim().toLowerCase() === name.toLowerCase());
+    }
+
+    function cvNorm(s) { return (s || "").toLowerCase().trim(); }
+
+    function cvCRLF(line) { return line.replace(/[\r\n]+$/, "") + "\r\n"; }
+
+    function cvEsc(s) {
+        return (s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // ── Drop zone de pasta ───────────────────────────────────────────────────
+
+    const CV_NEEDED = {
+        "teamplayerlinks.txt": "tpl",
+        "teams.txt":           "teams",
+        "leagues.txt":         "leagues",
+    };
+
+    function cvInitFolderDz() {
+        const dz    = document.getElementById("cv-dz-folder");
+        const input = document.getElementById("cv-fi-folder");
+        const st    = document.getElementById("cv-st-folder");
+        const pills = document.getElementById("cv-file-pills");
+
+        async function loadFiles(fileList) {
+            if (!fileList || !fileList.length) return;
+            st.textContent = "carregando…";
+            dz.classList.remove("ok", "err");
+
+            const found = {};
+            for (const file of fileList) {
+                const name = file.name.toLowerCase();
+                if (CV_NEEDED[name]) {
+                    try { found[name] = await file.arrayBuffer(); } catch (_) {}
+                }
+            }
+
+            for (const [fname, key] of Object.entries(CV_NEEDED))
+                cvS[key] = found[fname] || null;
+
+            pills.innerHTML = Object.keys(CV_NEEDED).map(fname => {
+                const ok = !!found[fname];
+                const label = fname === "leagues.txt" && !ok ? fname + " (opcional)" : fname;
+                return `<span class="cv-file-pill ${ok ? "ok" : "missing"}">${ok ? "✓" : "✗"} ${label}</span>`;
+            }).join("");
+
+            const hasRequired = !!(cvS.tpl && cvS.teams);
+            dz.classList.toggle("ok",  hasRequired);
+            dz.classList.toggle("err", !hasRequired);
+            st.textContent = hasRequired ? "✓ pasta carregada" : "teamplayerlinks.txt ou teams.txt não encontrado";
+
+            cvRenderPreview();
+        }
+
+        input.addEventListener("change", e => loadFiles(e.target.files));
+        dz.addEventListener("dragover",  e => { e.preventDefault(); dz.classList.add("over"); });
+        dz.addEventListener("dragleave", () => dz.classList.remove("over"));
+        dz.addEventListener("drop", e => {
+            e.preventDefault(); dz.classList.remove("over");
+            loadFiles(e.dataTransfer.files);
+        });
+    }
+
+    cvInitFolderDz();
+
+    // ── Parse teams.txt ──────────────────────────────────────────────────────
+
+    function cvParseTeams(buf) {
+        const lines = cvDecode(buf).split("\n").filter(l => l.trim());
+        const header = lines[0].replace(/\r$/, "").split("\t");
+        const iName = cvFindCol(header, "teamname");
+        const iId   = cvFindCol(header, "teamid");
+        if (iName < 0 || iId < 0) return null;
+        const map = {};
+        for (const raw of lines.slice(1)) {
+            const p  = raw.replace(/\r$/, "").split("\t");
+            const id = (p[iId] || "").trim();
+            if (/^\d+$/.test(id)) map[cvNorm(p[iName])] = id;
+        }
+        return map;
+    }
+
+    function cvResolveId(ptName, teamMap) {
+        const enName = CV_TRAD[cvNorm(ptName)] || ptName;
+        const id = teamMap[cvNorm(enName)] || teamMap[cvNorm(ptName)];
+        if (id) return { enName, id };
+        const key = cvNorm(enName);
+        for (const [k, v] of Object.entries(teamMap))
+            if (k.includes(key) || key.includes(k)) return { enName, id: v };
+        return { enName, id: null };
+    }
+
+    // ── Preview ──────────────────────────────────────────────────────────────
+
+    function cvGetDraftData() {
+        // Lê o estado atual do draft vivo (times / nomesJogadores / paisParticipante)
+        if (typeof times === "undefined" || !times.length) return null;
+        return nomesJogadores.map((nome, idx) => ({
+            player: nome,
+            team:   paisParticipante[idx] || null,
+            players: (times[idx] || []).map(j => ({
+                name:       j.nome,
+                position:   j.posicao,
+                nationality: j.pais,
+                playerid:   j.playerid || null,
+            })),
+        }));
+    }
+
+    function cvRenderPreview() {
+        if (!cvS.tpl || !cvS.teams) return;
+
+        const teamMap = cvParseTeams(cvS.teams);
+        if (!teamMap) return;
+
+        const participants = cvGetDraftData();
+        if (!participants) return;
+
+        cvS._resolved = participants.map(p => {
+            const { enName, id } = cvResolveId(p.team, teamMap);
+            const total  = p.players.length;
+            const withId = p.players.filter(j => j.playerid).length;
+            return { player: p.player, team: p.team, enName, teamId: id, total, withId, players: p.players };
+        });
+
+        const rows = cvS._resolved.map(r => {
+            let badge, cls;
+            if (!r.teamId) {
+                badge = "time não encontrado"; cls = "cv-badge-err";
+            } else if (r.withId === r.total) {
+                badge = r.total + " jogadores OK"; cls = "cv-badge-ok";
+            } else {
+                badge = r.withId + "/" + r.total + " com ID"; cls = "cv-badge-warn";
+            }
+            const tid = r.teamId ? `<span class="cv-prev-tid">ID ${r.teamId}</span>` : "";
+            return `<div class="cv-preview-row">
+                <div class="cv-prev-player">${cvEsc(r.player)}</div>
+                <div class="cv-prev-team">${cvEsc(r.team)} ${tid}</div>
+                <span class="${cls}">${badge}</span>
+            </div>`;
+        }).join("");
+
+        const el = document.getElementById("cv-preview");
+        el.innerHTML = rows;
+        el.style.display = "";
+
+        const btn = document.getElementById("cv-exportBtn");
+        btn.style.display = "";
+        btn.disabled = false;
+    }
+
+    // ── Export ───────────────────────────────────────────────────────────────
+
+    document.getElementById("cv-exportBtn").addEventListener("click", cvDoExport);
+
+    function cvDoExport() {
+        const log = [];
+
+        // splitlines(keepends=True) — mantém \r\n original, igual ao Python
+        const tplText  = cvDecode(cvS.tpl);
+        const rawLines = tplText.match(/[^\n]*\n?/g).filter(l => l.length > 0);
+        const headerCols = rawLines[0].replace(/[\r\n]+$/, "").split("\t");
+        const iPlayer = cvFindCol(headerCols, "playerid");
+        const iTeam   = cvFindCol(headerCols, "teamid");
+
+        if (iPlayer < 0 || iTeam < 0) {
+            cvShowLog(["[ERRO] teamplayerlinks.txt: colunas playerid/teamid não encontradas"]);
+            return;
+        }
+
+        const teamIdSet = new Set(cvS._resolved.map(r => r.teamId).filter(Boolean));
+        const kept = [rawLines[0]];  // header inalterado
+        let removed = 0;
+        for (const raw of rawLines.slice(1)) {
+            if (!raw.trim()) continue;
+            const tid = (raw.replace(/[\r\n]+$/, "").split("\t")[iTeam] || "").trim();
+            if (teamIdSet.has(tid)) { removed++; }
+            else { kept.push(raw); }  // linha original inalterada
+        }
+        log.push(`[OK] ${removed} jogadores removidos dos times selecionados`);
+
+        let added = 0;
+        for (const r of cvS._resolved) {
+            if (!r.teamId) { log.push(`[AVISO] ${r.team}: teamid não encontrado — pulado`); continue; }
+            let cnt = 0;
+            for (const j of r.players) {
+                if (!j.playerid) continue;
+                const jersey  = Math.floor(Math.random() * 99) + 1;
+                const posCode = CV_POS[j.position] || "0";
+                kept.push(`0\t0\t0\t0\t${jersey}\t${posCode}\t-1\t${r.teamId}\t0\t0\t0\t0\t0\t${j.playerid}\t3\t0\r\n`);
+                cnt++; added++;
+            }
+            log.push(`[OK] ${r.enName} (ID ${r.teamId}): +${cnt} jogadores adicionados`);
+        }
+        log.push(`[OK] Total adicionado: ${added} jogadores`);
+
+        cvDownload(cvEncode(kept.join("")), "teamplayerlinks.txt");
+
+        if (cvS.leagues) {
+            const lgLines = cvDecode(cvS.leagues).match(/[^\n]*\n?/g).filter(l => l.length > 0);
+            let changed = 0;
+            const lgOut = lgLines.map(raw => {
+                const stripped = raw.replace(/[\r\n]+$/, "");
+                const p = stripped.split("\t");
+                if (p.length >= 2 && (p[1] || "").toLowerCase().includes("international")) {
+                    if (p[p.length - 1].trim() === "1") {
+                        p[p.length - 1] = "0"; changed++;
+                        return p.join("\t") + "\r\n";
+                    }
+                }
+                return raw;  // linha original inalterada
+            }).join("");
+            setTimeout(() => cvDownload(cvEncode(lgOut), "leagues.txt"), 350);
+            log.push(`[OK] leagues.txt: ${changed > 0 ? changed + " flag(s) International: 1 → 0" : "nenhuma flag alterada"}`);
+        }
+
+        cvShowLog(log);
+        toast("Arquivos gerados com sucesso!");
+    }
+
+    function cvDownload(data, filename) {
+        const blob = new Blob([data], { type: "application/octet-stream" });
+        const url  = URL.createObjectURL(blob);
+        const a    = document.createElement("a");
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click();
+        document.body.removeChild(a); URL.revokeObjectURL(url);
+    }
+
+    function cvShowLog(lines) {
+        const el = document.getElementById("cv-log");
+        el.innerHTML = lines.map(l => {
+            if (l.startsWith("[OK]"))    return `<span class="log-ok">${cvEsc(l)}</span>`;
+            if (l.startsWith("[AVISO]")) return `<span class="log-warn">${cvEsc(l)}</span>`;
+            if (l.startsWith("[ERRO]"))  return `<span class="log-err">${cvEsc(l)}</span>`;
+            return cvEsc(l);
+        }).join("\n");
+        el.classList.add("show");
+    }
+
+})();

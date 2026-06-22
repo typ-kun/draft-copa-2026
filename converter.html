@@ -1,531 +1,763 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Conversor Draft &rarr; RDBM 26</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;600;700;800;900&family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">
-<style>
-:root {
-  --surface: #F3ECD8; --surface-2: #FFFFFF; --ink: #1B1A17;
-  --muted: #6B6452; --accent: #E8462B; --accent-2: #C8A24B;
-  --line: #D8CFB4; --win: #2F7D4F;
-  --display: 'Anton', sans-serif; --body: 'Hanken Grotesk', sans-serif;
-  --numeral: 'Archivo', sans-serif;
-  --hard-shadow: 3px 3px 0 var(--line);
-  --hard-shadow-ink: 3px 3px 0 #1B1A17;
-}
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-body {
-  font-family: var(--body); color: var(--ink); background: var(--surface);
-  -webkit-font-smoothing: antialiased; min-height: 100vh;
-}
-h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 0.92; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor RDBM 26 — Draft Copa 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;600;700;800;900&family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cv-wrap {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 40px 16px 100px;
+        }
 
-.container { max-width: 720px; margin: 0 auto; padding: 32px 16px 56px; }
+        .cv-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 36px;
+        }
+        .cv-back:hover { color: var(--ink); }
 
-h1 {
-  font-size: clamp(32px, 8vw, 52px); text-transform: uppercase;
-  letter-spacing: -0.01em; margin-bottom: 4px;
-  text-shadow: 4px 4px 0 var(--accent-2);
-}
-.subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; }
+        .cv-header {
+            margin-bottom: 44px;
+        }
+        .cv-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+        .cv-header h1 {
+            font-family: var(--display);
+            font-size: clamp(40px, 9vw, 64px);
+            text-transform: uppercase;
+            color: var(--ink);
+            text-shadow: 3px 3px 0 var(--accent-2);
+            margin: 0 0 10px;
+            line-height: 0.92;
+        }
+        .cv-header p {
+            font-size: 14px;
+            color: var(--muted);
+            margin: 0;
+        }
 
-/* Card */
-.card {
-  background: var(--surface-2); border: 2px solid var(--ink);
-  box-shadow: 6px 6px 0 var(--ink); padding: 20px; margin-bottom: 16px;
-}
-.card h2 {
-  font-family: var(--display); font-size: 1.15rem; text-transform: uppercase;
-  letter-spacing: -0.01em; margin-bottom: 14px; display: flex;
-  align-items: center; gap: 8px;
-}
-.card h2 .badge {
-  font-family: var(--body); font-size: 0.65rem; font-weight: 700;
-  background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 20px;
-  margin-left: auto;
-}
+        /* ── SECTION ── */
 
-/* Steps */
-.step-list { list-style: none; padding: 0; margin: 0; }
-.step-list li {
-  display: flex; gap: 12px; align-items: flex-start;
-  padding: 10px 0; border-bottom: 1px solid var(--line);
-}
-.step-list li:last-of-type { border-bottom: none; }
-.step-num {
-  flex: 0 0 32px; height: 32px; background: var(--ink); color: #fff;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-family: var(--numeral); font-weight: 900; font-size: 0.9rem;
-  box-shadow: 2px 2px 0 var(--accent);
-}
-.step-text { flex: 1; padding-top: 4px; }
-.step-text strong { display: block; font-size: 0.9rem; }
-.step-text span { font-size: 0.8rem; color: var(--muted); }
+        .cv-section {
+            margin-bottom: 36px;
+        }
+        .cv-section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--display);
+            font-size: 20px;
+            text-transform: uppercase;
+            color: var(--ink);
+            margin: 0 0 14px;
+        }
+        .step-badge {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--ink);
+            color: var(--surface);
+            font-family: var(--numeral);
+            font-weight: 900;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
 
-/* File rows */
-.file-row {
-  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
-  background: var(--surface); border: 1px solid var(--line); margin-bottom: 6px;
-}
-.file-row:last-of-type { margin-bottom: 0; }
-.file-row label { flex: 0 0 180px; font-size: 0.85rem; font-weight: 700; }
-.file-row .status { font-size: 0.8rem; flex: 1; }
-.file-row .status.ok { color: var(--win); }
-.file-row .status.missing { color: var(--accent); }
-.file-row .hint { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
-input[type="file"] { font-size: 0.78rem; }
+        /* ── DROP ZONES GRID ── */
 
-/* Buttons */
-.btn {
-  font-family: var(--body); font-weight: 800; font-size: 1rem;
-  background: var(--accent); color: #fff; border: 2px solid var(--ink);
-  padding: 14px 28px; cursor: pointer; width: 100%;
-  box-shadow: 4px 4px 0 var(--ink);
-  transition: transform 0.1s, box-shadow 0.1s; text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-.btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
-.btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
-.btn:disabled {
-  background: #aaa; color: #666; cursor: not-allowed;
-  box-shadow: none; transform: none;
-}
+        .dz-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 520px) {
+            .dz-grid { grid-template-columns: 1fr; }
+        }
 
-/* Log */
-.log {
-  background: var(--ink); color: #e0dcc8; border-radius: 4px; padding: 14px;
-  font-family: 'Courier New', monospace; font-size: 0.75rem; line-height: 1.6;
-  max-height: 300px; overflow-y: auto; white-space: pre-wrap; margin-top: 14px;
-}
-.log .ok { color: #5adb7a; }
-.log .warn { color: #f5b342; }
-.log .err { color: #ff5555; }
-.log .info { color: #88ccff; }
+        .dz {
+            position: relative;
+            background: var(--surface-2);
+            border: 2px dashed var(--line);
+            border-radius: 8px;
+            padding: 18px 14px 14px;
+            cursor: pointer;
+            transition: border-color 0.15s, background 0.15s;
+            text-align: center;
+            user-select: none;
+        }
+        .dz:hover, .dz.over { border-color: var(--accent-2); background: #fbf7eb; }
+        .dz.ok  { border-style: solid; border-color: var(--win); }
+        .dz.err { border-style: solid; border-color: var(--accent); }
 
-/* Preview */
-.player-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 6px; }
-.player-table th { text-align: left; padding: 5px 8px; border-bottom: 2px solid var(--ink); color: var(--muted); font-size: 0.72rem; text-transform: uppercase; }
-.player-table td { padding: 4px 8px; border-bottom: 1px solid var(--line); }
-.player-table .found { color: var(--win); font-weight: 700; }
-.player-table .miss { color: var(--accent); }
+        .dz input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        .dz-name {
+            font-family: var(--numeral);
+            font-weight: 900;
+            font-size: 11px;
+            letter-spacing: 0.04em;
+            color: var(--ink);
+            margin-bottom: 4px;
+            pointer-events: none;
+        }
+        .dz-action {
+            font-size: 11px;
+            color: var(--muted);
+            pointer-events: none;
+        }
+        .dz-st {
+            margin-top: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            pointer-events: none;
+            min-height: 15px;
+        }
+        .dz.ok  .dz-st { color: var(--win); }
+        .dz.err .dz-st { color: var(--accent); }
 
-/* Download */
-.download-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-.download-bar a {
-  background: var(--win); color: #fff; padding: 10px 18px; border: 2px solid var(--ink);
-  text-decoration: none; font-size: 0.85rem; font-weight: 800; text-transform: uppercase;
-  box-shadow: 3px 3px 0 var(--ink);
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-.download-bar a:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
-.download-bar a:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+        /* Draft JSON zone — wide */
+        .dz-wide {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+            padding: 20px 24px;
+        }
+        .dz-icon {
+            font-size: 36px;
+            line-height: 1;
+            flex-shrink: 0;
+            pointer-events: none;
+        }
+        .dz-wide .dz-name  { font-size: 14px; margin-bottom: 2px; }
+        .dz-wide .dz-action { font-size: 12px; }
+        .dz-wide .dz-st   { margin-top: 4px; font-size: 12px; }
 
-/* Result summary */
-.result-summary {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 10px; margin-bottom: 14px;
-}
-.result-stat {
-  background: var(--surface); border: 1px solid var(--line); padding: 12px;
-  text-align: center;
-}
-.result-stat .num { font-family: var(--numeral); font-weight: 900; font-size: 1.6rem; }
-.result-stat .label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; }
+        .dz-file-status {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+            min-height: 0;
+        }
+        .dz-file-pill {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 4px;
+        }
+        .dz-file-pill.ok  { background: #e4f5eb; color: var(--win); }
+        .dz-file-pill.missing { background: #fde8e8; color: var(--accent); }
 
-.hidden { display: none; }
-hr { border: none; border-top: 2px solid var(--line); margin: 16px 0; }
-</style>
+        /* ── PREVIEW ── */
+
+        .preview-card {
+            background: var(--surface-2);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .prev-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 16px;
+            border-bottom: 1px solid var(--line);
+        }
+        .prev-row:last-child { border-bottom: none; }
+        .prev-player {
+            font-weight: 800;
+            font-size: 13px;
+            min-width: 90px;
+        }
+        .prev-team {
+            flex: 1;
+            font-size: 13px;
+            color: var(--muted);
+        }
+        .prev-tid {
+            font-family: var(--numeral);
+            font-weight: 900;
+            font-size: 11px;
+            color: var(--muted);
+            margin-right: 6px;
+        }
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        .badge-ok   { background: #e4f5eb; color: var(--win); }
+        .badge-warn { background: #fef3e2; color: #b36b00; }
+        .badge-err  { background: #fde8e8; color: var(--accent); }
+
+        /* ── EXPORT ── */
+
+        .btn-rdbm {
+            width: 100%;
+            padding: 18px;
+            background: var(--accent);
+            color: var(--surface);
+            border: none;
+            border-radius: 8px;
+            font-family: var(--display);
+            font-size: 22px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: var(--hard-shadow-ink);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .btn-rdbm:hover:not(:disabled) {
+            transform: translateY(1px);
+            box-shadow: 2px 2px 0 var(--ink);
+        }
+        .btn-rdbm:disabled {
+            background: var(--line);
+            color: var(--muted);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .export-note {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* ── LOG ── */
+
+        .cv-log {
+            background: var(--ink);
+            color: #d8cfb8;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            border-radius: 8px;
+            padding: 16px 18px;
+            max-height: 220px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.6;
+            display: none;
+            margin-top: 16px;
+        }
+        .cv-log.show { display: block; }
+        .cv-log .log-ok   { color: #6fcf97; }
+        .cv-log .log-warn { color: #f2c94c; }
+        .cv-log .log-err  { color: #eb5757; }
+    </style>
 </head>
+
 <body>
-<div class="container">
 
-<h1>⚡ CONVERSOR</h1>
-<p class="subtitle">Transforme o draft do Copa 2026 em arquivos TXT prontos para o RDBM 26.</p>
+    <div class="cv-wrap">
 
-<!-- TUTORIAL -->
-<div class="card">
-  <h2>📖 Como usar</h2>
-  <ol class="step-list">
-    <li>
-      <span class="step-num">1</span>
-      <div class="step-text">
-        <strong>Exporte o draft</strong>
-        <span>No Draft Copa 2026, vá em "Resultado Final" e clique em <b>⬇ Exportar Elencos</b>. O arquivo <code>draft-copa-2026.json</code> será baixado.</span>
-      </div>
-    </li>
-    <li>
-      <span class="step-num">2</span>
-      <div class="step-text">
-        <strong>Carregue o JSON</strong>
-        <span>Clique em "📄 Draft exportado" abaixo e selecione o <code>draft-copa-2026.json</code>.</span>
-      </div>
-    </li>
-    <li>
-      <span class="step-num">3</span>
-      <div class="step-text">
-        <strong>Carregue os TXT originais</strong>
-        <span>Clique em "📁 Pasta com TXT originais" e selecione a pasta <b>Arquivos Originais</b> (do FC Editor). O conversor precisa de: <code>players.txt</code>, <code>teamplayerlinks.txt</code>, <code>teams.txt</code>, <code>leagues.txt</code>, <code>teamnationlinks.txt</code> e <code>idjogadoresfc26.txt</code>.</span>
-      </div>
-    </li>
-    <li>
-      <span class="step-num">4</span>
-      <div class="step-text">
-        <strong>Converta</strong>
-        <span>Clique em <b>🔄 Converter</b>. O navegador processa tudo localmente (nenhum dado sai do seu PC).</span>
-      </div>
-    </li>
-    <li>
-      <span class="step-num">5</span>
-      <div class="step-text">
-        <strong>Importe no RDBM 26</strong>
-        <span>Abra o RDBM 26, importe o Squad File original e depois importe os TXT gerados (<code>leagues.txt</code> + <code>teamplayerlinks.txt</code>) por cima. Gere o Squad File e jogue!</span>
-      </div>
-    </li>
-  </ol>
-</div>
+        <a href="index.html" class="cv-back">&#8592; Voltar ao Draft</a>
 
-<!-- FILES -->
-<div class="card">
-  <h2>📂 Arquivos <span class="badge">obrigatório</span></h2>
+        <header class="cv-header">
+            <div class="cv-eyebrow">FC 26 / RDBM 26</div>
+            <h1>Conversor</h1>
+            <p>Importa o resultado do draft e gera os arquivos prontos para o RDBM 26.</p>
+        </header>
 
-  <div class="file-row">
-    <label>📄 Draft exportado</label>
-    <input type="file" id="fileDraft" accept=".json">
-    <div style="flex:1; text-align:right;">
-      <span class="status" id="statusDraft">Nenhum</span>
+        <!-- STEP 1 — Arquivos originais -->
+        <div class="cv-section">
+            <h2 class="cv-section-title">
+                <span class="step-badge">1</span>
+                Arquivos Originais
+            </h2>
+            <div class="dz dz-wide" id="dz-folder">
+                <input type="file" id="fi-folder" webkitdirectory>
+                <div class="dz-icon">&#128193;</div>
+                <div style="pointer-events:none; flex:1;">
+                    <div class="dz-name">Pasta &quot;Arquivos Originais&quot;</div>
+                    <div class="dz-action">Clique para selecionar a pasta · ou arraste ela aqui</div>
+                    <div class="dz-st" id="st-folder">aguardando</div>
+                </div>
+            </div>
+            <div class="dz-file-status" id="dz-file-status"></div>
+        </div>
+
+        <!-- STEP 2 — Draft JSON -->
+        <div class="cv-section">
+            <h2 class="cv-section-title">
+                <span class="step-badge">2</span>
+                Arquivo do Draft
+            </h2>
+            <div class="dz dz-wide" id="dz-draft">
+                <input type="file" accept=".json" id="fi-draft">
+                <div class="dz-icon">{}</div>
+                <div style="pointer-events:none; flex:1;">
+                    <div class="dz-name">draft-copa-2026.json</div>
+                    <div class="dz-action">Exportado pelo app de Draft &middot; Clique ou arraste aqui</div>
+                    <div class="dz-st" id="st-draft">aguardando</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3 — Preview -->
+        <div class="cv-section" id="sec-preview" style="display:none">
+            <h2 class="cv-section-title">
+                <span class="step-badge">3</span>
+                Pr&#233;-visualiza&#231;&#227;o
+            </h2>
+            <div class="preview-card" id="preview-body"></div>
+        </div>
+
+        <!-- STEP 4 — Exportar -->
+        <div class="cv-section" id="sec-export" style="display:none">
+            <h2 class="cv-section-title">
+                <span class="step-badge">4</span>
+                Exportar
+            </h2>
+            <button class="btn-rdbm" id="exportBtn">
+                &#8595; Gerar Arquivos para RDBM 26
+            </button>
+            <div class="export-note" id="export-note">
+                Coloque os arquivos gerados na pasta <strong>Arquivos para Importar RDBM</strong> e importe no RDBM 26.
+            </div>
+            <div class="cv-log" id="cvLog"></div>
+        </div>
+
     </div>
-    <div class="hint">draft-copa-2026.json</div>
-  </div>
 
-  <div class="file-row">
-    <label>📁 Pasta com TXT</label>
-    <input type="file" id="fileFolder" webkitdirectory multiple>
-    <div style="flex:1; text-align:right;">
-      <span class="status" id="statusFolder">Nenhuma</span>
-    </div>
-    <div class="hint">Selecione a pasta <b>Arquivos Originais</b></div>
-  </div>
+    <div id="toast"></div>
 
-  <div id="fileStatus" style="font-size:0.8rem; color:var(--muted); margin-top:6px;"></div>
-</div>
+    <script>
+    "use strict";
 
-<!-- PREVIEW -->
-<div class="card" id="previewCard" style="display:none;">
-  <h2>👁️ Preview do draft</h2>
-  <div id="previewContent"></div>
-</div>
+    // ─── TRADUÇÃO PT → EN ────────────────────────────────────────────────────
 
-<!-- CONVERT -->
-<div class="card">
-  <button class="btn" id="btnConvert" disabled>
-    🔄 Converter para RDBM 26
-  </button>
+    const TRAD = {
+        "alemanha":             "Germany",
+        "argentina":            "Argentina",
+        "argélia":         "Algeria",
+        "arábia saudita":  "Saudi Arabia",
+        "austrália":       "Australia",
+        "bélgica":         "Belgium",
+        "bósnia e herzegovina": "Bosnia & Herzegovina",
+        "brasil":               "Brazil",
+        "cabo verde":           "Cabo Verde",
+        "canadá":          "Canada",
+        "catar":                "Qatar",
+        "colômbia":        "Colombia",
+        "coreia do sul":        "Korea Republic",
+        "costa do marfim":      "Ivory Coast",
+        "croácia":         "Croatia",
+        "curaçao":         "Curaçao",
+        "egito":                "Egypt",
+        "equador":              "Ecuador",
+        "escócia":         "Scotland",
+        "espanha":              "Spain",
+        "estados unidos":       "United States",
+        "frança":          "France",
+        "gana":                 "Ghana",
+        "haiti":                "Haiti",
+        "holanda":              "Holland",
+        "inglaterra":           "England",
+        "iraque":               "Iraq",
+        "irã":             "Iran",
+        "japão":           "Japan",
+        "jordânia":        "Jordan",
+        "marrocos":             "Morocco",
+        "méxico":          "Mexico",
+        "noruega":              "Norway",
+        "nova zelândia":   "New Zealand",
+        "panamá":          "Panaмá",
+        "paraguai":             "Paraguay",
+        "portugal":             "Portugal",
+        "rd congo":             "Congo DR",
+        "república tcheca": "Czech Republic",
+        "senegal":              "Senegal",
+        "suécia":          "Sweden",
+        "suíça":      "Switzerland",
+        "tunísia":         "Tunisia",
+        "turquia":              "Türkiye",
+        "uruguai":              "Uruguay",
+        "uzbequistão":     "Uzbekistan",
+        "áfrica do sul":   "South Africa",
+        "áustria":         "Austria",
+    };
 
-  <div class="log" id="logArea">💡 Carregue o JSON do draft e a pasta com os TXT originais para come&ccedil;ar.</div>
+    const POS_CODE = { GK: "0", DF: "1", MF: "2", FW: "3" };
 
-  <div id="downloadArea" class="hidden">
-    <hr>
-    <h2 style="font-size:1rem; font-family:var(--body); font-weight:800; text-transform:uppercase; margin-bottom:6px;">✅ Pronto!</h2>
-    <p style="font-size:0.85rem; color:var(--muted); margin-bottom:8px;">
-      Agora importe os arquivos abaixo no RDBM 26.
-    </p>
-    <div class="download-bar" id="downloadBar"></div>
-  </div>
-</div>
+    // ─── ESTADO ──────────────────────────────────────────────────────────────
 
-</div>
+    const S = {
+        tpl:      null,   // ArrayBuffer
+        teams:    null,   // ArrayBuffer
+        leagues:  null,   // ArrayBuffer (optional)
+        draft:    null,   // Object
+        _resolved: null,  // computed after all files loaded
+    };
 
-<script>
-// ─── UTF-16 helpers ────────────────────────────────────────────────────────
-function decodeUTF16(buf) { return new TextDecoder("utf-16le").decode(buf); }
-function tsv(line) { return line.replace(/\r?\n$/, '').split('\t'); }
-function downloadFile(name, content) {
-  // UTF-16LE manual com BOM - unico metodo que funciona
-  const start = (content.length > 0 && content.charCodeAt(0) === 0xFEFF) ? 1 : 0;
-  const len = content.length - start;
-  const buf = new ArrayBuffer(2 + len * 2);
-  const view = new DataView(buf);
-  view.setUint16(0, 0xFEFF, true); // BOM
-  for (let i = 0; i < len; i++) {
-    view.setUint16(2 + i * 2, content.charCodeAt(start + i), true);
-  }
-  const blob = new Blob([buf], { type: "application/octet-stream" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a"); a.href = url; a.download = name;
-  document.body.appendChild(a); a.click();
-  document.body.removeChild(a); URL.revokeObjectURL(url);
-}
-const logEl = document.getElementById("logArea");
-function log(msg, cls = "info") {
-  logEl.innerHTML += `<span class="${cls}">${msg}</span>\n`;
-  logEl.scrollTop = logEl.scrollHeight;
-}
+    // ─── UTF-16 LE ────────────────────────────────────────────────────────────
 
-const files = {};
-let draftData = null;
-function getFile(n) { return files[n]; }
-
-// ─── Translations ───────────────────────────────────────────────────────────
-const NOME_PT_EN = {
-  "brasil":"Brazil","gana":"Ghana","colômbia":"Colombia","colombia":"Colombia",
-  "coreia do sul":"Korea Republic","república tcheca":"Czech Republic",
-  "áustria":"Austria","catar":"Qatar","irã":"Iran","rd congo":"DR Congo",
-  "cabo verde":"Cabo Verde","austrália":"Australia","noruega":"Norway",
-  "estados unidos":"USA","equador":"Ecuador","espanha":"Spain",
-  "portugal":"Portugal","frança":"France","inglaterra":"England",
-  "alemanha":"Germany","holanda":"Netherlands","argentina":"Argentina",
-  "uruguai":"Uruguay","méxico":"Mexico","bélgica":"Belgium",
-  "itália":"Italy","suiça":"Switzerland","suíça":"Switzerland",
-  "suécia":"Sweden","polônia":"Poland","ucrânia":"Ukraine",
-  "dinamarca":"Denmark","croácia":"Croatia","japão":"Japan",
-  "marrocos":"Morocco","senegal":"Senegal","costa do marfim":"Ivory Coast",
-  "egito":"Egypt","argélia":"Algeria","tunísia":"Tunisia",
-  "nigéria":"Nigeria","camarões":"Cameroon","escócia":"Scotland",
-  "países baixos":"Netherlands","arábia saudita":"Saudi Arabia",
-  "coreia do norte":"Korea DPR",
-};
-
-const MANUAL_IDS = {
-  "weverton":"186555","zima":"255687","d. zima":"255687","david zima":"255687",
-  "wimmer":"254566","p. wimmer":"254566","patrick wimmer":"254566",
-  "g. rodrigues":"210212","garry rodrigues":"210212",
-  "a. freeman":"267920","alex freeman":"267920","freeman":"267920",
-  "p. hincapie":"256197","piero hincapie":"256197","hincapie":"256197",
-  "r. gravenberch":"246104","ryan gravenberch":"246104","gravenberch":"246104",
-  "g. inacio":"257179","goncalo inacio":"257179","gonçalo inácio":"257179","inacio":"257179",
-  "j. piquerez":"254623","joaquin piquerez":"254623","joaquín piquerez":"254623","piquerez":"254623",
-  "j. neves":"272834","joao neves":"272834","joão neves":"272834",
-  "n. kante":"215914","ngolo kante":"215914","n'golo kanté":"215914","kante":"215914",
-  "a. mac allister":"239837","alexis mac allister":"239837","mac allister":"239837",
-  "r. leao":"241721","rafael leao":"241721","rafael leão":"241721","leao":"241721",
-  "l. paqueta":"233927","m. guehi":"241159","w. zaire-emery":"270673","a. nuebel":"223885","n. vlasic":"241095","y. mvogo":"206003","a. guler":"264309","i. laye":null,"m. mohebbi":null,
-};
-
-// ─── File loading ───────────────────────────────────────────────────────────
-document.getElementById("fileDraft").addEventListener("change", async e => {
-  const file = e.target.files[0]; if (!file) return;
-  const st = document.getElementById("statusDraft");
-  st.className = "status"; st.textContent = "Carregando...";
-  try {
-    draftData = JSON.parse(await file.text());
-    st.className = "status ok";
-    const pp = draftData.draft.participants;
-    st.textContent = `✓ ${pp.length} participante(s), ${pp[0]?.players?.length || 0} jogadores`;
-    showPreview(); checkReady();
-  } catch (e) {
-    st.className = "status missing"; st.textContent = `✗ ${e.message}`; draftData = null;
-  }
-});
-
-document.getElementById("fileFolder").addEventListener("change", async e => {
-  const st = document.getElementById("statusFolder");
-  st.className = "status"; st.textContent = "Lendo...";
-  const fl = e.target.files; if (!fl.length) return;
-  const needed = ["players.txt","teamplayerlinks.txt","teams.txt","leagues.txt","teamnationlinks.txt","idjogadoresfc26.txt"];
-  for (const f of fl) {
-    const name = f.name.toLowerCase();
-    if (needed.includes(name)) files[f.name] = await f.arrayBuffer();
-  }
-  const ok = needed.filter(n => files[n]).length;
-  document.getElementById("fileStatus").textContent = `📁 ${ok}/${needed.length} arquivos carregados`;
-  st.className = "status ok";
-  st.textContent = `✓ ${fl.length} arquivo(s) lidos`;
-  if (ok < needed.length) log(`⚠ Faltando: ${needed.filter(n=>!files[n]).join(', ')}`, "warn");
-  checkReady();
-});
-
-function checkReady() {
-  const btn = document.getElementById("btnConvert");
-  if (draftData && ["players.txt","teamplayerlinks.txt","teams.txt","idjogadoresfc26.txt"].every(n=>getFile(n)))
-    { btn.disabled = false; log("✅ Pronto para converter!", "ok"); }
-}
-
-function showPreview() {
-  document.getElementById("previewCard").style.display = "block";
-  let html = "";
-  for (const p of draftData.draft.participants) {
-    html += `<div style="margin-bottom:8px;"><strong>${p.player}</strong> &rarr; ${p.team} (${p.players.length} jogadores)</div>`;
-    html += `<table class="player-table"><tr><th>#</th><th>Nome</th><th>Pos</th><th>Nacionalidade</th></tr>`;
-    p.players.forEach((j,i) => { html += `<tr><td>${i+1}</td><td>${j.name}</td><td>${j.position}</td><td>${j.nationality}</td></tr>`; });
-    html += `</table>`;
-  }
-  document.getElementById("previewContent").innerHTML = html;
-}
-
-// ─── Converter ──────────────────────────────────────────────────────────────
-document.getElementById("btnConvert").addEventListener("click", async () => {
-  const btn = document.getElementById("btnConvert");
-  btn.disabled = true; btn.textContent = "⏳ Convertendo...";
-  logEl.innerHTML = ""; log("🚀 Iniciando conversão...", "info");
-
-  try {
-    const playersTxt = decodeUTF16(getFile("players.txt"));
-    const tplTxt = decodeUTF16(getFile("teamplayerlinks.txt"));
-    const teamsTxt = decodeUTF16(getFile("teams.txt"));
-    const leaguesTxt = decodeUTF16(getFile("leagues.txt"));
-    const tnLinksTxt = getFile("teamnationlinks.txt") ? decodeUTF16(getFile("teamnationlinks.txt")) : "";
-    const idMapTxt = decodeUTF16(getFile("idjogadoresfc26.txt"));
-
-    // Parse id map
-    const nameToNameid = {}, nameidToName = {};
-    for (const line of idMapTxt.split(/\r?\n/)) {
-      const p = tsv(line);
-      if (p.length >= 3 && /^\d+$/.test(p[1].trim())) {
-        nameToNameid[p[0].trim().toLowerCase()] = parseInt(p[1].trim());
-        nameidToName[parseInt(p[1].trim())] = p[0].trim();
-      }
-    }
-    log(`  ${Object.keys(nameToNameid).length} nomes mapeados`, "ok");
-
-    // Parse teams
-    const tLines = teamsTxt.split(/\r?\n/);
-    const tHdr = tsv(tLines[0]);
-    const tColName = tHdr.findIndex(c=>c.trim().toLowerCase()==="teamname");
-    const tColId = tHdr.findIndex(c=>c.trim().toLowerCase()==="teamid");
-    const teamMap = {};
-    for (let i=1; i<tLines.length; i++) {
-      const p = tsv(tLines[i]);
-      if (p.length > Math.max(tColName,tColId) && /^\d+$/.test(p[tColId].trim()))
-        teamMap[p[tColName].trim()] = parseInt(p[tColId].trim());
-    }
-    log(`  ${Object.keys(teamMap).length} times mapeados`, "ok");
-
-    // Build player index
-    const pLines = playersTxt.split(/\r?\n/);
-    const pHdr = tsv(pLines[0]);
-    const pColPid = pHdr.findIndex(c=>c.trim().toLowerCase()==="playerid");
-    const pColNat = pHdr.findIndex(c=>c.trim().toLowerCase()==="nationality");
-    const pColRole = 9;
-
-    const playerNameMap = {}, playerInfo = {}, sobrenomeIdx = {}, nameidToPids = {};
-
-    for (let i=1; i<pLines.length; i++) {
-      const p = tsv(pLines[i]);
-      if (p.length <= pColPid || !/^\d+$/.test(p[pColPid].trim())) continue;
-      const pid = p[pColPid].trim();
-      const fn = parseInt(p[0])||0, ln = parseInt(p[1])||0, jn = (p[2]&&parseInt(p[2]))||0, cn = (p[3]&&parseInt(p[3]))||0;
-      const nat = parseInt(p[pColNat])||0, role = (p[pColRole]&&parseInt(p[pColRole]))||0;
-      [fn,ln,jn,cn].forEach(nid=>{ if(nid>0){if(!nameidToPids[nid])nameidToPids[nid]=[];if(!nameidToPids[nid].includes(pid))nameidToPids[nid].push(pid);}});
-      let nome="",sn="";
-      if(cn>0&&nameidToName[cn])nome=nameidToName[cn];
-      else if(jn>0&&nameidToName[jn])nome=nameidToName[jn];
-      if(nome){const w=nome.split(" ");sn=w.length>1?w[w.length-1].toLowerCase():nome.toLowerCase();}
-      if(!nome&&ln>0&&nameidToName[ln]){sn=nameidToName[ln].toLowerCase();const pf=(fn>0&&nameidToName[fn])?nameidToName[fn]:"";nome=pf?`${pf[0]}. ${nameidToName[ln]}`:nameidToName[ln];}
-      if(!sn&&ln>0&&nameidToName[ln])sn=nameidToName[ln].toLowerCase();
-      if(nome)playerNameMap[nome.toLowerCase().trim()]=pid;
-      playerInfo[pid]={nome,sn,nat,role};
-      if(sn){if(!sobrenomeIdx[sn])sobrenomeIdx[sn]=[];sobrenomeIdx[sn].push({pid,nat,role});}
-    }
-    // Extra: add names from idjogadores that link to players
-    for(const[name,nid]of Object.entries(nameToNameid)){const pids=nameidToPids[nid];if(pids&&pids.length&&!sobrenomeIdx[name])sobrenomeIdx[name]=pids.map(p=>({pid:p,nat:playerInfo[p]?.nat||0,role:playerInfo[p]?.role||0}));}
-    log(`  ${Object.keys(playerInfo).length} jogadores (${Object.keys(sobrenomeIdx).length} sobrenomes)`, "ok");
-
-    // Nationality map
-    const natTimeMap = {};
-    if (tnLinksTxt) {
-      const tnLines = tnLinksTxt.split(/\r?\n/);
-      const tnHdr = tsv(tnLines[0]);
-      const tnColTeam = tnHdr.findIndex(c=>c.trim().toLowerCase()==="teamid");
-      const tnColNation = tnHdr.findIndex(c=>c.trim().toLowerCase()==="nationid");
-      if (tnColTeam>-1&&tnColNation>-1) {
-        const t2n={};
-        for(let i=1;i<tnLines.length;i++){const p=tsv(tnLines[i]);if(p.length>Math.max(tnColTeam,tnColNation))t2n[p[tnColTeam].trim()]=p[tnColNation].trim();}
-        for(const[name,tid]of Object.entries(teamMap)){const ts=String(tid);if(t2n[ts]){natTimeMap[name.toLowerCase()]=t2n[ts];for(const[pt,en]of Object.entries(NOME_PT_EN))if(en.toLowerCase()===name.toLowerCase())natTimeMap[pt]=t2n[ts];}}
-      }
+    function decodeUtf16(buf) {
+        const bytes = new Uint8Array(buf);
+        const hasBom = bytes[0] === 0xFF && bytes[1] === 0xFE;
+        const slice = hasBom ? buf.slice(2) : buf;
+        return new TextDecoder("utf-16le").decode(slice);
     }
 
-    function buscarPlayerid(nomeDraft,posDraft,natDraft){
-      const chave=nomeDraft.toLowerCase().trim();
-      if(chave in MANUAL_IDS){const pid=MANUAL_IDS[chave];return pid?[pid,`manual: ${pid}`]:[null,"nao existe"];}
-      if(playerNameMap[chave])return[playerNameMap[chave],"exato"];
-      let sn="";if(chave.includes("."))sn=chave.split(".")[1].trim();else{const w=chave.split(" ");sn=w[w.length-1];}
-      if(!sn)return[null,"sem sobrenome"];
-      if(sn in MANUAL_IDS){const pid=MANUAL_IDS[sn];if(pid)return[pid,`manual: ${pid}`];}
-      let candidates=sobrenomeIdx[sn]||[];
-      if(!candidates.length){for(const[s,c]of Object.entries(sobrenomeIdx)){if(s.includes(sn))candidates=candidates.concat(c);}}
-      if(!candidates.length){for(const[ns,nid]of Object.entries(nameToNameid)){if(ns.includes(sn)||sn.includes(ns)){const pids=nameidToPids[nid];if(pids){for(const pid of pids)candidates.push({pid,nat:playerInfo[pid]?.nat||0,role:playerInfo[pid]?.role||0});}}}}
-      const natKey=(natDraft||"").toLowerCase().trim();
-      const natEn=NOME_PT_EN[natKey]||natKey;
-      const targetNat=natTimeMap[natEn.toLowerCase()]||null;
-      const roleRanges={GK:[100,200],DF:[0,60],MF:[60,100],FW:[0,25]};
-      const[rMin,rMax]=roleRanges[posDraft]||[0,999];
-      if(targetNat){const byNat=candidates.filter(c=>c.nat===parseInt(targetNat));if(byNat.length===1)return[byNat[0].pid,"só nat"];if(byNat.length)candidates=byNat;}
-      const filtered=candidates.filter(c=>c.role>=rMin&&c.role<rMax);
-      const uniquePids=[...new Set(filtered.map(c=>c.pid))];
-      if(uniquePids.length===1)return[uniquePids[0],`filtrado: ${playerInfo[uniquePids[0]]?.nome||"?"}`];
-      if(candidates.length)return[null,`${candidates.length} candidatos`];
-      return[null,"sem candidatos"];
+    function encodeUtf16le(str) {
+        const bom  = new Uint8Array([0xFF, 0xFE]);
+        const buf  = new ArrayBuffer(str.length * 2);
+        const view = new DataView(buf);
+        for (let i = 0; i < str.length; i++)
+            view.setUint16(i * 2, str.charCodeAt(i), true);
+        const out = new Uint8Array(bom.length + buf.byteLength);
+        out.set(bom, 0);
+        out.set(new Uint8Array(buf), bom.length);
+        return out;
     }
 
-    // Process draft
-    const participantes = draftData.draft.participants;
-    let totalOk=0, total=0;
-    for(const p of participantes){
-      const teamEn=NOME_PT_EN[p.team.toLowerCase().trim()]||p.team;
-      const teamId=teamMap[teamEn];
-      log(`\n  ${p.player} → ${teamEn} (teamid=${teamId})`, "info");
-      for(const j of p.players){
-        total++;
-        const[pid,motivo]=buscarPlayerid(j.name,j.position,j.nationality);
-        j._playerid=pid; j._match=motivo||"?";
-        if(pid)totalOk++;
-        log(`  ${pid?"✓":"✗"} ${j.name.padEnd(22)} ${j.position} → ${pid||"???"} [${motivo}]`, pid?"ok":"err");
-      }
+    // ─── HELPERS ─────────────────────────────────────────────────────────────
+
+    function norm(s) { return (s || "").toLowerCase().trim(); }
+
+    function findCol(header, name) {
+        return header.findIndex(c => c.trim().toLowerCase() === name.toLowerCase());
     }
 
-    // Generate leagues.txt
-    log(`\n  ⋮ Gerando leagues.txt...`, "info");
-    const lLines=leaguesTxt.split(/\r?\n/).map(l=>l+"\r\n");
-    for(let i=0;i<lLines.length;i++){const p=tsv(lLines[i]);if(p.length>=2&&p[1].trim().toLowerCase()==="international"&&p.length>=12){p[p.length-1]="0";lLines[i]=p.join("\t")+"\r\n";}}
-    downloadFile("leagues.txt",lLines.join(""));
-    log(`  ✓ leagues.txt gerado`, "ok");
-
-    // Generate teamplayerlinks.txt
-    log(`\n  ⋮ Gerando teamplayerlinks.txt...`, "info");
-    const tplLines=tplTxt.split(/\r?\n/).map(l=>l+"\r\n");
-    const tplHdr=tsv(tplLines[0]);
-    const tplColPid=tplHdr.findIndex(c=>c.trim().toLowerCase()==="playerid");
-    const tplColTid=tplHdr.findIndex(c=>c.trim().toLowerCase()==="teamid");
-    let newLines=[tplLines[0]];
-    for(const p of participantes){
-      const teamEn=NOME_PT_EN[p.team.toLowerCase().trim()]||p.team;
-      const teamId=teamMap[teamEn]; if(!teamId){log(`  ✗ Time ${teamEn} nao encontrado`,"err");continue;}
-      const tidStr=String(teamId);
-      let removidos=0;
-      for(let i=1;i<tplLines.length;i++){const parts=tsv(tplLines[i]);if(parts[tplColTid]?.trim()===tidStr)removidos++;else newLines.push(tplLines[i]);}
-      let added=0;
-      for(const j of p.players){if(!j._playerid)continue;const jersey=Math.floor(Math.random()*98)+1;const posCode={GK:"0",DF:"1",MF:"2",FW:"3"}[j.position]||"0";newLines.push(`0\t0\t0\t0\t${jersey}\t${posCode}\t-1\t${teamId}\t0\t0\t0\t0\t0\t${j._playerid}\t3\t0\r\n`);added++;}
-      log(`  ${p.player}: ${removidos} removidos, ${added} adicionados`, "ok");
+    function parseTeams(buf) {
+        const text  = decodeUtf16(buf);
+        const lines = text.split("\n").filter(l => l.trim());
+        const header = lines[0].replace(/\r$/, "").split("\t");
+        const iName = findCol(header, "teamname");
+        const iId   = findCol(header, "teamid");
+        if (iName < 0 || iId < 0) return null;
+        const map = {};
+        for (const raw of lines.slice(1)) {
+            const p  = raw.replace(/\r$/, "").split("\t");
+            const id = (p[iId] || "").trim();
+            if (/^\d+$/.test(id)) map[norm(p[iName])] = id;
+        }
+        return map;
     }
-    downloadFile("teamplayerlinks.txt",newLines.join(""));
-    log(`  ✓ teamplayerlinks.txt gerado (${newLines.length} linhas)`, "ok");
 
-    // Done
-    log(`\n${'='.repeat(50)}`,"info");
-    log(`  ✅ CONCLUÍDO! ${totalOk}/${total} jogadores encontrados`,"ok");
-    log(`  leagues.txt + teamplayerlinks.txt baixados.`,"info");
+    function resolveTeamId(ptName, teamMap) {
+        const enName = TRAD[norm(ptName)] || ptName;
+        const id = teamMap[norm(enName)] || teamMap[norm(ptName)];
+        if (id) return { enName, id };
+        const key = norm(enName);
+        for (const [k, v] of Object.entries(teamMap)) {
+            if (k.includes(key) || key.includes(k)) return { enName, id: v };
+        }
+        return { enName, id: null };
+    }
 
-    // Show download buttons
-    const da=document.getElementById("downloadArea");da.classList.remove("hidden");
-    const db=document.getElementById("downloadBar");
-    db.innerHTML=`<a href="#" onclick="downloadFile('leagues.txt', leaguesTxtContent); downloadFile('teamplayerlinks.txt', tplTxtContent); return false;">⬇ Baixar tudo (2 arquivos)</a>
-                  <a href="#" onclick="downloadFile('leagues.txt', leaguesTxtContent); return false;">⬇ leagues.txt</a>
-                  <a href="#" onclick="downloadFile('teamplayerlinks.txt', tplTxtContent); return false;">⬇ teamplayerlinks.txt</a>`;
-    // Store content for re-download
-    window.leaguesTxtContent = lLines.join("");
-    window.tplTxtContent = newLines.join("");
+    // ─── DROP ZONE PASTA ─────────────────────────────────────────────────────
 
-  } catch(err) {
-    log(`\n  ❌ Erro: ${err.message}`,"err"); console.error(err);
-  } finally {
-    btn.disabled = false; btn.textContent = "🔄 Converter para RDBM 26";
-  }
-});
-</script>
+    const NEEDED = {
+        "teamplayerlinks.txt": "tpl",
+        "teams.txt":           "teams",
+        "leagues.txt":         "leagues",
+    };
+
+    function initFolderDz() {
+        const dz    = document.getElementById("dz-folder");
+        const input = document.getElementById("fi-folder");
+        const st    = document.getElementById("st-folder");
+        const pills = document.getElementById("dz-file-status");
+
+        async function loadFiles(fileList) {
+            if (!fileList || !fileList.length) return;
+            st.textContent = "carregando…";
+            dz.classList.remove("ok", "err");
+
+            const found = {};
+            for (const file of fileList) {
+                const name = file.name.toLowerCase();
+                if (NEEDED[name]) {
+                    try {
+                        found[name] = await file.arrayBuffer();
+                    } catch (_) { /* skip */ }
+                }
+            }
+
+            // Assign to state
+            for (const [fname, key] of Object.entries(NEEDED)) {
+                S[key] = found[fname] || null;
+            }
+
+            // Render pills
+            pills.innerHTML = Object.keys(NEEDED).map(fname => {
+                const ok = !!found[fname];
+                const label = fname === "leagues.txt" && !ok
+                    ? fname + " (opcional)"
+                    : fname;
+                return `<span class="dz-file-pill ${ok ? "ok" : "missing"}">${ok ? "✓" : "✗"} ${label}</span>`;
+            }).join("");
+
+            const hasRequired = !!(S.tpl && S.teams);
+            dz.classList.toggle("ok",  hasRequired);
+            dz.classList.toggle("err", !hasRequired);
+            st.textContent = hasRequired
+                ? "✓ pasta carregada"
+                : "teamplayerlinks.txt ou teams.txt não encontrado";
+
+            maybePreview();
+        }
+
+        input.addEventListener("change", e => loadFiles(e.target.files));
+        dz.addEventListener("dragover",  e => { e.preventDefault(); dz.classList.add("over"); });
+        dz.addEventListener("dragleave", () => dz.classList.remove("over"));
+        dz.addEventListener("drop", e => {
+            e.preventDefault();
+            dz.classList.remove("over");
+            // dataTransfer.files inclui todos os arquivos da pasta arrastada
+            loadFiles(e.dataTransfer.files);
+        });
+    }
+
+    function initDzJson(dzId, inputId) {
+        const dz    = document.getElementById(dzId);
+        const input = document.getElementById(inputId);
+        const st    = document.getElementById("st-draft");
+
+        async function load(file) {
+            if (!file) return;
+            st.textContent = "carregando…";
+            dz.classList.remove("ok", "err");
+            try {
+                const text = await file.text();
+                S.draft = JSON.parse(text);
+                dz.classList.add("ok");
+                st.textContent = "✓ " + file.name;
+            } catch (_) {
+                dz.classList.add("err");
+                st.textContent = "JSON inválido";
+                return;
+            }
+            maybePreview();
+        }
+
+        input.addEventListener("change", e => load(e.target.files[0]));
+        dz.addEventListener("dragover",  e => { e.preventDefault(); dz.classList.add("over"); });
+        dz.addEventListener("dragleave", () => dz.classList.remove("over"));
+        dz.addEventListener("drop", e => {
+            e.preventDefault();
+            dz.classList.remove("over");
+            load(e.dataTransfer.files[0]);
+        });
+    }
+
+    // ─── PREVIEW ─────────────────────────────────────────────────────────────
+
+    function maybePreview() {
+        if (!S.tpl || !S.teams || !S.draft) return;
+
+        const teamMap = parseTeams(S.teams);
+        if (!teamMap) {
+            logMsg("ERRO", "teams.txt inválido — colunas teamname/teamid não encontradas");
+            return;
+        }
+
+        const participants = S.draft.draft.participants;
+        S._resolved = participants.map(p => {
+            const { enName, id } = resolveTeamId(p.team, teamMap);
+            const total  = p.players.length;
+            const withId = p.players.filter(j => j.playerid).length;
+            return { player: p.player, team: p.team, enName, teamId: id, total, withId, players: p.players };
+        });
+
+        const rows = S._resolved.map(r => {
+            let badge, cls;
+            if (!r.teamId) {
+                badge = "time não encontrado"; cls = "badge-err";
+            } else if (r.withId === r.total) {
+                badge = r.total + " jogadores OK"; cls = "badge-ok";
+            } else {
+                badge = r.withId + "/" + r.total + " com ID"; cls = "badge-warn";
+            }
+            const tidLabel = r.teamId ? `<span class="prev-tid">ID ${r.teamId}</span>` : "";
+            return `
+                <div class="prev-row">
+                    <div class="prev-player">${esc(r.player)}</div>
+                    <div class="prev-team">${esc(r.team)} ${tidLabel}</div>
+                    <span class="badge ${cls}">${badge}</span>
+                </div>`;
+        }).join("");
+
+        document.getElementById("preview-body").innerHTML = rows;
+        document.getElementById("sec-preview").style.display = "";
+        document.getElementById("sec-export").style.display  = "";
+
+        const note = S.leagues
+            ? "Arquivos gerados: <strong>teamplayerlinks.txt</strong> e <strong>leagues.txt</strong>."
+            : "Arquivo gerado: <strong>teamplayerlinks.txt</strong>. Carregue leagues.txt para modificá-lo também.";
+        document.getElementById("export-note").innerHTML =
+            note + "<br>Coloque na pasta <strong>Arquivos para Importar RDBM</strong> e importe no RDBM 26.";
+    }
+
+    // ─── EXPORTAR ─────────────────────────────────────────────────────────────
+
+    document.getElementById("exportBtn").addEventListener("click", doExport);
+
+    function doExport() {
+        const log = [];
+
+        // ── teamplayerlinks.txt ──────────────────────────────────────────────
+        // splitlines(keepends=True) — mantém \r\n original em cada linha, igual ao Python
+        const tplText  = decodeUtf16(S.tpl);
+        const rawLines = tplText.match(/[^\n]*\n?/g).filter(l => l.length > 0);
+        const headerCols = rawLines[0].replace(/[\r\n]+$/, "").split("\t");
+        const iPlayer = findCol(headerCols, "playerid");
+        const iTeam   = findCol(headerCols, "teamid");
+
+        if (iPlayer < 0 || iTeam < 0) {
+            showLog(["[ERRO] teamplayerlinks.txt: colunas playerid/teamid não encontradas"]);
+            return;
+        }
+
+        const teamIdSet = new Set(S._resolved.map(r => r.teamId).filter(Boolean));
+
+        const kept = [rawLines[0]];  // header inalterado
+        let removed = 0;
+        for (const raw of rawLines.slice(1)) {
+            if (!raw.trim()) continue;
+            const tid = (raw.replace(/[\r\n]+$/, "").split("\t")[iTeam] || "").trim();
+            if (teamIdSet.has(tid)) { removed++; }
+            else { kept.push(raw); }  // linha original inalterada
+        }
+        log.push(`[OK] ${removed} jogadores removidos dos times selecionados`);
+
+        let added = 0;
+        for (const r of S._resolved) {
+            if (!r.teamId) {
+                log.push(`[AVISO] ${r.team}: teamid não encontrado — pulado`);
+                continue;
+            }
+            let cnt = 0;
+            for (const j of r.players) {
+                if (!j.playerid) continue;
+                const jersey  = Math.floor(Math.random() * 99) + 1;
+                const posCode = POS_CODE[j.position] || "0";
+                kept.push(`0\t0\t0\t0\t${jersey}\t${posCode}\t-1\t${r.teamId}\t0\t0\t0\t0\t0\t${j.playerid}\t3\t0\r\n`);
+                cnt++;
+                added++;
+            }
+            log.push(`[OK] ${r.enName} (ID ${r.teamId}): +${cnt} jogadores adicionados`);
+        }
+        log.push(`[OK] Total adicionado: ${added} jogadores`);
+
+        downloadUtf16le(kept.join(""), "teamplayerlinks.txt");
+
+        // ── leagues.txt (opcional) ────────────────────────────────────────────
+        if (S.leagues) {
+            const lgText  = decodeUtf16(S.leagues);
+            const lgLines = lgText.match(/[^\n]*\n?/g).filter(l => l.length > 0);
+            let changed = 0;
+            const lgOut = lgLines.map(raw => {
+                const stripped = raw.replace(/[\r\n]+$/, "");
+                const p = stripped.split("\t");
+                if (p.length >= 2 && (p[1] || "").toLowerCase().includes("international")) {
+                    if (p[p.length - 1].trim() === "1") {
+                        p[p.length - 1] = "0";
+                        changed++;
+                        return p.join("\t") + "\r\n";
+                    }
+                }
+                return raw;  // linha original inalterada
+            }).join("");
+            setTimeout(() => downloadUtf16le(lgOut, "leagues.txt"), 350);
+            log.push(`[OK] leagues.txt: ${changed > 0 ? changed + " flag(s) International: 1 → 0" : "nenhuma flag alterada"}`);
+        }
+
+        showLog(log);
+        toast("Arquivos gerados com sucesso!");
+    }
+
+    // ─── UTILS ────────────────────────────────────────────────────────────────
+
+    function ensureCRLF(line) {
+        return line.replace(/[\r\n]+$/, "") + "\r\n";
+    }
+
+    function downloadUtf16le(text, filename) {
+        const data = encodeUtf16le(text);
+        const blob = new Blob([data], { type: "application/octet-stream" });
+        const url  = URL.createObjectURL(blob);
+        const a    = document.createElement("a");
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click();
+        document.body.removeChild(a); URL.revokeObjectURL(url);
+    }
+
+    function esc(s) {
+        return (s || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+    }
+
+    // ─── LOG ─────────────────────────────────────────────────────────────────
+
+    function showLog(lines) {
+        const el = document.getElementById("cvLog");
+        el.innerHTML = lines.map(l => {
+            if (l.startsWith("[OK]"))    return `<span class="log-ok">${esc(l)}</span>`;
+            if (l.startsWith("[AVISO]")) return `<span class="log-warn">${esc(l)}</span>`;
+            if (l.startsWith("[ERRO]"))  return `<span class="log-err">${esc(l)}</span>`;
+            return esc(l);
+        }).join("\n");
+        el.classList.add("show");
+    }
+
+    function logMsg(type, msg) { showLog([`[${type}] ${msg}`]); }
+
+    // ─── TOAST ───────────────────────────────────────────────────────────────
+
+    let _tt = null;
+    function toast(msg, dur = 2500) {
+        const el = document.getElementById("toast");
+        if (!el) return;
+        clearTimeout(_tt);
+        el.textContent = msg;
+        el.classList.add("show");
+        _tt = setTimeout(() => el.classList.remove("show"), dur);
+    }
+
+    // ─── INIT ─────────────────────────────────────────────────────────────────
+
+    initFolderDz();
+    initDzJson("dz-draft", "fi-draft");
+
+    </script>
+
 </body>
 </html>

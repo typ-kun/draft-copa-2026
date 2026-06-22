@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": "2026-06-22T04:12:58.453Z",
+  "exportedAt": "2026-06-22T16:44:49.685Z",
   "draft": {
     "config": {
       "mode": "snake",
@@ -11,115 +11,343 @@
     "participants": [
       {
         "player": "Gui",
-        "team": "Brasil",
+        "team": "Alemanha",
         "players": [
           {
-            "name": "EDERSON",
-            "position": "GK",
-            "nationality": "Brasil",
-            "playerid": "210257"
-          },
-          {
-            "name": "PEDRI",
-            "position": "MF",
-            "nationality": "Espanha",
-            "playerid": "251854"
-          },
-          {
-            "name": "M. Lautaro",
+            "name": "M. SALAH",
             "position": "FW",
-            "nationality": "Argentina",
-            "playerid": "231478"
+            "nationality": "Egito",
+            "playerid": "269164"
           },
           {
-            "name": "S. COSTA",
-            "position": "DF",
-            "nationality": "Portugal",
-            "playerid": "1025"
-          },
-          {
-            "name": "C. Thibaut",
-            "position": "GK",
-            "nationality": "Bélgica",
-            "playerid": "75261"
-          },
-          {
-            "name": "G. Gustavo",
-            "position": "DF",
-            "nationality": "Paraguai",
-            "playerid": "72654"
-          },
-          {
-            "name": "S. Ismaila",
-            "position": "FW",
-            "nationality": "Senegal",
-            "playerid": "83807"
-          },
-          {
-            "name": "I. Hiroki",
+            "name": "W. Tsuyoshi",
             "position": "DF",
             "nationality": "Japão",
-            "playerid": "76449"
+            "playerid": "246826"
           },
           {
-            "name": "N. MENDES",
-            "position": "DF",
-            "nationality": "Portugal",
-            "playerid": "73414"
-          },
-          {
-            "name": "M. Johan",
+            "name": "M. Kobbie",
             "position": "MF",
-            "nationality": "Suíça",
-            "playerid": "276694"
+            "nationality": "Inglaterra",
+            "playerid": "269136"
           },
           {
-            "name": "R. Adrien",
-            "position": "MF",
+            "name": "M. Mike",
+            "position": "GK",
             "nationality": "França",
-            "playerid": "208787"
+            "playerid": "215698"
           },
           {
-            "name": "D. Luis",
+            "name": "T. Jonathan",
+            "position": "DF",
+            "nationality": "Alemanha",
+            "playerid": "213331"
+          },
+          {
+            "name": "M. Donyell",
             "position": "FW",
-            "nationality": "Colômbia",
-            "playerid": "241084"
+            "nationality": "Holanda",
+            "playerid": "231447"
+          },
+          {
+            "name": "B. Lucas",
+            "position": "MF",
+            "nationality": "Suécia",
+            "playerid": "272926"
+          },
+          {
+            "name": "A. Maxi",
+            "position": "MF",
+            "nationality": "Uruguai",
+            "playerid": "254817"
           },
           {
             "name": "O. Martin",
             "position": "MF",
             "nationality": "Noruega",
-            "playerid": "72810"
+            "playerid": "71321"
           },
           {
-            "name": "Z. Rodrigo",
+            "name": "V. Matias",
+            "position": "DF",
+            "nationality": "Uruguai",
+            "playerid": "253290"
+          },
+          {
+            "name": "P. Joaquin",
             "position": "MF",
             "nationality": "Uruguai",
-            "playerid": "78312"
+            "playerid": "254623"
           },
           {
-            "name": "O. Joel",
+            "name": "M. Emiliano",
+            "position": "GK",
+            "nationality": "Argentina",
+            "playerid": "202811"
+          },
+          {
+            "name": "S. Alidu",
             "position": "DF",
-            "nationality": "Equador",
-            "playerid": "79335"
+            "nationality": "Gana",
+            "playerid": "257946"
           },
           {
-            "name": "B. SILVA",
-            "position": "MF",
-            "nationality": "Portugal",
-            "playerid": "77733"
-          },
-          {
-            "name": "H. Erling",
+            "name": "A. Prince",
             "position": "FW",
-            "nationality": "Noruega",
-            "playerid": "239085"
+            "nationality": "Gana",
+            "playerid": "74753"
           },
           {
-            "name": "H. Jorrel",
+            "name": "S. Carl",
             "position": "DF",
+            "nationality": "Suécia",
+            "playerid": "220821"
+          },
+          {
+            "name": "M. CUNHA",
+            "position": "FW",
+            "nationality": "Brasil",
+            "playerid": "240243"
+          },
+          {
+            "name": "K. Justin",
+            "position": "MF",
             "nationality": "Holanda",
-            "playerid": "272978"
+            "playerid": "236920"
+          },
+          {
+            "name": "S. Giuliano",
+            "position": "FW",
+            "nationality": "Argentina",
+            "playerid": "253396"
+          }
+        ]
+      },
+      {
+        "player": "Duds",
+        "team": "Argentina",
+        "players": [
+          {
+            "name": "BREMER",
+            "position": "DF",
+            "nationality": "Brasil",
+            "playerid": "239580"
+          },
+          {
+            "name": "FABINHO",
+            "position": "MF",
+            "nationality": "Brasil",
+            "playerid": "209499"
+          },
+          {
+            "name": "D. Giorgian",
+            "position": "MF",
+            "nationality": "Uruguai",
+            "playerid": "225645"
+          },
+          {
+            "name": "MARQUINHOS",
+            "position": "DF",
+            "nationality": "Brasil",
+            "playerid": "207865"
+          },
+          {
+            "name": "R. Robin",
+            "position": "GK",
+            "nationality": "Holanda",
+            "playerid": "263798"
+          },
+          {
+            "name": "K. Ismael",
+            "position": "MF",
+            "nationality": "Canadá",
+            "playerid": "264207"
+          },
+          {
+            "name": "D. Ritsu",
+            "position": "MF",
+            "nationality": "Japão",
+            "playerid": "232639"
+          },
+          {
+            "name": "O. Salih",
+            "position": "MF",
+            "nationality": "Turquia",
+            "playerid": "235407"
+          },
+          {
+            "name": "O. Nicolas",
+            "position": "DF",
+            "nationality": "Argentina",
+            "playerid": "192366"
+          },
+          {
+            "name": "P. Pedro",
+            "position": "DF",
+            "nationality": "Espanha",
+            "playerid": "243576"
+          },
+          {
+            "name": "K. Teun",
+            "position": "MF",
+            "nationality": "Holanda",
+            "playerid": "240679"
+          },
+          {
+            "name": "B. Jude",
+            "position": "MF",
+            "nationality": "Inglaterra",
+            "playerid": "252371"
+          },
+          {
+            "name": "D. Jeremy",
+            "position": "FW",
+            "nationality": "Bélgica",
+            "playerid": "246420"
+          },
+          {
+            "name": "P. Nico",
+            "position": "FW",
+            "nationality": "Argentina",
+            "playerid": "277846"
+          },
+          {
+            "name": "EDERSON",
+            "position": "GK",
+            "nationality": "Brasil",
+            "playerid": "266866"
+          },
+          {
+            "name": "R. IBANEZ",
+            "position": "DF",
+            "nationality": "Brasil",
+            "playerid": "247257"
+          },
+          {
+            "name": "Q. Juan",
+            "position": "MF",
+            "nationality": "Colômbia",
+            "playerid": "210513"
+          },
+          {
+            "name": "M. Hannibal",
+            "position": "MF",
+            "nationality": "Tunísia",
+            "playerid": "258171"
+          }
+        ]
+      },
+      {
+        "player": "Wesley",
+        "team": "Brasil",
+        "players": [
+          {
+            "name": "T. James",
+            "position": "GK",
+            "nationality": "Inglaterra",
+            "playerid": "263063"
+          },
+          {
+            "name": "B. Maximilian",
+            "position": "FW",
+            "nationality": "Alemanha",
+            "playerid": "254117"
+          },
+          {
+            "name": "A. David",
+            "position": "DF",
+            "nationality": "Áustria",
+            "playerid": "197445"
+          },
+          {
+            "name": "M. Deiver",
+            "position": "DF",
+            "nationality": "Colômbia",
+            "playerid": "220837"
+          },
+          {
+            "name": "Z. Warren",
+            "position": "MF",
+            "nationality": "França",
+            "playerid": "270673"
+          },
+          {
+            "name": "Z. Ati",
+            "position": "GK",
+            "nationality": "Gana",
+            "playerid": "229956"
+          },
+          {
+            "name": "RAYAN",
+            "position": "FW",
+            "nationality": "Brasil",
+            "playerid": "83494"
+          },
+          {
+            "name": "S. Leroy",
+            "position": "MF",
+            "nationality": "Alemanha",
+            "playerid": "222492"
+          },
+          {
+            "name": "W. Florian",
+            "position": "MF",
+            "nationality": "Alemanha",
+            "playerid": "256630"
+          },
+          {
+            "name": "A. Ronald",
+            "position": "DF",
+            "nationality": "Uruguai",
+            "playerid": "253163"
+          },
+          {
+            "name": "H. Cucho",
+            "position": "FW",
+            "nationality": "Colômbia",
+            "playerid": "237034"
+          },
+          {
+            "name": "O. Mikel",
+            "position": "FW",
+            "nationality": "Espanha",
+            "playerid": "230142"
+          },
+          {
+            "name": "W. Nico",
+            "position": "FW",
+            "nationality": "Espanha",
+            "playerid": "256516"
+          },
+          {
+            "name": "D. Alphonso",
+            "position": "DF",
+            "nationality": "Canadá",
+            "playerid": "234396"
+          },
+          {
+            "name": "RAPHINHA",
+            "position": "FW",
+            "nationality": "Brasil",
+            "playerid": "233419"
+          },
+          {
+            "name": "D. Jonathan",
+            "position": "FW",
+            "nationality": "Canadá",
+            "playerid": "243630"
+          },
+          {
+            "name": "J. Raul",
+            "position": "FW",
+            "nationality": "México",
+            "playerid": "204838"
+          },
+          {
+            "name": "O. Azzedine",
+            "position": "MF",
+            "nationality": "Marrocos",
+            "playerid": "255125"
           }
         ]
       }

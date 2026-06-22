@@ -201,6 +201,10 @@
                 ⬇ Exportar Elencos
             </button>
 
+            <button id="openConversor">
+                &#9881; Conversor RDBM 26
+            </button>
+
             <button id="goToMataMata">
                 Ir para Mata-mata
             </button>
@@ -282,6 +286,48 @@
             </div>
         </div>
     </div>
+
+    <!-- MODAL CONVERSOR RDBM -->
+    <div id="conversorOverlay" class="modal-overlay" style="display:none;">
+        <div class="modal-card cv-modal-card">
+            <div class="modal-head">
+                <span class="modal-eyebrow">FC 26 / RDBM 26</span>
+                <span class="modal-title">Conversor</span>
+                <button id="conversorClose" class="modal-close" aria-label="Fechar">&times;</button>
+            </div>
+            <hr class="cm-rule">
+            <div class="modal-body cv-modal-body">
+
+                <!-- STEP 1 -->
+                <div class="cv-step">
+                    <div class="cv-step-label"><span class="cv-badge">1</span> Arquivos Originais</div>
+                    <div class="cv-dz cv-dz-folder" id="cv-dz-folder">
+                        <input type="file" id="cv-fi-folder" webkitdirectory>
+                        <div class="cv-dz-folder-icon">&#128193;</div>
+                        <div style="pointer-events:none; flex:1;">
+                            <div class="cv-dz-name">Pasta &quot;Arquivos Originais&quot;</div>
+                            <div class="cv-dz-sub">Clique ou arraste a pasta aqui</div>
+                            <div class="cv-dz-st" id="cv-st-folder">aguardando</div>
+                        </div>
+                    </div>
+                    <div class="cv-file-pills" id="cv-file-pills"></div>
+                </div>
+
+                <!-- STEP 2 — Preview / Export -->
+                <div class="cv-step" id="cv-step2">
+                    <div class="cv-step-label"><span class="cv-badge">2</span> Pr&#233;-visualiza&#231;&#227;o</div>
+                    <div class="cv-preview" id="cv-preview"></div>
+                    <button class="cv-btn-export" id="cv-exportBtn" disabled>
+                        &#8595; Gerar Arquivos para RDBM 26
+                    </button>
+                    <div class="cv-log" id="cv-log"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
 
     <script src="script.js"></script>
 
