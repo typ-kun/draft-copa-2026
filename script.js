@@ -1384,14 +1384,14 @@ function mostrarResultadoFinal() {
 
     let html = "";
 
+    let todosExpandidos = localStorage.getItem( "draftResultsExpandido" ) !== "false";
+    const classeToggle = todosExpandidos ? "player-detail is-open" : "player-detail";
+
     // Botão de toggle + copiar
     html += `<div class="result-toggle-wrap">
         <button id="togglePlayersBtn" class="result-toggle-btn">${todosExpandidos ? "▼" : "▶"} ${todosExpandidos ? "Reduzir tudo" : "Expandir tudo"}</button>
         <button id="copyResults" class="result-copy-btn" title="Copiar lista">📋</button>
     </div>`;
-
-    let todosExpandidos = localStorage.getItem( "draftResultsExpandido" ) !== "false";
-    const classeToggle = todosExpandidos ? "player-detail is-open" : "player-detail";
 
     nomesJogadores.forEach(
         (
