@@ -895,14 +895,19 @@ section.teams {
     background: transparent;
     border: 2px solid var(--line);
     border-radius: 4px;
-    font-size: 14px;
-    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--ink);
+    padding: 5px 12px;
     cursor: pointer;
-    line-height: 1;
-    transition: background 0.15s, border-color 0.15s;
+    font-family: var(--body);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .result-copy-btn:hover {
     background: var(--ink);
+    color: var(--surface);
     border-color: var(--ink);
 }
 

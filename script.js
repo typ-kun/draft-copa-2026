@@ -1390,7 +1390,7 @@ function mostrarResultadoFinal() {
     // Botão de toggle + copiar
     html += `<div class="result-toggle-wrap">
         <button id="togglePlayersBtn" class="result-toggle-btn">${todosExpandidos ? "▼" : "▶"} ${todosExpandidos ? "Reduzir tudo" : "Expandir tudo"}</button>
-        <button id="copyResults" class="result-copy-btn" title="Copiar lista">📋</button>
+        <button id="copyResults" class="result-copy-btn">Copiar escalações</button>
     </div>`;
 
     nomesJogadores.forEach(
@@ -3327,44 +3327,35 @@ document
         async () => {
 
             const confirmou = await mostrarModal( {
-                title: "Voltar ao menu?",
-                message: "O draft atual será perdido e você voltará à tela de configuração.",
-                confirmText: "Sim, voltar",
+                title: "Refazer Draft?",
+                message: "Os picks atuais serão mantidos e você voltará à tela de draft para fazer novas escolhas.",
+                confirmText: "Sim, refazer",
                 cancelText: "Cancelar",
                 eyebrow: "Draft"
             } );
 
             if ( !confirmou ) return;
 
-            limparEstadoDraft();
-
-            // Resetar variáveis do draft
-            times = [];
-            jogadoresDisponiveis = [];
+            // Resetar estado do draft mantendo os picks já feitos
+            jogadoresDisponiveis = [ ...jogadoresBase ];
             poolAtual = [];
-            participantesAtivos = [];
-            nomesJogadores = [];
-            paisParticipante = [];
-            mataMata = null;
-            localStorage.removeItem( MATA_MATA_STORAGE_KEY );
+            participantesAtivos = nomesJogadores.map( ( _, idx ) => idx );
+            jogadorAtual = participantesAtivos[ 0 ] ?? 0;
+            pickAtual = times.flat().length + 1;
+            direcaoSnake = 1;
+            refreshesPorJogador = nomesJogadores.map( () => config.refreshCount );
 
-            // Esconder todas as seções do jogo
             document.getElementById( "countrySelection" ).style.display = "none";
-            document.getElementById( "draftArea" ).style.display = "none";
             document.getElementById( "resultsArea" ).style.display = "none";
             document.getElementById( "mataMataArea" ).style.display = "none";
+            document.getElementById( "draftArea" ).style.display = "block";
 
-            // Mostrar tela de configuração
-            document.getElementById( "setup" ).style.display = "block";
-
-            // Resetar contagem de participantes no formulário
-            const playerCount = document.getElementById( "playerCount" );
-            if ( playerCount ) {
-                playerCount.value = "1";
-                gerarInputsNomes();
-            }
-
-            setActiveStep( 1 );
+            renderizarTeamCards();
+            atualizarStatus();
+            atualizarRefreshes();
+            gerarPool();
+            setActiveStep( 3 );
+            salvarEstadoDraft();
         }
     );
 
