@@ -1,0 +1,201 @@
+# Draft Copa do Mundo 2026 + Integração FC 26
+
+## Resumo
+
+O projeto tem como objetivo criar uma experiência completa de Copa do Mundo Fantasy, onde os participantes realizam um draft de seleções e jogadores, disputam partidas dentro do EA Sports FC 26 e acompanham toda a competição através de uma plataforma própria.
+
+O sistema é dividido em duas partes principais:
+
+1. Sistema de Draft e Gerenciamento do Torneio.
+2. Integração dos resultados do Draft com o FC 26.
+
+---
+
+# PARTE 1 — Sistema de Draft e Gerenciamento do Torneio
+
+A Parte 1 é uma aplicação web responsável por toda a organização da competição.
+
+Ela possui cinco etapas principais.
+
+---
+
+## Etapa 1 — Configuração
+
+O organizador configura:
+
+* Número de participantes.
+* Número de jogadores por elenco.
+* Seleções disponíveis.
+* Regras do draft.
+* Configurações do torneio.
+
+Ao final dessa etapa, o sistema possui todas as informações necessárias para iniciar a competição.
+
+---
+
+## Etapa 2 — Sorteio da Ordem
+
+O sistema realiza um sorteio aleatório para definir a ordem dos participantes.
+
+Exemplo:
+
+1. Guilherme
+2. João
+3. Pedro
+4. Lucas
+
+Essa ordem será utilizada durante o draft.
+
+---
+
+## Etapa 3 — Draft
+
+Primeiro ocorre a escolha das seleções.
+
+Exemplo:
+
+* Guilherme → Brasil
+* João → Argentina
+* Pedro → França
+
+Após a definição das seleções, ocorre o draft dos jogadores.
+
+Os participantes escolhem atletas para compor seus elencos.
+
+Exemplo:
+
+Brasil:
+
+* Mbappé
+* Rodri
+* Vini Jr.
+* Saliba
+
+Argentina:
+
+* Haaland
+* Bellingham
+* Valverde
+
+O resultado dessa etapa é a definição completa dos elencos.
+
+---
+
+## Etapa 4 — Consolidação dos Elencos
+
+O sistema gera uma estrutura contendo:
+
+* Seleção.
+* Lista de jogadores.
+* IDs dos jogadores.
+* Informações auxiliares.
+
+Essa estrutura será utilizada pela Parte 2.
+
+---
+
+## Etapa 5 — Chaveamento e Torneio
+
+O sistema exibe o mata-mata completo:
+
+16 avos → Oitavas → Quartas → Semifinais → Final
+
+As partidas são disputadas dentro do EA Sports FC 26.
+
+Após cada partida:
+
+* O usuário informa o resultado.
+* O sistema atualiza o chaveamento.
+* O vencedor avança automaticamente.
+
+O sistema funciona como o gerenciador oficial da competição.
+
+---
+
+# PARTE 2 — Integração com FC 26
+
+A Parte 2 é responsável por transformar os resultados do draft em equipes utilizáveis dentro do FC 26.
+
+---
+
+## Descobertas Técnicas Já Validadas
+
+Foi comprovado que é possível transferir jogadores de qualquer nacionalidade para qualquer seleção.
+
+Exemplo:
+
+* Mbappé pode jogar no Brasil.
+* Haaland pode jogar na Argentina.
+
+Isso foi validado utilizando:
+
+* FC Editor by Decoruiz Alpha v19.
+* RDBM 26 (Revolution Database Master 26).
+
+A restrição de nacionalidade não é mais considerada um bloqueio técnico para o projeto.
+
+---
+
+## Fluxo Técnico Descoberto
+
+### FC Editor
+
+Localiza e importa Squad Files do FC26.
+
+Permite:
+
+* Editar seleções.
+* Transferir jogadores.
+* Exportar dados em TXT.
+
+Diretório dos Squad Files:
+
+C:\Users\guilh\AppData\Local\EA SPORTS FC 26\settings
+
+---
+
+### RDBM 26
+
+Importa os TXT gerados.
+
+Converte novamente para o formato original do FC26.
+
+Gera um Squad File compatível com o jogo.
+
+---
+
+## Objetivo da Parte 2
+
+Automatizar a geração do TXT intermediário.
+
+Fluxo desejado:
+
+Draft Copa 2026
+↓
+Exportação dos elencos
+↓
+Conversor automático
+↓
+TXT compatível com RDBM 26
+↓
+RDBM 26
+↓
+Squad File FC26
+↓
+Jogo
+
+---
+
+## Objetivo Final do Projeto
+
+Permitir que um grupo de amigos:
+
+1. Faça um draft completo de seleções e jogadores.
+2. Monte equipes únicas.
+3. Exporte automaticamente os elencos.
+4. Gere um Squad File para FC26.
+5. Dispute os jogos dentro do FC26.
+6. Registre os resultados na plataforma.
+7. Acompanhe toda a Copa do Mundo através de um chaveamento automatizado.
+
+O objetivo é eliminar a necessidade de editar manualmente dezenas ou centenas de transferências dentro do FC26.

@@ -1332,6 +1332,86 @@ function mostrarResultadoFinal() {
             }
         );
 
+    // ======================
+    // EXPORTAR ELENCOS (JSON)
+    // ======================
+
+    document
+        .getElementById(
+            "exportDraft"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                const dados = {
+                    version: 1,
+                    exportedAt: new Date().toISOString(),
+                    draft: {
+                        config: {
+                            mode: config.draftMode,
+                            playersPerTeam: config.playersPerTeam,
+                            goalkeeperRule: config.goalkeeperRule,
+                            startingPhase: config.startingPhase
+                        },
+                        participants: nomesJogadores.map(
+                            ( nome, idx ) => ( {
+                                player: nome,
+                                team: paisParticipante[ idx ] || null,
+                                players: times[ idx ].map(
+                                    j => ( {
+                                        name: j.nome,
+                                        position: j.posicao,
+                                        nationality: j.pais,
+                                        playerid: j.playerid || null
+                                    } )
+                                )
+                            } )
+                        )
+                    }
+                };
+
+                const blob =
+                    new Blob(
+                        [ JSON.stringify( dados, null, 2 ) ],
+                        { type: "application/json" }
+                    );
+
+                const url =
+                    URL.createObjectURL(
+                        blob
+                    );
+
+                const a =
+                    document.createElement(
+                        "a"
+                    );
+
+                a.href = url;
+                a.download =
+                    `draft-copa-2026.json`;
+
+                document.body.appendChild(
+                    a
+                );
+
+                a.click();
+
+                document.body.removeChild(
+                    a
+                );
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+                alert(
+                    "Elencos exportados com sucesso!"
+                );
+
+            }
+        );
+
 }
 
 // ======================
@@ -2138,11 +2218,7 @@ function renderizarMataMata() {
 
     const fases = fasesAPartir( mataMata.faseInicial );
 
-    area.innerHTML = mataMata.faseInicial === "round32"
-        ? renderizarPainelResultados( fases ) + renderizarBracketHLTV( fases )
-        : fases.map(
-            fase => renderizarFaseMataMata( fase )
-        ).join( "" );
+    area.innerHTML = renderizarPainelResultados( fases ) + renderizarBracketHLTV( fases );
 
 }
 

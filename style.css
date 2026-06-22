@@ -958,6 +958,7 @@ section.teams {
 }
 
 #copyResults,
+#exportDraft,
 #goToMataMata,
 #backToDraft {
     background: var(--accent);
@@ -970,7 +971,12 @@ section.teams {
     transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
+#exportDraft {
+    background: #1b8a3d;
+}
+
 #copyResults:active,
+#exportDraft:active,
 #goToMataMata:active,
 #backToDraft:active {
     transform: translate(2px, 2px);
@@ -978,6 +984,7 @@ section.teams {
 }
 
 #copyResults:hover,
+#exportDraft:hover,
 #goToMataMata:hover,
 #backToDraft:hover {
     background: #d03d24;

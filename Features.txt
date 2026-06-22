@@ -1,8 +1,300 @@
-- Adicionar uma etapa 5, onde terá o chaveamento do mata mata da copa do mundo 2026. Não terá fase de grupos, apenas o mata mata e começara em 16 avos de final. 
-- Gostaria também na etapa 5 que tivesse um sistema de sorteio de cada confronto, sendo que começara em 16 avos de final, leve em conta quantos players humanos estão participando e complete os outros com CPU.
-- Gostaria que tivesse um botão e cada vez que eu clicasse ele sortearia 1 time para cada confronto/chave.
-- As referencias dessa etapa podem ser encontradas em "C:\Users\guilh\OneDrive\Documentos\draft-copa-do-mundo-2026\Referencias etapa 5"
-- Deve haver um espaço onde eu possa ir atualizando o placar de quanto foi a partida, com isso ele já passa/progride o time para a próxima chave dependendo de quem ganhou.
-- Sempre respeite a paleta de cores
-- Na etapa 1, gostaria de ter a opção de a partir de qual etapa vai começar o campeonato, sendo "Dezesseis-avos de final: 32 competidores (16 jogos)Oitavas de final: 16 competidores (8 jogos)Quartas de final: 8 competidores (4 jogos)Semifinal: 4 competidores (2 jogos)Final: 2 competidores (1 jogo)".
-- Mesmo estando na etapa 5, gostaria de poder e clicar para voltar na etapa 4 e visualizar as convocações, os players pickados e retornar quando eu quiser para a etapa 5 sem perder nada. 
+# Roadmap de Desenvolvimento
+
+## PARTE 1 — Sistema de Draft
+
+### Feature 1 — Tela de Configuração
+
+Objetivo:
+
+Permitir que o organizador configure:
+
+* Número de participantes.
+* Número de jogadores por equipe.
+* Seleções disponíveis.
+* Regras do draft.
+
+Status:
+Implementada parcialmente.
+
+---
+
+### Feature 2 — Sorteio Automático da Ordem
+
+Objetivo:
+
+Sortear aleatoriamente a ordem dos participantes.
+
+Exemplo:
+
+1. Guilherme
+2. João
+3. Pedro
+4. Lucas
+
+Status:
+Implementada.
+
+Possíveis melhorias:
+
+* Repetir sorteio.
+* Salvar histórico do sorteio.
+
+---
+
+### Feature 3 — Draft de Seleções
+
+Objetivo:
+
+Permitir que cada participante escolha sua seleção.
+
+Status:
+Implementada.
+
+Possíveis melhorias:
+
+* Validações adicionais.
+* Interface mais intuitiva.
+
+---
+
+### Feature 4 — Draft de Jogadores
+
+Objetivo:
+
+Permitir a escolha dos jogadores.
+
+Status:
+Implementada.
+
+Possíveis melhorias:
+
+* Pesquisa avançada.
+* Filtros por posição.
+* Filtros por overall.
+* Filtros por nacionalidade.
+
+---
+
+### Feature 5 — Consolidação dos Elencos
+
+Objetivo:
+
+Exibir todos os jogadores selecionados por cada equipe.
+
+Status:
+Necessita expansão.
+
+Melhorias necessárias:
+
+* Exibir IDs dos jogadores.
+* Exibir overall.
+* Exibir posição.
+* Exibir nacionalidade.
+
+---
+
+### Feature 6 — Exportação dos Elencos
+
+Objetivo:
+
+Gerar um arquivo contendo todas as equipes e seus jogadores.
+
+Formato recomendado:
+
+JSON.
+
+Exemplo:
+
+{
+"Brasil": {
+"players": [
+{
+"id": 231747,
+"name": "Kylian Mbappe"
+}
+]
+}
+}
+
+Status:
+Pendente.
+
+Prioridade:
+Muito alta.
+
+Essa feature é a ponte entre a Parte 1 e a Parte 2.
+
+---
+
+### Feature 7 — Chaveamento
+
+Objetivo:
+
+Exibir:
+
+* 16 avos.
+* Oitavas.
+* Quartas.
+* Semifinais.
+* Final.
+
+Status:
+Implementado parcialmente.
+
+Melhorias:
+
+* Ajustes visuais.
+* Melhor responsividade.
+* Melhor navegação.
+
+---
+
+### Feature 8 — Registro de Resultados
+
+Objetivo:
+
+Permitir inserir placares.
+
+Exemplo:
+
+Brasil 3 x 1 Argentina
+
+O sistema deve:
+
+* Atualizar o vencedor.
+* Avançar automaticamente.
+* Atualizar confrontos futuros.
+
+Status:
+Implementação em andamento.
+
+---
+
+### Feature 9 — Persistência
+
+Objetivo:
+
+Salvar:
+
+* Configurações.
+* Draft.
+* Chaveamento.
+* Resultados.
+
+Status:
+Pendente.
+
+Prioridade:
+Alta.
+
+---
+
+# PARTE 2 — Conversor para FC26
+
+### Feature 10 — Análise do TXT do FC Editor
+
+Objetivo:
+
+Mapear exatamente como uma transferência de jogador é representada.
+
+Procedimento:
+
+1. Exportar TXT original.
+2. Fazer uma transferência.
+3. Exportar TXT modificado.
+4. Comparar os dois arquivos.
+
+Status:
+Pendente.
+
+Prioridade:
+Crítica.
+
+---
+
+### Feature 11 — Definição do Formato de Entrada
+
+Objetivo:
+
+Definir o formato exportado pela Parte 1.
+
+Recomendação:
+
+JSON.
+
+Status:
+Pendente.
+
+---
+
+### Feature 12 — Leitor do Draft
+
+Objetivo:
+
+Criar um programa que leia o JSON exportado.
+
+Status:
+Pendente.
+
+---
+
+### Feature 13 — Gerador de Transferências
+
+Objetivo:
+
+Converter as escolhas do draft em comandos compatíveis com o formato TXT do RDBM.
+
+Status:
+Pendente.
+
+Prioridade:
+Muito alta.
+
+---
+
+### Feature 14 — Gerador de TXT Compatível com RDBM
+
+Objetivo:
+
+Produzir automaticamente um TXT que possa ser importado diretamente pelo RDBM 26.
+
+Fluxo:
+
+Draft Export
+↓
+Conversor
+↓
+TXT RDBM
+
+Status:
+Pendente.
+
+---
+
+### Feature 15 — Teste Completo de Integração
+
+Objetivo:
+
+Validar:
+
+* Exportação do Draft.
+* Conversão.
+* Importação no RDBM.
+* Geração do Squad File.
+* Funcionamento dentro do FC26.
+
+Status:
+Pendente.
+
+---
+
+# Próxima Prioridade Recomendada
+
+1. Implementar exportação JSON na Etapa 4.
+2. Mapear exatamente o formato TXT gerado pelo FC Editor.
+3. Descobrir quais linhas mudam durante uma transferência.
+4. Criar o conversor JSON → TXT RDBM.
+5. Automatizar a geração do Squad File.
+6. Finalizar a integração completa com o FC26.
+
+Essa sequência reduz riscos e valida cada etapa antes de avançar para a próxima.

@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "exportedAt": "2026-06-22T02:02:49.612Z",
+  "draft": {
+    "config": {
+      "mode": "snake",
+      "playersPerTeam": 18,
+      "goalkeeperRule": true,
+      "startingPhase": "round32"
+    },
+    "participants": [
+      {
+        "player": "Gui",
+        "team": "Brasil",
+        "players": [
+          {
+            "name": "A. Ruediger",
+            "position": "DF",
+            "nationality": "Alemanha",
+            "playerid": "191569"
+          },
+          {
+            "name": "E. Martinez",
+            "position": "GK",
+            "nationality": "Argentina",
+            "playerid": "71072"
+          },
+          {
+            "name": "A. Mac Allister",
+            "position": "MF",
+            "nationality": "Argentina",
+            "playerid": "239837"
+          },
+          {
+            "name": "A. Gordon",
+            "position": "FW",
+            "nationality": "Inglaterra",
+            "playerid": "53110"
+          },
+          {
+            "name": "A. Sandro",
+            "position": "DF",
+            "nationality": "Brasil",
+            "playerid": "191043"
+          },
+          {
+            "name": "L. Paqueta",
+            "position": "MF",
+            "nationality": "Brasil",
+            "playerid": null
+          },
+          {
+            "name": "I. Sangare",
+            "position": "MF",
+            "nationality": "Costa do Marfim",
+            "playerid": "238660"
+          },
+          {
+            "name": "J. Pickford",
+            "position": "GK",
+            "nationality": "Inglaterra",
+            "playerid": "204935"
+          },
+          {
+            "name": "D. Nunez",
+            "position": "FW",
+            "nationality": "Uruguai",
+            "playerid": "279069"
+          },
+          {
+            "name": "C. Pulisic",
+            "position": "FW",
+            "nationality": "Estados Unidos",
+            "playerid": "227796"
+          },
+          {
+            "name": "Y. Mina",
+            "position": "DF",
+            "nationality": "Colômbia",
+            "playerid": "220523"
+          },
+          {
+            "name": "A. Tchouameni",
+            "position": "MF",
+            "nationality": "França",
+            "playerid": "241637"
+          },
+          {
+            "name": "R. de Paul",
+            "position": "MF",
+            "nationality": "Argentina",
+            "playerid": "212616"
+          },
+          {
+            "name": "A. Hakimi",
+            "position": "DF",
+            "nationality": "Marrocos",
+            "playerid": "235212"
+          },
+          {
+            "name": "N. Paz",
+            "position": "FW",
+            "nationality": "Argentina",
+            "playerid": "77775"
+          },
+          {
+            "name": "H. Son",
+            "position": "FW",
+            "nationality": "Coreia do Sul",
+            "playerid": "83061"
+          },
+          {
+            "name": "M. Akanji",
+            "position": "DF",
+            "nationality": "Suíça",
+            "playerid": "229237"
+          },
+          {
+            "name": "F. Valverde",
+            "position": "MF",
+            "nationality": "Uruguai",
+            "playerid": "79583"
+          }
+        ]
+      }
+    ]
+  }
+}
