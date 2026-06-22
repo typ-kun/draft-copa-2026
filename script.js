@@ -36,6 +36,12 @@ let ordemSelecao = [];
 let indiceSelecao = 0;
 
 // ======================
+// PERSISTÊNCIA
+// ======================
+
+const DRAFT_STORAGE_KEY = "draftCopa2026Completo";
+
+// ======================
 // CONFIGURAÇÕES
 // ======================
 
@@ -239,6 +245,12 @@ async function carregarJogadores() {
             `Jogadores carregados: ${jogadoresBase.length}`
         );
 
+        // Tentar restaurar draft salvo
+        const restaurou = carregarEstadoDraft();
+        if (restaurou) {
+            console.log("Draft restaurado com sucesso!");
+        }
+
     } catch ( erro ) {
 
         console.error(
@@ -280,6 +292,146 @@ async function carregarJogadores() {
 
     }
 
+}
+
+// ======================
+// PERSISTÊNCIA DO DRAFT
+// ======================
+
+function salvarEstadoDraft() {
+    const estado = {
+        config: { ...config },
+        nomesJogadores: [...nomesJogadores],
+        times: times.map(t => [...t]),
+        paisParticipante: [...paisParticipante],
+        ordemSelecao: [...ordemSelecao],
+        indiceSelecao: indiceSelecao,
+        jogadorAtual: jogadorAtual,
+        pickAtual: pickAtual,
+        direcaoSnake: direcaoSnake,
+        refreshesPorJogador: [...refreshesPorJogador],
+        participantesAtivos: [...participantesAtivos],
+        jogadoresDisponiveis: jogadoresDisponiveis.map(j => ({
+            nome: j.nome, pais: j.pais, posicao: j.posicao,
+            playerid: j.playerid || null, nomeCompleto: j.nomeCompleto || null
+        })),
+        poolAtual: poolAtual.map(j => ({
+            nome: j.nome, pais: j.pais, posicao: j.posicao,
+            playerid: j.playerid || null, nomeCompleto: j.nomeCompleto || null
+        }))
+    };
+
+    // Determinar em qual etapa estamos
+    const setupVisivel = document.getElementById("setup").style.display !== "none";
+    const countryVisivel = document.getElementById("countrySelection").style.display !== "none";
+    const draftVisivel = document.getElementById("draftArea").style.display !== "none";
+    const resultsVisivel = document.getElementById("resultsArea").style.display !== "none";
+    const mataMataVisivel = document.getElementById("mataMataArea").style.display !== "none";
+
+    if (resultsVisivel) estado.etapa = 4;
+    else if (draftVisivel) estado.etapa = 3;
+    else if (countryVisivel) estado.etapa = 2;
+    else if (mataMataVisivel) estado.etapa = 5;
+    else estado.etapa = 1;
+
+    try {
+        localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(estado));
+    } catch (e) {
+        console.warn("Erro ao salvar draft:", e);
+    }
+}
+
+function carregarEstadoDraft() {
+    try {
+        const salvo = localStorage.getItem(DRAFT_STORAGE_KEY);
+        if (!salvo) return false;
+        const est = JSON.parse(salvo);
+        if (!est || !est.nomesJogadores || !est.nomesJogadores.length) return false;
+
+        // Restaurar config
+        Object.assign(config, est.config);
+
+        // Restaurar variáveis
+        nomesJogadores = est.nomesJogadores;
+        times = est.times;
+        paisParticipante = est.paisParticipante;
+        ordemSelecao = est.ordemSelecao;
+        indiceSelecao = est.indiceSelecao;
+        jogadorAtual = est.jogadorAtual;
+        pickAtual = est.pickAtual;
+        direcaoSnake = est.direcaoSnake;
+        refreshesPorJogador = est.refreshesPorJogador;
+        participantesAtivos = est.participantesAtivos;
+        jogadoresDisponiveis = est.jogadoresDisponiveis;
+        poolAtual = est.poolAtual;
+        paisesCpu = [...new Set(jogadoresBase.map(j => j.pais))].sort();
+
+        // Esconder todas as seções
+        document.getElementById("setup").style.display = "none";
+        document.getElementById("countrySelection").style.display = "none";
+        document.getElementById("draftArea").style.display = "none";
+        document.getElementById("resultsArea").style.display = "none";
+        document.getElementById("mataMataArea").style.display = "none";
+
+        // Restaurar a etapa correta
+        const etapa = est.etapa || 3;
+
+        // Se tinha seleção de países, preencher país de cada jogador
+        for (let i = 0; i < nomesJogadores.length; i++) {
+            const input = document.getElementById(`playerName${i + 1}`);
+            if (input) input.value = nomesJogadores[i];
+        }
+
+        if (etapa >= 2 && paisParticipante.length) {
+            document.getElementById("countrySelection").style.display = "block";
+            // Re-renderizar grid de países se ainda estamos selecionando
+            if (indiceSelecao < nomesJogadores.length && etapa === 2) {
+                const paisesRestantes = [...new Set(jogadoresBase.map(j => j.pais))].sort();
+                renderizarGridPaises(paisesRestantes);
+            }
+            setActiveStep(2);
+        }
+
+        if (etapa >= 3) {
+            document.getElementById("draftArea").style.display = "block";
+            renderizarTeamCards();
+            if (etapa === 3) {
+                atualizarRefreshes();
+                atualizarStatus();
+                gerarPool();
+            }
+            setActiveStep(3);
+        }
+
+        if (etapa >= 4) {
+            document.getElementById("draftArea").style.display = "none";
+            document.getElementById("resultsArea").style.display = "block";
+            setActiveStep(4);
+            // Renderizar resultados
+            const area = document.getElementById("finalResults");
+            if (area) {
+                mostrarResultadoFinal();
+            }
+        }
+
+        if (etapa >= 5) {
+            document.getElementById("mataMataArea").style.display = "block";
+            setActiveStep(5);
+        }
+
+        console.log(`Draft restaurado: etapa ${etapa}`);
+        return true;
+
+    } catch (e) {
+        console.warn("Erro ao carregar draft salvo:", e);
+        return false;
+    }
+}
+
+function limparEstadoDraft() {
+    try {
+        localStorage.removeItem(DRAFT_STORAGE_KEY);
+    } catch (_) {}
 }
 
 // ======================
@@ -453,6 +605,8 @@ document
 // ======================
 
 function iniciarDraft() {
+
+    limparEstadoDraft();
 
     localStorage.removeItem(
         MATA_MATA_STORAGE_KEY
@@ -703,6 +857,8 @@ function selecionarPais(
 
     indiceSelecao++;
 
+    salvarEstadoDraft();
+
     if (
         indiceSelecao >=
         nomesJogadores.length
@@ -797,6 +953,8 @@ function prosseguirParaDraft() {
     atualizarStatus();
 
     gerarPool();
+
+    salvarEstadoDraft();
 
 }
 
@@ -1183,6 +1341,8 @@ function selecionarJogador(
 
     gerarPool();
 
+    salvarEstadoDraft();
+
 }
 
 // ======================
@@ -1443,6 +1603,8 @@ function mostrarResultadoFinal() {
 
             }
         );
+
+    salvarEstadoDraft();
 
 }
 
@@ -2870,6 +3032,9 @@ function mostrarMataMata() {
 
     setActiveStep( 5 );
 
+    // Salvar que avançamos para o mata-mata
+    salvarEstadoDraft();
+
     if ( !mataMata ) {
         iniciarModoSorteio();
         return;
@@ -2899,6 +3064,7 @@ async function resetarTudo() {
     }
 
     localStorage.clear();
+    limparEstadoDraft();
     location.reload();
 
 }
@@ -3132,6 +3298,7 @@ document
             ).style.display = "block";
 
             setActiveStep( 4 );
+            salvarEstadoDraft();
         }
     );
 
@@ -3150,6 +3317,8 @@ document
             } );
 
             if ( !confirmou ) return;
+
+            limparEstadoDraft();
 
             // Resetar o estado do draft
             times = times.map( () => [] );
