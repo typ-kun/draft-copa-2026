@@ -1363,6 +1363,10 @@ function mostrarResultadoFinal() {
 
     setActiveStep(4);
 
+    // Garantir que outras seções estão ocultas
+    document.getElementById("setup").style.display = "none";
+    document.getElementById("countrySelection").style.display = "none";
+
     document.getElementById(
         "draftArea"
     ).style.display =
