@@ -3271,6 +3271,9 @@ document
 
             if (!confirmou) return;
 
+            // Limpar estado salvo antes de recarregar
+            limparEstadoDraft();
+            localStorage.removeItem( MATA_MATA_STORAGE_KEY );
             location.href =
                 "index.html";
 
@@ -3309,9 +3312,9 @@ document
         async () => {
 
             const confirmou = await mostrarModal( {
-                title: "Reiniciar Draft?",
-                message: "Os picks atuais serão perdidos e o draft será reiniciado.",
-                confirmText: "Sim, reiniciar",
+                title: "Voltar ao menu?",
+                message: "O draft atual será perdido e você voltará à tela de configuração.",
+                confirmText: "Sim, voltar",
                 cancelText: "Cancelar",
                 eyebrow: "Draft"
             } );
@@ -3320,33 +3323,33 @@ document
 
             limparEstadoDraft();
 
-            // Resetar o estado do draft
-            times = times.map( () => [] );
-            jogadoresDisponiveis = [ ...jogadoresBase ];
+            // Resetar variáveis do draft
+            times = [];
+            jogadoresDisponiveis = [];
             poolAtual = [];
-            participantesAtivos = nomesJogadores.map( ( _, idx ) => idx );
-            jogadorAtual = participantesAtivos[ 0 ] ?? 0;
-            pickAtual = 1;
-            direcaoSnake = 1;
-            refreshesPorJogador = nomesJogadores.map( () => config.refreshCount );
+            participantesAtivos = [];
+            nomesJogadores = [];
+            paisParticipante = [];
+            mataMata = null;
+            localStorage.removeItem( MATA_MATA_STORAGE_KEY );
 
-            document.getElementById(
-                "resultsArea"
-            ).style.display = "none";
+            // Esconder todas as seções do jogo
+            document.getElementById( "countrySelection" ).style.display = "none";
+            document.getElementById( "draftArea" ).style.display = "none";
+            document.getElementById( "resultsArea" ).style.display = "none";
+            document.getElementById( "mataMataArea" ).style.display = "none";
 
-            document.getElementById(
-                "mataMataArea"
-            ).style.display = "none";
+            // Mostrar tela de configuração
+            document.getElementById( "setup" ).style.display = "block";
 
-            document.getElementById(
-                "draftArea"
-            ).style.display = "block";
+            // Resetar contagem de participantes no formulário
+            const playerCount = document.getElementById( "playerCount" );
+            if ( playerCount ) {
+                playerCount.value = "1";
+                gerarInputsNomes();
+            }
 
-            renderizarTeamCards();
-            atualizarStatus();
-            atualizarRefreshes();
-            gerarPool();
-            setActiveStep( 3 );
+            setActiveStep( 1 );
         }
     );
 
