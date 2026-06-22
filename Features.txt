@@ -3,298 +3,91 @@
 ## PARTE 1 — Sistema de Draft
 
 ### Feature 1 — Tela de Configuração
-
-Objetivo:
-
-Permitir que o organizador configure:
-
-* Número de participantes.
-* Número de jogadores por equipe.
-* Seleções disponíveis.
-* Regras do draft.
-
-Status:
-Implementada parcialmente.
-
----
+**Status:** Implementada.
+Permite configurar número de participantes, jogadores por equipe, seleções disponíveis e regras do draft.
 
 ### Feature 2 — Sorteio Automático da Ordem
-
-Objetivo:
-
-Sortear aleatoriamente a ordem dos participantes.
-
-Exemplo:
-
-1. Guilherme
-2. João
-3. Pedro
-4. Lucas
-
-Status:
-Implementada.
-
-Possíveis melhorias:
-
-* Repetir sorteio.
-* Salvar histórico do sorteio.
-
----
+**Status:** Implementada.
+Sorteia aleatoriamente a ordem dos participantes.
 
 ### Feature 3 — Draft de Seleções
-
-Objetivo:
-
-Permitir que cada participante escolha sua seleção.
-
-Status:
-Implementada.
-
-Possíveis melhorias:
-
-* Validações adicionais.
-* Interface mais intuitiva.
-
----
+**Status:** Implementada.
+Cada participante escolhe sua seleção.
 
 ### Feature 4 — Draft de Jogadores
-
-Objetivo:
-
-Permitir a escolha dos jogadores.
-
-Status:
-Implementada.
-
-Possíveis melhorias:
-
-* Pesquisa avançada.
-* Filtros por posição.
-* Filtros por overall.
-* Filtros por nacionalidade.
-
----
+**Status:** Implementada.
+Escolha dos jogadores com pool atualizável.
 
 ### Feature 5 — Consolidação dos Elencos
-
-Objetivo:
-
-Exibir todos os jogadores selecionados por cada equipe.
-
-Status:
-Necessita expansão.
-
-Melhorias necessárias:
-
-* Exibir IDs dos jogadores.
-* Exibir overall.
-* Exibir posição.
-* Exibir nacionalidade.
-
----
+**Status:** Implementada.
+Exibe todos os jogadores selecionados por cada equipe com IDs e posições.
 
 ### Feature 6 — Exportação dos Elencos
-
-Objetivo:
-
-Gerar um arquivo contendo todas as equipes e seus jogadores.
-
-Formato recomendado:
-
-JSON.
-
-Exemplo:
-
-{
-"Brasil": {
-"players": [
-{
-"id": 231747,
-"name": "Kylian Mbappe"
-}
-]
-}
-}
-
-Status:
-Pendente.
-
-Prioridade:
-Muito alta.
-
-Essa feature é a ponte entre a Parte 1 e a Parte 2.
-
----
+**Status:** Implementada.
+Gera `draft-copa-2026.json` com jogadores, times e playerids do FC26.
 
 ### Feature 7 — Chaveamento
-
-Objetivo:
-
-Exibir:
-
-* 16 avos.
-* Oitavas.
-* Quartas.
-* Semifinais.
-* Final.
-
-Status:
-Implementado parcialmente.
-
-Melhorias:
-
-* Ajustes visuais.
-* Melhor responsividade.
-* Melhor navegação.
-
----
+**Status:** Implementado.
+Mata-mata de 16 avos até a final.
 
 ### Feature 8 — Registro de Resultados
-
-Objetivo:
-
-Permitir inserir placares.
-
-Exemplo:
-
-Brasil 3 x 1 Argentina
-
-O sistema deve:
-
-* Atualizar o vencedor.
-* Avançar automaticamente.
-* Atualizar confrontos futuros.
-
-Status:
-Implementação em andamento.
-
----
+**Status:** Implementado.
+Inserir placares e avançar vencedores.
 
 ### Feature 9 — Persistência
-
-Objetivo:
-
-Salvar:
-
-* Configurações.
-* Draft.
-* Chaveamento.
-* Resultados.
-
-Status:
-Pendente.
-
-Prioridade:
-Alta.
+**Status:** Pendente.
+Salvar configurações, draft e chaveamento entre sessões.
 
 ---
 
-# PARTE 2 — Conversor para FC26
+## PARTE 2 — Conversor para RDBM 26
 
-### Feature 10 — Análise do TXT do FC Editor
+### Feature 10 — Conversor TXT (Python)
+**Status:** Implementado (`converter_v2.py` + `converter.bat`).
+Lê o `draft-copa-2026.json`, modifica os TXT originais e gera arquivos prontos para o RDBM 26.
 
-Objetivo:
+### Feature 11 — Conversor Web (HTML)
+**Status:** Implementado (`converter.html`).
+Interface visual com tutorial passo a passo.
 
-Mapear exatamente como uma transferência de jogador é representada.
-
-Procedimento:
-
-1. Exportar TXT original.
-2. Fazer uma transferência.
-3. Exportar TXT modificado.
-4. Comparar os dois arquivos.
-
-Status:
-Pendente.
-
-Prioridade:
-Crítica.
+### Feature 12 — Database de Jogadores
+**Status:** Implementada (`jogadores_final.json`).
+1237 jogadores baseados na lista oficial de convocados da FIFA Copa 2026.
 
 ---
 
-### Feature 11 — Definição do Formato de Entrada
+## PARTE 3 — Correção de IDs (PRIORIDADE MÁXIMA)
 
-Objetivo:
+### Feature 13 — Validação e Correção dos PlayerIDs
+**Status:** EM ANDAMENTO — PRIORIDADE MÁXIMA.
 
-Definir o formato exportado pela Parte 1.
+**Problema:** Dos 1237 jogadores na database, 892 (72%) têm playerid do FC26
+identificado automaticamente. Os 345 restantes (28%) precisam de correção manual.
 
-Recomendação:
+**Método:**
+1. Usar FC Editor para buscar o playerid de cada jogador sem ID
+2. Adicionar o ID no `jogadores_final.json` e no `MANUAL_PLAYER_IDS` do conversor
+3. Validar cada ID conferindo nacionalidade + posição no FC26
 
-JSON.
+**Jogadores pendentes (345):**
+Lista completa disponível rodando `python validar_ids.py`
 
-Status:
-Pendente.
+**Como ajudar:**
+1. Abrir o Squad File no FC Editor by Decoruiz
+2. Procurar o jogador pelo nome completo
+3. Anotar o playerid (ex: 186555)
+4. Informar para adicionar na database
 
----
-
-### Feature 12 — Leitor do Draft
-
-Objetivo:
-
-Criar um programa que leia o JSON exportado.
-
-Status:
-Pendente.
-
----
-
-### Feature 13 — Gerador de Transferências
-
-Objetivo:
-
-Converter as escolhas do draft em comandos compatíveis com o formato TXT do RDBM.
-
-Status:
-Pendente.
-
-Prioridade:
-Muito alta.
+### Feature 14 — Validação Automática de IDs
+**Status:** Implementado (`validar_ids.py`).
+Confronta cada playerid da database com os dados do FC26
+(nacionalidade + posição + nome) para detectar IDs incorretos.
 
 ---
 
-### Feature 14 — Gerador de TXT Compatível com RDBM
+## Próximos Passos Recomendados
 
-Objetivo:
-
-Produzir automaticamente um TXT que possa ser importado diretamente pelo RDBM 26.
-
-Fluxo:
-
-Draft Export
-↓
-Conversor
-↓
-TXT RDBM
-
-Status:
-Pendente.
-
----
-
-### Feature 15 — Teste Completo de Integração
-
-Objetivo:
-
-Validar:
-
-* Exportação do Draft.
-* Conversão.
-* Importação no RDBM.
-* Geração do Squad File.
-* Funcionamento dentro do FC26.
-
-Status:
-Pendente.
-
----
-
-# Próxima Prioridade Recomendada
-
-1. Implementar exportação JSON na Etapa 4.
-2. Mapear exatamente o formato TXT gerado pelo FC Editor.
-3. Descobrir quais linhas mudam durante uma transferência.
-4. Criar o conversor JSON → TXT RDBM.
-5. Automatizar a geração do Squad File.
-6. Finalizar a integração completa com o FC26.
-
-Essa sequência reduz riscos e valida cada etapa antes de avançar para a próxima.
+1. 🔴 **Corrigir IDs pendentes** — 345 jogadores sem ID no FC26
+2. 🟡 **Feature 9 — Persistência** — Salvar progresso do draft
+3. 🟢 **Feature 11** — Fazer o conversor HTML funcionar com encoding UTF-16LE
+4. 🟢 **Testes** — Validar drafts completos com a database atual
