@@ -2306,6 +2306,80 @@ section.teams {
     box-shadow: none;
 }
 
+/* Button row (export + clear) */
+.cv-btn-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 2px;
+}
+.cv-btn-row .cv-btn-export {
+    flex: 1;
+}
+
+/* Clear button */
+.cv-btn-clear {
+    padding: 0 16px;
+    background: var(--line);
+    color: var(--muted);
+    border: 2px solid var(--muted);
+    border-radius: 6px;
+    font-family: var(--display);
+    font-size: 13px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+    display: none;
+}
+.cv-btn-clear:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+/* JSON drop zone (reuses .cv-dz base) */
+.cv-dz-json {
+    border-style: dashed;
+}
+.cv-dz-json.ok  { border-style: solid; border-color: var(--win); }
+.cv-dz-json.err { border-style: solid; border-color: var(--accent); }
+.cv-dz-json.ok  .cv-dz-st { color: var(--win); }
+.cv-dz-json.err .cv-dz-st { color: var(--accent); }
+
+/* Downloads area */
+.cv-downloads {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+.cv-downloads.show { display: flex; }
+.cv-downloads-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.cv-download-btn {
+    padding: 10px 14px;
+    background: var(--win);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: var(--display);
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-align: center;
+    box-shadow: 2px 2px 0 var(--ink);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+.cv-download-btn:hover {
+    transform: translateY(1px);
+    box-shadow: 1px 1px 0 var(--ink);
+}
+
 /* Log */
 .cv-log {
     background: var(--ink);

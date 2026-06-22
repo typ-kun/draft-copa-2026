@@ -3578,7 +3578,7 @@ setTimeout(() => setActiveStep(1), 50);
 
     const CV_POS = { GK: "0", DF: "1", MF: "2", FW: "3" };
 
-    const cvS = { tpl: null, teams: null, leagues: null };
+    const cvS = { tpl: null, teams: null, leagues: null, draftData: null, _downloads: [], _resolved: null };
 
     // ── Abrir / fechar ────────────────────────────────────────────────────────
 
@@ -3683,6 +3683,62 @@ setTimeout(() => setActiveStep(1), 50);
 
     cvInitFolderDz();
 
+    // ── Drop zone de JSON do draft ──────────────────────────────────────────
+
+    function cvInitJsonDz() {
+        const dz    = document.getElementById("cv-dz-json");
+        const input = document.getElementById("cv-fi-json");
+        const st    = document.getElementById("cv-st-json");
+        const pills = document.getElementById("cv-json-pills");
+
+        async function loadJson(fileList) {
+            if (!fileList || !fileList.length) return;
+            st.textContent = "carregando…";
+            dz.classList.remove("ok", "err");
+
+            const file = fileList[0];
+            if (!file.name.toLowerCase().endsWith(".json")) {
+                st.textContent = "✗ arquivo JSON inválido";
+                dz.classList.add("err");
+                pills.innerHTML = '<span class="cv-file-pill missing">✗ formato inválido</span>';
+                return;
+            }
+
+            try {
+                const text = await file.text();
+                const data = JSON.parse(text);
+
+                // Validar estrutura do draft
+                if (!data.draft || !data.draft.participants || !Array.isArray(data.draft.participants)) {
+                    throw new Error("Estrutura inválida: draft.participants não encontrado");
+                }
+
+                cvS.draftData = data;
+                st.textContent = `✓ ${data.draft.participants.length} participante(s)`;
+                dz.classList.add("ok");
+                pills.innerHTML = `<span class="cv-file-pill ok">✓ ${file.name}</span>`;
+
+            } catch (e) {
+                st.textContent = "✗ erro ao ler JSON";
+                dz.classList.add("err");
+                pills.innerHTML = `<span class="cv-file-pill missing">✗ ${e.message}</span>`;
+                cvS.draftData = null;
+            }
+
+            cvRenderPreview();
+        }
+
+        input.addEventListener("change", e => loadJson(e.target.files));
+        dz.addEventListener("dragover",  e => { e.preventDefault(); dz.classList.add("over"); });
+        dz.addEventListener("dragleave", () => dz.classList.remove("over"));
+        dz.addEventListener("drop", e => {
+            e.preventDefault(); dz.classList.remove("over");
+            loadJson(e.dataTransfer.files);
+        });
+    }
+
+    cvInitJsonDz();
+
     // ── Parse teams.txt ──────────────────────────────────────────────────────
 
     function cvParseTeams(buf) {
@@ -3713,18 +3769,35 @@ setTimeout(() => setActiveStep(1), 50);
     // ── Preview ──────────────────────────────────────────────────────────────
 
     function cvGetDraftData() {
-        // Lê o estado atual do draft vivo (times / nomesJogadores / paisParticipante)
-        if (typeof times === "undefined" || !times.length) return null;
-        return nomesJogadores.map((nome, idx) => ({
-            player: nome,
-            team:   paisParticipante[idx] || null,
-            players: (times[idx] || []).map(j => ({
-                name:       j.nome,
-                position:   j.posicao,
-                nationality: j.pais,
-                playerid:   j.playerid || null,
-            })),
-        }));
+        // Prioridade 1: JSON carregado manualmente
+        if (cvS.draftData && cvS.draftData.draft && cvS.draftData.draft.participants) {
+            return cvS.draftData.draft.participants.map(p => ({
+                player: p.player || p.playerName || "?",
+                team:   p.team || null,
+                players: (p.players || []).map(j => ({
+                    name:        j.name || j.nome || "?",
+                    position:    j.position || j.posicao || "FW",
+                    nationality: j.nationality || j.pais || "",
+                    playerid:    j.playerid || null,
+                })),
+            }));
+        }
+
+        // Prioridade 2: estado em memória do draft vivo
+        if (typeof times !== "undefined" && times.length && nomesJogadores && nomesJogadores.length) {
+            return nomesJogadores.map((nome, idx) => ({
+                player: nome,
+                team:   paisParticipante[idx] || null,
+                players: (times[idx] || []).map(j => ({
+                    name:        j.nome,
+                    position:    j.posicao,
+                    nationality: j.pais,
+                    playerid:    j.playerid || null,
+                })),
+            }));
+        }
+
+        return null;
     }
 
     function cvRenderPreview() {
@@ -3736,6 +3809,9 @@ setTimeout(() => setActiveStep(1), 50);
         const participants = cvGetDraftData();
         if (!participants) return;
 
+        // Indicar fonte dos dados
+        const fonte = cvS.draftData ? "📄 JSON" : "💾 memória";
+
         cvS._resolved = participants.map(p => {
             const { enName, id } = cvResolveId(p.team, teamMap);
             const total  = p.players.length;
@@ -3743,7 +3819,11 @@ setTimeout(() => setActiveStep(1), 50);
             return { player: p.player, team: p.team, enName, teamId: id, total, withId, players: p.players };
         });
 
-        const rows = cvS._resolved.map(r => {
+        const rows = `<div class="cv-preview-row" style="border-bottom-color:transparent;">
+            <div class="cv-prev-player" style="font-weight:700;font-size:11px;color:var(--muted);">Fonte: ${fonte}</div>
+            <div class="cv-prev-team"></div>
+            <span class="cv-badge-warn" style="font-size:10px;">${participants.length} time(s)</span>
+        </div>` + cvS._resolved.map(r => {
             let badge, cls;
             if (!r.teamId) {
                 badge = "time não encontrado"; cls = "cv-badge-err";
@@ -3767,11 +3847,46 @@ setTimeout(() => setActiveStep(1), 50);
         const btn = document.getElementById("cv-exportBtn");
         btn.style.display = "";
         btn.disabled = false;
+        document.getElementById("cv-clearBtn").style.display = "";
     }
 
     // ── Export ───────────────────────────────────────────────────────────────
 
     document.getElementById("cv-exportBtn").addEventListener("click", cvDoExport);
+
+    document.getElementById("cv-clearBtn").addEventListener("click", cvClearAll);
+
+    function cvClearAll() {
+        cvS.tpl = null;
+        cvS.teams = null;
+        cvS.leagues = null;
+        cvS.draftData = null;
+        cvS._resolved = null;
+        cvS._downloads = [];
+
+        document.getElementById("cv-dz-folder").classList.remove("ok", "err");
+        document.getElementById("cv-st-folder").textContent = "aguardando";
+        document.getElementById("cv-file-pills").innerHTML = "";
+        document.getElementById("cv-fi-folder").value = "";
+
+        document.getElementById("cv-dz-json").classList.remove("ok", "err");
+        document.getElementById("cv-st-json").textContent = "não carregado";
+        document.getElementById("cv-json-pills").innerHTML = "";
+        document.getElementById("cv-fi-json").value = "";
+
+        document.getElementById("cv-preview").innerHTML = "";
+        document.getElementById("cv-preview").style.display = "none";
+        document.getElementById("cv-log").classList.remove("show");
+        document.getElementById("cv-log").innerHTML = "";
+        document.getElementById("cv-downloads").classList.remove("show");
+        document.getElementById("cv-downloads").innerHTML = "";
+
+        const exportBtn = document.getElementById("cv-exportBtn");
+        exportBtn.disabled = true;
+        exportBtn.style.display = "none";
+        document.getElementById("cv-clearBtn").style.display = "none";
+        toast("Arquivos removidos");
+    }
 
     function cvDoExport() {
         const log = [];
@@ -3814,7 +3929,10 @@ setTimeout(() => setActiveStep(1), 50);
         }
         log.push(`[OK] Total adicionado: ${added} jogadores`);
 
-        cvDownload(cvEncode(kept.join("")), "teamplayerlinks.txt");
+        // Armazenar arquivos gerados em vez de baixar automaticamente
+        cvS._downloads = [
+            { filename: "teamplayerlinks.txt", data: cvEncode(kept.join("")) }
+        ];
 
         if (cvS.leagues) {
             const lgLines = cvDecode(cvS.leagues).match(/[^\n]*\n?/g).filter(l => l.length > 0);
@@ -3828,14 +3946,42 @@ setTimeout(() => setActiveStep(1), 50);
                         return p.join("\t") + "\r\n";
                     }
                 }
-                return raw;  // linha original inalterada
+                return raw;
             }).join("");
-            setTimeout(() => cvDownload(cvEncode(lgOut), "leagues.txt"), 350);
+            cvS._downloads.push({ filename: "leagues.txt", data: cvEncode(lgOut) });
             log.push(`[OK] leagues.txt: ${changed > 0 ? changed + " flag(s) International: 1 → 0" : "nenhuma flag alterada"}`);
         }
 
+        cvS._resolved.forEach((r, idx) => {
+            log.push(`  ${r.player} (${r.team}): ${r.players.filter(j => !!j.playerid).length}/${r.players.length} com ID`);
+        });
+
         cvShowLog(log);
-        toast("Arquivos gerados com sucesso!");
+        cvShowDownloads();
+        toast("Arquivos gerados! Clique nos botões abaixo para baixar.");
+    }
+
+    function cvShowDownloads() {
+        const el = document.getElementById("cv-downloads");
+        if (!el || !cvS._downloads.length) return;
+
+        el.innerHTML = '<div class="cv-downloads-label">📥 Arquivos gerados</div>' +
+            cvS._downloads.map(f =>
+                `<button class="cv-download-btn" data-file="${cvEsc(f.filename)}">📥 ${cvEsc(f.filename)}</button>`
+            ).join("");
+
+        el.classList.add("show");
+
+        // Adicionar listeners para cada botão
+        el.querySelectorAll(".cv-download-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const filename = btn.dataset.file;
+                const file = cvS._downloads.find(f => f.filename === filename);
+                if (file) {
+                    cvDownload(file.data, file.filename);
+                }
+            });
+        });
     }
 
     function cvDownload(data, filename) {
