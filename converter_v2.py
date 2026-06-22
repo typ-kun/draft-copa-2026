@@ -16,7 +16,7 @@ from pathlib import Path
 # ─── CONFIGURACOES ──────────────────────────────────────────────────────────
 
 ORIG_DIR = Path(r"C:\Users\guilh\OneDrive\Documentos\draft-copa-do-mundo-2026\Arquivos Originais")
-OUTPUT_DIR = Path(r"C:\Users\guilh\OneDrive\Documentos\draft-copa-do-mundo-2026\Arquivos Modificados")
+# REMOVED: r"C:\Users\guilh\OneDrive\Documentos\draft-copa-do-mundo-2026\Arquivos Modificados")
 IMPORT_DIR = Path(r"C:\Users\guilh\OneDrive\Documentos\draft-copa-do-mundo-2026\Arquivos para Importar RDBM")
 DRAFT_JSON = Path("draft-copa-2026.json")
 SCRIPT_DIR = Path(__file__).parent
@@ -414,8 +414,7 @@ def gerar_modificacoes(draft, id_nomes, team_map, nat_time_map,
                     modificado = True
                     print(f"    [OK] Flag International: 1 -> 0")
         if modificado:
-            escrever_utf16(OUTPUT_DIR / "leagues.txt", linhas)
-            #escrever_utf16(IMPORT_DIR / "leagues.txt", linhas)
+            escrever_utf16(IMPORT_DIR / "leagues.txt", linhas)
 
     # ── 3b. teamplayerlinks.txt ─────────────────────────────────────────────
     if TP_LINKS_FILE.exists():
@@ -464,8 +463,7 @@ def gerar_modificacoes(draft, id_nomes, team_map, nat_time_map,
             print(f"    {adicionados} jogadores do draft adicionados")
             linhas = novas_linhas  # acumula para proximo participante
 
-        escrever_utf16(OUTPUT_DIR / "teamplayerlinks.txt", linhas)
-        #escrever_utf16(IMPORT_DIR / "teamplayerlinks.txt", linhas)
+        escrever_utf16(IMPORT_DIR / "teamplayerlinks.txt", linhas)
         print(f"  [OK] teamplayerlinks.txt salvo ({len(linhas)} linhas)")
 
 
@@ -506,7 +504,6 @@ def main():
     print(f"  [OK] {len(nat_time_map)} nacionalidades mapeadas")
 
     # Criar diretorio de saida
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     IMPORT_DIR.mkdir(parents=True, exist_ok=True)
 
     # Gerar modificacoes
@@ -518,7 +515,7 @@ def main():
 
     print(f"\n{'='*60}")
     print(f"  [OK] CONCLUIDO!")
-    print(f"  Arquivos em: {OUTPUT_DIR}")
+    print(f"  Arquivos em: {IMPORT_DIR}")
     print(f"  Importe no RDBM 26 e gere o Squad File.")
     print(f"{'='*60}")
 
