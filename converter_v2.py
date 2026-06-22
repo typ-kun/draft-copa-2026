@@ -109,6 +109,13 @@ MANUAL_PLAYER_IDS = {
     "n. kante": "215914", "ngolo kante": "215914", "ngolo kante": "215914", "kante": "215914",
     "a. mac allister": "239837", "alexis mac allister": "239837", "mac allister": "239837",
     "r. leao": "241721", "rafael leao": "241721", "rafael leao": "241721", "leao": "241721",
+        "l. paqueta": "233927", "lucas paqueta": "233927",
+    "m. guehi": "241159", "guehi": "241159",
+    "w. zaire-emery": "270673",
+    "a. nuebel": "223885", "nuebel": "223885",
+    "n. vlasic": "241095", "vlasic": "241095",
+    "y. mvogo": "206003", "mvogo": "206003",
+    "a. guler": "264309", "guler": "264309",
     "i. laye": None, "m. mohebbi": None,
 }
 
