@@ -35,8 +35,8 @@ Mata-mata de 16 avos até a final.
 Inserir placares e avançar vencedores.
 
 ### Feature 9 — Persistência
-**Status:** Pendente.
-Salvar configurações, draft e chaveamento entre sessões.
+**Status:** Implementada.
+Salva automaticamente todo o estado do draft (configurações, seleção de países, picks, elencos) em localStorage a cada ação. Restaura automaticamente ao recarregar a página, mantendo a etapa exata onde o usuário parou.
 
 ---
 
