@@ -15,9 +15,9 @@ from pathlib import Path
 
 # ─── CONFIGURACOES ──────────────────────────────────────────────────────────
 
-ORIG_DIR = Path(r"C:\Users\guilh\Downloads\Mod\Arquivos Originais")
-OUTPUT_DIR = Path(r"C:\Users\guilh\Downloads\Mod\Arquivos Modificados")
-IMPORT_DIR = Path(r"C:\Users\guilh\Downloads\Mod\Arquivos para Importar RDBM")
+ORIG_DIR = Path(r"C:\Users\guilh\OneDrive\Documentos\draft-copa-do-mundo-2026\Arquivos Originais")
+OUTPUT_DIR = Path(r"C:\Users\guilh\OneDrive\Documentos\draft-copa-do-mundo-2026\Arquivos Modificados")
+IMPORT_DIR = Path(r"C:\Users\guilh\OneDrive\Documentos\draft-copa-do-mundo-2026\Arquivos para Importar RDBM")
 DRAFT_JSON = Path("draft-copa-2026.json")
 SCRIPT_DIR = Path(__file__).parent
 ID_MAP_FILE = SCRIPT_DIR / "idjogadoresfc26.txt"
