@@ -2293,13 +2293,14 @@ section.teams {
     cursor: pointer;
     box-shadow: var(--hard-shadow-ink);
     transition: transform 0.1s, box-shadow 0.1s;
-    display: none;
 }
 .cv-btn-export:not([disabled]):hover {
     transform: translateY(1px);
     box-shadow: 2px 2px 0 var(--ink);
 }
 .cv-btn-export[disabled] {
+    display: none;
+}
     background: var(--line);
     color: var(--muted);
     cursor: not-allowed;
@@ -2329,7 +2330,6 @@ section.teams {
     text-transform: uppercase;
     transition: background 0.15s, color 0.15s;
     white-space: nowrap;
-    display: none;
 }
 .cv-btn-clear:hover {
     background: var(--accent);

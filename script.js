@@ -3845,12 +3845,12 @@ setTimeout(() => setActiveStep(1), 50);
 
         const el = document.getElementById("cv-preview");
         el.innerHTML = rows;
-        el.style.display = "";
+        el.style.display = "block";
 
         const btn = document.getElementById("cv-exportBtn");
-        btn.style.display = "";
+        btn.style.display = "block";
         btn.disabled = false;
-        document.getElementById("cv-clearBtn").style.display = "";
+        document.getElementById("cv-clearBtn").style.display = "block";
     }
 
     // ── Export ───────────────────────────────────────────────────────────────
