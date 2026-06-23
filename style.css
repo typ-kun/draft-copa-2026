@@ -817,6 +817,75 @@ section.teams {
 #finalResults .player-entry.pos-fw { border-left-color: var(--pos-fw); }
 
 /* ====================== */
+/* ICONS & HEROES BADGES   */
+/* ====================== */
+
+.pool-tipo-badge {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-left: auto;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,.35));
+}
+
+.team-tipo-badge {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    margin-left: 4px;
+    vertical-align: middle;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,.35));
+}
+
+.result-tipo-badge {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    margin-left: 5px;
+    vertical-align: middle;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,.35));
+}
+
+.pool-inner.is-special {
+    background: linear-gradient(90deg, #1b1a17 0%, #2a2720 100%);
+    border-left-color: #c8a84b;
+    color: #f5e8c0;
+}
+
+.pool-inner.is-special .pool-name,
+.pool-inner.is-special .pool-num {
+    color: #f5e8c0;
+}
+
+.pool-inner.is-special .pos-label {
+    color: #c8a84b;
+}
+
+.player-card:hover .pool-inner.is-special {
+    background: linear-gradient(90deg, #c8a84b 0%, #a8882b 100%);
+    color: #1b1a17;
+}
+
+.player-card:hover .pool-inner.is-special .pool-name,
+.player-card:hover .pool-inner.is-special .pool-num,
+.player-card:hover .pool-inner.is-special .pos-label {
+    color: #1b1a17;
+}
+
+.team-card li.is-special {
+    border-left-color: #c8a84b;
+    background: rgba(200, 168, 75, 0.08);
+}
+
+#finalResults .player-entry.is-special {
+    border-left-color: #c8a84b;
+    background: rgba(200, 168, 75, 0.07);
+}
+
+/* ====================== */
 /* FOOTER DO DRAFT         */
 /* ====================== */
 

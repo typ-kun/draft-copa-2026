@@ -13,6 +13,7 @@ function toast(msg, duration = 2500) {
 }
 
 let jogadoresBase = [];
+let iconsHeroesBase = [];
 let jogadoresDisponiveis = [];
 let poolAtual = [];
 
@@ -55,7 +56,9 @@ const config = {
 
     playersPerTeam: 18,
 
-    refreshCount: 2
+    refreshCount: 2,
+
+    iconsHeroesMode: "none"
 
 };
 
@@ -185,6 +188,25 @@ function bandeira(pais) {
 // CARREGAR JSON
 // ======================
 
+async function carregarIconsHeroes() {
+    try {
+        const resposta = await fetch("icons_heroes.json");
+        if (!resposta.ok) return;
+        const dados = await resposta.json();
+        iconsHeroesBase = dados.map(j => ({
+            nome: j.nome,
+            pais: j.pais,
+            posicao: j.posicao,
+            playerid: j.playerid || null,
+            nomeCompleto: j.nome,
+            tipo: j.tipo
+        }));
+        console.log(`Icons/Heroes carregados: ${iconsHeroesBase.length}`);
+    } catch (erro) {
+        console.warn("Erro ao carregar icons_heroes.json:", erro);
+    }
+}
+
 async function carregarJogadores() {
 
     try {
@@ -313,11 +335,13 @@ function salvarEstadoDraft() {
         participantesAtivos: [...participantesAtivos],
         jogadoresDisponiveis: jogadoresDisponiveis.map(j => ({
             nome: j.nome, pais: j.pais, posicao: j.posicao,
-            playerid: j.playerid || null, nomeCompleto: j.nomeCompleto || null
+            playerid: j.playerid || null, nomeCompleto: j.nomeCompleto || null,
+            tipo: j.tipo || null
         })),
         poolAtual: poolAtual.map(j => ({
             nome: j.nome, pais: j.pais, posicao: j.posicao,
-            playerid: j.playerid || null, nomeCompleto: j.nomeCompleto || null
+            playerid: j.playerid || null, nomeCompleto: j.nomeCompleto || null,
+            tipo: j.tipo || null
         }))
     };
 
@@ -651,8 +675,20 @@ function iniciarDraft() {
             ).value
         );
 
+    config.iconsHeroesMode =
+        document.getElementById(
+            "iconsHeroesMode"
+        ).value;
+
+    const extrasAtivos = iconsHeroesBase.filter(j => {
+        if (config.iconsHeroesMode === "icons") return j.tipo === "icon";
+        if (config.iconsHeroesMode === "heroes") return j.tipo === "hero";
+        if (config.iconsHeroesMode === "both") return true;
+        return false;
+    });
+
     jogadoresDisponiveis =
-        [...jogadoresBase];
+        [...jogadoresBase, ...extrasAtivos];
 
     nomesJogadores = [];
 
@@ -1000,8 +1036,13 @@ const timeOrdenado =
                 timeOrdenado
                     .map(
                         jogador => {
-                            return `<li class="pos-${jogador.posicao.toLowerCase()}">
-                                <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span> ${bandeira(jogador.pais)}${jogador.nome}
+                            const badgeTipo = jogador.tipo === "icon"
+                                ? `<img src="assets/icons.png" class="team-tipo-badge" alt="Icon">`
+                                : jogador.tipo === "hero"
+                                    ? `<img src="assets/heroes.png" class="team-tipo-badge" alt="Hero">`
+                                    : "";
+                            return `<li class="pos-${jogador.posicao.toLowerCase()}${jogador.tipo ? " is-special" : ""}">
+                                <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span> ${bandeira(jogador.pais)}${jogador.nome}${badgeTipo}
                             </li>`;
                         }
                     )
@@ -1188,11 +1229,18 @@ function renderizarPool() {
             card.style.cursor =
                 "pointer";
 
+            const badgeEspecial = jogador.tipo === "icon"
+                ? `<img src="assets/icons.png" class="pool-tipo-badge" alt="Icon" title="Icon">`
+                : jogador.tipo === "hero"
+                    ? `<img src="assets/heroes.png" class="pool-tipo-badge" alt="Hero" title="Hero">`
+                    : "";
+
             card.innerHTML = `
-                <span class="pool-inner pos-${jogador.posicao.toLowerCase()}">
+                <span class="pool-inner pos-${jogador.posicao.toLowerCase()}${jogador.tipo ? " is-special" : ""}">
                     <span class="pool-num">${index + 1}</span>
                     <span class="pool-name">${bandeira(jogador.pais)}${jogador.nomeCompleto || jogador.nome}</span>
                     <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span>
+                    ${badgeEspecial}
                 </span>
             `;
 
@@ -1469,9 +1517,15 @@ function mostrarResultadoFinal() {
                     grupo[1].forEach(
                         jogador => {
 
+                            const badgeTipo = jogador.tipo === "icon"
+                                ? `<img src="assets/icons.png" class="result-tipo-badge" alt="Icon" title="Icon">`
+                                : jogador.tipo === "hero"
+                                    ? `<img src="assets/heroes.png" class="result-tipo-badge" alt="Hero" title="Hero">`
+                                    : "";
+
                             html += `
-                                <div class="player-entry pos-${jogador.posicao.toLowerCase()}">
-                                    <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span> ${bandeira(jogador.pais)}<span class="player-pais-sigla">${abreviacaoPais(jogador.pais)}</span> ${jogador.nome}
+                                <div class="player-entry pos-${jogador.posicao.toLowerCase()}${jogador.tipo ? " is-special" : ""}">
+                                    <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span> ${bandeira(jogador.pais)}<span class="player-pais-sigla">${abreviacaoPais(jogador.pais)}</span> ${jogador.nome}${badgeTipo}
                                 </div>
                             `;
 
@@ -3450,11 +3504,12 @@ document
 // ======================
 
 const camposNota = [
-    { id: "draftMode",      nota: "note-formato" },
-    { id: "startingPhase",  nota: "note-starting-phase" },
-    { id: "goalkeeperRule", nota: "note-goleiros" },
-    { id: "playersPerTeam", nota: "note-elenco" },
-    { id: "refreshCount",   nota: "note-refreshes" },
+    { id: "draftMode",        nota: "note-formato" },
+    { id: "startingPhase",    nota: "note-starting-phase" },
+    { id: "goalkeeperRule",   nota: "note-goleiros" },
+    { id: "playersPerTeam",   nota: "note-elenco" },
+    { id: "refreshCount",     nota: "note-refreshes" },
+    { id: "iconsHeroesMode",  nota: "note-icons-heroes" },
 ];
 
 function mostrarNota(idNota) {
@@ -3557,6 +3612,7 @@ function setActiveStep(step) {
 }
 
 carregarJogadores();
+carregarIconsHeroes();
 
 // Etapa inicial: Configurar (1)
 setTimeout(() => setActiveStep(1), 50);
