@@ -1704,8 +1704,21 @@ function mostrarResultadoFinal() {
                     }
                 }
 
+                // Função local para UTF-16LE com BOM
+                function encodeUTF16(str) {
+                    const bom = new Uint8Array([0xFF, 0xFE]);
+                    const buf = new ArrayBuffer(str.length * 2);
+                    const view = new DataView(buf);
+                    for (let i = 0; i < str.length; i++)
+                        view.setUint16(i * 2, str.charCodeAt(i), true);
+                    const out = new Uint8Array(bom.length + buf.byteLength);
+                    out.set(bom, 0);
+                    out.set(new Uint8Array(buf), bom.length);
+                    return out;
+                }
+
                 // Download teamplayerlinks.txt
-                const tplBlob = new Blob([cvEncode(tplLines.join("\r\n"))], { type: "application/octet-stream" });
+                const tplBlob = new Blob([encodeUTF16(tplLines.join("\r\n"))], { type: "application/octet-stream" });
                 const tplUrl = URL.createObjectURL(tplBlob);
                 const a1 = document.createElement("a");
                 a1.href = tplUrl; a1.download = "teamplayerlinks.txt";
@@ -1715,7 +1728,7 @@ function mostrarResultadoFinal() {
                 // Download leagues.txt (placeholder — mantém original)
                 const lgHeader = "countryid\tleaguename\tleaguetype\tlevel\tiscompetitionscarfenabled\tisbannerenabled\tleagueid\tiscompetitionpoleflagenabled\tiscompetitioncrowdcardsenabled\tleaguetimeslice\tiswomencompetition\tiswithintransferwindow\tisinternationalleague";
                 const lgLines = [lgHeader, "13\tInternational (1)\t0\t1\t2\t2\t1\t2\t2\t7\t0\t0\t0"];
-                const lgBlob = new Blob([cvEncode(lgLines.join("\r\n"))], { type: "application/octet-stream" });
+                const lgBlob = new Blob([encodeUTF16(lgLines.join("\r\n"))], { type: "application/octet-stream" });
                 const lgUrl = URL.createObjectURL(lgBlob);
                 const a2 = document.createElement("a");
                 a2.href = lgUrl; a2.download = "leagues.txt";
