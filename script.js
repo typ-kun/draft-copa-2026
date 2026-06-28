@@ -95,9 +95,9 @@ const CODIGOS_HLTV = {
     "Cabo Verde":           "CV", "Canadá":            "CA", "Colômbia":          "CO",
     "Costa do Marfim":      "CI", "Croácia":           "HR", "Curaçao":           "CW",
     "República Tcheca":     "CZ", "Equador":           "EC", "Egito":             "EG",
-    "Inglaterra":           "GB", "França":            "FR", "Alemanha":          "DE",
+    "Finlândia":            "FI", "Inglaterra":        "GB", "França":            "FR", "Alemanha":          "DE",
     "Gana":                 "GH", "Haiti":             "HT", "Irã":               "IR",
-    "Iraque":               "IQ", "Japão":             "JP", "Jordânia":          "JO",
+    "Itália":               "IT", "Iraque":           "IQ", "Japão":             "JP", "Jordânia":          "JO",
     "Coreia do Sul":        "KR", "México":            "MX", "Marrocos":          "MA",
     "Holanda":              "NL", "Nova Zelândia":     "NZ", "Noruega":           "NO",
     "Panamá":               "PA", "Paraguai":          "PY", "Portugal":          "PT",
@@ -106,6 +106,11 @@ const CODIGOS_HLTV = {
     "Espanha":              "ES", "Suécia":            "SE", "Suíça":             "CH",
     "Tunísia":              "TN", "Turquia":           "TR", "Estados Unidos":    "US",
     "Uruguai":              "UY", "Uzbequistão":       "UZ", "Áustria":           "AT",
+    "Bulgária":             "BG", "Chile":             "CL", "Dinamarca":         "DK",
+    "Eslováquia":           "SK", "Gales":             "GB", "Hungria":           "HU",
+    "Irlanda":              "IE", "Irlanda do Norte":  "GB", "Nigéria":           "NG",
+    "Polônia":              "PL", "Romênia":           "RO", "Rússia":            "RU",
+    "Sérvia":               "RS", "Ucrânia":           "UA",
 };
 
 const ABREVIACOES_PAISES = {
@@ -136,7 +141,7 @@ const ABREVIACOES_PAISES = {
     "Haiti": "HAI",
     "Holanda": "HOL",
     "Inglaterra": "ING",
-    "Irã": "IRA",
+    "Itália": "ITA", "Irã": "IRA",
     "Iraque": "IRQ",
     "Japão": "JAP",
     "Jordânia": "JOR",
@@ -155,7 +160,21 @@ const ABREVIACOES_PAISES = {
     "Tunísia": "TUN",
     "Turquia": "TUR",
     "Uruguai": "URU",
-    "Uzbequistão": "UZB"
+    "Uzbequistão": "UZB",
+    "Bulgária": "BUL",
+    "Chile": "CHI",
+    "Dinamarca": "DIN",
+    "Eslováquia": "SVK",
+    "Gales": "GAL",
+    "Hungria": "HUN",
+    "Irlanda": "IRL",
+    "Irlanda do Norte": "NIR",
+    "Nigéria": "NIG",
+    "Polônia": "POL",
+    "Romênia": "ROM",
+    "Rússia": "RUS",
+    "Sérvia": "SRB",
+    "Ucrânia": "UCR"
 };
 
 function abreviacaoPais(
@@ -178,6 +197,30 @@ function bandeira(pais) {
     }
     if (pais === "Escócia") {
         return `<img class="flag" src="assets/Flag_of_Scotland.svg" alt="Escócia" loading="lazy">`;
+    }
+    if (pais === "Itália") {
+        return `<img class="flag" src="assets/Flag_of_Italy.webp" alt="Itália" loading="lazy">`;
+    }
+    if (pais === "Gales") {
+        return `<img class="flag" src="Referencias/pais-de-gales.png" alt="Gales" loading="lazy">`;
+    }
+    if (pais === "Irlanda do Norte") {
+        return `<img class="flag" src="Referencias/irlanda-do-norte.png" alt="Irlanda do Norte" loading="lazy">`;
+    }
+    if (pais === "Camarões") {
+        return `<img class="flag" src="Referencias/camaroes.png" alt="Camarões" loading="lazy">`;
+    }
+    if (pais === "Finlândia") {
+        return `<img class="flag" src="assets/Flag_of_Finland.png" alt="Finlândia" loading="lazy">`;
+    }
+    if (pais === "Hungria") {
+        return `<img class="flag" src="assets/Flag_of_Hungary.png" alt="Hungria" loading="lazy">`;
+    }
+    if (pais === "Polônia") {
+        return `<img class="flag" src="assets/Flag_of_Poland.png" alt="Polônia" loading="lazy">`;
+    }
+    if (pais === "Nigéria") {
+        return `<img class="flag" src="assets/Flag_of_Nigeria.png" alt="Nigéria" loading="lazy">`;
     }
     const codigo = CODIGOS_HLTV[pais];
     if (!codigo) return "";
@@ -606,7 +649,7 @@ function gerarInputsNomes() {
 
     container.innerHTML += `
         <button id="startDraft">
-            Iniciar Draft
+            INICIAR DRAFT
         </button>
     `;
 
@@ -679,6 +722,21 @@ function iniciarDraft() {
         document.getElementById(
             "iconsHeroesMode"
         ).value;
+
+    // Slider 0-10000 mapeia linearmente para 0-100% (0.0 - 1.0)
+    const sliderVal = parseInt(
+        document.getElementById(
+            "poolSpecialChance"
+        ).value
+    );
+    config.poolSpecialChance = sliderVal / 10000;
+
+    // Mostrar/esconder slider de chance conforme modo
+    const chanceContainer = document.getElementById("poolSpecialChanceContainer");
+    if (chanceContainer) {
+        chanceContainer.style.display =
+            config.iconsHeroesMode === "none" ? "none" : "block";
+    }
 
     const extrasAtivos = iconsHeroesBase.filter(j => {
         if (config.iconsHeroesMode === "icons") return j.tipo === "icon";
@@ -1041,7 +1099,7 @@ const timeOrdenado =
                                 : jogador.tipo === "hero"
                                     ? `<img src="assets/heroes.png" class="team-tipo-badge" alt="Hero">`
                                     : "";
-                            return `<li class="pos-${jogador.posicao.toLowerCase()}${jogador.tipo ? " is-special" : ""}">
+                            return `<li class="pos-${jogador.posicao.toLowerCase()}${jogador.tipo ? " is-special " + jogador.tipo : ""}">
                                 <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span> ${bandeira(jogador.pais)}${jogador.nome}${badgeTipo}
                             </li>`;
                         }
@@ -1072,8 +1130,16 @@ function gerarPool() {
 
     poolAtual = [];
 
-    let disponiveis =
-        [...jogadoresDisponiveis];
+    // Separa normais e especiais — normais vêm de jogadoresDisponiveis (já exclui pickados)
+    let normais = jogadoresDisponiveis.filter(j => !j.tipo);
+    let especiais = [];
+    if (config.iconsHeroesMode === "icons") {
+        especiais = iconsHeroesBase.filter(j => j.tipo === "icon");
+    } else if (config.iconsHeroesMode === "heroes") {
+        especiais = iconsHeroesBase.filter(j => j.tipo === "hero");
+    } else if (config.iconsHeroesMode === "both") {
+        especiais = [...iconsHeroesBase];
+    }
 
     const gksDoJogador =
         contarGoleiros(
@@ -1095,22 +1161,16 @@ function gerarPool() {
                 restantes <= 1)
         );
 
-    // Se já tem 2 goleiros, filtra todos
+    // Se já tem 2 goleiros, filtra GKs dos normais
     if (jaTemDoisGoleiros) {
-
-        disponiveis =
-            disponiveis.filter(
-                j =>
-                    j.posicao !== "GK"
-            );
-
+        normais = normais.filter(j => j.posicao !== "GK");
     }
 
-    // Últimas rodadas: só goleiros
+    // Últimas rodadas: só goleiros (sempre normais)
     if (forcandoGK) {
 
         let soGoleiros =
-            disponiveis.filter(
+            normais.filter(
                 j => j.posicao === "GK"
             );
 
@@ -1142,14 +1202,14 @@ function gerarPool() {
 
     }
 
-    // Precisa de goleiro: coloca 1 e remove os demais
+    // Precisa de goleiro: coloca 1 dos normais
     if (
         config.goalkeeperRule &&
         gksDoJogador < 2
     ) {
 
         const goleiros =
-            disponiveis.filter(
+            normais.filter(
                 j => j.posicao === "GK"
             );
 
@@ -1162,36 +1222,51 @@ function gerarPool() {
 
             poolAtual.push(goleiro);
 
-            // Remove todos os goleiros do disponiveis
-            // para garantir no máximo 1 por pool
-            disponiveis =
-                disponiveis.filter(
-                    j =>
-                        j.posicao !== "GK"
-                );
+            // Remove todos os goleiros dos normais
+            normais = normais.filter(j => j.posicao !== "GK");
 
         }
 
     }
 
+    // Limites de posição na pool (evita excesso de zagueiros, etc.)
+    const MAX_POR_POSICAO = { GK: 1, DF: 2, MF: 2, FW: 2 };
+
+    function contaPosicaoNaPool(posicao) {
+        return poolAtual.filter(j => j.posicao === posicao).length;
+    }
+
+    // Preenche os slots restantes com chance configurável de especial
     while (
         poolAtual.length < 5 &&
-        disponiveis.length > 0
+        (normais.length > 0 || especiais.length > 0)
     ) {
 
-        const jogador =
-            aleatorio(
-                disponiveis
-            );
+        const sortearEspecial =
+            especiais.length > 0 &&
+            Math.random() < config.poolSpecialChance;
 
-        poolAtual.push(
-            jogador
-        );
+        let jogador;
 
-        disponiveis =
-            disponiveis.filter(
-                p => p !== jogador
-            );
+        if (sortearEspecial) {
+            jogador = aleatorio(especiais);
+            especiais = especiais.filter(p => p !== jogador);
+        } else if (normais.length > 0) {
+            // Filtra normais para respeitar limites de posição
+            const candidatos = normais.filter(j => {
+                if (contaPosicaoNaPool(j.posicao) >= (MAX_POR_POSICAO[j.posicao] || 2)) return false;
+                return true;
+            });
+            // Usa candidatos filtrados; se vazio, relaxa e aceita qualquer um
+            const poolEscolha = candidatos.length > 0 ? candidatos : normais;
+            jogador = aleatorio(poolEscolha);
+            normais = normais.filter(p => p !== jogador);
+        } else {
+            jogador = aleatorio(especiais);
+            especiais = especiais.filter(p => p !== jogador);
+        }
+
+        poolAtual.push(jogador);
 
     }
 
@@ -1236,11 +1311,11 @@ function renderizarPool() {
                     : "";
 
             card.innerHTML = `
-                <span class="pool-inner pos-${jogador.posicao.toLowerCase()}${jogador.tipo ? " is-special" : ""}">
+                <span class="pool-inner pos-${jogador.posicao.toLowerCase()}${jogador.tipo ? " is-special " + jogador.tipo : ""}">
                     <span class="pool-num">${index + 1}</span>
                     <span class="pool-name">${bandeira(jogador.pais)}${jogador.nomeCompleto || jogador.nome}</span>
-                    <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span>
                     ${badgeEspecial}
+                    <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span>
                 </span>
             `;
 
@@ -1437,7 +1512,7 @@ function mostrarResultadoFinal() {
 
     // Botão de toggle + copiar
     html += `<div class="result-toggle-wrap">
-        <button id="togglePlayersBtn" class="result-toggle-btn">${todosExpandidos ? "▼" : "▶"} ${todosExpandidos ? "Reduzir tudo" : "Expandir tudo"}</button>
+        <button id="togglePlayersBtn" class="result-toggle-btn">${todosExpandidos ? "▼" : "▶"} ${todosExpandidos ? "REDUZIR LISTA" : "EXPANDIR LISTA"}</button>
         <button id="copyResults" class="result-copy-btn">Copiar escalações</button>
     </div>`;
 
@@ -1449,9 +1524,13 @@ function mostrarResultadoFinal() {
 
             const total = times[ index ].length;
 
+            const pais = paisParticipante[index];
+            const bandPais = pais ? bandeira(pais) : "";
+            const abrevPais = pais ? abreviacaoPais(pais) : "";
+
             html += `
                 <h2 class="player-team-head" data-team="${index}">
-                    ${nome} <span class="player-count">(${total} jogadores)</span>
+                    ${bandPais} ${nome} <span class="player-country-abbr">${abrevPais}</span> <span class="player-count">(${total} jogadores)</span>
                     <span class="player-toggle-icon">${todosExpandidos ? "▲" : "▼"}</span>
                 </h2>
             `;
@@ -1524,7 +1603,7 @@ function mostrarResultadoFinal() {
                                     : "";
 
                             html += `
-                                <div class="player-entry pos-${jogador.posicao.toLowerCase()}${jogador.tipo ? " is-special" : ""}">
+                                <div class="player-entry pos-${jogador.posicao.toLowerCase()}${jogador.tipo ? " is-special " + jogador.tipo : ""}">
                                     <span class="pos-label">${POSICOES_ABREV[jogador.posicao]}</span> ${bandeira(jogador.pais)}<span class="player-pais-sigla">${abreviacaoPais(jogador.pais)}</span> ${jogador.nome}${badgeTipo}
                                 </div>
                             `;
@@ -1571,7 +1650,7 @@ function mostrarResultadoFinal() {
         } );
 
         document.getElementById( "togglePlayersBtn" ).textContent =
-            novaAberta ? "▼ Reduzir tudo" : "▶ Expandir tudo";
+            novaAberta ? "▼ REDUZIR LISTA" : "▶ EXPANDIR LISTA";
 
         localStorage.setItem( "draftResultsExpandido", novaAberta );
     } );
@@ -1995,10 +2074,10 @@ function renderizarModoSorteio() {
 
                 ${restantes > 0 ? `
                     <div style="display:flex;gap:10px;width:100%;max-width:500px;">
-                        <button id="btnSortearProximo" class="btn-primary" style="font-size:18px;padding:16px 24px;flex:1;box-shadow:4px 4px 0 var(--ink);">
+                        <button id="btnSortearProximo" class="btn-primary btn-sortear-um">
                             🎲 SORTEAR UM
                         </button>
-                        <button id="btnSortearTodos" class="btn-primary" style="font-size:18px;padding:16px 24px;flex:1;background:var(--ink);box-shadow:4px 4px 0 var(--accent-2);">
+                        <button id="btnSortearTodos" class="btn-primary btn-sortear-todos">
                             ⚡ SORTEAR TODOS
                         </button>
                     </div>
@@ -2943,29 +3022,22 @@ function renderizarCompetidorMataMata(
         return `<span class="mata-empty">A definir</span>`;
     }
 
-    const tagHumano = mostrarHumano && competidor.humano
-        ? `<span class="mata-human-tag">${competidor.nomePessoa}</span>`
+    const nomeJogador = competidor.humano
+        ? competidor.nomePessoa
         : "";
 
     const tagCpu = !competidor.humano && competidor.id?.startsWith( "cpu-" )
         ? `<span class="mata-cpu-tag">CPU</span>`
         : "";
 
-    if ( tagCpu && mostrarHumano === false ) {
-        return `
-            <span class="mata-competitor">
+    return `
+        <span class="mata-competitor">
+            <span class="mata-competitor-top">
                 <span class="mata-country-code">${abreviacaoPais( competidor.pais )}</span>
                 ${bandeira( competidor.pais )}
             </span>
+            ${nomeJogador ? `<span class="mata-player-name">${nomeJogador}</span>` : ""}
             ${tagCpu}
-        `;
-    }
-
-    return `
-        <span class="mata-competitor">
-            <span class="mata-country-code">${abreviacaoPais( competidor.pais )}</span>
-            ${bandeira( competidor.pais )}
-            ${tagHumano}${tagCpu}
         </span>
     `;
 
@@ -3382,7 +3454,7 @@ document
 
             const confirmou = await mostrarModal( {
                 title: "Refazer Draft?",
-                message: "Os picks atuais serão mantidos e você voltará à tela de draft para fazer novas escolhas.",
+                message: "Todos os picks feitos serão apagados. Você voltará à tela de draft para recomeçar do zero.",
                 confirmText: "Sim, refazer",
                 cancelText: "Cancelar",
                 eyebrow: "Draft"
@@ -3390,12 +3462,13 @@ document
 
             if ( !confirmou ) return;
 
-            // Resetar estado do draft mantendo os picks já feitos
+            // Resetar estado do draft por completo (zerar picks, times, refreshes)
             jogadoresDisponiveis = [ ...jogadoresBase ];
             poolAtual = [];
+            times = nomesJogadores.map( () => [] );
             participantesAtivos = nomesJogadores.map( ( _, idx ) => idx );
             jogadorAtual = participantesAtivos[ 0 ] ?? 0;
-            pickAtual = times.flat().length + 1;
+            pickAtual = 1;
             direcaoSnake = 1;
             refreshesPorJogador = nomesJogadores.map( () => config.refreshCount );
 
@@ -3613,6 +3686,23 @@ function setActiveStep(step) {
 
 carregarJogadores();
 carregarIconsHeroes();
+
+// Sincronizar slider <-> input numérico do poolSpecialChance
+(function() {
+    const poolSlider = document.getElementById("poolSpecialChance");
+    const poolInput = document.getElementById("poolSpecialChanceInput");
+    if (poolSlider && poolInput) {
+        // Escala linear: 0-10000 no slider ↔ 0-100 no input
+        poolSlider.addEventListener("input", () => {
+            const pct = parseInt(poolSlider.value) / 100;
+            poolInput.value = pct.toFixed(2);
+        });
+        poolInput.addEventListener("input", () => {
+            const pct = Math.min(100, Math.max(0, parseFloat(poolInput.value) || 0));
+            poolSlider.value = Math.round(pct * 100);
+        });
+    }
+})();
 
 // Etapa inicial: Configurar (1)
 setTimeout(() => setActiveStep(1), 50);

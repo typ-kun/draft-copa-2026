@@ -53,7 +53,7 @@ EA Sports FC 26
 **1. Database de Jogadores (`jogadores_final.json`)**
 1237 jogadores convocados para a Copa do Mundo 2026 (lista oficial FIFA).
 Cada jogador tem: nome abreviado, nome completo, posição, país e playerid do FC26.
-892 IDs já mapeados, 345 pendentes.
+Todos os IDs foram mapeados e validados.
 
 **2. Conversor Python (`converter_v2.py` + `converter.bat`)**
 Lê o JSON exportado do draft, modifica os TXT originais do FC26 e gera
@@ -87,8 +87,7 @@ Interface visual com tutorial para usar o conversor sem o terminal.
 
 - ✅ Sistema de draft completo e funcional
 - ✅ Conversor gerando TXT válidos (encoding UTF-16LE correto)
-- ✅ Database com 1237 jogadores da FIFA
-- 🔴 345 IDs pendentes de correção manual via FC Editor
+- ✅ Database com 1237 jogadores da FIFA (todos os IDs mapeados)
 - ✅ Exportação incluindo playerids no JSON
 
 ## Objetivo Final

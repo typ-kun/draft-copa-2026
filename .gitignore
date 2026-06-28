@@ -15,3 +15,40 @@ desktop.ini
 # IDE
 .vscode/
 .idea/
+
+# Binarios e build
+*.exe
+*.dll
+*.pdb
+bin/
+obj/
+FifaControls_decompiled/
+RDBM26_decompiled/
+
+# Squad files (grandes)
+Squads*
+
+# Temp files
+*.tmp
+*.log
+*.bak
+our_test.bin
+rdbm_test.bin
+tmp_*
+debug_writer.log
+
+# Tools (binarios)
+dnSpy/
+FifaLibrary19_src/
+RDBM26/*.exe
+RDBM26/*.dll
+RDBM26/*.zip
+RDBM26/fifa07tool/
+
+# Referencias (imagens)
+Referencias/
+assets/
+*.png
+*.jpg
+*.pdf
+*.webp

@@ -56,27 +56,11 @@ Interface visual com tutorial passo a passo.
 
 ---
 
-## PARTE 3 — Correção de IDs (PRIORIDADE MÁXIMA)
+## PARTE 3 — Validação de IDs
 
 ### Feature 13 — Validação e Correção dos PlayerIDs
-**Status:** EM ANDAMENTO — PRIORIDADE MÁXIMA.
-
-**Problema:** Dos 1237 jogadores na database, 892 (72%) têm playerid do FC26
-identificado automaticamente. Os 345 restantes (28%) precisam de correção manual.
-
-**Método:**
-1. Usar FC Editor para buscar o playerid de cada jogador sem ID
-2. Adicionar o ID no `jogadores_final.json` e no `MANUAL_PLAYER_IDS` do conversor
-3. Validar cada ID conferindo nacionalidade + posição no FC26
-
-**Jogadores pendentes (345):**
-Lista completa disponível rodando `python validar_ids.py`
-
-**Como ajudar:**
-1. Abrir o Squad File no FC Editor by Decoruiz
-2. Procurar o jogador pelo nome completo
-3. Anotar o playerid (ex: 186555)
-4. Informar para adicionar na database
+**Status:** ✅ Concluído.
+Todos os 1237 jogadores da database tiveram seus playerids do FC26 mapeados e validados.
 
 ### Feature 14 — Validação Automática de IDs
 **Status:** Implementado (`validar_ids.py`).
@@ -87,7 +71,6 @@ Confronta cada playerid da database com os dados do FC26
 
 ## Próximos Passos Recomendados
 
-1. 🔴 **Corrigir IDs pendentes** — 345 jogadores sem ID no FC26
-2. 🟡 **Feature 9 — Persistência** — Salvar progresso do draft
-3. 🟢 **Feature 11** — Fazer o conversor HTML funcionar com encoding UTF-16LE
-4. 🟢 **Testes** — Validar drafts completos com a database atual
+1. 🟢 **Testes** — Validar drafts completos com a database atual
+2. 🟢 **Conversor HTML** — Testar geração de TXT via interface web
+3. 🟢 **Polimento** — Ajustes de UI/UX e responsividade

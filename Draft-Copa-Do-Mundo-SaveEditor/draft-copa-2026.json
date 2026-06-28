@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "exportedAt": "2026-06-28T00:09:22.862Z",
+  "draft": {
+    "config": {
+      "mode": "snake",
+      "playersPerTeam": 26,
+      "goalkeeperRule": true,
+      "startingPhase": "round32"
+    },
+    "participants": [
+      {
+        "player": "Gui",
+        "team": "Brasil",
+        "players": [
+          {
+            "name": "A. Maxi",
+            "position": "MF",
+            "nationality": "Uruguai",
+            "playerid": "254817"
+          },
+          {
+            "name": "H. Erling",
+            "position": "FW",
+            "nationality": "Noruega",
+            "playerid": "239085"
+          },
+          {
+            "name": "D. Kevin",
+            "position": "MF",
+            "nationality": "Bélgica",
+            "playerid": "192985"
+          },
+          {
+            "name": "K. Marvin",
+            "position": "GK",
+            "nationality": "Suíça",
+            "playerid": "256726"
+          },
+          {
+            "name": "T. Jonathan",
+            "position": "DF",
+            "nationality": "Alemanha",
+            "playerid": "213331"
+          },
+          {
+            "name": "M. SALAH",
+            "position": "FW",
+            "nationality": "Egito",
+            "playerid": "209331"
+          },
+          {
+            "name": "M. Edouard",
+            "position": "GK",
+            "nationality": "Senegal",
+            "playerid": "81557"
+          },
+          {
+            "name": "H. Lucas",
+            "position": "DF",
+            "nationality": "França",
+            "playerid": "220814"
+          },
+          {
+            "name": "M. Gonzalo",
+            "position": "DF",
+            "nationality": "Argentina",
+            "playerid": "231340"
+          },
+          {
+            "name": "S. William",
+            "position": "DF",
+            "nationality": "França",
+            "playerid": "243715"
+          },
+          {
+            "name": "GAVI",
+            "position": "MF",
+            "nationality": "Espanha",
+            "playerid": "264240"
+          },
+          {
+            "name": "R. Tijjani",
+            "position": "MF",
+            "nationality": "Holanda",
+            "playerid": "240638"
+          },
+          {
+            "name": "C. Hakan",
+            "position": "MF",
+            "nationality": "Turquia",
+            "playerid": "208128"
+          },
+          {
+            "name": "B. GUIMARAES",
+            "position": "MF",
+            "nationality": "Brasil",
+            "playerid": "247851"
+          },
+          {
+            "name": "W. Inaki",
+            "position": "FW",
+            "nationality": "Gana",
+            "playerid": "216201"
+          },
+          {
+            "name": "A. Manuel",
+            "position": "DF",
+            "nationality": "Suíça",
+            "playerid": "229237"
+          },
+          {
+            "name": "L. Maxence",
+            "position": "DF",
+            "nationality": "França",
+            "playerid": "244067"
+          },
+          {
+            "name": "W. Ollie",
+            "position": "FW",
+            "nationality": "Inglaterra",
+            "playerid": "221697"
+          },
+          {
+            "name": "A. Miguel",
+            "position": "MF",
+            "nationality": "Paraguai",
+            "playerid": "230977"
+          },
+          {
+            "name": "M. Kylian",
+            "position": "FW",
+            "nationality": "França",
+            "playerid": "231747"
+          },
+          {
+            "name": "D. Krepin",
+            "position": "DF",
+            "nationality": "Senegal",
+            "playerid": "75748"
+          },
+          {
+            "name": "RODRI",
+            "position": "MF",
+            "nationality": "Espanha",
+            "playerid": "231866"
+          },
+          {
+            "name": "U. Ayase",
+            "position": "FW",
+            "nationality": "Japão",
+            "playerid": "252162"
+          },
+          {
+            "name": "D. Denzel",
+            "position": "DF",
+            "nationality": "Holanda",
+            "playerid": "233096"
+          },
+          {
+            "name": "B. Lucas",
+            "position": "MF",
+            "nationality": "Suécia",
+            "playerid": "272926"
+          },
+          {
+            "name": "B. Valentin",
+            "position": "MF",
+            "nationality": "Argentina",
+            "playerid": "263370"
+          }
+        ]
+      }
+    ]
+  }
+}

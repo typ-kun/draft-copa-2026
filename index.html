@@ -33,6 +33,8 @@
                         <option value="4">4 jogadores</option>
                         <option value="5">5 jogadores</option>
                         <option value="6">6 jogadores</option>
+                        <">7 jogadores</option>
+                        <option value="8">8 jogadores</option>
                     </select>
                 </div>
             </div>
@@ -76,7 +78,7 @@
             <div class="setting-row">
                 <div class="setting-field">
                     <label>Jogadores por elenco</label>
-                    <input type="number" id="playersPerTeam" value="18" min="1" max="30">
+                    <input type="number" id="playersPerTeam" value="26" min="1" max="30">
                 </div>
                 <div class="setting-note" id="note-elenco">Total de jogadores que cada participante deve selecionar para completar seu time.</div>
             </div>
@@ -92,7 +94,7 @@
             <div class="setting-row">
                 <div class="setting-field">
                     <label>Icons &amp; Heroes</label>
-                    <select id="iconsHeroesMode">
+                    <select id="iconsHeroesMode" onchange="var c=document.getElementById('poolSpecialChanceContainer'); if(c){c.style.display=this.value==='none'?'none':'block';}">
                         <option value="none" selected>Nenhum</option>
                         <option value="icons">Só Icons</option>
                         <option value="heroes">Só Heroes</option>
@@ -103,6 +105,14 @@
                     <b>Icons:</b> Lendas históricas do futebol (Pelé, Maradona, Zidane…).<br>
                     <b>Heroes:</b> Ídolos de clube que marcaram época (Drogba, Hazard…).<br>
                     Quando ativados, entram no pool junto com os jogadores da Copa.
+                </div>
+                <div class="setting-field" id="poolSpecialChanceContainer" style="display:none; margin-top:6px;">
+                    <label>Chance de Icon/Hero</label>
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                        <input type="number" id="poolSpecialChanceInput" min="0" max="100" step="0.01" value="1.00" style="width:65px; text-align:center; padding:4px;">
+                        <span style="font-weight:700; color:var(--ink);">%</span>
+                    </div>
+                    <input type="range" id="poolSpecialChance" min="0" max="10000" value="100" style="width:100%;">
                 </div>
             </div>
 
@@ -219,7 +229,7 @@
             </button>
 
             <button id="goToMataMata">
-                Ir para Mata-mata
+                🏆 IR PARA MATA-MATA
             </button>
 
             <button id="backToDraft">
@@ -253,7 +263,7 @@
 
             <div class="mata-actions">
                 <button id="sortearMataMata">
-                    Sortear novamente
+                    🔄 Sortear novamente
                 </button>
                 <button id="resetarTudo" class="btn-reset">
                     Menu

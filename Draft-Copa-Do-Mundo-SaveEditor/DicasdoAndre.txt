@@ -1,0 +1,7 @@
+André é um conhecido que conheci no discord e ele é grande na comunidade modding de fifa/fc26. Ele tem um programa que consegue abrir squadfile e importar tabelas nele e salvar. Seguem as dicas dele abaixo:
+
+Mas um caminho que pode ajudar, talvez seja analisar o programa de baixar Squads do Aranaktu: https://github.com/xAranaktu/FIFASquadFileDownloader.
+
+Baixa uns decompiladores de dll e analisa as dlls do RDBM (FIFALibrary e FIFAControls, 95% do que tem na FIFALibrary vai clarear o meio campo).
+
+Você precisa recalcular o CRC de todas as tabelas quando monta a squad, precisa do xml da base de dados pra fazer isso.
