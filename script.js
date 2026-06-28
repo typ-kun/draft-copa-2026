@@ -1717,7 +1717,8 @@ function mostrarResultadoFinal() {
                     if (!teamId) { toast("Teamid não encontrado para: " + teamName); return; }
                     for (const j of times[idx]) {
                         if (!j.playerid) { toast("Jogador sem playerid: " + j.nome); return; }
-                        const pos = CV_POS[j.posicao] || "3";
+                        const posMap = { GK: "0", DF: "1", MF: "2", FW: "3" };
+                        const pos = posMap[j.posicao] || "3";
                         const jersey = Math.floor(Math.random() * 99) + 1;
                         tplLines.push(`0\t0\t0\t0\t${jersey}\t${pos}\t${artKey}\t${teamId}\t0\t0\t0\t0\t0\t${j.playerid}\t3\t0`);
                         artKey++;
