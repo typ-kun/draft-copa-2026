@@ -25,7 +25,7 @@ namespace DraftCopaDoMundo.SaveEditor
             xmlPath = Path.Combine(exeDir, "fifa_ng_db-meta.xml");
 
             this.Text = "Draft Copa do Mundo 2026 - Importar Elencos";
-            this.Size = new System.Drawing.Size(480, 220);
+            this.Size = new System.Drawing.Size(480, 280);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -111,6 +111,7 @@ namespace DraftCopaDoMundo.SaveEditor
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.Description = "Selecione a pasta com os TXTs para importar";
+            fbd.SelectedPath = @"C:\draft-copa-do-mundo-2026\Arquivos para Importar SaveEditor";
 
             if (fbd.ShowDialog() != DialogResult.OK) return;
 
