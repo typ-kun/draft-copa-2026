@@ -10,15 +10,14 @@ namespace DraftCopaDoMundo.SaveEditor
 {
     public class ImportForm : Form
     {
-        // Cores: Preto e Dourado
-        private static readonly Color BgDark = Color.FromArgb(25, 25, 25);
-        private static readonly Color BgPanel = Color.FromArgb(35, 35, 35);
-        private static readonly Color Gold = Color.FromArgb(212, 175, 55);
-        private static readonly Color GoldDim = Color.FromArgb(140, 115, 35);
-        private static readonly Color White = Color.FromArgb(240, 240, 240);
-        private static readonly Color Gray = Color.FromArgb(120, 120, 120);
-        private static readonly Color Success = Color.FromArgb(80, 200, 120);
-        private static readonly Color Error = Color.FromArgb(232, 70, 43);
+        // Cores do logo Draft Copa do Mundo 2026
+        private static readonly Color Surface = Color.FromArgb(243, 236, 216);  // Bege claro
+        private static readonly Color Ink = Color.FromArgb(27, 26, 23);        // Preto quase absoluto
+        private static readonly Color Gold = Color.FromArgb(240, 172, 0);       // Dourado/Amarelo
+        private static readonly Color GoldDim = Color.FromArgb(180, 130, 0);    // Dourado mais escuro
+        private static readonly Color Line = Color.FromArgb(216, 207, 180);    // Linha suave
+        private static readonly Color Success = Color.FromArgb(60, 160, 80);
+        private static readonly Color Error = Color.FromArgb(200, 60, 40);
 
         private FifaLibrary.CareerFile careerFile;
         private DataSet[] dataSets;
@@ -42,13 +41,13 @@ namespace DraftCopaDoMundo.SaveEditor
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.BackColor = BgDark;
+            this.BackColor = Surface;
 
             // Título
             lblTitle = new Label();
             lblTitle.Text = "⚽ DRAFT COPA DO MUNDO 2026";
             lblTitle.Font = new Font("Segoe UI", 13, FontStyle.Bold);
-            lblTitle.ForeColor = Gold;
+            lblTitle.ForeColor = Ink;
             lblTitle.Size = new System.Drawing.Size(460, 35);
             lblTitle.Location = new System.Drawing.Point(20, 15);
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
@@ -69,7 +68,7 @@ namespace DraftCopaDoMundo.SaveEditor
             lblInGameName = new Label();
             lblInGameName.Text = "Nenhum squad aberto";
             lblInGameName.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            lblInGameName.ForeColor = White;
+            lblInGameName.ForeColor = Ink;
             lblInGameName.Size = new System.Drawing.Size(460, 25);
             lblInGameName.Location = new System.Drawing.Point(20, 195);
 
@@ -77,7 +76,7 @@ namespace DraftCopaDoMundo.SaveEditor
             lblStatus = new Label();
             lblStatus.Text = "Selecione um squad file para comecar";
             lblStatus.Font = new Font("Segoe UI", 9);
-            lblStatus.ForeColor = Gray;
+            lblStatus.ForeColor = Line;
             lblStatus.Size = new System.Drawing.Size(460, 25);
             lblStatus.Location = new System.Drawing.Point(20, 225);
 
@@ -85,7 +84,7 @@ namespace DraftCopaDoMundo.SaveEditor
             Label lblCredits = new Label();
             lblCredits.Text = "Feito para a comunidade modding FC 26";
             lblCredits.Font = new Font("Segoe UI", 8, FontStyle.Italic);
-            lblCredits.ForeColor = GoldDim;
+            lblCredits.ForeColor = Gold;
             lblCredits.Size = new System.Drawing.Size(460, 20);
             lblCredits.Location = new System.Drawing.Point(20, 265);
             lblCredits.TextAlign = ContentAlignment.MiddleCenter;
@@ -103,15 +102,10 @@ namespace DraftCopaDoMundo.SaveEditor
 
         private void ImportForm_Paint(object sender, PaintEventArgs e)
         {
-            // Borda dourada
-            using (Pen pen = new Pen(Gold, 2))
+            // Borda dourada na janela
+            using (Pen pen = new Pen(Gold, 3))
             {
                 e.Graphics.DrawRectangle(pen, 1, 1, this.ClientSize.Width - 3, this.ClientSize.Height - 3);
-            }
-            // Linha decorativa dourada abaixo do titulo
-            using (Pen pen = new Pen(Gold, 2))
-            {
-                e.Graphics.DrawLine(pen, 40, 52, this.ClientSize.Width - 40, 52);
             }
         }
 
@@ -121,15 +115,15 @@ namespace DraftCopaDoMundo.SaveEditor
             btn.Text = text;
             btn.Size = new System.Drawing.Size(210, 50);
             btn.Location = new System.Drawing.Point(x, y);
-            btn.BackColor = BgPanel;
-            btn.ForeColor = Gold;
+            btn.BackColor = Gold;
+            btn.ForeColor = Ink;
             btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderColor = Gold;
+            btn.FlatAppearance.BorderColor = Ink;
             btn.FlatAppearance.BorderSize = 2;
             btn.Font = new Font("Segoe UI", 11, FontStyle.Bold);
             btn.Cursor = Cursors.Hand;
-            btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 50, 50);
-            btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(20, 20, 20);
+            btn.FlatAppearance.MouseOverBackColor = GoldDim;
+            btn.FlatAppearance.MouseDownBackColor = Ink;
             btn.Enabled = false;
             btn.Paint += Button_Paint;
             return btn;
@@ -140,13 +134,13 @@ namespace DraftCopaDoMundo.SaveEditor
             Button btn = (Button)sender;
             if (!btn.Enabled)
             {
-                btn.BackColor = BgDark;
-                btn.ForeColor = Gray;
-                btn.FlatAppearance.BorderColor = Gray;
+                btn.BackColor = Line;
+                btn.ForeColor = Line;
+                btn.FlatAppearance.BorderColor = Line;
             }
             else
             {
-                btn.BackColor = BgPanel;
+                btn.BackColor = Surface;
                 btn.ForeColor = Gold;
                 btn.FlatAppearance.BorderColor = Gold;
             }
@@ -156,16 +150,16 @@ namespace DraftCopaDoMundo.SaveEditor
         {
             if (btn.Enabled)
             {
-                btn.BackColor = BgPanel;
-                btn.ForeColor = Gold;
-                btn.FlatAppearance.BorderColor = Gold;
+                btn.BackColor = Gold;
+                btn.ForeColor = Ink;
+                btn.FlatAppearance.BorderColor = Ink;
                 btn.Cursor = Cursors.Hand;
             }
             else
             {
-                btn.BackColor = BgDark;
-                btn.ForeColor = Gray;
-                btn.FlatAppearance.BorderColor = Gray;
+                btn.BackColor = Line;
+                btn.ForeColor = Line;
+                btn.FlatAppearance.BorderColor = Line;
                 btn.Cursor = Cursors.Default;
             }
         }
@@ -192,7 +186,7 @@ namespace DraftCopaDoMundo.SaveEditor
             try
             {
                 lblStatus.Text = "Carregando squad...";
-                lblStatus.ForeColor = Gray;
+                lblStatus.ForeColor = Line;
                 this.Refresh();
 
                 careerFile = new FifaLibrary.CareerFile(currentFile, xmlPath);
@@ -226,7 +220,7 @@ namespace DraftCopaDoMundo.SaveEditor
             try
             {
                 lblStatus.Text = "Importando tabelas...";
-                lblStatus.ForeColor = Gray;
+                lblStatus.ForeColor = Line;
                 this.Refresh();
 
                 DataSet mainDS = dataSets[0];
@@ -284,7 +278,7 @@ namespace DraftCopaDoMundo.SaveEditor
             try
             {
                 lblStatus.Text = "Salvando squad...";
-                lblStatus.ForeColor = Gray;
+                lblStatus.ForeColor = Line;
                 this.Refresh();
 
                 careerFile.SaveEa(currentFile);
