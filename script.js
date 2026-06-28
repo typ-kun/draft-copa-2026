@@ -1686,68 +1686,43 @@ function mostrarResultadoFinal() {
             "click",
             () => {
 
-                const dados = {
-                    version: 1,
-                    exportedAt: new Date().toISOString(),
-                    draft: {
-                        config: {
-                            mode: config.draftMode,
-                            playersPerTeam: config.playersPerTeam,
-                            goalkeeperRule: config.goalkeeperRule,
-                            startingPhase: config.startingPhase
-                        },
-                        participants: nomesJogadores.map(
-                            ( nome, idx ) => ( {
-                                player: nome,
-                                team: paisParticipante[ idx ] || null,
-                                players: times[ idx ].map(
-                                    j => ( {
-                                        name: j.nome,
-                                        position: j.posicao,
-                                        nationality: j.pais,
-                                        playerid: j.playerid || null
-                                    } )
-                                )
-                            } )
-                        )
+                // ── Gerar TXTs diretamente ──────────────────────────────────
+                // teamplayerlinks.txt
+                let tplHeader = "leaguegoals\tisamongtopscorers\tyellows\tisamongtopscorersinteam\tjerseynumber\tposition\tartificialkey\tteamid\tleaguegoalsprevmatch\tinjury\tleagueappearances\tistopscorer\tleaguegoalsprevthreematches\tplayerid\tform\treds";
+                let tplLines = [tplHeader];
+                let artKey = 0;
+                for (let idx = 0; idx < times.length; idx++) {
+                    const teamName = paisParticipante[idx] || "";
+                    const teamId = TEAM_MAP[teamName.toLowerCase()] || TEAM_MAP[teamName] || 0;
+                    if (!teamId) { toast("Teamid não encontrado para: " + teamName); return; }
+                    for (const j of times[idx]) {
+                        if (!j.playerid) { toast("Jogador sem playerid: " + j.nome); return; }
+                        const pos = CV_POS[j.posicao] || "3";
+                        const jersey = Math.floor(Math.random() * 99) + 1;
+                        tplLines.push(`0\t0\t0\t0\t${jersey}\t${pos}\t${artKey}\t${teamId}\t0\t0\t0\t0\t0\t${j.playerid}\t3\t0`);
+                        artKey++;
                     }
-                };
+                }
 
-                const blob =
-                    new Blob(
-                        [ JSON.stringify( dados, null, 2 ) ],
-                        { type: "application/json" }
-                    );
+                // Download teamplayerlinks.txt
+                const tplBlob = new Blob([cvEncode(tplLines.join("\r\n"))], { type: "application/octet-stream" });
+                const tplUrl = URL.createObjectURL(tplBlob);
+                const a1 = document.createElement("a");
+                a1.href = tplUrl; a1.download = "teamplayerlinks.txt";
+                document.body.appendChild(a1); a1.click();
+                document.body.removeChild(a1); URL.revokeObjectURL(tplUrl);
 
-                const url =
-                    URL.createObjectURL(
-                        blob
-                    );
+                // Download leagues.txt (placeholder — mantém original)
+                const lgHeader = "countryid\tleaguename\tleaguetype\tlevel\tiscompetitionscarfenabled\tisbannerenabled\tleagueid\tiscompetitionpoleflagenabled\tiscompetitioncrowdcardsenabled\tleaguetimeslice\tiswomencompetition\tiswithintransferwindow\tisinternationalleague";
+                const lgLines = [lgHeader, "13\tInternational (1)\t0\t1\t2\t2\t1\t2\t2\t7\t0\t0\t0"];
+                const lgBlob = new Blob([cvEncode(lgLines.join("\r\n"))], { type: "application/octet-stream" });
+                const lgUrl = URL.createObjectURL(lgBlob);
+                const a2 = document.createElement("a");
+                a2.href = lgUrl; a2.download = "leagues.txt";
+                document.body.appendChild(a2); a2.click();
+                document.body.removeChild(a2); URL.revokeObjectURL(lgUrl);
 
-                const a =
-                    document.createElement(
-                        "a"
-                    );
-
-                a.href = url;
-                a.download =
-                    `draft-copa-2026.json`;
-
-                document.body.appendChild(
-                    a
-                );
-
-                a.click();
-
-                document.body.removeChild(
-                    a
-                );
-
-                URL.revokeObjectURL(
-                    url
-                );
-
-                toast("Elencos exportados com sucesso!");
+                toast("TXTs exportados! Coloque na pasta do projeto e rode Importar.bat");
 
             }
         );
@@ -3739,6 +3714,26 @@ setTimeout(() => setActiveStep(1), 50);
     };
 
     const CV_POS = { GK: "0", DF: "1", MF: "2", FW: "3" };
+
+    // Mapeamento: nome PT → teamid (do teams.txt)
+    const TEAM_MAP = {
+        "alemanha": 1337, "argentina": 1369, "argélia": 111448,
+        "arábia saudita": 111114, "austrália": 1415, "bélgica": 1325,
+        "brasil": 1370, "cabo verde": 0, "canadá": 111455,
+        "catar": 111527, "colômbia": 111109, "coreia do sul": 0,
+        "costa do marfim": 0, "croácia": 1328, "curaçao": 0,
+        "egito": 111130, "equador": 111165, "escócia": 1359,
+        "espanha": 1362, "estados unidos": 0, "frança": 1335,
+        "gana": 111462, "haiti": 0, "holanda": 0,
+        "inglaterra": 1318, "irã": 111115, "iraque": 111512,
+        "japão": 1411, "jordânia": 111513, "marrocos": 111111,
+        "méxico": 1386, "noruega": 1352, "nova zelândia": 0,
+        "panamá": 0, "paraguai": 1375, "portugal": 1354,
+        "rd congo": 111545, "república tcheca": 1330, "senegal": 1667,
+        "suécia": 0, "suíça": 1364, "tunísia": 1391,
+        "turquia": 0, "uruguai": 1377, "uzbequistão": 111485,
+        "áfrica do sul": 111099, "áustria": 0, "irlanda do norte": 110081
+    };
 
     const cvS = { tpl: null, teams: null, leagues: null, draftData: null, _downloads: [], _resolved: null };
 
