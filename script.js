@@ -3230,18 +3230,6 @@ function mostrarMataMata() {
 
 async function resetarTudo() {
 
-    const confirmou = await mostrarModal( {
-        title: "Recomeçar tudo?",
-        message: "Todo o draft e mata-mata atuais serão apagados.",
-        confirmText: "Sim, recomeçar",
-        cancelText: "Cancelar",
-        eyebrow: "Mata-mata"
-    } );
-
-    if ( !confirmou ) {
-        return;
-    }
-
     localStorage.clear();
     limparEstadoDraft();
     location.reload();
