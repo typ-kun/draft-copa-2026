@@ -1,5 +1,7 @@
 using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -8,6 +10,15 @@ namespace DraftCopaDoMundo.SaveEditor
 {
     public class ImportForm : Form
     {
+        // Cores inspiradas no Draft Copa do Mundo 2026
+        private static readonly Color Surface = Color.FromArgb(243, 236, 216);
+        private static readonly Color Surface2 = Color.White;
+        private static readonly Color Ink = Color.FromArgb(27, 26, 23);
+        private static readonly Color Accent = Color.FromArgb(232, 70, 43);
+        private static readonly Color Accent2 = Color.FromArgb(200, 162, 75);
+        private static readonly Color Line = Color.FromArgb(216, 207, 180);
+        private static readonly Color Gold = Color.FromArgb(200, 162, 75);
+
         private FifaLibrary.CareerFile careerFile;
         private DataSet[] dataSets;
         private string currentFile;
@@ -18,56 +29,115 @@ namespace DraftCopaDoMundo.SaveEditor
         private Button btnSave;
         private Label lblStatus;
         private Label lblInGameName;
+        private Label lblTitle;
 
         public ImportForm()
         {
             string exeDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) ?? ".";
             xmlPath = Path.Combine(exeDir, "fifa_ng_db-meta.xml");
 
-            this.Text = "Draft Copa do Mundo 2026 - Importar Elencos";
-            this.Size = new System.Drawing.Size(480, 280);
+            this.Text = "Draft Copa do Mundo 2026";
+            this.Size = new System.Drawing.Size(520, 320);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.BackColor = Surface;
 
-            btnOpen = new Button();
-            btnOpen.Text = "1. Abrir SquadFile";
-            btnOpen.Size = new System.Drawing.Size(200, 50);
-            btnOpen.Location = new System.Drawing.Point(20, 20);
-            btnOpen.Enabled = true;
+            // Título
+            lblTitle = new Label();
+            lblTitle.Text = "⚽ DRAFT COPA DO MUNDO 2026";
+            lblTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblTitle.ForeColor = Accent;
+            lblTitle.Size = new System.Drawing.Size(480, 35);
+            lblTitle.Location = new System.Drawing.Point(20, 15);
+            lblTitle.TextAlign = ContentAlignment.MiddleCenter;
+
+            // Linha decorativa
+            Panel divider = new Panel();
+            divider.Size = new System.Drawing.Size(480, 3);
+            divider.Location = new System.Drawing.Point(20, 52);
+            divider.BackColor = Gold;
+
+            // Botões estilo do draft
+            btnOpen = CreateButton("1. Abrir SquadFile", 20, 65, Accent);
             btnOpen.Click += BtnOpen_Click;
 
-            btnImport = new Button();
-            btnImport.Text = "2. Importar tabelas";
-            btnImport.Size = new System.Drawing.Size(200, 50);
-            btnImport.Location = new System.Drawing.Point(250, 20);
+            btnImport = CreateButton("2. Importar tabelas", 260, 65, Color.FromArgb(37, 99, 168));
             btnImport.Enabled = false;
             btnImport.Click += BtnImport_Click;
 
-            btnSave = new Button();
-            btnSave.Text = "3. Salvar";
-            btnSave.Size = new System.Drawing.Size(200, 50);
-            btnSave.Location = new System.Drawing.Point(20, 85);
+            btnSave = CreateButton("3. Salvar", 20, 130, Color.FromArgb(27, 138, 61));
             btnSave.Enabled = false;
             btnSave.Click += BtnSave_Click;
 
+            // Label do squad
             lblInGameName = new Label();
             lblInGameName.Text = "Nenhum squad aberto";
-            lblInGameName.Size = new System.Drawing.Size(440, 20);
-            lblInGameName.Location = new System.Drawing.Point(20, 145);
-            lblInGameName.ForeColor = System.Drawing.Color.DarkBlue;
+            lblInGameName.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            lblInGameName.ForeColor = Ink;
+            lblInGameName.Size = new System.Drawing.Size(480, 25);
+            lblInGameName.Location = new System.Drawing.Point(20, 195);
 
+            // Status
             lblStatus = new Label();
             lblStatus.Text = "Selecione um squad file para comecar";
-            lblStatus.Size = new System.Drawing.Size(440, 20);
-            lblStatus.Location = new System.Drawing.Point(20, 170);
-            lblStatus.ForeColor = System.Drawing.Color.Gray;
+            lblStatus.Font = new Font("Segoe UI", 9);
+            lblStatus.ForeColor = Color.FromArgb(120, 120, 120);
+            lblStatus.Size = new System.Drawing.Size(480, 25);
+            lblStatus.Location = new System.Drawing.Point(20, 225);
 
+            // Linha inferior
+            Panel dividerBottom = new Panel();
+            dividerBottom.Size = new System.Drawing.Size(480, 2);
+            dividerBottom.Location = new System.Drawing.Point(20, 260);
+            dividerBottom.BackColor = Line;
+
+            // Label de créditos
+            Label lblCredits = new Label();
+            lblCredits.Text = "Feito com ❤️ para a comunidade modding FC 26";
+            lblCredits.Font = new Font("Segoe UI", 8, FontStyle.Italic);
+            lblCredits.ForeColor = Color.FromArgb(160, 155, 140);
+            lblCredits.Size = new System.Drawing.Size(480, 20);
+            lblCredits.Location = new System.Drawing.Point(20, 270);
+            lblCredits.TextAlign = ContentAlignment.MiddleCenter;
+
+            this.Controls.Add(lblTitle);
+            this.Controls.Add(divider);
             this.Controls.Add(btnOpen);
             this.Controls.Add(btnImport);
             this.Controls.Add(btnSave);
             this.Controls.Add(lblInGameName);
             this.Controls.Add(lblStatus);
+            this.Controls.Add(dividerBottom);
+            this.Controls.Add(lblCredits);
+
+            this.Paint += ImportForm_Paint;
+        }
+
+        private void ImportForm_Paint(object sender, PaintEventArgs e)
+        {
+            // Borda decorativa dourada
+            using (Pen pen = new Pen(Gold, 2))
+            {
+                e.Graphics.DrawRectangle(pen, 1, 1, this.ClientSize.Width - 3, this.ClientSize.Height - 3);
+            }
+        }
+
+        private Button CreateButton(string text, int x, int y, Color backColor)
+        {
+            Button btn = new Button();
+            btn.Text = text;
+            btn.Size = new System.Drawing.Size(220, 55);
+            btn.Location = new System.Drawing.Point(x, y);
+            btn.BackColor = backColor;
+            btn.ForeColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+            btn.Cursor = Cursors.Hand;
+            btn.FlatAppearance.MouseOverBackColor = ControlPaint.Light(backColor, 0.15f);
+            btn.FlatAppearance.MouseDownBackColor = ControlPaint.Dark(backColor, 0.15f);
+            return btn;
         }
 
         private void BtnOpen_Click(object sender, EventArgs e)
@@ -92,11 +162,15 @@ namespace DraftCopaDoMundo.SaveEditor
 
             try
             {
+                lblStatus.Text = "Carregando squad...";
+                this.Refresh();
+
                 careerFile = new FifaLibrary.CareerFile(currentFile, xmlPath);
                 dataSets = careerFile.ConvertToDataSet();
 
                 lblInGameName.Text = $"Squad: {Path.GetFileName(currentFile)} | Nome: {careerFile.InGameName}";
                 lblStatus.Text = $"Carregado OK - {dataSets[0].Tables.Count} tabelas";
+                lblStatus.ForeColor = Color.FromArgb(27, 138, 61);
 
                 btnImport.Enabled = true;
                 btnSave.Enabled = false;
@@ -104,6 +178,7 @@ namespace DraftCopaDoMundo.SaveEditor
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao abrir: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblStatus.ForeColor = Accent;
             }
         }
 
@@ -117,6 +192,9 @@ namespace DraftCopaDoMundo.SaveEditor
 
             try
             {
+                lblStatus.Text = "Importando tabelas...";
+                this.Refresh();
+
                 DataSet mainDS = dataSets[0];
                 string[] txtFiles = Directory.GetFiles(fbd.SelectedPath, "*.txt");
                 int imported = 0;
@@ -155,11 +233,13 @@ namespace DraftCopaDoMundo.SaveEditor
 
                 careerFile.ConvertFromDataSet(dataSets);
                 lblStatus.Text = $"Importado: {imported} tabelas, {totalRecords} registros";
+                lblStatus.ForeColor = Color.FromArgb(27, 138, 61);
                 btnSave.Enabled = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao importar: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblStatus.ForeColor = Accent;
             }
         }
 
@@ -168,6 +248,7 @@ namespace DraftCopaDoMundo.SaveEditor
             try
             {
                 lblStatus.Text = "Salvando...";
+                lblStatus.ForeColor = Ink;
                 this.Refresh();
 
                 careerFile.SaveEa(currentFile);
@@ -182,20 +263,20 @@ namespace DraftCopaDoMundo.SaveEditor
                     string suffix = new Random().Next(100, 1000).ToString();
                     string gamePath = Path.Combine(fc26Dir, $"Squads{ts}{suffix}");
                     File.Copy(currentFile, gamePath, true);
-                    lblStatus.Text = $"Salvo OK! Copiado para: Squads{ts}{suffix}";
+                    lblStatus.Text = $"✅ Salvo OK! Squad copiado para o jogo";
                 }
                 else
                 {
-                    lblStatus.Text = $"Salvo em: {currentFile}";
+                    lblStatus.Text = $"✅ Salvo em: {Path.GetFileName(currentFile)}";
                 }
 
-                lblStatus.ForeColor = System.Drawing.Color.DarkGreen;
+                lblStatus.ForeColor = Color.FromArgb(27, 138, 61);
                 btnSave.Enabled = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao salvar: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                lblStatus.ForeColor = System.Drawing.Color.Red;
+                lblStatus.ForeColor = Accent;
             }
         }
 
