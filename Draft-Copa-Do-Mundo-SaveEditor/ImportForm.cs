@@ -59,14 +59,14 @@ namespace DraftCopaDoMundo.SaveEditor
             divider.BackColor = Gold;
 
             // Botões estilo do draft
-            btnOpen = CreateButton("1. Abrir SquadFile", 20, 65, Accent);
+            btnOpen = CreateButton("1. Abrir SquadFile", 20, 65);
             btnOpen.Click += BtnOpen_Click;
 
-            btnImport = CreateButton("2. Importar tabelas", 260, 65, Color.FromArgb(37, 99, 168));
+            btnImport = CreateButton("2. Importar tabelas", 260, 65);
             btnImport.Enabled = false;
             btnImport.Click += BtnImport_Click;
 
-            btnSave = CreateButton("3. Salvar", 20, 130, Color.FromArgb(27, 138, 61));
+            btnSave = CreateButton("3. Salvar", 20, 130);
             btnSave.Enabled = false;
             btnSave.Click += BtnSave_Click;
 
@@ -123,21 +123,39 @@ namespace DraftCopaDoMundo.SaveEditor
             }
         }
 
-        private Button CreateButton(string text, int x, int y, Color backColor)
+        private Button CreateButton(string text, int x, int y)
         {
             Button btn = new Button();
             btn.Text = text;
             btn.Size = new System.Drawing.Size(220, 55);
             btn.Location = new System.Drawing.Point(x, y);
-            btn.BackColor = backColor;
+            btn.BackColor = Accent;
             btn.ForeColor = Color.White;
             btn.FlatStyle = FlatStyle.Flat;
             btn.FlatAppearance.BorderSize = 0;
             btn.Font = new Font("Segoe UI", 11, FontStyle.Bold);
             btn.Cursor = Cursors.Hand;
-            btn.FlatAppearance.MouseOverBackColor = ControlPaint.Light(backColor, 0.15f);
-            btn.FlatAppearance.MouseDownBackColor = ControlPaint.Dark(backColor, 0.15f);
+            btn.FlatAppearance.MouseOverBackColor = ControlPaint.Light(Accent, 0.15f);
+            btn.FlatAppearance.MouseDownBackColor = ControlPaint.Dark(Accent, 0.15f);
+            btn.Enabled = false; // Desabilitado por padrão
+            btn.BackColorChanged += (s, e) => UpdateButtonStyle(btn);
             return btn;
+        }
+
+        private void UpdateButtonStyle(Button btn)
+        {
+            if (btn.Enabled)
+            {
+                btn.BackColor = Accent;
+                btn.ForeColor = Color.White;
+                btn.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                btn.BackColor = Line;
+                btn.ForeColor = Color.FromArgb(160, 155, 140);
+                btn.Cursor = Cursors.Default;
+            }
         }
 
         private void BtnOpen_Click(object sender, EventArgs e)
@@ -173,7 +191,9 @@ namespace DraftCopaDoMundo.SaveEditor
                 lblStatus.ForeColor = Color.FromArgb(27, 138, 61);
 
                 btnImport.Enabled = true;
+                UpdateButtonStyle(btnImport);
                 btnSave.Enabled = false;
+                UpdateButtonStyle(btnSave);
             }
             catch (Exception ex)
             {
@@ -235,6 +255,7 @@ namespace DraftCopaDoMundo.SaveEditor
                 lblStatus.Text = $"Importado: {imported} tabelas, {totalRecords} registros";
                 lblStatus.ForeColor = Color.FromArgb(27, 138, 61);
                 btnSave.Enabled = true;
+                UpdateButtonStyle(btnSave);
             }
             catch (Exception ex)
             {
@@ -272,6 +293,7 @@ namespace DraftCopaDoMundo.SaveEditor
 
                 lblStatus.ForeColor = Color.FromArgb(27, 138, 61);
                 btnSave.Enabled = false;
+                UpdateButtonStyle(btnSave);
             }
             catch (Exception ex)
             {
