@@ -177,6 +177,26 @@ const ABREVIACOES_PAISES = {
     "Ucrânia": "UCR"
 };
 
+// Mapeamento: nome PT → teamid (do teams.txt) — usado na exportação de TXTs
+const TEAM_MAP = {
+    "alemanha": 1337, "argentina": 1369, "argélia": 111448,
+    "arábia saudita": 111114, "austrália": 1415, "bélgica": 1325,
+    "brasil": 1370, "cabo verde": 0, "canadá": 111455,
+    "catar": 111527, "colômbia": 111109, "coreia do sul": 0,
+    "costa do marfim": 0, "croácia": 1328, "curaçao": 0,
+    "egito": 111130, "equador": 111165, "escócia": 1359,
+    "espanha": 1362, "estados unidos": 0, "frança": 1335,
+    "gana": 111462, "haiti": 0, "holanda": 0,
+    "inglaterra": 1318, "irã": 111115, "iraque": 111512,
+    "japão": 1411, "jordânia": 111513, "marrocos": 111111,
+    "méxico": 1386, "noruega": 1352, "nova zelândia": 0,
+    "panamá": 0, "paraguai": 1375, "portugal": 1354,
+    "rd congo": 111545, "república tcheca": 1330, "senegal": 1667,
+    "suécia": 0, "suíça": 1364, "tunísia": 1391,
+    "turquia": 0, "uruguai": 1377, "uzbequistão": 111485,
+    "áfrica do sul": 111099, "áustria": 0, "irlanda do norte": 110081
+};
+
 function abreviacaoPais(
     pais
 ) {
@@ -3727,26 +3747,6 @@ setTimeout(() => setActiveStep(1), 50);
     };
 
     const CV_POS = { GK: "0", DF: "1", MF: "2", FW: "3" };
-
-    // Mapeamento: nome PT → teamid (do teams.txt)
-    const TEAM_MAP = {
-        "alemanha": 1337, "argentina": 1369, "argélia": 111448,
-        "arábia saudita": 111114, "austrália": 1415, "bélgica": 1325,
-        "brasil": 1370, "cabo verde": 0, "canadá": 111455,
-        "catar": 111527, "colômbia": 111109, "coreia do sul": 0,
-        "costa do marfim": 0, "croácia": 1328, "curaçao": 0,
-        "egito": 111130, "equador": 111165, "escócia": 1359,
-        "espanha": 1362, "estados unidos": 0, "frança": 1335,
-        "gana": 111462, "haiti": 0, "holanda": 0,
-        "inglaterra": 1318, "irã": 111115, "iraque": 111512,
-        "japão": 1411, "jordânia": 111513, "marrocos": 111111,
-        "méxico": 1386, "noruega": 1352, "nova zelândia": 0,
-        "panamá": 0, "paraguai": 1375, "portugal": 1354,
-        "rd congo": 111545, "república tcheca": 1330, "senegal": 1667,
-        "suécia": 0, "suíça": 1364, "tunísia": 1391,
-        "turquia": 0, "uruguai": 1377, "uzbequistão": 111485,
-        "áfrica do sul": 111099, "áustria": 0, "irlanda do norte": 110081
-    };
 
     const cvS = { tpl: null, teams: null, leagues: null, draftData: null, _downloads: [], _resolved: null };
 
