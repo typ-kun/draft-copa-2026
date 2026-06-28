@@ -9,6 +9,7 @@
     <AssemblyName>Draft-Copa-Do-Mundo-SaveEditor</AssemblyName>
     <RollForward>Major</RollForward>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <ApplicationIcon>draft-copa.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
