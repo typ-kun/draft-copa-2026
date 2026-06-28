@@ -60,6 +60,8 @@ namespace DraftCopaDoMundo.SaveEditor
 
             // Botões estilo do draft
             btnOpen = CreateButton("1. Abrir SquadFile", 20, 65);
+            btnOpen.Enabled = true;
+            UpdateButtonStyle(btnOpen);
             btnOpen.Click += BtnOpen_Click;
 
             btnImport = CreateButton("2. Importar tabelas", 260, 65);
