@@ -1738,25 +1738,54 @@ function mostrarResultadoFinal() {
                     return out;
                 }
 
-                // Download teamplayerlinks.txt
-                const tplBlob = new Blob([encodeUTF16(tplLines.join("\r\n"))], { type: "application/octet-stream" });
-                const tplUrl = URL.createObjectURL(tplBlob);
-                const a1 = document.createElement("a");
-                a1.href = tplUrl; a1.download = "teamplayerlinks.txt";
-                document.body.appendChild(a1); a1.click();
-                document.body.removeChild(a1); URL.revokeObjectURL(tplUrl);
+                async function salvarArquivos() {
+                    const tplData = encodeUTF16(tplLines.join("\r\n"));
+                    const lgLines = ["countryid\tleaguename\tleaguetype\tlevel\tiscompetitionscarfenabled\tisbannerenabled\tleagueid\tiscompetitionpoleflagenabled\tiscompetitioncrowdcardsenabled\tleaguetimeslice\tiswomencompetition\tiswithintransferwindow\tisinternationalleague", "13\tInternational (1)\t0\t1\t2\t2\t1\t2\t2\t7\t0\t0\t0"];
+                    const lgData = encodeUTF16(lgLines.join("\r\n"));
 
-                // Download leagues.txt (placeholder — mantém original)
-                const lgHeader = "countryid\tleaguename\tleaguetype\tlevel\tiscompetitionscarfenabled\tisbannerenabled\tleagueid\tiscompetitionpoleflagenabled\tiscompetitioncrowdcardsenabled\tleaguetimeslice\tiswomencompetition\tiswithintransferwindow\tisinternationalleague";
-                const lgLines = [lgHeader, "13\tInternational (1)\t0\t1\t2\t2\t1\t2\t2\t7\t0\t0\t0"];
-                const lgBlob = new Blob([encodeUTF16(lgLines.join("\r\n"))], { type: "application/octet-stream" });
-                const lgUrl = URL.createObjectURL(lgBlob);
-                const a2 = document.createElement("a");
-                a2.href = lgUrl; a2.download = "leagues.txt";
-                document.body.appendChild(a2); a2.click();
-                document.body.removeChild(a2); URL.revokeObjectURL(lgUrl);
+                    // Tenta usar File System Access API (salvar como)
+                    if (window.showSaveFilePicker) {
+                        try {
+                            // Pedir pasta destino
+                            const dirHandle = await window.showDirectoryPicker({ mode: "readwrite" });
 
-                toast("TXTs exportados! Coloque na pasta do projeto e rode Importar.bat");
+                            // Salvar teamplayerlinks.txt
+                            const tplHandle = await dirHandle.getFileHandle("teamplayerlinks.txt", { create: true });
+                            const tplWritable = await tplHandle.createWritable();
+                            await tplWritable.write(tplData);
+                            await tplWritable.close();
+
+                            // Salvar leagues.txt
+                            const lgHandle = await dirHandle.getFileHandle("leagues.txt", { create: true });
+                            const lgWritable = await lgHandle.createWritable();
+                            await lgWritable.write(lgData);
+                            await lgWritable.close();
+
+                            toast("TXTs salvos em: " + dirHandle.name + " — Agora rode Importar.bat");
+                        } catch (e) {
+                            if (e.name !== "AbortError") toast("Erro ao salvar: " + e.message);
+                        }
+                    } else {
+                        // Fallback: download para pasta padrão
+                        const tplBlob = new Blob([tplData], { type: "application/octet-stream" });
+                        const tplUrl = URL.createObjectURL(tplBlob);
+                        const a1 = document.createElement("a");
+                        a1.href = tplUrl; a1.download = "teamplayerlinks.txt";
+                        document.body.appendChild(a1); a1.click();
+                        document.body.removeChild(a1); URL.revokeObjectURL(tplUrl);
+
+                        const lgBlob = new Blob([lgData], { type: "application/octet-stream" });
+                        const lgUrl = URL.createObjectURL(lgBlob);
+                        const a2 = document.createElement("a");
+                        a2.href = lgUrl; a2.download = "leagues.txt";
+                        document.body.appendChild(a2); a2.click();
+                        document.body.removeChild(a2); URL.revokeObjectURL(lgUrl);
+
+                        toast("TXTs baixados! Coloque na pasta do projeto e rode Importar.bat");
+                    }
+                }
+
+                salvarArquivos();
 
             }
         );
