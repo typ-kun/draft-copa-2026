@@ -1,0 +1,102 @@
+# Draft Copa do Mundo 2026 + Integração FC 26
+
+## Resumo
+
+O projeto permite que um grupo de amigos organize uma Copa do Mundo
+Fantasy completa: sorteio de seleções, draft de jogadores de qualquer
+nacionalidade, exportação automática dos elencos para o EA Sports FC 26,
+disputa das partidas no jogo e acompanhamento do chaveamento.
+
+---
+
+## PARTE 1 — Aplicação Web - Draft Copa Do Mundo (Draft)
+
+Interface web responsável por toda a organização da competição.
+
+### Etapas:
+
+1. **Configuração** — Define participantes, número de jogadores e regras.
+2. **Sorteio da Ordem** — Define aleatoriamente a ordem do draft.
+3. **Draft de Seleções** — Cada participante escolhe sua seleção.
+4. **Draft de Jogadores** — Cada participante monta seu elenco escolhendo
+   jogadores de QUALQUER nacionalidade (ex: Mbappé pode jogar pelo Brasil).
+5. **Consolidação** — Exibe o resultado final com IDs do FC26.
+6. **Exportação** — Gera um JSON com os elencos e playerids.
+7. **Mata-mata** — Chaveamento de 16 avos até a final com registro de
+   resultados.
+
+### Tecnologia:
+HTML + CSS + JavaScript puro. Sem frameworks. Dados salvos em JSON local.
+
+---
+
+## PARTE 2 — Integração com FC 26
+
+Transforma os resultados do draft em um Squad File jogável no FC 26.
+
+### Fluxo:
+
+```
+App Web (Draft)
+    ↓ Exporta JSON
+draft-copa-2026.json
+    ↓ Converte (Python ou HTML)
+Arquivos TXT modificados
+    ↓ Importa no Draft-Copa-Do-Mundo-SaveEditor
+Squad File FC26
+    ↓ Copia para a pasta do jogo
+EA Sports FC 26
+```
+
+### Componentes:
+
+**1. Database de Jogadores (`jogadores_final.json`)**
+1237 jogadores convocados para a Copa do Mundo 2026 (lista oficial FIFA).
+Cada jogador tem: nome abreviado, nome completo, posição, país e playerid do FC26.
+Todos os IDs foram mapeados e validados.
+
+**2. Conversor Python (`converter_v2.py` + `converter.bat`)**
+Lê o JSON exportado do draft, modifica os TXT originais do FC26 e gera
+arquivos prontos para importação no Draft-Copa-Do-Mundo-SaveEditor:
+- `leagues.txt` — Transforma a liga International em "clube" (permite
+  transferências entre seleções).
+- `teamplayerlinks.txt` — Remove jogadores originais da seleção e vincula
+  os jogadores do draft.
+
+**3. Conversor Web (`converter.html`)**
+Interface visual com tutorial para usar o conversor sem o terminal.
+
+### Ferramentas Externas:
+
+- Draft-Copa-Do-Mundo-SaveEditor
+
+---
+
+## Descobertas Técnicas Validadas
+
+- É possível transferir jogadores de QUALQUER nacionalidade para
+  QUALQUER seleção (ex: Mbappé no Brasil, Haaland na Argentina).
+- A restrição de nacionalidade é controlada por uma flag na liga
+  International no arquivo `leagues.txt`.
+- O vinculo jogador-time fica em `teamplayerlinks.txt`.
+
+---
+
+## Estado Atual
+
+- ✅ Sistema de draft completo e funcional
+- ✅ Conversor gerando TXT válidos (encoding UTF-16LE correto)
+- ✅ Database com 1237 jogadores da FIFA (todos os IDs mapeados)
+- ✅ Exportação incluindo playerids no JSON
+
+## Objetivo Final
+
+Um grupo de amigos deve conseguir:
+1. Fazer o draft completo na aplicação web
+2. Clicar em "Exportar Elencos"
+3. Dar dois cliques no `converter.bat`
+4. Importar no Draft-Copa-Do-Mundo-SaveEditor
+5. Jogar a Copa do Mundo no FC 26
+6. Registrar os resultados no chaveamento
+
+Tudo sem editar nada manualmente.

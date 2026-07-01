@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 385 236">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Anton&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- DRAFT -->
+  <text
+    x="192"
+    y="125"
+    text-anchor="middle"
+    dominant-baseline="auto"
+    font-family="'Anton', 'Impact', sans-serif"
+    font-size="128"
+    fill="#1B1A17"
+  >DRAFT</text>
+
+  <!-- COPA DO MUNDO -->
+  <text
+    x="186"
+    y="175"
+    text-anchor="middle"
+    dominant-baseline="auto"
+    font-family="'Anton', 'Impact', sans-serif"
+    font-size="40"
+    fill="#F0AC00"
+  >COPA DO MUNDO</text>
+
+  <!-- Linha dourada esquerda -->
+  <line x1="5"   y1="210" x2="96"  y2="210" stroke="#F0AC00" stroke-width="3" stroke-linecap="square"/>
+
+  <!-- 2026 -->
+  <text
+    x="186"
+    y="228"
+    text-anchor="middle"
+    dominant-baseline="auto"
+    font-family="'Anton', 'Impact', sans-serif"
+    font-size="42"
+    fill="#1B1A17"
+  >2026</text>
+
+  <!-- Linha dourada direita -->
+  <line x1="288" y1="210" x2="368" y2="210" stroke="#F0AC00" stroke-width="3" stroke-linecap="square"/>
+
+</svg>

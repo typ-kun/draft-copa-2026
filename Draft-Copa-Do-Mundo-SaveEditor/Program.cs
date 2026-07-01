@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
@@ -30,13 +31,18 @@ namespace DraftCopaDoMundo.SaveEditor
                 System.Reflection.Assembly.GetExecutingAssembly().Location) ?? ".";
             string xmlPath = Path.Combine(exeDir, "fifa_ng_db-meta.xml");
 
-            // Backup
-            string backupPath = squadPath + "_1_";
-            if (!File.Exists(backupPath))
+            // Backup incremental: _1_, _2_, _3_...
+            string backupDir = Path.GetDirectoryName(squadPath) ?? ".";
+            string fileName = Path.GetFileName(squadPath);
+            int backupNum = 1;
+            string backupPath;
+            do
             {
-                File.Copy(squadPath, backupPath);
-                Console.WriteLine($"Backup: {backupPath}");
-            }
+                backupPath = Path.Combine(backupDir, $"_{backupNum}_{fileName}");
+                backupNum++;
+            } while (File.Exists(backupPath));
+            File.Copy(squadPath, backupPath);
+            Console.WriteLine($"Backup: {backupPath}");
 
             // 1. CareerFile.Open
             Console.WriteLine($"[1] Abrindo squad: {squadPath}");
@@ -81,7 +87,7 @@ namespace DraftCopaDoMundo.SaveEditor
                     string[] cells = lines[i].Split('\t');
                     DataRow row = dt.NewRow();
                     for (int c = 0; c < dt.Columns.Count && c < cells.Length; c++)
-                        row[c] = cells[c].Trim();
+                        row[c] = ConvertToColumn(cells[c].Trim(), dt.Columns[c].DataType);
                     dt.Rows.Add(row);
                 }
                 Console.WriteLine($"  {tableName}: {dt.Rows.Count} registros");
@@ -98,10 +104,26 @@ namespace DraftCopaDoMundo.SaveEditor
 
             Console.WriteLine($"[4] Salvo: {squadPath} ({new FileInfo(squadPath).Length} bytes)");
 
-            // 5. Copiar para jogo
+            // 5. Remover arquivo extra que o SaveEa cria na pasta do jogo
+            // O SaveEa cria um novo Squads* com timestamp - remover qualquer um que não seja o original
             string fc26Dir = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "EA SPORTS FC 26", "settings");
+            if (Directory.Exists(fc26Dir))
+            {
+                string squadFileName = Path.GetFileName(squadPath);
+                foreach (string f in Directory.GetFiles(fc26Dir, "Squads*"))
+                {
+                    string fName = Path.GetFileName(f);
+                    // Pular: arquivo original, backups (_1_, _2_, etc)
+                    if (fName.Equals(squadFileName, StringComparison.OrdinalIgnoreCase) || fName.StartsWith("_"))
+                        continue;
+                    // Qualquer outro Squads* é extra do SaveEa - remover
+                    try { File.Delete(f); Console.WriteLine($"Removido extra: {fName}"); } catch { }
+                }
+            }
+
+            // 6. Copiar para jogo
             if (Directory.Exists(fc26Dir))
             {
                 string ts = DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -112,6 +134,33 @@ namespace DraftCopaDoMundo.SaveEditor
             }
 
             return 0;
+        }
+
+        private static object ConvertToColumn(string value, Type targetType)
+        {
+            if (targetType == typeof(int))
+            {
+                if (double.TryParse(value, System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture, out double d))
+                    return (int)d;
+                if (int.TryParse(value, out int i)) return i;
+                return DBNull.Value;
+            }
+            if (targetType == typeof(double) || targetType == typeof(float))
+            {
+                if (double.TryParse(value, System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture, out double d))
+                    return d;
+                return DBNull.Value;
+            }
+            if (targetType == typeof(bool))
+            {
+                if (value == "1") return true;
+                if (value == "0") return false;
+                if (bool.TryParse(value, out bool b)) return b;
+                return DBNull.Value;
+            }
+            return value;
         }
     }
 }

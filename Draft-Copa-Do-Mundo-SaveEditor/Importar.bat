@@ -2,10 +2,10 @@
 setlocal
 
 set EXE=%~dp0bin\Release\net8.0-windows\win-x64\Draft-Copa-Do-Mundo-SaveEditor.exe
-set TXT_DIR=%~dp0..\Arquivos para Importar SaveEditor
+set TXT_DIR=%~dp0Arquivos para Importar - DCDM SaveEditor
 
 echo.
-echo === Draft Copa do Mundo 2026 - FC26 Squad Import ===
+echo === Draft Copa Do Mundo SaveEditor - FC26 Squad Import ===
 echo.
 
 :: Procurar squad mais recente na pasta do jogo

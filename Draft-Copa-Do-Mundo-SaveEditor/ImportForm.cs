@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -52,7 +54,7 @@ namespace DraftCopaDoMundo.SaveEditor
             fontSmall = new Font("Segoe UI", 8f);
 
             // Janela
-            this.Text = "Draft Copa do Mundo 2026";
+            this.Text = "Draft Copa Do Mundo SaveEditor";
             this.Size = new System.Drawing.Size(460, 290);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -63,7 +65,7 @@ namespace DraftCopaDoMundo.SaveEditor
 
             // Título
             lblTitle = new Label();
-            lblTitle.Text = "DRAFT COPA DO MUNDO 2026";
+            lblTitle.Text = "DRAFT COPA DO MUNDO SAVEEDITOR";
             lblTitle.Font = fontTitle;
             lblTitle.ForeColor = Ink;
             lblTitle.Size = new System.Drawing.Size(420, 32);
@@ -141,6 +143,34 @@ namespace DraftCopaDoMundo.SaveEditor
             }
         }
 
+        private static object ConvertToColumn(string value, Type targetType)
+        {
+            if (targetType == typeof(int))
+            {
+                // "2018.0" → 2018, "2018" → 2018
+                if (double.TryParse(value, System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture, out double d))
+                    return (int)d;
+                if (int.TryParse(value, out int i)) return i;
+                return DBNull.Value;
+            }
+            if (targetType == typeof(double) || targetType == typeof(float))
+            {
+                if (double.TryParse(value, System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture, out double d))
+                    return d;
+                return DBNull.Value;
+            }
+            if (targetType == typeof(bool))
+            {
+                if (value == "1") return true;
+                if (value == "0") return false;
+                if (bool.TryParse(value, out bool b)) return b;
+                return DBNull.Value;
+            }
+            return value;
+        }
+
         private void BtnOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -154,9 +184,16 @@ namespace DraftCopaDoMundo.SaveEditor
 
             currentFile = ofd.FileName;
 
-            string backupPath = currentFile + "_1_";
-            if (!File.Exists(backupPath))
-                File.Copy(currentFile, backupPath);
+            string backupDir = Path.GetDirectoryName(currentFile) ?? ".";
+            string fileName = Path.GetFileName(currentFile);
+            int backupNum = 1;
+            string backupPath;
+            do
+            {
+                backupPath = Path.Combine(backupDir, $"_{backupNum}_{fileName}");
+                backupNum++;
+            } while (File.Exists(backupPath));
+            File.Copy(currentFile, backupPath);
 
             try
             {
@@ -185,24 +222,47 @@ namespace DraftCopaDoMundo.SaveEditor
 
         private void BtnImport_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            fbd.Description = "Selecione a pasta com os TXTs";
-            fbd.SelectedPath = @"C:\draft-copa-do-mundo-2026\Arquivos para Importar SaveEditor";
-
-            if (fbd.ShowDialog() != DialogResult.OK) return;
-
             try
             {
-                lblStatus.Text = "Importando...";
+                FolderBrowserDialog fbd = new FolderBrowserDialog();
+                fbd.Description = "Selecione a pasta com os TXTs";
+                fbd.SelectedPath = @"C:\draft-copa-do-mundo-2026\Draft-Copa-Do-Mundo-SaveEditor\Arquivos para Importar - DCDM SaveEditor";
+
+                if (fbd.ShowDialog() != DialogResult.OK) return;
+
+                string selectedPath = fbd.SelectedPath;
+
+                if (dataSets == null || dataSets.Length == 0)
+                {
+                    lblStatus.Text = "ERRO: Nenhum squad carregado. Abra um SquadFile primeiro.";
+                    lblStatus.ForeColor = Error;
+                    return;
+                }
+
+                DataSet mainDS = dataSets[0];
+                string[] txtFiles = Directory.GetFiles(selectedPath, "*.txt");
+
+                // Tabelas permitidas para importação
+                var allowedTables = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    "leagues",
+                    "teamplayerlinks",
+                    "players",
+                    "dcplayernames",
+                    "default_teamsheets"
+                };
+
+                var validFiles = txtFiles.Where(f =>
+                    allowedTables.Contains(Path.GetFileNameWithoutExtension(f))).ToArray();
+
+                lblStatus.Text = $"Importando {validFiles.Length} tabelas...";
                 lblStatus.ForeColor = TextGray;
                 this.Refresh();
 
-                DataSet mainDS = dataSets[0];
-                string[] txtFiles = Directory.GetFiles(fbd.SelectedPath, "*.txt");
                 int imported = 0;
                 int totalRecords = 0;
 
-                foreach (string txtPath in txtFiles)
+                foreach (string txtPath in validFiles)
                 {
                     string tableName = Path.GetFileNameWithoutExtension(txtPath);
                     DataTable dt = null;
@@ -223,7 +283,7 @@ namespace DraftCopaDoMundo.SaveEditor
                         string[] cells = lines[i].Split('\t');
                         DataRow row = dt.NewRow();
                         for (int c = 0; c < dt.Columns.Count && c < cells.Length; c++)
-                            row[c] = cells[c].Trim();
+                            row[c] = ConvertToColumn(cells[c].Trim(), dt.Columns[c].DataType);
                         dt.Rows.Add(row);
                     }
                     totalRecords += dt.Rows.Count;
@@ -247,35 +307,39 @@ namespace DraftCopaDoMundo.SaveEditor
         {
             try
             {
-                lblStatus.Text = "Salvando...";
-                lblStatus.ForeColor = TextGray;
-                this.Refresh();
-
+                // Salvar
                 careerFile.SaveEa(currentFile);
 
+                // Remover arquivo extra que o SaveEa cria na pasta do jogo
                 string fc26Dir = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                     "EA SPORTS FC 26", "settings");
                 if (Directory.Exists(fc26Dir))
                 {
-                    string ts = DateTime.Now.ToString("yyyyMMddHHmmss");
-                    string suffix = new Random().Next(100, 1000).ToString();
-                    string gamePath = Path.Combine(fc26Dir, $"Squads{ts}{suffix}");
-                    File.Copy(currentFile, gamePath, true);
-                    lblStatus.Text = $"Salvo — Squad copiado para o jogo";
+                    string currentFileName = Path.GetFileName(currentFile);
+                    foreach (string f in Directory.GetFiles(fc26Dir, "Squads*"))
+                    {
+                        string fName = Path.GetFileName(f);
+                        if (fName.Equals(currentFileName, StringComparison.OrdinalIgnoreCase) || fName.StartsWith("_"))
+                            continue;
+                        try { File.Delete(f); } catch { }
+                    }
                 }
-                else
-                {
-                    lblStatus.Text = $"Salvo — {Path.GetFileName(currentFile)}";
-                }
+
+                lblStatus.Text = $"Salvo — {Path.GetFileName(currentFile)}";
                 lblStatus.ForeColor = Success;
-                btnSave.Enabled = false;
-                ApplyButtonState(btnSave);
+
+                MessageBox.Show(
+                    $"Arquivo salvo com sucesso!\n\nArquivo: {Path.GetFileName(currentFile)}",
+                    "Draft Copa Do Mundo SaveEditor",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 lblStatus.Text = ex.Message;
                 lblStatus.ForeColor = Error;
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
