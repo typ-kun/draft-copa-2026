@@ -1,0 +1,141 @@
+================================================================================
+  DRAFT COPA DO MUNDO 2026 — Histórico de Implementação
+================================================================================
+
+Data: 2026-07-05
+
+================================================================================
+  NOVAS FUNCIONALIDADES IMPLEMENTADAS
+================================================================================
+
+
+1. PRÉ-MENU
+--------------------------------------------------------------------------------
+- Nova tela inicial antes da configuração
+- Campo de nome do jogador (salvo no localStorage)
+- Botão "Modo Offline" → leva ao draft como era antes
+- Botão "Multiplayer" → abre menu de salas
+- Painel de Opções com alternador Light/Dark Mode
+- Estrutura para Som (placeholder)
+
+2. DARK MODE
+--------------------------------------------------------------------------------
+- Tema completo via CSS custom properties
+- Alternador com ícone dinâmico (🌙 Modo escuro / ☀️ Modo claro)
+- Persiste no localStorage
+- Logo alternativo para dark mode (logo-darkmode.svg)
+
+3. COUNTDOWN TIMER
+--------------------------------------------------------------------------------
+- 10 segundos para seleção de países (auto-pick aleatório no timeout)
+- 15 segundos para draft (auto-pick aleatório no timeout)
+- Timer visível no header centralizado
+- Pulsa nos últimos 3 segundos
+- Para ao clicar e reinicia para o próximo turno
+
+4. MULTIPLAYER ONLINE (via Supabase)
+--------------------------------------------------------------------------------
+Backend:
+- Conta no Supabase (https://supabase.com)
+- Tabelas: rooms, room_players
+- Realtime Presence (jogadores online)
+- Realtime Broadcast (picks, pool, mata-mata)
+- Postgres CDC (mudanças na sala)
+
+Funcionalidades:
+- Criar sala com código de 6 dígitos
+- Entrar na sala pelo código
+- Lobby com lista de jogadores online
+- Moderador configura as regras do draft
+- Draft sincronizado em tempo real
+- Turnos respeitados (só quem é a vez pode agir)
+- Pool idêntico para todos os jogadores
+- Timer só roda para quem é a vez
+- Mata-mata restrito (só moderador pode sortear/editar)
+- Reconexão após F5 (estado preservado no Supabase)
+- Kick ao sair (moderador sai → todos voltam ao menu)
+
+Arquivos criados:
+- multiplayer.js     → Lógica de salas, lobby, sincronia
+- supabase-config.js → Configuração do cliente Supabase
+
+
+================================================================================
+  PRÓXIMAS ETAPAS SUGERIDAS
+================================================================================
+
+
+1. DOMÍNIO PERSONALIZADO
+--------------------------------------------------------------------------------
+- Comprar um domínio (ex: draftcopa2026.com.br) em sites como:
+  * Registro.br (.com.br por ~R$40/ano)
+  * GoDaddy
+  * Cloudflare Registrar
+- No Cloudflare: Workers & Pages → seu projeto → Custom domains
+- Colocar o domínio e seguir as instruções de DNS
+
+2. SOM
+--------------------------------------------------------------------------------
+- Adicionar efeitos sonoros:
+  * Ao fazer um pick
+  * Ao finalizar o draft
+  * Ao sortear no mata-mata
+  * Timer nos últimos segundos
+- Usar a Web Audio API ou arquivos .mp3/.wav simples
+
+3. CORREÇÃO DE BUGS CONHECIDOS
+--------------------------------------------------------------------------------
+- [ ] Após F5, as vezes conteúdo do mata-mata vaza na etapa 4
+- [ ] Barras vermelhas no bracket do mata-mata para todos os times
+- [ ] Sincronia do mata-mata entre jogadores após reconexão
+
+4. MELHORIAS NO MULTIPLAYER
+--------------------------------------------------------------------------------
+- [ ] Adicionar chat na sala
+- [ ] Indicador visual de "jogador está digitando"
+- [ ] Botão de "pronto" no lobby
+- [ ] Histórico de picks (feed lateral)
+- [ ] Sorteio ao vivo no mata-mata (animação)
+- [ ] Reação aos picks (emojis)
+
+5. SAVE EDITOR (C#)
+--------------------------------------------------------------------------------
+- O projeto Draft-Copa-Do-Mundo-SaveEditor continua funcional
+- Integração: exportar do site → importar no jogo via Save Editor
+- Possível melhoria: gerar os TXTs diretamente no servidor
+
+6. PERFORMANCE
+--------------------------------------------------------------------------------
+- [ ] Lazy loading dos JSONs (jogadores_final.json ~263KB)
+- [ ] Minificar CSS e JS para produção
+- [ ] Cache de imagens de bandeiras
+
+================================================================================
+  ARQUIVOS DO PROJETO (apenas a parte web)
+================================================================================
+
+Draft Copa Do Mundo 2026/
+├── index.html              → Página principal
+├── style.css               → Estilos (dark mode incluso)
+├── script.js               → Lógica do draft offline + countdown
+├── multiplayer.js          → Lógica multiplayer (Supabase)
+├── supabase-config.js      → Config Supabase (chaves)
+├── historico-e-proximos-passos.txt
+├── assets/
+│   ├── logo.svg            → Logo original
+│   ├── logo-darkmode.svg   → Logo para dark mode
+│   ├── draft-copa.ico      → Ícone da aba
+│   └── *.png / *.svg       → Bandeiras e sprites
+├── jogadores_final.json    → Banco de jogadores (~1237)
+├── icons_heroes.json       → Icons e Heroes (~110)
+└── originals_data.json     → Dados originais para exportação
+
+================================================================================
+  CRÉDITOS
+================================================================================
+
+Desenvolvido por: Guilherme (@typ-kun)
+IA Assistente: Claude (Anthropic)
+Julho de 2026
+
+================================================================================

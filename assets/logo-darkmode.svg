@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 385 236"
+   version="1.1"
+   id="svg3"
+   sodipodi:docname="logo-darkmode.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview3"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="true"
+     inkscape:lockguides="false"
+     inkscape:zoom="2.4179456"
+     inkscape:cx="186.93555"
+     inkscape:cy="131.30982"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">
+      @import url('https://fonts.googleapis.com/css2?family=Anton&amp;display=swap');
+    </style>
+  </defs>
+  <!-- DRAFT -->
+  <text
+     x="190.25"
+     y="128.72217"
+     text-anchor="middle"
+     dominant-baseline="auto"
+     font-family="Anton, Impact, sans-serif"
+     font-size="128px"
+     fill="#1b1a17"
+     id="text1"
+     style="fill:#ffffff">DRAFT</text>
+  <!-- COPA DO MUNDO -->
+  <text
+     x="192.50977"
+     y="174.00342"
+     text-anchor="middle"
+     dominant-baseline="auto"
+     font-family="Anton, Impact, sans-serif"
+     font-size="40px"
+     fill="#f0ac00"
+     id="text2">COPA DO MUNDO</text>
+  <!-- Linha dourada esquerda -->
+  <!-- 2026 -->
+  <text
+     x="192.50903"
+     y="221.52197"
+     text-anchor="middle"
+     dominant-baseline="auto"
+     font-family="Anton, Impact, sans-serif"
+     font-size="42px"
+     fill="#1b1a17"
+     id="text3"
+     style="fill:#ffffff">2026</text>
+  <!-- Linha dourada direita -->
+  <line
+     x1="39.626221"
+     y1="204.49707"
+     x2="116.4187"
+     y2="204.49707"
+     stroke="#f0ac00"
+     stroke-width="2.75587"
+     stroke-linecap="square"
+     id="use4" />
+  <line
+     x1="268.33276"
+     y1="204.56494"
+     x2="345.12524"
+     y2="204.56494"
+     stroke="#f0ac00"
+     stroke-width="2.75587"
+     stroke-linecap="square"
+     id="use5" />
+</svg>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Draft Copa do Mundo 2026</title>
+
+    <link rel="icon" type="image/x-icon" href="assets/draft-copa.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;600;700;800;900&family=Archivo:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- PRÉ-MENU -->
+
+    <div id="preMenu">
+
+        <h1><img src="assets/logo.svg" alt="Draft Copa do Mundo 2026" class="logo" width="400"></h1>
+
+        <div class="pre-menu-card">
+
+            <!-- Nome do jogador -->
+            <div class="pre-menu-section">
+                <label class="pre-menu-label">SEU NOME</label>
+                <input type="text" id="prePlayerName" placeholder="Digite seu nome" class="pre-menu-input" autocomplete="off">
+            </div>
+
+            <hr class="pre-menu-divider">
+
+            <!-- Modos de jogo -->
+            <div class="pre-menu-section">
+                <button id="btnOffline" class="pre-menu-btn">Modo Offline</button>
+                <button id="btnMultiplayer" class="pre-menu-btn pre-menu-btn-secondary">
+                    Multiplayer
+                </button>
+            </div>
+
+            <hr class="pre-menu-divider">
+
+            <!-- Opções -->
+            <div class="pre-menu-section">
+                <label class="pre-menu-label">OPÇÕES</label>
+
+                <div class="option-row">
+                    <span class="option-label" id="themeLabel">🌙 Modo escuro</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="option-row is-disabled">
+                    <span class="option-label">🔊 Som</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" disabled>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MULTIPLAYER - MENU DE SALAS -->
+
+    <div id="roomMenu" style="display:none;">
+
+        <div class="room-wrap">
+
+            <h1><img src="assets/logo.svg" alt="Draft Copa do Mundo 2026" class="logo" width="400"></h1>
+
+            <div class="room-card">
+
+                <div class="room-section">
+                    <label class="pre-menu-label">CRIAR SALA</label>
+                    <button id="btnCriarSala" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;">Criar Sala</button>
+                </div>
+
+                <hr class="pre-menu-divider">
+
+                <div class="room-section">
+                    <label class="pre-menu-label">ENTRAR EM SALA</label>
+                    <input type="text" id="inputCodigoSala" class="pre-menu-input" placeholder="Código da sala" maxlength="6" style="text-transform:uppercase;text-align:center;font-size:24px;letter-spacing:8px;">
+                    <button id="btnEntrarSala" class="pre-menu-btn btn-back-setup">Entrar</button>
+                </div>
+
+                <hr class="pre-menu-divider">
+
+                <button id="btnVoltarRoomMenu" class="pre-menu-btn btn-back-setup">← Voltar</button>
+
+            </div>
+
+            <div id="roomStatus" class="room-status"></div>
+
+        </div>
+
+    </div>
+
+    <!-- MULTIPLAYER - LOBBY -->
+
+    <div id="lobby" style="display:none;">
+
+        <div class="lobby-wrap">
+
+            <div class="lobby-header">
+                <h1>🛡️ Sala de Espera</h1>
+                <div id="lobbyCode" class="lobby-code"></div>
+            </div>
+
+            <div class="lobby-card">
+                <div class="lobby-section">
+                    <label class="pre-menu-label">JOGADORES NA SALA</label>
+                    <div id="lobbyPlayers" class="lobby-players">
+                        <div class="lobby-empty">Nenhum jogador conectado</div>
+                    </div>
+                </div>
+
+                <hr class="pre-menu-divider">
+
+                <!-- Moderador: configurar / iniciar -->
+                <div id="lobbyModArea" style="display:none;">
+                    <button id="btnConfigurarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;">⚙️ Configurar Draft</button>
+                    <button id="btnIniciarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🚀 Iniciar Draft</button>
+                </div>
+                <!-- Continuar mata-mata (visível para todos) -->
+                <button id="btnResumeMataMata" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:18px;padding:14px 20px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🏆 Continuar Mata-Mata</button>
+
+                <!-- Jogadores: aguardando -->
+                <div id="lobbyWaitArea" style="display:block;">
+                    <p class="lobby-waiting">Aguardando o moderador configurar o draft...</p>
+                </div>
+
+                <hr class="pre-menu-divider">
+
+                <button id="btnSairLobby" class="pre-menu-btn btn-back-setup">← Sair da sala</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MULTIPLAYER - CONFIGURAÇÃO DO DRAFT (moderador) -->
+
+    <div id="draftConfig" style="display:none;">
+
+        <div class="room-wrap">
+
+            <h1>⚙️ Configurar Draft</h1>
+
+            <div class="setup-card">
+
+                <div class="setting-row">
+                    <div class="setting-field">
+                        <label>Formato do Draft</label>
+                        <select id="mpDraftMode">
+                            <option value="snake" selected>Snake Draft</option>
+                            <option value="normal">Circular</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-field">
+                        <label>Etapa inicial do mata-mata</label>
+                        <select id="mpStartingPhase">
+                            <option value="round32" selected>Dezesseis-avos de final: 32 competidores</option>
+                            <option value="round16">Oitavas de final: 16 competidores</option>
+                            <option value="quarterfinals">Quartas de final: 8 competidores</option>
+                            <option value="semifinals">Semifinal: 4 competidores</option>
+                            <option value="final">Final: 2 competidores</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-field">
+                        <label>Regra dos Goleiros</label>
+                        <select id="mpGoalkeeperRule">
+                            <option value="on" selected>Ativada</option>
+                            <option value="off">Desativada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-field">
+                        <label>Jogadores por elenco</label>
+                        <input type="number" id="mpPlayersPerTeam" value="18" min="1" max="30">
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-field">
+                        <label>Refreshes por participante</label>
+                        <input type="number" id="mpRefreshCount" value="2" min="0" max="20">
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-field">
+                        <label>Icons &amp; Heroes</label>
+                        <select id="mpIconsHeroesMode">
+                            <option value="none" selected>Nenhum</option>
+                            <option value="icons">Só Icons</option>
+                            <option value="heroes">Só Heroes</option>
+                            <option value="both">Icons + Heroes</option>
+                        </select>
+                    </div>
+                    <div class="setting-field" id="mpSpecialChanceContainer" style="display:none; margin-top:6px;">
+                        <label>Chance de Icon/Hero (%)</label>
+                        <input type="number" id="mpSpecialChance" min="0" max="100" value="1" step="0.5">
+                    </div>
+                </div>
+
+                <button id="btnSalvarConfig" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:14px;">💾 Salvar e Voltar ao Lobby</button>
+
+                <button id="btnVoltarConfig" class="btn-back-setup" style="margin-top:8px;">← Voltar ao lobby sem salvar</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CONFIGURAÇÃO -->
+
+    <div id="setup" style="display:none;">
+
+        <h1><img src="assets/logo.svg" alt="Draft Copa do Mundo 2026" class="logo" width="400"></h1>
+
+        <div class="setup-card">
+
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Quantidade de participantes</label>
+                    <select id="playerCount">
+                        <option value="1" selected>1 jogador</option>
+                        <option value="2">2 jogadores</option>
+                        <option value="3">3 jogadores</option>
+                        <option value="4">4 jogadores</option>
+                        <option value="5">5 jogadores</option>
+                        <option value="6">6 jogadores</option>
+                        <option value="7">7 jogadores</option>
+                        <option value="8">8 jogadores</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Formato do Draft</label>
+                    <select id="draftMode">
+                        <option value="snake" selected>Snake Draft</option>
+                        <option value="normal">Circular</option>
+                    </select>
+                </div>
+                <div class="setting-note" id="note-formato"><b>Snake:</b> A ordem inverte a cada rodada (1→2→3→3→2→1).<br><b>Circular:</b> A ordem se mantém (1→2→3→1→2→3).</div>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Etapa inicial do campeonato</label>
+                    <select id="startingPhase">
+                        <option value="round32" selected>Dezesseis-avos de final: 32 competidores (16 jogos)</option>
+                        <option value="round16">Oitavas de final: 16 competidores (8 jogos)</option>
+                        <option value="quarterfinals">Quartas de final: 8 competidores (4 jogos)</option>
+                        <option value="semifinals">Semifinal: 4 competidores (2 jogos)</option>
+                        <option value="final">Final: 2 competidores (1 jogo)</option>
+                    </select>
+                </div>
+                <div class="setting-note" id="note-starting-phase">Define em qual etapa o mata-mata começa.</div>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Regra dos Goleiros</label>
+                    <select id="goalkeeperRule">
+                        <option value="on" selected>Ativada</option>
+                        <option value="off">Desativada</option>
+                    </select>
+                </div>
+                <div class="setting-note" id="note-goleiros">Quando ativada, cada elenco deve ter no mínimo 2 goleiros. O pool sempre oferecerá goleiros até atingir essa meta.</div>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Jogadores por elenco</label>
+                    <input type="number" id="playersPerTeam" value="26" min="1" max="30">
+                </div>
+                <div class="setting-note" id="note-elenco">Total de jogadores que cada participante deve selecionar para completar seu time.</div>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Refreshes por participante</label>
+                    <input type="number" id="refreshCount" value="2" min="0" max="20">
+                </div>
+                <div class="setting-note" id="note-refreshes">Cada refresh permite gerar um novo pool de jogadores caso as opções atuais não sejam interessantes.</div>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-field">
+                    <label>Icons &amp; Heroes</label>
+                    <select id="iconsHeroesMode" onchange="var c=document.getElementById('poolSpecialChanceContainer'); if(c){c.style.display=this.value==='none'?'none':'block';}">
+                        <option value="none" selected>Nenhum</option>
+                        <option value="icons">Só Icons</option>
+                        <option value="heroes">Só Heroes</option>
+                        <option value="both">Icons + Heroes</option>
+                    </select>
+                </div>
+                <div class="setting-note" id="note-icons-heroes">
+                    <b>Icons:</b> Lendas históricas do futebol (Pelé, Maradona, Zidane…).<br>
+                    <b>Heroes:</b> Ídolos de clube que marcaram época (Drogba, Hazard…).<br>
+                    Quando ativados, entram no pool junto com os jogadores da Copa.
+                </div>
+                <div class="setting-field" id="poolSpecialChanceContainer" style="display:none; margin-top:6px;">
+                    <label>Chance de Icon/Hero</label>
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                        <input type="number" id="poolSpecialChanceInput" min="0" max="100" step="0.01" value="1.00" style="width:65px; text-align:center; padding:4px;">
+                        <span style="font-weight:700; color:var(--ink);">%</span>
+                    </div>
+                    <input type="range" id="poolSpecialChance" min="0" max="10000" value="100" style="width:100%;">
+                    <div id="poolSpecialChanceEstimate" style="font-size:10px; color:var(--muted); margin-top:4px; line-height:1.3; font-weight:600;"></div>
+                </div>
+            </div>
+
+            <div id="playerNames"></div>
+
+            <button id="backToPreMenu" class="btn-back-setup">← Voltar</button>
+
+        </div>
+
+    </div>
+
+    <!-- SELEÇÃO DE PAÍSES -->
+
+    <div
+        id="countrySelection"
+        style="display:none;"
+    >
+
+        <div class="cs-wrap">
+
+            <div class="cs-header">
+
+                <div class="cs-eyebrow">
+                    Etapa 1 de 2
+                </div>
+
+                <h1>Seleção de Países</h1>
+
+                <div id="csTurn" class="cs-turn">
+                    Vez de: <span class="cs-player">—</span>
+                </div>
+
+                <div id="csTimer" class="timer-display"></div>
+
+            </div>
+
+            <div id="countryGrid" class="country-grid"></div>
+
+        </div>
+
+    </div>
+
+    <!-- DRAFT -->
+
+    <div
+        id="draftArea"
+        style="display:none;"
+    >
+
+        <header>
+
+            <div id="status">
+                Pick 1
+            </div>
+            <span id="draftTimer" class="timer-display header-timer"></span>
+
+            <h1>Draft Copa do Mundo 2026</h1>
+
+            <div class="header-spacer"></div>
+
+        </header>
+
+        <div class="layout">
+
+            <!-- POOL -->
+
+            <section class="pool">
+
+                <h2>Pool Atual</h2>
+
+                <div id="refreshes">
+                    Refreshes
+                </div>
+
+                <button id="refreshBtn">
+                    ↺ ATUALIZAR POOL
+                </button>
+
+                <div id="poolList"></div>
+
+                <div class="pool-footer">
+                    <button id="restartDraft">
+                        Voltar ao menu
+                    </button>
+                </div>
+
+            </section>
+
+            <!-- TIMES -->
+
+            <section class="teams">
+
+                <!-- Gerado dinamicamente -->
+
+            </section>
+
+        </div>
+
+    </div>
+
+    <!-- RESULTADO FINAL -->
+
+    <div
+        id="resultsArea"
+        style="display:none;"
+    >
+
+        <h1>Draft Finalizado</h1>
+
+        <div id="finalResults"></div>
+
+        <div class="result-actions">
+            <button id="exportDraft" class="btn-export">
+                ⬇ Exportar para o Jogo
+            </button>
+
+            <button id="goToMataMata">
+                🏆 IR PARA MATA-MATA
+            </button>
+
+            <button id="backToDraft">
+                Refazer Draft
+            </button>
+
+            <button class="btn-novo-draft" id="resetFromResults">
+                Menu inicial
+            </button>
+        </div>
+
+        <div class="scroll-spacer"></div>
+
+    </div>
+
+    <!-- MATA-MATA -->
+
+    <div
+        id="mataMataArea"
+        style="display:none;"
+    >
+
+        <header class="mata-header">
+
+            <button id="backToResults" class="mata-back">
+                ← Voltar aos elencos
+            </button>
+
+            <div>
+                <div class="mata-eyebrow">Etapa 5</div>
+                <h1>Mata-mata Copa do Mundo 2026</h1>
+            </div>
+
+            <div class="mata-actions">
+                <button id="sortearMataMata">
+                    Sortear novamente
+                </button>
+                <button id="resetarTudo" class="btn-reset">
+                    Menu Inicial
+                </button>
+            </div>
+
+        </header>
+
+        <section class="mata-summary">
+            <div>
+                <span class="mata-summary-label">Fase inicial</span>
+                <strong id="mataFaseInicial">16 avos de final</strong>
+            </div>
+            <div>
+                <span class="mata-summary-label">Competidores</span>
+                <strong id="mataCompetidores">32</strong>
+            </div>
+            <div>
+                <span class="mata-summary-label">Humanos</span>
+                <strong id="mataHumanos">0</strong>
+            </div>
+        </section>
+
+        <section id="mataMataBracket" class="mata-bracket"></section>
+
+    </div>
+
+    <!-- MODAL -->
+    <div id="modalOverlay" class="modal-overlay" style="display:none;">
+        <div class="modal-card">
+            <div class="modal-head">
+                <span class="modal-eyebrow">Draft</span>
+                <span class="modal-title">Recomeçar Draft?</span>
+                <button id="modalClose" class="modal-close" aria-label="Fechar">&times;</button>
+            </div>
+            <hr class="cm-rule">
+            <div class="modal-body">
+                <p class="modal-msg">Todo o progresso atual será perdido e um novo draft será iniciado.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="modalCancel" class="btn-secondary"><span class="modal-cancel-text">Cancelar</span></button>
+                <button id="modalConfirm" class="btn-primary"><span class="modal-confirm-text">Sim, reiniciar</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CONVERSOR RDBM -->
+    <div id="conversorOverlay" class="modal-overlay" style="display:none;">
+        <div class="modal-card cv-modal-card">
+            <div class="modal-head">
+                <span class="modal-eyebrow">FC 26 / RDBM 26</span>
+                <span class="modal-title">Conversor</span>
+                <button id="conversorClose" class="modal-close" aria-label="Fechar">&times;</button>
+            </div>
+            <hr class="cm-rule">
+            <div class="modal-body cv-modal-body">
+
+                <!-- STEP 1 -->
+                <div class="cv-step">
+                    <div class="cv-step-label"><span class="cv-badge">1</span> Arquivos Originais</div>
+                    <div class="cv-dz cv-dz-folder" id="cv-dz-folder">
+                        <input type="file" id="cv-fi-folder" webkitdirectory>
+                        <div class="cv-dz-folder-icon">&#128193;</div>
+                        <div style="pointer-events:none; flex:1;">
+                            <div class="cv-dz-name">Pasta &quot;Arquivos Originais&quot;</div>
+                            <div class="cv-dz-sub">Clique ou arraste a pasta aqui</div>
+                            <div class="cv-dz-st" id="cv-st-folder">aguardando</div>
+                        </div>
+                    </div>
+                    <div class="cv-file-pills" id="cv-file-pills"></div>
+                </div>
+
+                <!-- STEP 1.5 — JSON do Draft -->
+                <div class="cv-step">
+                    <div class="cv-step-label"><span class="cv-badge">&#9432;</span> Draft Exportado</div>
+                    <div class="cv-dz cv-dz-json" id="cv-dz-json">
+                        <input type="file" id="cv-fi-json" accept=".json">
+                        <div class="cv-dz-folder-icon">&#128196;</div>
+                        <div style="pointer-events:none; flex:1;">
+                            <div class="cv-dz-name">draft-copa-2026.json</div>
+                            <div class="cv-dz-sub">Clique ou arraste o JSON exportado aqui</div>
+                            <div class="cv-dz-st" id="cv-st-json">não carregado</div>
+                        </div>
+                    </div>
+                    <div class="cv-file-pills" id="cv-json-pills"></div>
+                </div>
+
+                <!-- STEP 2 — Preview / Export -->
+                <div class="cv-step" id="cv-step2">
+                    <div class="cv-step-label"><span class="cv-badge">2</span> Pr&#233;-visualiza&#231;&#227;o</div>
+                    <div class="cv-preview" id="cv-preview"></div>
+                    <div class="cv-btn-row">
+                        <button class="cv-btn-export" id="cv-exportBtn" disabled>
+                            &#8595; Gerar Arquivos para RDBM 26
+                        </button>
+                        <button class="cv-btn-clear" id="cv-clearBtn" style="display:none">
+                            &#128465; Limpar
+                        </button>
+                    </div>
+                    <div class="cv-log" id="cv-log"></div>
+                    <div class="cv-downloads" id="cv-downloads"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="multiplayer.js"></script>
+    <script src="script.js"></script>
+
+    <!-- FOOTER GLOBAL -->
+
+    <div class="steps-bar" id="stepsBar">
+
+        <div class="steps-item" data-step="1">
+            <span class="steps-num">1</span>
+            <div class="steps-text">
+                <span class="steps-t">Menu</span>
+                <span class="steps-d">Defina participantes e regras</span>
+            </div>
+        </div>
+
+        <span class="steps-arrow">→</span>
+
+        <div class="steps-item" data-step="2">
+            <span class="steps-num">2</span>
+            <div class="steps-text">
+                <span class="steps-t">Seleções</span>
+                <span class="steps-d">Cada um picka uma seleção</span>
+            </div>
+        </div>
+
+        <span class="steps-arrow">→</span>
+
+        <div class="steps-item" data-step="3">
+            <span class="steps-num">3</span>
+            <div class="steps-text">
+                <span class="steps-t">Draft</span>
+                <span class="steps-d">Monte o elenco jogador a jogador</span>
+            </div>
+        </div>
+
+        <span class="steps-arrow">→</span>
+
+        <div class="steps-item" data-step="4">
+            <span class="steps-num">4</span>
+            <div class="steps-text">
+                <span class="steps-t">Lista Final</span>
+                <span class="steps-d">Veja o resultado final do draft</span>
+            </div>
+        </div>
+
+        <span class="steps-arrow">→</span>
+
+        <div class="steps-item" data-step="5">
+            <span class="steps-num">5</span>
+            <div class="steps-text">
+                <span class="steps-t">Mata-mata</span>
+                <span class="steps-d">Sorteie e jogue o eliminatório</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
