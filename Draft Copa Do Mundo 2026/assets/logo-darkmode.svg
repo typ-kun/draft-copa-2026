@@ -3,7 +3,7 @@
    viewBox="0 0 385 236"
    version="1.1"
    id="svg3"
-   sodipodi:docname="logo.svg"
+   sodipodi:docname="logo-darkmode.svg"
    inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -45,7 +45,8 @@
      font-family="Anton, Impact, sans-serif"
      font-size="128px"
      fill="#1b1a17"
-     id="text1">DRAFT</text>
+     id="text1"
+     style="fill:#ffffff">DRAFT</text>
   <!-- COPA DO MUNDO -->
   <text
      x="192.50977"
@@ -66,7 +67,8 @@
      font-family="Anton, Impact, sans-serif"
      font-size="42px"
      fill="#1b1a17"
-     id="text3">2026</text>
+     id="text3"
+     style="fill:#ffffff">2026</text>
   <!-- Linha dourada direita -->
   <line
      x1="39.626221"

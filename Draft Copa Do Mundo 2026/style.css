@@ -6,18 +6,39 @@
     --surface:       #F3ECD8;
     --surface-2:     #FFFFFF;
     --ink:           #1B1A17;
+    --ink-bg:        #1B1A17;
     --muted:         #6B6452;
     --accent:        #E8462B;
     --accent-2:      #C8A24B;
     --line:          #D8CFB4;
     --win:           #2F7D4F;
+    --shadow:        #1B1A17;
+    --card-bg:       #FFFFFF;
     --display:       'Anton', sans-serif;
     --display-weight: 400;
     --body:          'Hanken Grotesk', sans-serif;
     --numeral:       'Archivo', sans-serif;
     --numeral-weight: 900;
     --hard-shadow:     3px 3px 0 var(--line);
-    --hard-shadow-ink: 3px 3px 0 #1B1A17;
+    --hard-shadow-ink: 3px 3px 0 var(--shadow);
+}
+
+/* ====================== */
+/* DARK MODE               */
+/* ====================== */
+
+[data-theme="dark"] {
+    --surface:       #1a1a1a;
+    --surface-2:     #2d2d2d;
+    --ink:           #f0ede6;
+    --ink-bg:        #3a3a3a;
+    --muted:         #a09a8a;
+    --accent:        #e85d45;
+    --accent-2:      #d4a84b;
+    --line:          #3a3a35;
+    --win:           #3da86a;
+    --shadow:        #555544;
+    --card-bg:       #1e1e1e;
 }
 
 /* ====================== */
@@ -436,13 +457,13 @@ button:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
 #createPlayers:active,
 #startDraft:active {
     transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 #1B1A17;
+    box-shadow: 1px 1px  0 var(--shadow);
 }
 
 #startDraft {
     background: #c0392b;
     color: #fff;
-    box-shadow: 4px 4px 0 #1a1a1a;
+    box-shadow: 4px 4px  0 var(--shadow);
     margin-top: 6px;
     font-size: 20px;
     padding: 16px 24px;
@@ -460,7 +481,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
 
 #startDraft:active {
     transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 #1a1a1a;
+    box-shadow: 2px 2px  0 var(--shadow);
 }
 
 /* Botão de refresh do pool */
@@ -510,7 +531,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
     width: auto;
 }
 
-#copyResults:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #1B1A17; }
+#copyResults:active { transform: translate(2px, 2px); box-shadow: 1px 1px  0 var(--shadow); }
 
 .btn-novo-draft {
     background: transparent;
@@ -574,6 +595,41 @@ button:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
 
 @media (max-width: 720px) {
     .header-spacer { display: none; }
+}
+
+/* Timer display */
+.timer-display {
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    font-size: 24px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    min-height: 28px;
+    text-align: center;
+}
+
+.timer-display.is-warning {
+    color: var(--accent);
+    animation: timerPulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes timerPulse {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.5; transform: scale(1.1); }
+}
+
+.header-timer {
+    font-size: 18px;
+    color: var(--accent);
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    text-align: center;
+    flex-shrink: 0;
+    min-width: 40px;
+}
+
+.cs-timer {
+    margin-top: 8px;
 }
 
 .current-player {
@@ -1155,7 +1211,7 @@ section.teams {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--ink);
+    background: var(--ink-bg);
     color: #fff;
     font-size: 10px;
     font-weight: 700;
@@ -1220,7 +1276,16 @@ section.teams {
 }
 
 #goToMataMata {
-    background: #1a1a1a;
+    background: var(--ink);
+}
+
+[data-theme="dark"] #goToMataMata {
+    background: #3a3a3a;
+}
+
+/* Botões que precisam manter fundo escuro mesmo no dark mode */
+[data-theme="dark"] .btn-sortear-todos {
+    background: #3a3a3a !important;
 }
 
 #copyResults:active,
@@ -1236,7 +1301,12 @@ section.teams {
 }
 
 #goToMataMata:hover {
-    background: #333333;
+    background: #3a3a3a;
+    opacity: 0.9;
+}
+[data-theme="dark"] #goToMataMata:hover {
+    background: #4a4a4a;
+    opacity: 0.9;
 }
 
 #backToDraft {
@@ -1248,11 +1318,11 @@ section.teams {
 }
 
 #copyResults {
-    background: #7f8c8d;
+    background: var(--muted);
 }
 
 #copyResults:hover {
-    background: #6c7a7b;
+    background: var(--muted);
 }
 
 .btn-novo-draft {
@@ -1460,7 +1530,7 @@ section.teams {
     max-width: 400px;
     background: var(--surface);
     color: var(--ink);
-    border: 6px solid #fff;
+    border: 6px solid var(--card-bg);
     box-shadow: var(--hard-shadow-ink);
     overflow: hidden;
     animation: modalCardIn 0.28s cubic-bezier(0.2, 0.8, 0.3, 1) both;
@@ -1560,7 +1630,7 @@ section.teams {
     transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-.btn-primary:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #1B1A17; }
+.btn-primary:active { transform: translate(2px, 2px); box-shadow: 1px 1px  0 var(--shadow); }
 
 .btn-sortear-um {
     font-size: 18px !important;
@@ -1589,7 +1659,12 @@ section.teams {
 }
 
 .btn-sortear-todos:hover {
-    background: #333333 !important;
+    background: #3a3a3a !important;
+    opacity: 0.9 !important;
+}
+[data-theme="dark"] .btn-sortear-todos:hover {
+    background: #4a4a4a !important;
+    opacity: 0.9 !important;
 }
 
 .btn-sortear-todos:active {
@@ -1679,7 +1754,7 @@ section.teams {
     font-weight: 700;
     padding: 12px 20px;
     border: none;
-    box-shadow: 3px 3px 0 #1a1a1a;
+    box-shadow: 3px 3px  0 var(--shadow);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
@@ -1691,7 +1766,7 @@ section.teams {
 
 #sortearMataMata:active {
     transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 #1a1a1a;
+    box-shadow: 1px 1px  0 var(--shadow);
 }
 
 #resetarTudo {
@@ -1859,6 +1934,16 @@ section.teams {
     background: var(--ink);
     color: var(--surface);
     padding: 12px;
+}
+
+.mata-result-save:hover {
+    background: #3a3a3a;
+    opacity: 0.9;
+}
+[data-theme="dark"] .mata-result-save:hover {
+    background: #4a4a4a;
+    opacity: 0.9;
+}
     font-size: 14px;
     margin-top: 4px;
 }
@@ -2431,6 +2516,16 @@ section.teams {
     margin-top: 10px;
     width: 100%;
     background: var(--ink);
+}
+
+.btn-confirm:hover {
+    background: #3a3a3a;
+    opacity: 0.9;
+}
+[data-theme="dark"] .btn-confirm:hover {
+    background: #4a4a4a;
+    opacity: 0.9;
+}
     color: var(--surface);
     padding: 8px;
     font-size: 12px;
@@ -2725,7 +2820,7 @@ section.teams {
 
 /* Log */
 .cv-log {
-    background: var(--ink);
+    background: var(--ink-bg);
     color: #d8cfb8;
     font-family: 'Courier New', monospace;
     font-size: 11px;
@@ -2742,3 +2837,401 @@ section.teams {
 .cv-log .log-ok   { color: #6fcf97; }
 .cv-log .log-warn { color: #f2c94c; }
 .cv-log .log-err  { color: #eb5757; }
+
+/* ====================== */
+/* PRÉ-MENU               */
+/* ====================== */
+
+#preMenu {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 60px 16px;
+}
+
+#preMenu h1 {
+    font-size: clamp(36px, 9vw, 60px);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+    color: var(--ink);
+    text-shadow: 4px 4px 0 var(--accent-2);
+}
+
+#preMenu .logo,
+#setup .logo {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.pre-menu-card {
+    width: 100%;
+    border: 2px solid var(--ink);
+    background: var(--card-bg);
+    box-shadow: var(--hard-shadow-ink);
+    padding: 22px 24px 28px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-sizing: border-box;
+}
+
+.pre-menu-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pre-menu-label {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.pre-menu-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 18px;
+    outline: none;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    transition: border-color 0.15s;
+}
+
+.pre-menu-input:focus {
+    border-color: var(--ink);
+}
+
+.pre-menu-input::placeholder {
+    color: var(--muted);
+    opacity: 0.5;
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.pre-menu-divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 4px 0;
+}
+
+.pre-menu-btn {
+    width: 100%;
+    padding: 14px 20px;
+    font-family: var(--display);
+    font-weight: var(--display-weight);
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    text-align: center;
+}
+
+#btnOffline {
+    background: #c0392b;
+    color: #fff;
+    box-shadow: 4px 4px 0 var(--shadow);
+    margin-top: 6px;
+    font-size: 20px;
+    padding: 16px 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: none;
+    cursor: pointer;
+}
+
+#btnOffline:hover {
+    background: #a93226;
+}
+
+#btnOffline:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.pre-menu-btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    box-shadow: var(--hard-shadow);
+    position: relative;
+    overflow: visible;
+    font-size: 20px;
+    padding: 14px 24px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+.pre-menu-btn-secondary:hover {
+    background: var(--ink);
+    color: var(--surface);
+}
+
+.pre-menu-btn-secondary:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--line);
+}
+
+.badge-em-breve {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    padding: 2px 7px;
+    border-radius: 8px;
+    line-height: 1.3;
+}
+
+/* ====================== */
+/* OPTION ROWS             */
+/* ====================== */
+
+.option-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.option-row.is-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.option-label {
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink);
+}
+
+/* ====================== */
+/* TOGGLE SWITCH           */
+/* ====================== */
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: var(--line);
+    border-radius: 12px;
+    transition: background 0.2s;
+}
+
+.toggle-slider::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 18px;
+    height: 18px;
+    background: var(--card-bg);
+    border-radius: 50%;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background: var(--accent);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+    transform: translateX(20px);
+}
+
+/* ====================== */
+/* MULTIPLAYER - SALAS    */
+/* ====================== */
+
+.room-wrap,
+.lobby-wrap {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 40px 16px;
+}
+
+.room-wrap h1,
+.lobby-header h1 {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.room-card,
+.lobby-card {
+    width: 100%;
+    border: 2px solid var(--ink);
+    background: var(--card-bg);
+    box-shadow: var(--hard-shadow-ink);
+    padding: 22px 24px 28px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-sizing: border-box;
+}
+
+.room-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.room-status {
+    margin-top: 12px;
+    text-align: center;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--accent);
+    min-height: 20px;
+}
+
+/* Lobby */
+.lobby-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.lobby-code {
+    font-family: var(--numeral);
+    font-weight: var(--numeral-weight);
+    font-size: 32px;
+    letter-spacing: 12px;
+    color: var(--accent);
+    margin-top: 8px;
+    padding: 8px 16px;
+    background: var(--surface);
+    border: 2px dashed var(--line);
+    display: inline-block;
+    cursor: pointer;
+    user-select: all;
+}
+
+.lobby-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lobby-players {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 40px;
+}
+
+.lobby-player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 2px solid var(--line);
+    background: var(--surface);
+    font-family: var(--display);
+    font-size: 16px;
+    color: var(--ink);
+    text-transform: uppercase;
+}
+
+.lobby-player-moderator {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--accent-2);
+    background: var(--ink);
+    padding: 2px 8px;
+    margin-left: auto;
+    text-transform: uppercase;
+}
+
+.lobby-empty {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    text-align: center;
+    padding: 12px;
+}
+
+.lobby-waiting {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--muted);
+    text-align: center;
+    margin: 8px 0;
+    font-style: italic;
+}
+
+/* ====================== */
+/* BOTÃO VOLTAR NO SETUP  */
+/* ====================== */
+
+.btn-back-setup {
+    background: transparent;
+    color: var(--muted);
+    border: 2px solid var(--line);
+    font-size: 12px;
+    padding: 8px 16px;
+    width: 100%;
+    margin-top: 10px;
+    font-family: var(--body);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.btn-back-setup:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* ====================== */
+/* STEPS - SHOW STEP 1 HINT */
+/* ====================== */
+
+#preMenu + #setup {
+    padding-bottom: 80px;
+}

@@ -86,6 +86,92 @@ const POSICOES_ABREV = {
 };
 
 // ======================
+// PRÉ-MENU
+// ======================
+
+const PRE_MENU_KEY = "draft2026_playerName";
+const THEME_KEY = "draft2026_theme";
+
+// ======================
+// FUNÇÕES DO PRÉ-MENU
+// ======================
+
+function iniciarPreMenu() {
+    // Carregar nome salvo
+    const nomeSalvo = localStorage.getItem(PRE_MENU_KEY) || "";
+    const inputNome = document.getElementById("prePlayerName");
+    if (inputNome && nomeSalvo) {
+        inputNome.value = nomeSalvo;
+    }
+
+    // Carregar tema salvo
+    const temaSalvo = localStorage.getItem(THEME_KEY) || "light";
+    alternarTema(temaSalvo);
+    const toggle = document.getElementById("themeToggle");
+    if (toggle) {
+        toggle.checked = temaSalvo === "dark";
+    }
+
+    // Esconder barra de etapas e todas as seções de jogo no pré-menu
+    const stepsBar = document.getElementById("stepsBar");
+    if (stepsBar) stepsBar.style.display = "none";
+    ["setup", "countrySelection", "draftArea", "resultsArea", "mataMataArea", "roomMenu", "lobby", "draftConfig"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "none";
+    });
+}
+
+function entrarModoOffline() {
+    // Salvar nome
+    const nome = document.getElementById("prePlayerName").value.trim();
+    if (nome) {
+        localStorage.setItem(PRE_MENU_KEY, nome);
+    }
+
+    // Verificar se já existe um draft salvo
+    const temDraft = localStorage.getItem(DRAFT_STORAGE_KEY);
+    if (temDraft && carregarEstadoDraft()) {
+        // Draft restaurado — esconder pré-menu, steps bar já aparece no carregarEstadoDraft
+        document.getElementById("preMenu").style.display = "none";
+        const stepsBar = document.getElementById("stepsBar");
+        if (stepsBar) stepsBar.style.display = "";
+        return;
+    }
+
+    // Esconder pré-menu, mostrar setup
+    document.getElementById("preMenu").style.display = "none";
+    document.getElementById("setup").style.display = "block";
+
+    // Mostrar barra de etapas
+    const stepsBar = document.getElementById("stepsBar");
+    if (stepsBar) stepsBar.style.display = "";
+
+    // Pré-preencher nome do jogador 1 no setup
+    const input = document.getElementById("playerName1");
+    if (input && nome) {
+        input.value = nome;
+    }
+
+    setActiveStep(1);
+}
+
+function alternarTema(modo) {
+    document.documentElement.dataset.theme = modo;
+    localStorage.setItem(THEME_KEY, modo);
+    const label = document.getElementById("themeLabel");
+    if (label) {
+        label.textContent = modo === "dark" ? "☀️ Modo claro" : "🌙 Modo escuro";
+    }
+    // Trocar logo para o tema
+    const logos = document.querySelectorAll(".logo");
+    logos.forEach(img => {
+        img.src = modo === "dark"
+            ? "assets/logo-darkmode.svg"
+            : "assets/logo.svg";
+    });
+}
+
+// ======================
 // BANDEIRAS
 // ======================
 
@@ -454,11 +540,16 @@ function carregarEstadoDraft() {
         paisesCpu = [...new Set(jogadoresBase.map(j => j.pais))].sort();
 
         // Esconder todas as seções
+        document.getElementById("preMenu").style.display = "none";
         document.getElementById("setup").style.display = "none";
         document.getElementById("countrySelection").style.display = "none";
         document.getElementById("draftArea").style.display = "none";
         document.getElementById("resultsArea").style.display = "none";
         document.getElementById("mataMataArea").style.display = "none";
+
+        // Mostrar barra de etapas
+        const stepsBar = document.getElementById("stepsBar");
+        if (stepsBar) stepsBar.style.display = "";
 
         // Restaurar a etapa correta
         const etapa = est.etapa || 3;
@@ -479,11 +570,13 @@ function carregarEstadoDraft() {
                 atualizarStatus();
                 gerarPool();
                 setActiveStep(3);
+                iniciarTimer(TIMER_DRAFT, autoPickJogador);
             } else {
                 document.getElementById("countrySelection").style.display = "block";
                 if (etapa === 2) {
                     const paisesRestantes = [...new Set(jogadoresBase.map(j => j.pais))].sort();
                     renderizarGridPaises(paisesRestantes);
+                    // Timer já inicia dentro de renderizarGridPaises
                 }
                 setActiveStep(2);
             }
@@ -496,6 +589,9 @@ function carregarEstadoDraft() {
                 atualizarRefreshes();
                 atualizarStatus();
                 gerarPool();
+                iniciarTimer(TIMER_DRAFT, autoPickJogador);
+            } else {
+                pararTimer();
             }
             setActiveStep(3);
         }
@@ -625,7 +721,83 @@ function atualizarStatus() {
             </span>
         `;
 
+    // Controle de turno multiplayer
+    if (typeof mpAtualizarTurnoUI === "function") {
+        mpAtualizarTurnoUI();
+    }
+
 }
+// ======================
+// TIMER (COUNTDOWN)
+// ======================
+
+const TIMER_PAISES = 10;
+const TIMER_DRAFT = 15;
+let timerRestante = 0;
+let timerInterval = null;
+let timerCallback = null;
+
+function iniciarTimer(segundos, callback) {
+    pararTimer();
+    timerRestante = segundos;
+    timerCallback = callback;
+    atualizarTimerDisplay();
+    timerInterval = setInterval(() => {
+        timerRestante--;
+        atualizarTimerDisplay();
+        if (timerRestante <= 0) {
+            const cb = timerCallback;
+            pararTimer();
+            if (cb) cb();
+        }
+    }, 1000);
+}
+
+function pararTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+    timerCallback = null;
+    timerRestante = 0;
+    atualizarTimerDisplay();
+}
+
+function atualizarTimerDisplay() {
+    const csEl = document.getElementById("csTimer");
+    const draftEl = document.getElementById("draftTimer");
+    const mostrando = timerInterval !== null && timerRestante > 0;
+    if (csEl) {
+        csEl.textContent = mostrando ? timerRestante + "s" : "";
+        csEl.classList.toggle("is-warning", mostrando && timerRestante <= 3);
+    }
+    if (draftEl) {
+        draftEl.textContent = mostrando ? timerRestante + "s" : "";
+        draftEl.classList.toggle("is-warning", mostrando && timerRestante <= 3);
+    }
+}
+
+// Auto-pick aleatório para países
+function autoPickPais() {
+    const cards = document.querySelectorAll("#countryGrid .country-card:not(.is-taken)");
+    if (cards.length > 0) {
+        const randomCard = cards[Math.floor(Math.random() * cards.length)];
+        const pais = randomCard.querySelector(".country-name").textContent;
+        const paises = [...new Set(jogadoresBase.map(j => j.pais))].sort();
+        toast(`⏰ Tempo esgotado! 🇺🇳 ${pais} selecionado automaticamente.`, 3000);
+        selecionarPais(pais, paises);
+    }
+}
+
+// Auto-pick aleatório para jogadores
+function autoPickJogador() {
+    if (poolAtual.length > 0) {
+        const jogador = poolAtual[Math.floor(Math.random() * poolAtual.length)];
+        toast(`⏰ Tempo esgotado! ${jogador.nome} pickado automaticamente.`, 3000);
+        selecionarJogador(jogador);
+    }
+}
+
 // ======================
 // CRIAR PARTICIPANTES
 // ======================
@@ -702,6 +874,8 @@ document
 // ======================
 
 function iniciarDraft() {
+
+    pararTimer();
 
     limparEstadoDraft();
 
@@ -963,12 +1137,20 @@ function renderizarGridPaises(
         }
     );
 
+    // Iniciar timer para seleção de países
+    iniciarTimer(TIMER_PAISES, autoPickPais);
+
+    // Controle de turno multiplayer
+    mpControlarTurnoPaises();
+
 }
 
 function selecionarPais(
     pais,
     paises
 ) {
+
+    pararTimer();
 
     const jogadorIdx =
         ordemSelecao[
@@ -982,6 +1164,15 @@ function selecionarPais(
     indiceSelecao++;
 
     salvarEstadoDraft();
+
+    // Broadcast multiplayer
+    if (modoAtual !== MODO.OFFLINE && mpState.channel) {
+        mpState.channel.send({
+            type: "broadcast",
+            event: "country_picked",
+            payload: { pais }
+        });
+    }
 
     if (
         indiceSelecao >=
@@ -1076,9 +1267,25 @@ function prosseguirParaDraft() {
 
     atualizarStatus();
 
-    gerarPool();
+    // Em multiplayer, só o moderador gera o pool e broadcasta
+    if (modoAtual !== MODO.OFFLINE && modoAtual !== MODO.ONLINE_MODERATOR) {
+        // Player aguarda o pool do moderador
+        poolAtual = [];
+    } else {
+        gerarPool();
+    }
+    // Forçar broadcast no início do draft (moderador envia o pool inicial)
+    if (typeof mpBroadcastPool === "function") mpBroadcastPool(true);
 
     salvarEstadoDraft();
+
+    // Iniciar timer do draft
+    iniciarTimer(TIMER_DRAFT, autoPickJogador);
+
+    // Controle de turno multiplayer
+    if (typeof mpAtualizarTurnoUI === "function") {
+        mpAtualizarTurnoUI();
+    }
 
 }
 
@@ -1368,8 +1575,13 @@ function avancarTurno() {
         return;
     }
 
+    // Em multiplayer, usar o modo travado
+    const modoDraft = (modoAtual !== MODO.OFFLINE && mpState && mpState.draftModeLocked)
+        ? mpState.draftModeLocked
+        : config.draftMode;
+
     if (
-        config.draftMode ===
+        modoDraft ===
         "normal"
     ) {
 
@@ -1441,6 +1653,8 @@ function selecionarJogador(
     jogador
 ) {
 
+    pararTimer();
+
     times[
         jogadorAtual
     ].push(
@@ -1478,6 +1692,22 @@ function selecionarJogador(
         todosCompletos()
     ) {
 
+        // Broadcast multiplayer ANTES de sair (último pick)
+        if (modoAtual !== MODO.OFFLINE && mpState.channel) {
+            mpState.channel.send({
+                type: "broadcast",
+                event: "player_picked",
+                payload: {
+                    jogador,
+                    pickerIndex: jogadorAtual,
+                    nextJogadorAtual: jogadorAtual,
+                    direcaoSnake,
+                    refreshesRestantes: 0,
+                    pool: []
+                }
+            });
+        }
+
         mostrarResultadoFinal();
 
         return;
@@ -1486,6 +1716,8 @@ function selecionarJogador(
 
     pickAtual++;
 
+    // Salvar quem pickou antes de avançar (para broadcast multiplayer)
+    const mpPickerIndex = jogadorAtual;
     avancarTurno();
 
     atualizarStatus();
@@ -1494,7 +1726,37 @@ function selecionarJogador(
 
     gerarPool();
 
+    // Controle de turno multiplayer (após recriar o pool)
+    if (typeof mpAtualizarTurnoUI === "function") {
+        mpAtualizarTurnoUI();
+    }
+
     salvarEstadoDraft();
+
+    // Broadcast multiplayer (inclui pool para sync)
+    if (modoAtual !== MODO.OFFLINE && mpState.channel) {
+        mpState.channel.send({
+            type: "broadcast",
+            event: "player_picked",
+            payload: {
+                jogador,
+                pickerIndex: mpPickerIndex,
+                nextJogadorAtual: jogadorAtual,
+                direcaoSnake,
+                refreshesRestantes: refreshesPorJogador[jogadorAtual] ?? 0,
+                pool: poolAtual.map(j => ({
+                    nome: j.nome, pais: j.pais, posicao: j.posicao,
+                    playerid: j.playerid || null, nomeCompleto: j.nomeCompleto || null,
+                    tipo: j.tipo || null
+                }))
+            }
+        });
+    }
+
+    // Iniciar timer para o próximo jogador
+    if (!todosCompletos()) {
+        iniciarTimer(TIMER_DRAFT, autoPickJogador);
+    }
 
 }
 
@@ -1504,7 +1766,12 @@ function selecionarJogador(
 
 function mostrarResultadoFinal() {
 
+    pararTimer();
+
     setActiveStep(4);
+
+    // Desabilitar controles para não-moderadores
+    if (typeof mpDesabilitarResults === "function") mpDesabilitarResults();
 
     // Garantir que outras seções estão ocultas
     document.getElementById("setup").style.display = "none";
@@ -2000,6 +2267,12 @@ function montarCompetidoresMataMata(
 
 function sortearMataMata() {
 
+    // Bloqueio para não-moderadores
+    if (modoAtual !== MODO.OFFLINE && mpState && !mpState.isModerator) {
+        toast("⛔ Apenas o moderador pode sortear.", 2000);
+        return;
+    }
+
     const faseInicial = FASES_MATA_MATA.find(
         fase => fase.key === config.startingPhase
     ) || FASES_MATA_MATA[0];
@@ -2066,6 +2339,11 @@ function embaralharLista(
 // ======================
 
 function iniciarModoSorteio() {
+
+    if (modoAtual !== MODO.OFFLINE && !mpState.isModerator) {
+        toast("⛔ Apenas o moderador pode iniciar o sorteio.", 2000);
+        return;
+    }
 
     const faseInicial = FASES_MATA_MATA.find(
         fase => fase.key === config.startingPhase
@@ -2262,6 +2540,11 @@ function renderizarModoSorteio() {
 
 function sortearProximoTime() {
 
+    if (modoAtual !== MODO.OFFLINE && !mpState.isModerator) {
+        toast("⛔ Apenas o moderador pode sortear.", 2000);
+        return;
+    }
+
     if (
         !mataMata ||
         !mataMata.emSorteio ||
@@ -2307,15 +2590,22 @@ function sortearProximoTime() {
         mataMata.emSorteio = false;
         salvarMataMata();
         renderizarMataMata();
+        if (typeof mpBroadcastMataMata === "function") mpBroadcastMataMata();
         return;
     }
 
     salvarMataMata();
     renderizarModoSorteio();
+    if (typeof mpBroadcastMataMata === "function") mpBroadcastMataMata();
 
 }
 
 function finalizarSorteio() {
+
+    if (modoAtual !== MODO.OFFLINE && !mpState.isModerator) {
+        toast("⛔ Apenas o moderador pode finalizar.", 2000);
+        return;
+    }
 
     if ( !mataMata ) {
         return;
@@ -2324,10 +2614,16 @@ function finalizarSorteio() {
     mataMata.emSorteio = false;
     salvarMataMata();
     renderizarMataMata();
+    if (typeof mpBroadcastMataMata === "function") mpBroadcastMataMata();
 
 }
 
 function sortearTodosTimes() {
+
+    if (modoAtual !== MODO.OFFLINE && !mpState.isModerator) {
+        toast("⛔ Apenas o moderador pode sortear.", 2000);
+        return;
+    }
 
     if ( !mataMata || !mataMata.emSorteio || !mataMata.poolSorteio || mataMata.poolSorteio.length === 0 ) {
         return;
@@ -2357,6 +2653,7 @@ function sortearTodosTimes() {
     mataMata.emSorteio = false;
     salvarMataMata();
     renderizarMataMata();
+    if (typeof mpBroadcastMataMata === "function") mpBroadcastMataMata();
 
 }
 
@@ -3180,6 +3477,12 @@ function confirmarPlacar(
     idJogo
 ) {
 
+    // Bloqueio para não-moderadores
+    if (modoAtual !== MODO.OFFLINE && !mpState.isModerator) {
+        toast("⛔ Apenas o moderador pode confirmar resultados.", 2000);
+        return;
+    }
+
     let faseEncontrada = null;
     let indiceFase = -1;
     let jogo = null;
@@ -3255,11 +3558,20 @@ function confirmarPlacar(
     salvarMataMata();
     renderizarMataMata();
 
+    // Broadcast do mata-mata para outros jogadores
+    if (typeof mpBroadcastMataMata === "function") mpBroadcastMataMata();
+
 }
 
 function mostrarMataMata() {
 
     mataMata = carregarMataMata();
+
+    // Esconder seções de multiplayer/lobby
+    ["lobby", "draftConfig", "roomMenu"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "none";
+    });
 
     document.getElementById(
         "draftArea"
@@ -3280,21 +3592,49 @@ function mostrarMataMata() {
 
     if ( !mataMata ) {
         iniciarModoSorteio();
+        if (typeof mpDesabilitarMataMata === "function") mpDesabilitarMataMata();
+        if (typeof mpBroadcastMataMata === "function") mpBroadcastMataMata();
         return;
     }
 
     if ( mataMata.emSorteio ) {
         renderizarModoSorteio();
+        if (typeof mpDesabilitarMataMata === "function") mpDesabilitarMataMata();
+        if (typeof mpBroadcastMataMata === "function") mpBroadcastMataMata();
         return;
     }
 
     renderizarMataMata();
 
+    if (typeof mpDesabilitarMataMata === "function") mpDesabilitarMataMata();
+
 }
 
 async function resetarTudo() {
 
+    // Confirmar antes de sair
+    const confirmou = await mostrarModal({
+        title: "Menu Inicial",
+        message: "Você será levado ao menu inicial e todo o progresso atual será perdido.",
+        confirmText: "Sair",
+        cancelText: "Cancelar",
+        eyebrow: "Draft"
+    });
+    if (!confirmou) return;
+
+    // Avisar outros jogadores que o moderador saiu
+    if (modoAtual !== MODO.OFFLINE && mpState && mpState.channel && mpState.isModerator) {
+        mpState.channel.send({ type: "broadcast", event: "moderator_left", payload: {} });
+    }
+    // Limpar estado multiplayer
+    if (typeof mpSairSala === "function") mpSairSala();
+
+    // Preservar nome e tema antes de limpar
+    const nome = localStorage.getItem(PRE_MENU_KEY);
+    const tema = localStorage.getItem(THEME_KEY);
     localStorage.clear();
+    if (nome) localStorage.setItem(PRE_MENU_KEY, nome);
+    if (tema) localStorage.setItem(THEME_KEY, tema);
     limparEstadoDraft();
     location.reload();
 
@@ -3327,6 +3667,9 @@ document
             atualizarRefreshes();
 
             gerarPool();
+
+            // Broadcast pool em multiplayer
+            if (typeof mpBroadcastPool === "function") mpBroadcastPool();
 
         }
     );
@@ -3489,25 +3832,25 @@ document
     .getElementById("restartDraft")
     .addEventListener(
         "click",
-        async () => {
-
-            const confirmou =
-                await mostrarModal( {
-                    title: "Recomeçar Draft?",
-                    message: "Todo o progresso atual será perdido e um novo draft será iniciado.",
-                    confirmText: "Sim, reiniciar",
-                    cancelText: "Cancelar",
-                    eyebrow: "Draft"
-                } );
-
-            if (!confirmou) return;
-
-            // Limpar estado salvo antes de recarregar
+        () => {
+            pararTimer();
             limparEstadoDraft();
-            localStorage.removeItem( MATA_MATA_STORAGE_KEY );
-            location.href =
-                "index.html";
-
+            localStorage.removeItem(MATA_MATA_STORAGE_KEY);
+            // Avisar outros jogadores que o moderador saiu
+            if (modoAtual !== MODO.OFFLINE && mpState && mpState.channel && mpState.isModerator) {
+                mpState.channel.send({ type: "broadcast", event: "moderator_left", payload: {} });
+            }
+            // Limpar estado multiplayer
+            if (typeof mpSairSala === "function") mpSairSala();
+            document.getElementById("draftArea").style.display = "none";
+            document.getElementById("preMenu").style.display = "block";
+            document.getElementById("setup").style.display = "none";
+            document.getElementById("countrySelection").style.display = "none";
+            document.getElementById("resultsArea").style.display = "none";
+            document.getElementById("mataMataArea").style.display = "none";
+            const stepsBar = document.getElementById("stepsBar");
+            if (stepsBar) stepsBar.style.display = "none";
+            iniciarPreMenu();
         }
     );
 
@@ -3515,7 +3858,19 @@ document
     .getElementById("goToMataMata")
     .addEventListener(
         "click",
-        mostrarMataMata
+        () => {
+            mostrarMataMata();
+            // Aplicar proteções para não-moderadores
+            if (typeof mpDesabilitarMataMata === "function") {
+                mpDesabilitarMataMata();
+                // Reaplicar após renderização completa
+                setTimeout(() => mpDesabilitarMataMata(), 300);
+            }
+            // Broadcast para outros jogadores entrarem no mata-mata (com estado completo)
+            if (modoAtual !== MODO.OFFLINE && mpState && mpState.channel && mpState.isModerator) {
+                mpState.channel.send({ type: "broadcast", event: "enter_mata_mata", payload: { mataMata } });
+            }
+        }
     );
 
 document
@@ -3532,7 +3887,14 @@ document
             ).style.display = "block";
 
             setActiveStep( 4 );
+            // Renderizar resultados se estiver vazio (multiplayer após F5)
+            const finalResults = document.getElementById("finalResults");
+            if (finalResults && !finalResults.innerHTML.trim()) {
+                mostrarResultadoFinal();
+            }
             salvarEstadoDraft();
+            // Reaplicar proteções para não-moderadores
+            if (typeof mpDesabilitarResults === "function") mpDesabilitarResults();
         }
     );
 
@@ -3594,6 +3956,10 @@ document
             }
 
             iniciarModoSorteio();
+            // Broadcast para outros jogadores
+            setTimeout(() => {
+                if (typeof mpBroadcastMataMata === "function") mpBroadcastMataMata();
+            }, 200);
         }
     );
 
@@ -3777,6 +4143,27 @@ function setActiveStep(step) {
 carregarJogadores();
 carregarIconsHeroes();
 
+// Estimativa de icons+heroes por equipe (media estimada)
+function atualizarEstimativaIconsHeroes() {
+    const estimateEl = document.getElementById("poolSpecialChanceEstimate");
+    const iconsHeroesSelect = document.getElementById("iconsHeroesMode");
+    const poolSlider = document.getElementById("poolSpecialChance");
+    if (!estimateEl || !poolSlider || !iconsHeroesSelect) return;
+
+    const modo = iconsHeroesSelect.value;
+    if (modo === "none") {
+        estimateEl.textContent = "";
+        return;
+    }
+    const chance = parseInt(poolSlider.value, 10) / 100; // 0-10000 → 0-100 (%)
+    const porElenco = parseInt(document.getElementById("playersPerTeam")?.value || "18", 10);
+    // Cada equipe faz `porElenco` picks, cada um com `chance`% de ser icon/hero
+    const mediaPorElenco = (porElenco * chance) / 100;
+    const formatado = mediaPorElenco.toFixed(1);
+    const tipoLabel = modo === "icons" ? "icones" : modo === "heroes" ? "herois" : "icones+herois";
+    estimateEl.textContent = "Media estimada: ~" + formatado + " " + tipoLabel + " por equipe";
+}
+
 // Sincronizar slider <-> input numérico do poolSpecialChance
 (function() {
     const poolSlider = document.getElementById("poolSpecialChance");
@@ -3786,16 +4173,160 @@ carregarIconsHeroes();
         poolSlider.addEventListener("input", () => {
             const pct = parseInt(poolSlider.value) / 100;
             poolInput.value = pct.toFixed(2);
+            atualizarEstimativaIconsHeroes();
         });
         poolInput.addEventListener("input", () => {
             const pct = Math.min(100, Math.max(0, parseFloat(poolInput.value) || 0));
             poolSlider.value = Math.round(pct * 100);
+            atualizarEstimativaIconsHeroes();
         });
+    }
+
+    // Atualizar estimativa ao mudar participantes ou jogadores/elenco
+    ["playerCount", "playersPerTeam"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("change", atualizarEstimativaIconsHeroes);
+    });
+    const iconsHeroesSelect = document.getElementById("iconsHeroesMode");
+    if (iconsHeroesSelect) {
+        iconsHeroesSelect.addEventListener("change", atualizarEstimativaIconsHeroes);
+    }
+
+    // Inicializar estimativa se visível
+    if (poolSlider) {
+        poolInput.value = parseInt(poolSlider.value, 10) / 100;
+        poolInput.value = parseFloat(poolInput.value).toFixed(2);
+        atualizarEstimativaIconsHeroes();
     }
 })();
 
-// Etapa inicial: Configurar (1)
-setTimeout(() => setActiveStep(1), 50);
+// Bootstrap: tentar restaurar draft, senão mostrar pré-menu
+setTimeout(() => {
+    // Se estávamos em multiplayer antes do F5, não restaurar draft (vai reentrar pela sala)
+    const foiMP = typeof mpFoiMultiplayer === "function" && mpFoiMultiplayer();
+    const restored = foiMP ? false : carregarEstadoDraft();
+    // Se restaurou mas setup ficou visível (etapa 1 sem draft ativo), trata como "não restaurado"
+    const setupVisivel = document.getElementById("setup").style.display !== "none";
+    if (!restored || setupVisivel) {
+        // Sem draft salvo — mostrar pré-menu
+        document.getElementById("setup").style.display = "none";
+        document.getElementById("preMenu").style.display = "block";
+        iniciarPreMenu();
+    } else {
+        // Draft restaurado — esconder pré-menu
+        document.getElementById("preMenu").style.display = "none";
+    }
+}, 50);
+
+// ─── EVENT LISTENERS DO PRÉ-MENU ──────────────────────────────────────────────
+
+document.addEventListener("click", function (e) {
+    // Botão Offline
+    if (e.target.id === "btnOffline" || e.target.closest("#btnOffline")) {
+        entrarModoOffline();
+        return;
+    }
+    // Botão Multiplayer → abrir menu de salas
+    if (e.target.id === "btnMultiplayer" || e.target.closest("#btnMultiplayer")) {
+        mpAbrirMenuSalas();
+        return;
+    }
+});
+
+// Toggle de tema
+document.addEventListener("change", function (e) {
+    if (e.target.id === "themeToggle") {
+        alternarTema(e.target.checked ? "dark" : "light");
+    }
+});
+
+// Botão voltar no setup
+document.addEventListener("click", function (e) {
+    if (e.target.id === "backToPreMenu") {
+        pararTimer();
+        document.getElementById("setup").style.display = "none";
+        document.getElementById("preMenu").style.display = "block";
+        const stepsBar = document.getElementById("stepsBar");
+        if (stepsBar) stepsBar.style.display = "none";
+        iniciarPreMenu();
+    }
+
+    // ── Multiplayer ──
+    if (e.target.id === "btnCriarSala" || e.target.closest("#btnCriarSala")) {
+        mpHandleCriarSala();
+        return;
+    }
+
+    if (e.target.id === "btnEntrarSala" || e.target.closest("#btnEntrarSala")) {
+        mpHandleEntrarSala();
+        return;
+    }
+
+    if (e.target.id === "btnVoltarRoomMenu" || e.target.closest("#btnVoltarRoomMenu")) {
+        mpFecharMenuSalas();
+        return;
+    }
+
+    if (e.target.id === "btnSairLobby" || e.target.closest("#btnSairLobby")) {
+        mpFecharLobby();
+        return;
+    }
+
+    // Configurar draft (moderador)
+    if (e.target.id === "btnConfigurarDraft" || e.target.closest("#btnConfigurarDraft")) {
+        mpAbrirConfig();
+        return;
+    }
+
+    // Salvar configuração
+    if (e.target.id === "btnSalvarConfig" || e.target.closest("#btnSalvarConfig")) {
+        mpSalvarConfig();
+        return;
+    }
+
+    // Voltar da config sem salvar
+    if (e.target.id === "btnVoltarConfig" || e.target.closest("#btnVoltarConfig")) {
+        mpFecharConfig();
+        return;
+    }
+
+    // Iniciar draft (moderador)
+    if (e.target.id === "btnIniciarDraft" || e.target.closest("#btnIniciarDraft")) {
+        mpIniciarDraftOnline();
+        return;
+    }
+
+    // Continuar mata-mata (após F5)
+    if (e.target.id === "btnResumeMataMata" || e.target.closest("#btnResumeMataMata")) {
+        mostrarMataMata();
+        return;
+    }
+
+    // Copiar código da sala ao clicar
+    if (e.target.id === "lobbyCode") {
+        const code = e.target.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            toast("📋 Código copiado: " + code, 2000);
+        }).catch(() => {});
+        return;
+    }
+});
+
+// Enter no campo de código da sala
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && e.target.id === "inputCodigoSala") {
+        e.preventDefault();
+        mpHandleEntrarSala();
+    }
+});
+
+// Enter no campo de nome → inicia offline
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && e.target.id === "prePlayerName") {
+        e.preventDefault();
+        entrarModoOffline();
+    }
+});
 
 // ─── CONVERSOR RDBM ──────────────────────────────────────────────────────────
 
