@@ -2,6 +2,32 @@
 // DRAFT COPA DO MUNDO V2
 // ======================
 
+// ─── SOM DE CLIQUE ──────────────────────────────────────────────────────────
+
+const SOUND_KEY = "draft2026_sound";
+
+function isSoundEnabled() {
+    return localStorage.getItem(SOUND_KEY) !== "off";
+}
+
+function playClickSound() {
+    if (!isSoundEnabled()) return;
+    try {
+        const audio = new Audio("clicksound.mp3");
+        audio.volume = 0.5;
+        audio.play().catch(() => {});
+    } catch (_) {}
+}
+
+// Toca som em qualquer clique em botão
+document.addEventListener("click", function (e) {
+    if (e.target.tagName === "BUTTON" || e.target.closest("button")) {
+        playClickSound();
+    }
+}, true);
+
+// ─── TOAST ──────────────────────────────────────────────────────────────────
+
 let _toastTimer = null;
 function toast(msg, duration = 2500) {
     const el = document.getElementById("toast");
@@ -110,6 +136,16 @@ function iniciarPreMenu() {
     const toggle = document.getElementById("themeToggle");
     if (toggle) {
         toggle.checked = temaSalvo === "dark";
+    }
+
+    // Carregar preferência de som
+    const somToggle = document.getElementById("soundToggle");
+    if (somToggle) {
+        somToggle.checked = isSoundEnabled();
+        const soundLabel = document.getElementById("soundLabel");
+        if (soundLabel) {
+            soundLabel.textContent = isSoundEnabled() ? "🔊 Som" : "🔇 Som";
+        }
     }
 
     // Esconder barra de etapas e todas as seções de jogo no pré-menu
@@ -4265,10 +4301,19 @@ document.addEventListener("click", function (e) {
     }
 });
 
-// Toggle de tema
+// Toggle de tema e som
 document.addEventListener("change", function (e) {
     if (e.target.id === "themeToggle") {
         alternarTema(e.target.checked ? "dark" : "light");
+    }
+    if (e.target.id === "soundToggle") {
+        localStorage.setItem(SOUND_KEY, e.target.checked ? "on" : "off");
+        const label = document.getElementById("soundLabel");
+        if (label) {
+            label.textContent = e.target.checked ? "🔊 Som" : "🔇 Som";
+        }
+        // Se ativou, tocar som de confirmação
+        if (e.target.checked) playClickSound();
     }
 });
 
