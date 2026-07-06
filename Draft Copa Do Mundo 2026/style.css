@@ -2930,17 +2930,23 @@ section.teams {
 #preMenu {
     max-width: 480px;
     margin: 0 auto;
-    padding: 40px 16px;
+    padding: 20px 16px 16px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #preMenu h1 {
     font-size: clamp(36px, 9vw, 60px);
     text-transform: uppercase;
     letter-spacing: -0.01em;
-    margin-bottom: 28px;
+    margin-bottom: 16px;
     color: var(--ink);
     text-shadow: 4px 4px 0 var(--accent-2);
     text-align: center;
+    line-height: 1;
 }
 
 #preMenu .logo,
@@ -2958,18 +2964,18 @@ section.teams {
     border: 2px solid var(--ink);
     background: var(--card-bg);
     box-shadow: var(--hard-shadow-ink);
-    padding: 22px 24px 28px;
+    padding: 16px 20px 20px;
     border-radius: 2px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     box-sizing: border-box;
 }
 
 .pre-menu-section {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .pre-menu-label {
