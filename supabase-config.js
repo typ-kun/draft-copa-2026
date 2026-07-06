@@ -31,10 +31,8 @@ function initSupabase() {
 
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
         auth: {
-            flowType: "pkce",
             autoRefreshToken: true,
-            persistSession: true,
-            detectSessionInUrl: true
+            persistSession: true
         },
         realtime: {
             params: {
