@@ -2609,10 +2609,6 @@ section.teams {
     background: #4a4a4a;
     opacity: 0.9;
 }
-    color: var(--surface);
-    padding: 8px;
-    font-size: 12px;
-}
 
 /* Toast notification */
 #toast {

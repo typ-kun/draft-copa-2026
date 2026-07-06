@@ -244,7 +244,7 @@ async function handleLogout() {
     if (authState.isGuest) {
         authState.isGuest = false;
         renderAuthUI();
-        toast("Modo convidado desativado.", 2000);
+        showAuthSuccess("Modo convidado desativado.");
         return;
     }
 
@@ -259,16 +259,16 @@ async function handleLogout() {
 
     document.getElementById("authEmail").value = "";
     document.getElementById("authPassword").value = "";
-    toast("Desconectado.", 2000);
     renderAuthUI();
+    showAuthSuccess("Desconectado.");
 }
 
 // ─── CONVIDADO ───────────────────────────────────────────────────────────────
 
 function handleContinuarConvidado() {
     authState.isGuest = true;
-    toast("🎮 Modo convidado ativado!", 2000);
     renderAuthUI();
+    showAuthSuccess("🎮 Modo convidado ativado!");
     atualizarStatusPreMenu();
     // Focar no input de nome
     const inputNome = document.getElementById("prePlayerName");
