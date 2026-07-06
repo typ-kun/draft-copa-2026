@@ -2861,7 +2861,7 @@ section.teams {
 #setup .logo {
     display: block;
     width: 100%;
-    max-width: 400px;
+    max-width: 480px;
     height: auto;
     margin: 0 auto;
 }
