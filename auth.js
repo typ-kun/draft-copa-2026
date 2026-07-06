@@ -379,11 +379,14 @@ async function mpListarProfiles() {
                     ${profile.created_at ? " • " + new Date(profile.created_at).toLocaleDateString("pt-BR") : ""}
                 </span>
             </div>
-            ${profile.email !== "guilherme_marchese@hotmail.com" ? `
-            <select class="admin-level-select" data-profile-id="${profile.id}" data-current="${profile.level}">
-                <option value="common" ${profile.level === "common" ? "selected" : ""}>🎮 Comum</option>
-                <option value="premium" ${profile.level === "premium" ? "selected" : ""}>⭐ Premium</option>
-            </select>` : '<span style="font-size:11px;color:var(--accent);font-weight:700;">👑 ADMIN</span>'}
+            <div style="display:flex;align-items:center;gap:6px;">
+                ${profile.email !== "guilherme_marchese@hotmail.com" ? `
+                <select class="admin-level-select" data-profile-id="${profile.id}" data-current="${profile.level}">
+                    <option value="common" ${profile.level === "common" ? "selected" : ""}>🎮 Comum</option>
+                    <option value="premium" ${profile.level === "premium" ? "selected" : ""}>⭐ Premium</option>
+                </select>
+                <button class="admin-delete-btn" data-profile-id="${profile.id}" data-profile-email="${profile.email}" title="Deletar ${profile.email}">✕</button>` : '<span style="font-size:11px;color:var(--accent);font-weight:700;">👑 ADMIN</span>'}
+            </div>
         </div>
     `).join("");
 }
@@ -401,6 +404,40 @@ async function mpAlterarNivel(profileId, novoNivel) {
         toast("❌ Erro ao alterar nível: " + error.message, 3000);
     } else {
         toast("✅ Nível alterado!", 2000);
+        mpListarProfiles();
+    }
+}
+
+async function mpDeletarProfile(profileId, email) {
+    if (!confirm(`Tem certeza que deseja deletar "${email}"?\n\nIsso remove o perfil e a conta de usuário permanentemente.`)) return;
+
+    const supabase = initSupabase();
+    if (!supabase) return;
+
+    // Tenta usar a função RPC admin_delete_user (se existir no banco)
+    const { error: rpcError } = await supabase.rpc("admin_delete_user", {
+        target_user_id: profileId
+    });
+
+    if (rpcError) {
+        // Fallback: tenta deletar só da tabela profiles
+        if (rpcError.message && rpcError.message.includes("function not found")) {
+            const { error: delError } = await supabase
+                .from("profiles")
+                .delete()
+                .eq("id", profileId);
+
+            if (delError) {
+                toast("❌ Erro ao deletar: " + delError.message, 3000);
+            } else {
+                toast("✅ Perfil deletado! O usuario ainda existe em auth.users — delete manualmente no Supabase Dashboard se necessario.", 4000);
+                mpListarProfiles();
+            }
+        } else {
+            toast("❌ Erro ao deletar: " + rpcError.message, 3000);
+        }
+    } else {
+        toast("✅ Usuário deletado com sucesso!", 2000);
         mpListarProfiles();
     }
 }
@@ -510,6 +547,12 @@ document.addEventListener("click", function (e) {
     }
     if (e.target.classList.contains("admin-level-select")) {
         // Não fazer nada no click, apenas abrir o dropdown
+        return;
+    }
+    if (e.target.classList.contains("admin-delete-btn")) {
+        const profileId = e.target.dataset.profileId;
+        const profileEmail = e.target.dataset.profileEmail;
+        if (profileId) mpDeletarProfile(profileId, profileEmail);
         return;
     }
 });

@@ -3490,6 +3490,26 @@ section.teams {
     font-family: var(--body);
 }
 
+.admin-delete-btn {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .15s;
+    flex-shrink: 0;
+}
+.admin-delete-btn:hover {
+    opacity: 0.8;
+}
+
 .pre-menu-status {
     font-family: var(--body);
     font-size: 12px;
