@@ -984,11 +984,15 @@ async function mpListarSalasAbertas() {
 
     listEl.innerHTML = '<div class="open-rooms-empty">🔄 Buscando salas...</div>';
 
+    // Só mostrar salas criadas nas últimas 2 horas
+    const duasHorasAtras = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
+
     // Buscar salas com status "waiting"
     const { data: rooms, error } = await supabase
         .from("rooms")
         .select("id, code, created_at")
         .eq("status", "waiting")
+        .gte("created_at", duasHorasAtras)
         .order("created_at", { ascending: false });
 
     if (error) {

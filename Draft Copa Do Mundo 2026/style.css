@@ -1327,12 +1327,14 @@ section.teams {
     background: var(--surface-2);
     border-radius: 8px;
     transition: background .15s;
+    border: 1px solid var(--line);
 }
 .open-room-item:hover {
     background: var(--card-bg);
 }
 [data-theme="dark"] .open-room-item {
     background: #2a2a2a;
+    border-color: transparent;
 }
 [data-theme="dark"] .open-room-item:hover {
     background: #3a3a3a;
