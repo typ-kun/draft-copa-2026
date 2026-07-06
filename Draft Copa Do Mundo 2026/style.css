@@ -2617,24 +2617,30 @@ section.teams {
 /* Toast notification */
 #toast {
     position: fixed;
-    bottom: 24px;
+    top: 20px;
     left: 50%;
-    transform: translateX(-50%) translateY(16px);
+    transform: translateX(-50%) translateY(-16px);
     background: var(--ink);
     color: var(--surface);
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: opacity 0.25s, transform 0.25s;
     z-index: 9999;
     white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border: 2px solid var(--accent);
 }
 #toast.show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+}
+
+[data-theme="dark"] #toast {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
 
 /* ====================== */
