@@ -126,7 +126,12 @@ function entrarModoOffline() {
     const authOk = (typeof isAuthenticated === "function" && isAuthenticated()) || (typeof getAuthUser === "function" && getAuthUser());
     const guestOk = typeof authState !== "undefined" && authState && authState.isGuest;
     if (!authOk && !guestOk) {
-        toast("Faça login ou clique em 'Logar / Registrar' primeiro.", 3500);
+        const statusEl = document.getElementById("preMenuStatus");
+        if (statusEl) {
+            statusEl.textContent = "⚠️ Faça login ou clique em 'Logar / Registrar' primeiro.";
+            statusEl.classList.add("show");
+            setTimeout(() => { statusEl.classList.remove("show"); }, 4000);
+        }
         return;
     }
 
