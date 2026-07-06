@@ -25,46 +25,86 @@
 
         <div class="pre-menu-card">
 
-            <!-- Nome do jogador -->
-            <div class="pre-menu-section">
-                <label class="pre-menu-label">SEU NOME</label>
-                <input type="text" id="prePlayerName" placeholder="Digite seu nome" class="pre-menu-input" autocomplete="off">
-            </div>
+            <!-- Autenticação -->
+            <div class="pre-menu-section" id="authSection" style="display:none;">
 
-            <hr class="pre-menu-divider">
-
-            <!-- Modos de jogo -->
-            <div class="pre-menu-section">
-                <button id="btnOffline" class="pre-menu-btn">Modo Offline</button>
-                <button id="btnMultiplayer" class="pre-menu-btn pre-menu-btn-secondary">
-                    Multiplayer
-                </button>
-            </div>
-
-            <hr class="pre-menu-divider">
-
-            <!-- Opções -->
-            <div class="pre-menu-section">
-                <label class="pre-menu-label">OPÇÕES</label>
-
-                <div class="option-row">
-                    <span class="option-label" id="themeLabel">🌙 Modo escuro</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="themeToggle">
-                        <span class="toggle-slider"></span>
-                    </label>
+                <!-- Deslogado -->
+                <div id="authLoggedOut">
+                    <label class="pre-menu-label">ENTRAR / CADASTRAR</label>
+                    <input type="email" id="authEmail" class="pre-menu-input" placeholder="seu@email.com" autocomplete="email" style="margin-bottom:6px;">
+                    <input type="password" id="authPassword" class="pre-menu-input" placeholder="Senha" autocomplete="current-password" style="margin-bottom:4px;">
+                    <div style="display:flex; gap:6px; margin-bottom:4px;">
+                        <button id="btnLogin" class="pre-menu-btn" style="flex:1;font-size:14px;padding:10px;">Entrar</button>
+                        <button id="btnRegister" class="pre-menu-btn pre-menu-btn-secondary" style="flex:1;font-size:14px;padding:10px;">Cadastrar</button>
+                    </div>
+                    <div style="text-align:center;margin-bottom:4px;">
+                        <button id="btnGoogleLogin" style="background:none;border:2px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:2px;cursor:pointer;font-size:13px;font-weight:600;transition:color .15s,border-color .15s;width:100%;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">🔵 Entrar com Google</button>
+                    </div>
+                    <div style="text-align:center;margin-top:8px;">
+                        <button id="btnContinuarConvidado" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;font-weight:600;text-decoration:underline;padding:4px;transition:color .15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">Continuar como convidado →</button>
+                    </div>
+                    <div id="authError" style="color:var(--accent);font-size:12px;font-weight:600;display:none;margin-top:4px;"></div>
+                    <div id="authSuccess" style="color:var(--win);font-size:12px;font-weight:600;display:none;margin-top:4px;"></div>
+                    <div id="authLoading" style="display:none;font-size:12px;color:var(--muted);text-align:center;margin-top:4px;">Aguarde...</div>
                 </div>
 
-                <div class="option-row is-disabled">
-                    <span class="option-label">🔊 Som</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" disabled>
-                        <span class="toggle-slider"></span>
-                    </label>
+                <!-- Logado -->
+                <div id="authLoggedIn" style="display:none;">
+                    <label class="pre-menu-label">CONTA</label>
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                        <span id="authUserEmail" style="font-weight:600;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink);"></span>
+                        <button id="btnLogout" class="pre-menu-btn" style="width:auto;padding:8px 16px;font-size:12px;flex-shrink:0;">Sair</button>
+                    </div>
+                    <p style="font-size:12px;margin:6px 0 0;color:var(--win);font-weight:600;">✅ Conectado</p>
                 </div>
+
             </div>
 
-        </div>
+            <!-- Menu principal (só aparece após login ou convidado) -->
+            <div id="gameMenuArea" style="display:none;">
+
+                <hr class="pre-menu-divider">
+
+                <!-- Nome do jogador -->
+                <div class="pre-menu-section">
+                    <label class="pre-menu-label">SEU NOME</label>
+                    <input type="text" id="prePlayerName" placeholder="Digite seu nome" class="pre-menu-input" autocomplete="off">
+                </div>
+
+                <hr class="pre-menu-divider">
+
+                <!-- Modos de jogo -->
+                <div class="pre-menu-section">
+                    <button id="btnOffline" class="pre-menu-btn">Modo Offline</button>
+                    <button id="btnMultiplayer" class="pre-menu-btn pre-menu-btn-secondary">
+                        Multiplayer
+                    </button>
+                </div>
+
+                <hr class="pre-menu-divider">
+
+                <!-- Opções -->
+                <div class="pre-menu-section">
+                    <label class="pre-menu-label">OPÇÕES</label>
+
+                    <div class="option-row">
+                        <span class="option-label" id="themeLabel">🌙 Modo escuro</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="themeToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="option-row is-disabled">
+                        <span class="option-label">🔊 Som</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" disabled>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
 
     </div>
 
@@ -636,6 +676,7 @@
     <script src="supabase-config.js"></script>
     <script src="multiplayer.js"></script>
     <script src="script.js"></script>
+    <script src="auth.js"></script>
 
     <!-- FOOTER GLOBAL -->
 

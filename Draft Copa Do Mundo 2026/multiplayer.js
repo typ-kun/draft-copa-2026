@@ -29,14 +29,15 @@ async function mpCriarSala(playerName) {
 
     const code = gerarCodigoSala();
 
-    // Usar um UUID temporário pro moderator_id (o Supabase gera o id da room)
-    const tempModId = crypto.randomUUID();
+    // Usar ID do usuário autenticado se disponível
+    const authUser = typeof getAuthUser === "function" ? getAuthUser() : null;
+    const moderatorId = authUser ? authUser.id : crypto.randomUUID();
 
     const { data: room, error } = await supabase
         .from("rooms")
         .insert({
             code,
-            moderator_id: tempModId,
+            moderator_id: moderatorId,
             status: "waiting",
             settings: {}
         })
@@ -51,6 +52,7 @@ async function mpCriarSala(playerName) {
         .insert({
             room_id: room.id,
             player_name: playerName,
+            user_id: authUser?.id || null,
             is_moderator: true,
             player_order: 0
         })
@@ -104,8 +106,16 @@ async function mpEntrarSala(code, playerName) {
 
     if (eErr) return { erro: eErr.message };
 
-    // Verificar se já sou um jogador existente (reconexão)
-    const meuRegistroExistente = existing ? existing.find(p => p.player_name === playerName) : null;
+    // Verificar se já sou um jogador existente (reconexão após F5)
+    // Prioridade: user_id > player_name
+    const authUser = typeof getAuthUser === "function" ? getAuthUser() : null;
+    let meuRegistroExistente = null;
+    if (authUser && existing) {
+        meuRegistroExistente = existing.find(p => p.user_id === authUser.id);
+    }
+    if (!meuRegistroExistente && existing) {
+        meuRegistroExistente = existing.find(p => p.player_name === playerName);
+    }
 
     if (meuRegistroExistente) {
         // Já existia → reutilizar o registro (preserva is_moderator original)
@@ -126,6 +136,7 @@ async function mpEntrarSala(code, playerName) {
         .insert({
             room_id: room.id,
             player_name: playerName,
+            user_id: authUser?.id || null,
             is_moderator: false,
             player_order: playerOrder
         })
@@ -276,6 +287,7 @@ function mpIniciarLobby() {
             await channel.track({
                 player_id: mpState.playerId,
                 player_name: localStorage.getItem(PRE_MENU_KEY) || "Anônimo",
+                user_id: (typeof getAuthUser === "function" ? getAuthUser()?.id : null) || null,
                 is_moderator: mpState.isModerator
             });
         }
@@ -593,6 +605,15 @@ function mpArrancarDraft(players, ordemEmbaralhada, settingsOverride) {
 
 async function mpHandleCriarSala() {
     const statusEl = document.getElementById("roomStatus");
+
+    // Bloquear criação sem login
+    const autenticado = typeof isAuthenticated === "function" ? isAuthenticated() : false;
+    if (!autenticado) {
+        statusEl.textContent = "⚠️ Faça login para criar uma sala.";
+        toast("Faça login para criar salas (use email ou Google)", 3500);
+        return;
+    }
+
     // Tentar ler do input do pré-menu primeiro, depois do localStorage
     const inputNome = document.getElementById("prePlayerName");
     const nome = (inputNome ? inputNome.value.trim() : "") || (localStorage.getItem(PRE_MENU_KEY) || "").trim();

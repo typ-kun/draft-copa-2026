@@ -3355,3 +3355,11 @@ section.teams {
 #preMenu + #setup {
     padding-bottom: 80px;
 }
+
+/* ====================== */
+/* AUTH SECTION           */
+/* ====================== */
+
+#authSection .pre-menu-input {
+    box-sizing: border-box;
+}
