@@ -38,12 +38,36 @@ function initAuth() {
     });
 }
 
+const ADMIN_EMAILS = ["guilherme_marchese@hotmail.com"];
+const PREMIUM_EMAILS = [];
+
 function getAuthUser() {
     return authState.user;
 }
 
 function isAuthenticated() {
     return !!authState.user;
+}
+
+function isAdmin() {
+    return authState.user && ADMIN_EMAILS.includes(authState.user.email);
+}
+
+function getUserLevel() {
+    if (!authState.user) return authState.isGuest ? "guest" : null;
+    if (ADMIN_EMAILS.includes(authState.user.email)) return "admin";
+    if (PREMIUM_EMAILS.includes(authState.user.email)) return "premium";
+    return "common";
+}
+
+function canPlayOffline() {
+    const level = getUserLevel();
+    return level === "admin" || level === "premium";
+}
+
+function canCreateRoom() {
+    const level = getUserLevel();
+    return level === "admin";
 }
 
 // ─── UI ──────────────────────────────────────────────────────────────────────
@@ -54,8 +78,10 @@ function atualizarStatusPreMenu() {
     if (!statusEl) return;
 
     if (authState.user) {
-        const email = authState.user.email || "Logado";
-        statusEl.innerHTML = `✅ <strong>${email}</strong>`;
+        const nivel = getUserLevel();
+        const icones = { admin: "👑", premium: "⭐", common: "🎮" };
+        const icone = icones[nivel] || "🎮";
+        statusEl.innerHTML = `✅ <strong>Logado</strong> <span style="color:var(--muted);font-size:11px;">${icone} ${nivel === "admin" ? "ADMIN" : nivel === "premium" ? "Premium" : "Jogador"}</span>`;
         statusEl.style.display = "block";
         if (btnLabel) btnLabel.textContent = "Conta";
     } else if (authState.isGuest) {
@@ -75,9 +101,8 @@ function renderAuthUI() {
     const loggedOut = document.getElementById("authLoggedOut");
     const loggedIn = document.getElementById("authLoggedIn");
     const userEmail = document.getElementById("authUserEmail");
-    const authSection = document.getElementById("authSection");
     const gameMenu = document.getElementById("gameMenuArea");
-    if (!loggedOut || !loggedIn || !authSection) return;
+    if (!loggedOut || !loggedIn) return;
 
     // Esconder error/success ao renderizar
     const errEl = document.getElementById("authError");
@@ -89,12 +114,9 @@ function renderAuthUI() {
     if (authState.loading) {
         loggedOut.style.display = "none";
         loggedIn.style.display = "none";
-        authSection.style.display = "none";
         if (gameMenu) gameMenu.style.display = "none";
         return;
     }
-
-    authSection.style.display = "block";
 
     const menuLiberado = authState.user || authState.isGuest;
 
@@ -103,6 +125,12 @@ function renderAuthUI() {
         loggedIn.style.display = "block";
         if (userEmail) {
             userEmail.textContent = authState.user.email || authState.user.user_metadata?.full_name || "Logado";
+        }
+        const privEl = document.getElementById("authPrivilege");
+        if (privEl) {
+            const nivel = getUserLevel();
+            const nomes = { admin: "👑 ADMIN", premium: "⭐ Jogador Premium", common: "🎮 Jogador Comum" };
+            privEl.textContent = "Nível: " + (nomes[nivel] || "🎮 Jogador Comum");
         }
     } else {
         loggedOut.style.display = "block";
@@ -113,8 +141,9 @@ function renderAuthUI() {
         gameMenu.style.display = menuLiberado ? "block" : "none";
     }
 
-    // Atualizar status no pré-menu
+    // Atualizar status no pré-menu e botão admin
     atualizarStatusPreMenu();
+    atualizarBotaoAdmin();
 }
 
 function showAuthError(msg) {
@@ -230,8 +259,7 @@ async function handleLogin() {
     }
 
     document.getElementById("authPassword").value = "";
-    showAuthSuccess("✅ Login realizado!");
-    renderAuthUI();
+    // onAuthStateChange já chama renderAuthUI automaticamente
 }
 
 async function handleLogout() {
@@ -242,7 +270,7 @@ async function handleLogout() {
     if (authState.isGuest) {
         authState.isGuest = false;
         renderAuthUI();
-        toast("Modo convidado desativado.", 2000);
+        showAuthSuccess("Modo convidado desativado.");
         return;
     }
 
@@ -257,16 +285,94 @@ async function handleLogout() {
 
     document.getElementById("authEmail").value = "";
     document.getElementById("authPassword").value = "";
-    toast("Desconectado.", 2000);
     renderAuthUI();
+    showAuthSuccess("Desconectado.");
+}
+
+// ─── ADMIN PANEL ─────────────────────────────────────────────────────────────
+
+function atualizarBotaoAdmin() {
+    const btn = document.getElementById("btnAdminPanel");
+    if (!btn) return;
+    btn.style.display = isAdmin() ? "block" : "none";
+}
+
+function mpAbrirAdminPanel() {
+    document.getElementById("preMenu").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+    mpListarProfiles();
+}
+
+function mpFecharAdminPanel() {
+    document.getElementById("adminPanel").style.display = "none";
+    document.getElementById("preMenu").style.display = "block";
+}
+
+async function mpListarProfiles() {
+    const supabase = initSupabase();
+    const listEl = document.getElementById("adminProfilesList");
+    if (!supabase || !listEl) return;
+
+    listEl.innerHTML = '<div class="open-rooms-empty">🔄 Carregando...</div>';
+
+    const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        listEl.innerHTML = '<div class="open-rooms-empty" style="color:#e74c3c;">❌ Erro: ' + error.message + '</div>';
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        listEl.innerHTML = '<div class="open-rooms-empty">Nenhum usuário encontrado. Execute o SQL primeiro.</div>';
+        return;
+    }
+
+    const nomesNivel = { admin: "👑 Admin", premium: "⭐ Premium", common: "🎮 Comum" };
+
+    listEl.innerHTML = data.map(profile => `
+        <div class="open-room-item">
+            <div class="open-room-info" style="flex-direction:column;align-items:flex-start;gap:2px;">
+                <span style="font-weight:600;font-size:14px;color:var(--ink);">${profile.email || "Sem email"}</span>
+                <span style="font-size:11px;color:var(--muted);">
+                    ${nomesNivel[profile.level] || "🎮 Comum"}
+                    ${profile.created_at ? " • " + new Date(profile.created_at).toLocaleDateString("pt-BR") : ""}
+                </span>
+            </div>
+            ${profile.email !== "guilherme_marchese@hotmail.com" ? `
+            <select class="admin-level-select" data-profile-id="${profile.id}" data-current="${profile.level}">
+                <option value="common" ${profile.level === "common" ? "selected" : ""}>🎮 Comum</option>
+                <option value="premium" ${profile.level === "premium" ? "selected" : ""}>⭐ Premium</option>
+            </select>` : '<span style="font-size:11px;color:var(--accent);font-weight:700;">👑 ADMIN</span>'}
+        </div>
+    `).join("");
+}
+
+async function mpAlterarNivel(profileId, novoNivel) {
+    const supabase = initSupabase();
+    if (!supabase) return;
+
+    const { error } = await supabase
+        .from("profiles")
+        .update({ level: novoNivel })
+        .eq("id", profileId);
+
+    if (error) {
+        toast("❌ Erro ao alterar nível: " + error.message, 3000);
+    } else {
+        toast("✅ Nível alterado!", 2000);
+        mpListarProfiles();
+    }
 }
 
 // ─── CONVIDADO ───────────────────────────────────────────────────────────────
 
 function handleContinuarConvidado() {
     authState.isGuest = true;
-    toast("🎮 Modo convidado ativado!", 2000);
     renderAuthUI();
+    showAuthSuccess("🎮 Modo convidado ativado!");
     atualizarStatusPreMenu();
     // Focar no input de nome
     const inputNome = document.getElementById("prePlayerName");
@@ -334,6 +440,31 @@ document.addEventListener("click", function (e) {
         document.getElementById("authScreen").style.display = "none";
         document.getElementById("preMenu").style.display = "block";
         return;
+    }
+    if (e.target.id === "btnAdminPanel" || e.target.closest("#btnAdminPanel")) {
+        mpAbrirAdminPanel();
+        return;
+    }
+    if (e.target.id === "btnVoltarDeAdmin" || e.target.closest("#btnVoltarDeAdmin")) {
+        mpFecharAdminPanel();
+        return;
+    }
+    if (e.target.id === "btnRefreshProfiles" || e.target.closest("#btnRefreshProfiles")) {
+        mpListarProfiles();
+        return;
+    }
+    if (e.target.classList.contains("admin-level-select")) {
+        // Não fazer nada no click, apenas abrir o dropdown
+        return;
+    }
+});
+
+// Change nos selects de nível (dispara quando seleciona uma opção)
+document.addEventListener("change", function (e) {
+    if (e.target.classList.contains("admin-level-select")) {
+        const profileId = e.target.dataset.profileId;
+        const novoNivel = e.target.value;
+        if (profileId && novoNivel) mpAlterarNivel(profileId, novoNivel);
     }
 });
 

@@ -284,10 +284,12 @@ function mpIniciarLobby() {
 
     channel.subscribe(async (status) => {
         if (status === "SUBSCRIBED") {
+            const authEmail = typeof getAuthUser === "function" ? getAuthUser()?.email : null;
             await channel.track({
                 player_id: mpState.playerId,
                 player_name: localStorage.getItem(PRE_MENU_KEY) || "Anônimo",
                 user_id: (typeof getAuthUser === "function" ? getAuthUser()?.id : null) || null,
+                email: authEmail,
                 is_moderator: mpState.isModerator
             });
         }
@@ -356,16 +358,23 @@ function mpRenderizarLobby() {
     if (mpState.players.length === 0) {
         listEl.innerHTML = '<div class="lobby-empty">Nenhum jogador conectado</div>';
     } else {
-        listEl.innerHTML = mpState.players.map(p => `
+        const adminEmails = typeof ADMIN_EMAILS !== "undefined" ? ADMIN_EMAILS : [];
+        const premiumEmails = typeof PREMIUM_EMAILS !== "undefined" ? PREMIUM_EMAILS : [];
+        listEl.innerHTML = mpState.players.map(p => {
+            const badge = adminEmails.includes(p.email) ? '<span class="lobby-player-admin">👑 ADMIN</span>'
+                : premiumEmails.includes(p.email) ? '<span class="lobby-player-premium">⭐ Premium</span>'
+                : '';
+            return `
             <div class="lobby-player">
                 <span>${p.player_name}</span>
                 ${p.is_moderator ? '<span class="lobby-player-moderator">🛡️ Moderador</span>' : ''}
+                ${badge}
                 <span class="lobby-player-right">
                     ${mpState.isModerator && !p.is_moderator ? `<button class="lobby-kick-btn" data-player-id="${p.player_id}" data-player-name="${p.player_name}" title="Kickar ${p.player_name}">✕</button>` : ''}
                     <span class="lobby-player-status">🟢 online</span>
                 </span>
-            </div>
-        `).join("");
+            </div>`;
+        }).join("");
     }
 
     // Moderador vê botão de configurar / iniciar
@@ -381,7 +390,8 @@ function mpRenderizarLobby() {
             // Se já tem configuração salva, mostrar "Iniciar Draft"
             const temConfig = mpState.settings && Object.keys(mpState.settings).length > 0;
             const temMataMata = mpState.settings && mpState.settings.mataMata;
-            if (configBtn) configBtn.style.display = temConfig && !temMataMata ? "none" : "block";
+            // Mostra ambos os botões se tem config, para permitir re-editar
+            if (configBtn) configBtn.style.display = temMataMata ? "none" : "block";
             if (startBtn) startBtn.style.display = temConfig && !temMataMata ? "block" : "none";
             // Mostrar botão de continuar mata-mata para todos se houver dados
             if (resumeBtn) {
@@ -606,10 +616,10 @@ function mpArrancarDraft(players, ordemEmbaralhada, settingsOverride) {
 async function mpHandleCriarSala() {
     const statusEl = document.getElementById("roomStatus");
 
-    // Bloquear criação sem login
-    const autenticado = typeof isAuthenticated === "function" ? isAuthenticated() : false;
-    if (!autenticado) {
-        statusEl.textContent = "⚠️ Faça login para criar uma sala.";
+    // Apenas ADMIN e Premium podem criar salas
+    const podeCriar = typeof canCreateRoom === "function" ? canCreateRoom() : false;
+    if (!podeCriar) {
+        statusEl.textContent = "⚠️ Você não tem permissão para criar salas.";
         return;
     }
 

@@ -2609,10 +2609,6 @@ section.teams {
     background: #4a4a4a;
     opacity: 0.9;
 }
-    color: var(--surface);
-    padding: 8px;
-    font-size: 12px;
-}
 
 /* Toast notification */
 #toast {
@@ -2934,17 +2930,18 @@ section.teams {
 #preMenu {
     max-width: 480px;
     margin: 0 auto;
-    padding: 40px 16px;
+    padding: 24px 16px 16px;
 }
 
 #preMenu h1 {
     font-size: clamp(36px, 9vw, 60px);
     text-transform: uppercase;
     letter-spacing: -0.01em;
-    margin-bottom: 28px;
+    margin-bottom: 16px;
     color: var(--ink);
     text-shadow: 4px 4px 0 var(--accent-2);
     text-align: center;
+    line-height: 1;
 }
 
 #preMenu .logo,
@@ -2962,18 +2959,18 @@ section.teams {
     border: 2px solid var(--ink);
     background: var(--card-bg);
     box-shadow: var(--hard-shadow-ink);
-    padding: 22px 24px 28px;
+    padding: 16px 20px 20px;
     border-radius: 2px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     box-sizing: border-box;
 }
 
 .pre-menu-section {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .pre-menu-label {
@@ -3175,12 +3172,12 @@ section.teams {
 .lobby-wrap {
     max-width: 480px;
     margin: 0 auto;
-    padding: 40px 16px;
+    padding: 24px 16px 16px;
 }
 
 .room-wrap h1,
 .lobby-header h1 {
-    margin-bottom: 28px;
+    margin-bottom: 16px;
     text-align: center;
 }
 
@@ -3272,6 +3269,23 @@ section.teams {
     text-transform: uppercase;
 }
 
+.lobby-player-admin,
+.lobby-player-premium {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    background: var(--ink);
+    padding: 2px 8px;
+    text-transform: uppercase;
+}
+.lobby-player-admin {
+    color: var(--accent);
+}
+.lobby-player-premium {
+    color: var(--accent-2);
+}
+
 .lobby-player-right {
     display: flex;
     align-items: center;
@@ -3360,6 +3374,39 @@ section.teams {
 
 #preMenu + #setup {
     padding-bottom: 80px;
+}
+
+.admin-float-btn {
+    position: fixed;
+    top: 20px;
+    right: 12px;
+    z-index: 100;
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--body);
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    transition: opacity .15s;
+}
+.admin-float-btn:hover {
+    opacity: 0.85;
+}
+
+.admin-level-select {
+    background: var(--surface-2);
+    color: var(--ink);
+    border: 2px solid var(--line);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--body);
 }
 
 .pre-menu-status {

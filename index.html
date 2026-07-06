@@ -22,6 +22,7 @@
     <div id="preMenu">
 
         <h1><img src="assets/logo.svg" alt="Draft Copa do Mundo 2026" class="logo" width="480"></h1>
+        <button id="btnAdminPanel" class="admin-float-btn" style="display:none;">🛡️ Admin</button>
 
         <div class="pre-menu-card">
 
@@ -114,12 +115,44 @@
                             <button id="btnLogout" class="pre-menu-btn" style="width:auto;padding:8px 16px;font-size:12px;flex-shrink:0;">Sair</button>
                         </div>
                         <p style="font-size:12px;margin:6px 0 0;color:var(--win);font-weight:600;">✅ Conectado</p>
+                        <p id="authPrivilege" style="font-size:11px;margin:4px 0 0;color:var(--muted);font-weight:600;"></p>
                     </div>
                 </div>
 
                 <hr class="pre-menu-divider">
 
                 <button id="btnVoltarDeAuth" class="pre-menu-btn btn-back-setup">← Voltar</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel" style="display:none;">
+
+        <div class="room-wrap">
+
+            <div class="lobby-header">
+                <h1>🛡️ Painel Admin</h1>
+            </div>
+
+            <div class="lobby-card">
+
+                <div class="room-section" style="padding:0;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                        <span style="font-size:14px;color:var(--muted);font-family:var(--body);font-weight:600;">Usuários cadastrados</span>
+                        <button id="btnRefreshProfiles" style="background:var(--accent);color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">⟳ Atualizar</button>
+                    </div>
+                    <div id="adminProfilesList" style="max-height:400px;overflow-y:auto;">
+                        <div class="open-rooms-empty">Clique em "Atualizar" para carregar.</div>
+                    </div>
+                </div>
+
+                <hr class="pre-menu-divider">
+
+                <button id="btnVoltarDeAdmin" class="pre-menu-btn btn-back-setup">← Voltar</button>
 
             </div>
 
