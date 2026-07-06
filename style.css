@@ -2928,7 +2928,7 @@ section.teams {
 #preMenu {
     max-width: 480px;
     margin: 0 auto;
-    padding: 0 16px 40px;
+    padding: 40px 16px;
 }
 
 #preMenu h1 {
@@ -3354,45 +3354,6 @@ section.teams {
 
 #preMenu + #setup {
     padding-bottom: 80px;
-}
-
-/* ====================== */
-/* CONTA DCDM BUTTON      */
-/* ====================== */
-
-.pre-menu-topo {
-    position: relative;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 40px 16px 0;
-}
-
-.pre-menu-topo h1 {
-    margin-bottom: 28px;
-    text-align: center;
-}
-
-.conta-dcdm-btn {
-    position: fixed;
-    top: 40px;
-    right: 0;
-    z-index: 100;
-    background: none;
-    border: 2px solid var(--line);
-    color: var(--muted);
-    padding: 6px 14px;
-    border-radius: 2px;
-    cursor: pointer;
-    font-family: var(--body);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    transition: color .15s, border-color .15s, background .15s;
-}
-.conta-dcdm-btn:hover {
-    color: var(--accent);
-    border-color: var(--accent);
 }
 
 /* ====================== */

@@ -297,7 +297,7 @@ document.addEventListener("click", function (e) {
         handleContinuarConvidado();
         return;
     }
-    if (e.target.id === "btnContaDCDM" || e.target.closest("#btnContaDCDM")) {
+    if (e.target.id === "btnLogarRegistrar" || e.target.closest("#btnLogarRegistrar")) {
         document.getElementById("preMenu").style.display = "none";
         document.getElementById("authScreen").style.display = "block";
         renderAuthUI();
