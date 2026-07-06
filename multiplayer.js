@@ -453,6 +453,26 @@ function mpFecharLobby() {
 
 // ─── CONFIGURAÇÃO DO DRAFT (moderador) ────────────────────────────────────────
 
+let _mpConfigHandlersSet = false;
+
+function mpAtualizarEstimativaIconsHeroes() {
+    const estimateEl = document.getElementById("mpSpecialChanceEstimate");
+    const iconsSelect = document.getElementById("mpIconsHeroesMode");
+    const slider = document.getElementById("mpSpecialChanceSlider");
+    if (!estimateEl || !slider || !iconsSelect) return;
+    const modo = iconsSelect.value;
+    if (modo === "none") {
+        estimateEl.textContent = "";
+        return;
+    }
+    const chance = parseInt(slider.value, 10) / 100; // 0-10000 → 0-100 (%)
+    const porElenco = parseInt(document.getElementById("mpPlayersPerTeam")?.value || "18", 10);
+    const mediaPorElenco = (porElenco * chance) / 100;
+    const formatado = mediaPorElenco.toFixed(1);
+    const tipoLabel = modo === "icons" ? "icones" : modo === "heroes" ? "herois" : "icones+herois";
+    estimateEl.textContent = "Média estimada: ~" + formatado + " " + tipoLabel + " por equipe";
+}
+
 function mpAbrirConfig() {
     document.getElementById("lobby").style.display = "none";
     document.getElementById("draftConfig").style.display = "block";
@@ -463,8 +483,34 @@ function mpAbrirConfig() {
         chanceContainer.style.display = iconsSelect.value === "none" ? "none" : "block";
         iconsSelect.addEventListener("change", () => {
             chanceContainer.style.display = iconsSelect.value === "none" ? "none" : "block";
+            mpAtualizarEstimativaIconsHeroes();
         });
     }
+
+    // Sincronizar slider <-> input (apenas uma vez)
+    if (!_mpConfigHandlersSet) {
+        _mpConfigHandlersSet = true;
+        const slider = document.getElementById("mpSpecialChanceSlider");
+        const input = document.getElementById("mpSpecialChance");
+        if (slider && input) {
+            slider.addEventListener("input", () => {
+                const pct = parseInt(slider.value, 10) / 100;
+                input.value = pct.toFixed(2);
+                mpAtualizarEstimativaIconsHeroes();
+            });
+            input.addEventListener("input", () => {
+                const pct = Math.min(100, Math.max(0, parseFloat(input.value) || 0));
+                slider.value = Math.round(pct * 100);
+                mpAtualizarEstimativaIconsHeroes();
+            });
+        }
+        // Atualizar estimativa ao mudar jogadores/elenco
+        const playersPerTeam = document.getElementById("mpPlayersPerTeam");
+        if (playersPerTeam) {
+            playersPerTeam.addEventListener("change", mpAtualizarEstimativaIconsHeroes);
+        }
+    }
+    mpAtualizarEstimativaIconsHeroes();
 }
 
 function mpFecharConfig() {
