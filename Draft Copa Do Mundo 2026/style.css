@@ -3172,7 +3172,7 @@ section.teams {
 .lobby-wrap {
     max-width: 480px;
     margin: 0 auto;
-    padding: 40px 16px;
+    padding: 24px 16px 16px;
 }
 
 .room-wrap h1,
