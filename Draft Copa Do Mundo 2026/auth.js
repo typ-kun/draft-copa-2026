@@ -67,7 +67,7 @@ function canPlayOffline() {
 
 function canCreateRoom() {
     const level = getUserLevel();
-    return level === "admin" || level === "premium";
+    return level === "admin";
 }
 
 // ─── UI ──────────────────────────────────────────────────────────────────────
@@ -141,8 +141,9 @@ function renderAuthUI() {
         gameMenu.style.display = menuLiberado ? "block" : "none";
     }
 
-    // Atualizar status no pré-menu
+    // Atualizar status no pré-menu e botão admin
     atualizarStatusPreMenu();
+    atualizarBotaoAdmin();
 }
 
 function showAuthError(msg) {
@@ -288,6 +289,84 @@ async function handleLogout() {
     showAuthSuccess("Desconectado.");
 }
 
+// ─── ADMIN PANEL ─────────────────────────────────────────────────────────────
+
+function atualizarBotaoAdmin() {
+    const btn = document.getElementById("btnAdminPanel");
+    if (!btn) return;
+    btn.style.display = isAdmin() ? "block" : "none";
+}
+
+function mpAbrirAdminPanel() {
+    document.getElementById("preMenu").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+    mpListarProfiles();
+}
+
+function mpFecharAdminPanel() {
+    document.getElementById("adminPanel").style.display = "none";
+    document.getElementById("preMenu").style.display = "block";
+}
+
+async function mpListarProfiles() {
+    const supabase = initSupabase();
+    const listEl = document.getElementById("adminProfilesList");
+    if (!supabase || !listEl) return;
+
+    listEl.innerHTML = '<div class="open-rooms-empty">🔄 Carregando...</div>';
+
+    const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        listEl.innerHTML = '<div class="open-rooms-empty" style="color:#e74c3c;">❌ Erro: ' + error.message + '</div>';
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        listEl.innerHTML = '<div class="open-rooms-empty">Nenhum usuário encontrado. Execute o SQL primeiro.</div>';
+        return;
+    }
+
+    const nomesNivel = { admin: "👑 Admin", premium: "⭐ Premium", common: "🎮 Comum" };
+
+    listEl.innerHTML = data.map(profile => `
+        <div class="open-room-item">
+            <div class="open-room-info" style="flex-direction:column;align-items:flex-start;gap:2px;">
+                <span style="font-weight:600;font-size:14px;color:var(--ink);">${profile.email || "Sem email"}</span>
+                <span style="font-size:11px;color:var(--muted);">
+                    ${nomesNivel[profile.level] || "🎮 Comum"}
+                    ${profile.created_at ? " • " + new Date(profile.created_at).toLocaleDateString("pt-BR") : ""}
+                </span>
+            </div>
+            ${profile.email !== "guilherme_marchese@hotmail.com" ? `
+            <select class="admin-level-select" data-profile-id="${profile.id}" data-current="${profile.level}">
+                <option value="common" ${profile.level === "common" ? "selected" : ""}>🎮 Comum</option>
+                <option value="premium" ${profile.level === "premium" ? "selected" : ""}>⭐ Premium</option>
+            </select>` : '<span style="font-size:11px;color:var(--accent);font-weight:700;">👑 ADMIN</span>'}
+        </div>
+    `).join("");
+}
+
+async function mpAlterarNivel(profileId, novoNivel) {
+    const supabase = initSupabase();
+    if (!supabase) return;
+
+    const { error } = await supabase
+        .from("profiles")
+        .update({ level: novoNivel })
+        .eq("id", profileId);
+
+    if (error) {
+        toast("❌ Erro ao alterar nível: " + error.message, 3000);
+    } else {
+        toast("✅ Nível alterado!", 2000);
+        mpListarProfiles();
+    }
+}
+
 // ─── CONVIDADO ───────────────────────────────────────────────────────────────
 
 function handleContinuarConvidado() {
@@ -360,6 +439,24 @@ document.addEventListener("click", function (e) {
     if (e.target.id === "btnVoltarDeAuth" || e.target.closest("#btnVoltarDeAuth")) {
         document.getElementById("authScreen").style.display = "none";
         document.getElementById("preMenu").style.display = "block";
+        return;
+    }
+    if (e.target.id === "btnAdminPanel" || e.target.closest("#btnAdminPanel")) {
+        mpAbrirAdminPanel();
+        return;
+    }
+    if (e.target.id === "btnVoltarDeAdmin" || e.target.closest("#btnVoltarDeAdmin")) {
+        mpFecharAdminPanel();
+        return;
+    }
+    if (e.target.id === "btnRefreshProfiles" || e.target.closest("#btnRefreshProfiles")) {
+        mpListarProfiles();
+        return;
+    }
+    if (e.target.classList.contains("admin-level-select")) {
+        const profileId = e.target.dataset.profileId;
+        const novoNivel = e.target.value;
+        if (profileId && novoNivel) mpAlterarNivel(profileId, novoNivel);
         return;
     }
 });

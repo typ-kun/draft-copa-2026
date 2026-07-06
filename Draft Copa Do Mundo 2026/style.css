@@ -3375,6 +3375,18 @@ section.teams {
     padding-bottom: 80px;
 }
 
+.admin-level-select {
+    background: var(--surface-2);
+    color: var(--ink);
+    border: 2px solid var(--line);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--body);
+}
+
 .pre-menu-status {
     font-family: var(--body);
     font-size: 12px;

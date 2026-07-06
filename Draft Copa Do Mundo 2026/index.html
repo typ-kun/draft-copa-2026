@@ -39,6 +39,7 @@
             <!-- Modos de jogo -->
             <div class="pre-menu-section">
                 <button id="btnLogarRegistrar" class="pre-menu-btn btn-back-setup" style="width:100%;margin-bottom:6px;">Logar / Registrar</button>
+                <button id="btnAdminPanel" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:16px;padding:12px 20px;font-weight:700;border:none;cursor:pointer;width:100%;margin-bottom:6px;display:none;">🛡️ Admin</button>
                 <button id="btnOffline" class="pre-menu-btn">Modo Offline</button>
                 <button id="btnMultiplayer" class="pre-menu-btn pre-menu-btn-secondary">
                     Multiplayer
@@ -121,6 +122,37 @@
                 <hr class="pre-menu-divider">
 
                 <button id="btnVoltarDeAuth" class="pre-menu-btn btn-back-setup">← Voltar</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel" style="display:none;">
+
+        <div class="room-wrap">
+
+            <div class="lobby-header">
+                <h1>🛡️ Painel Admin</h1>
+            </div>
+
+            <div class="lobby-card">
+
+                <div class="room-section" style="padding:0;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                        <span style="font-size:14px;color:var(--muted);font-family:var(--body);font-weight:600;">Usuários cadastrados</span>
+                        <button id="btnRefreshProfiles" style="background:var(--accent);color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">⟳ Atualizar</button>
+                    </div>
+                    <div id="adminProfilesList" style="max-height:400px;overflow-y:auto;">
+                        <div class="open-rooms-empty">Clique em "Atualizar" para carregar.</div>
+                    </div>
+                </div>
+
+                <hr class="pre-menu-divider">
+
+                <button id="btnVoltarDeAdmin" class="pre-menu-btn btn-back-setup">← Voltar</button>
 
             </div>
 
