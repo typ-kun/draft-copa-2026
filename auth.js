@@ -298,14 +298,30 @@ function atualizarBotaoAdmin() {
 }
 
 function mpAbrirAdminPanel() {
-    document.getElementById("preMenu").style.display = "none";
+    // Esconde a tela atual (preMenu, roomMenu, lobby, etc.)
+    const telas = ["preMenu", "roomMenu", "lobby", "setup", "countrySelection", "draftArea", "resultsArea", "mataMataArea", "draftConfig"];
+    telas.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.style.display !== "none") {
+            el.dataset.adminAnterior = el.style.display;
+            el.style.display = "none";
+        }
+    });
     document.getElementById("adminPanel").style.display = "block";
     mpListarProfiles();
 }
 
 function mpFecharAdminPanel() {
     document.getElementById("adminPanel").style.display = "none";
-    document.getElementById("preMenu").style.display = "block";
+    // Restaura a tela que estava visível antes
+    const telas = ["preMenu", "roomMenu", "lobby", "setup", "countrySelection", "draftArea", "resultsArea", "mataMataArea", "draftConfig"];
+    telas.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.dataset.adminAnterior !== undefined) {
+            el.style.display = el.dataset.adminAnterior || "none";
+            delete el.dataset.adminAnterior;
+        }
+    });
 }
 
 async function mpListarProfiles() {
