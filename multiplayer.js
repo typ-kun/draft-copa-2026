@@ -622,6 +622,8 @@ async function mpSalvarConfig() {
 
     toast("✅ Configuração salva!", 2000);
     mpFecharConfig();
+    // Re-renderizar lobby pra mostrar botao "Iniciar Draft" e painel de config
+    mpRenderizarLobby();
 }
 
 async function mpIniciarDraftOnline() {
@@ -1204,11 +1206,11 @@ async function mpListarSalasAbertas() {
     // Só mostrar salas criadas nas últimas 2 horas
     const duasHorasAtras = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
 
-    // Buscar salas com status "waiting"
+    // Buscar salas com status "waiting" ou "configuring"
     const { data: rooms, error } = await supabase
         .from("rooms")
-        .select("id, code, created_at")
-        .eq("status", "waiting")
+        .select("id, code, created_at, status")
+        .in("status", ["waiting", "configuring"])
         .gte("created_at", duasHorasAtras)
         .order("created_at", { ascending: false });
 
@@ -1236,6 +1238,7 @@ async function mpListarSalasAbertas() {
             <div class="open-room-info">
                 <span class="open-room-code">${room.code}</span>
                 <span class="open-room-players">👤 ${room.playerCount}</span>
+                ${room.status === "configuring" ? '<span style="font-size:10px;color:var(--accent-2);font-weight:700;margin-left:6px;">⚙️</span>' : ''}
             </div>
             <button class="open-room-enter-btn" data-code="${room.code}">Entrar</button>
         </div>
