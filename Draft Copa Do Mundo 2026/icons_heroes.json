@@ -78,7 +78,6 @@
   { "nome": "Carlos Alberto",           "pais": "Brasil",          "posicao": "DF", "playerid": 167135, "tipo": "icon" },
   { "nome": "Eric Cantona",             "pais": "França",          "posicao": "FW", "playerid": 167198, "tipo": "icon" },
   { "nome": "Abedi Pelé",               "pais": "Gana",            "posicao": "MF", "playerid": 167425, "tipo": "icon" },
-  { "nome": "Manuel Neuer",             "pais": "Alemanha",        "posicao": "GK", "playerid": 167495, "tipo": "icon" },
   { "nome": "Ronald Koeman",            "pais": "Holanda",         "posicao": "DF", "playerid": 167680, "tipo": "icon" },
   { "nome": "Franz Beckenbauer",        "pais": "Alemanha",        "posicao": "DF", "playerid": 168473, "tipo": "icon" },
   { "nome": "Marek Hamšík",             "pais": "Eslováquia",      "posicao": "MF", "playerid": 171877, "tipo": "icon" },

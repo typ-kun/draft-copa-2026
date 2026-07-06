@@ -4262,8 +4262,28 @@ document.addEventListener("click", function (e) {
         return;
     }
 
+    if (e.target.id === "btnListarSalas" || e.target.closest("#btnListarSalas")) {
+        mpAbrirSalasAbertas();
+        return;
+    }
+
+    if (e.target.id === "btnMostrarEntrarCodigo" || e.target.closest("#btnMostrarEntrarCodigo")) {
+        mpToggleEntrarCodigo();
+        return;
+    }
+
+    if (e.target.id === "btnRefreshSalas" || e.target.closest("#btnRefreshSalas")) {
+        mpListarSalasAbertas();
+        return;
+    }
+
     if (e.target.id === "btnVoltarRoomMenu" || e.target.closest("#btnVoltarRoomMenu")) {
         mpFecharMenuSalas();
+        return;
+    }
+
+    if (e.target.id === "btnVoltarDeSalasAbertas" || e.target.closest("#btnVoltarDeSalasAbertas")) {
+        mpFecharSalasAbertas();
         return;
     }
 

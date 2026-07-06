@@ -961,3 +961,87 @@ function mpAtualizarTurnoUI() {
         }
     }
 }
+
+// ─── SALAS ABERTAS ─────────────────────────────────────────────────────────────
+
+function mpAbrirSalasAbertas() {
+    document.getElementById("roomMenu").style.display = "none";
+    document.getElementById("openRoomsScreen").style.display = "block";
+    mpListarSalasAbertas();
+}
+
+function mpFecharSalasAbertas() {
+    document.getElementById("openRoomsScreen").style.display = "none";
+    document.getElementById("roomMenu").style.display = "block";
+}
+
+async function mpListarSalasAbertas() {
+    const supabase = initSupabase();
+    if (!supabase) return;
+
+    const listEl = document.getElementById("openRoomsList");
+    if (!listEl) return;
+
+    listEl.innerHTML = '<div class="open-rooms-empty">🔄 Buscando salas...</div>';
+
+    // Buscar salas com status "waiting"
+    const { data: rooms, error } = await supabase
+        .from("rooms")
+        .select("id, code, created_at")
+        .eq("status", "waiting")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        listEl.innerHTML = '<div class="open-rooms-empty" style="color:#e74c3c;">❌ Erro ao buscar salas</div>';
+        return;
+    }
+
+    if (!rooms || rooms.length === 0) {
+        listEl.innerHTML = '<div class="open-rooms-empty">Nenhuma sala aberta no momento.</div>';
+        return;
+    }
+
+    // Buscar contagem de jogadores de cada sala
+    const roomsCompletos = await Promise.all(rooms.map(async (room) => {
+        const { count, error: countErr } = await supabase
+            .from("room_players")
+            .select("*", { count: "exact", head: true })
+            .eq("room_id", room.id);
+        return { ...room, playerCount: countErr ? 0 : count };
+    }));
+
+    listEl.innerHTML = roomsCompletos.map(room => `
+        <div class="open-room-item">
+            <div class="open-room-info">
+                <span class="open-room-code">${room.code}</span>
+                <span class="open-room-players">👤 ${room.playerCount}</span>
+            </div>
+            <button class="open-room-enter-btn" data-code="${room.code}">Entrar</button>
+        </div>
+    `).join("");
+}
+
+function mpToggleEntrarCodigo() {
+    const container = document.getElementById("entrarCodigoContainer");
+    if (!container) return;
+    const isOpen = container.style.display === "block";
+    container.style.display = isOpen ? "none" : "block";
+    if (!isOpen) {
+        const input = document.getElementById("inputCodigoSala");
+        if (input) input.focus();
+    }
+}
+
+// Delegar clique nos botões "Entrar" das salas abertas
+document.addEventListener("click", function (e) {
+    const btn = e.target.closest(".open-room-enter-btn");
+    if (!btn || !btn.dataset.code) return;
+    // Voltar ao menu de salas e preencher o código
+    document.getElementById("openRoomsScreen").style.display = "none";
+    document.getElementById("roomMenu").style.display = "block";
+    const container = document.getElementById("entrarCodigoContainer");
+    if (container) container.style.display = "block";
+    const input = document.getElementById("inputCodigoSala");
+    if (input) input.value = btn.dataset.code;
+    mpHandleEntrarSala();
+});
