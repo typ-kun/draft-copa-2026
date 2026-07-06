@@ -3268,15 +3268,21 @@ section.teams {
     text-transform: uppercase;
 }
 
-.lobby-player-admin {
+.lobby-player-admin,
+.lobby-player-premium {
     font-family: var(--body);
     font-weight: 800;
     font-size: 9px;
     letter-spacing: 0.12em;
-    color: var(--accent);
     background: var(--ink);
     padding: 2px 8px;
     text-transform: uppercase;
+}
+.lobby-player-admin {
+    color: var(--accent);
+}
+.lobby-player-premium {
+    color: var(--accent-2);
 }
 
 .lobby-player-right {

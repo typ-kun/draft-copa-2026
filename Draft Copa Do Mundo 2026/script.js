@@ -158,13 +158,12 @@ function iniciarPreMenu() {
 }
 
 function entrarModoOffline() {
-    // Verificar se está logado ou em modo convidado
-    const authOk = (typeof isAuthenticated === "function" && isAuthenticated()) || (typeof getAuthUser === "function" && getAuthUser());
-    const guestOk = typeof authState !== "undefined" && authState && authState.isGuest;
-    if (!authOk && !guestOk) {
+    // Verificar permissão para jogar offline (Admin ou Premium)
+    const podeJogar = typeof canPlayOffline === "function" ? canPlayOffline() : false;
+    if (!podeJogar) {
         const statusEl = document.getElementById("preMenuStatus");
         if (statusEl) {
-            statusEl.textContent = "⚠️ Faça login ou clique em 'Logar / Registrar' primeiro.";
+            statusEl.textContent = "⚠️ Você não tem permissão para jogar offline.";
             statusEl.classList.add("show");
             setTimeout(() => { statusEl.classList.remove("show"); }, 4000);
         }

@@ -39,6 +39,7 @@ function initAuth() {
 }
 
 const ADMIN_EMAILS = ["guilherme_marchese@hotmail.com"];
+const PREMIUM_EMAILS = [];
 
 function getAuthUser() {
     return authState.user;
@@ -52,6 +53,23 @@ function isAdmin() {
     return authState.user && ADMIN_EMAILS.includes(authState.user.email);
 }
 
+function getUserLevel() {
+    if (!authState.user) return authState.isGuest ? "guest" : null;
+    if (ADMIN_EMAILS.includes(authState.user.email)) return "admin";
+    if (PREMIUM_EMAILS.includes(authState.user.email)) return "premium";
+    return "common";
+}
+
+function canPlayOffline() {
+    const level = getUserLevel();
+    return level === "admin" || level === "premium";
+}
+
+function canCreateRoom() {
+    const level = getUserLevel();
+    return level === "admin" || level === "premium";
+}
+
 // ─── UI ──────────────────────────────────────────────────────────────────────
 
 function atualizarStatusPreMenu() {
@@ -60,7 +78,10 @@ function atualizarStatusPreMenu() {
     if (!statusEl) return;
 
     if (authState.user) {
-        statusEl.innerHTML = `✅ <strong>Logado</strong>`;
+        const nivel = getUserLevel();
+        const icones = { admin: "👑", premium: "⭐", common: "🎮" };
+        const icone = icones[nivel] || "🎮";
+        statusEl.innerHTML = `✅ <strong>Logado</strong> <span style="color:var(--muted);font-size:11px;">${icone} ${nivel === "admin" ? "ADMIN" : nivel === "premium" ? "Premium" : "Jogador"}</span>`;
         statusEl.style.display = "block";
         if (btnLabel) btnLabel.textContent = "Conta";
     } else if (authState.isGuest) {
@@ -107,8 +128,9 @@ function renderAuthUI() {
         }
         const privEl = document.getElementById("authPrivilege");
         if (privEl) {
-            const nivel = isAdmin() ? "👑 ADMIN" : "🎮 Jogador";
-            privEl.textContent = "Nível: " + nivel;
+            const nivel = getUserLevel();
+            const nomes = { admin: "👑 ADMIN", premium: "⭐ Jogador Premium", common: "🎮 Jogador Comum" };
+            privEl.textContent = "Nível: " + (nomes[nivel] || "🎮 Jogador Comum");
         }
     } else {
         loggedOut.style.display = "block";

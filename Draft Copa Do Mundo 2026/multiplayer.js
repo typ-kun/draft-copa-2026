@@ -359,17 +359,22 @@ function mpRenderizarLobby() {
         listEl.innerHTML = '<div class="lobby-empty">Nenhum jogador conectado</div>';
     } else {
         const adminEmails = typeof ADMIN_EMAILS !== "undefined" ? ADMIN_EMAILS : [];
-        listEl.innerHTML = mpState.players.map(p => `
+        const premiumEmails = typeof PREMIUM_EMAILS !== "undefined" ? PREMIUM_EMAILS : [];
+        listEl.innerHTML = mpState.players.map(p => {
+            const badge = adminEmails.includes(p.email) ? '<span class="lobby-player-admin">👑 ADMIN</span>'
+                : premiumEmails.includes(p.email) ? '<span class="lobby-player-premium">⭐ Premium</span>'
+                : '';
+            return `
             <div class="lobby-player">
                 <span>${p.player_name}</span>
                 ${p.is_moderator ? '<span class="lobby-player-moderator">🛡️ Moderador</span>' : ''}
-                ${adminEmails.includes(p.email) ? '<span class="lobby-player-admin">👑 ADMIN</span>' : ''}
+                ${badge}
                 <span class="lobby-player-right">
                     ${mpState.isModerator && !p.is_moderator ? `<button class="lobby-kick-btn" data-player-id="${p.player_id}" data-player-name="${p.player_name}" title="Kickar ${p.player_name}">✕</button>` : ''}
                     <span class="lobby-player-status">🟢 online</span>
                 </span>
-            </div>
-        `).join("");
+            </div>`;
+        }).join("");
     }
 
     // Moderador vê botão de configurar / iniciar
@@ -610,10 +615,10 @@ function mpArrancarDraft(players, ordemEmbaralhada, settingsOverride) {
 async function mpHandleCriarSala() {
     const statusEl = document.getElementById("roomStatus");
 
-    // Apenas ADMIN pode criar salas
-    const admin = typeof isAdmin === "function" ? isAdmin() : false;
-    if (!admin) {
-        statusEl.textContent = "⚠️ Apenas o ADMIN pode criar salas.";
+    // Apenas ADMIN e Premium podem criar salas
+    const podeCriar = typeof canCreateRoom === "function" ? canCreateRoom() : false;
+    if (!podeCriar) {
+        statusEl.textContent = "⚠️ Você não tem permissão para criar salas.";
         return;
     }
 
