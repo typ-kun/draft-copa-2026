@@ -5,7 +5,8 @@
 let authState = {
     user: null,
     session: null,
-    loading: true
+    loading: true,
+    isGuest: false
 };
 
 function initAuth() {
@@ -29,6 +30,7 @@ function initAuth() {
         renderAuthUI();
 
         if (event === "SIGNED_OUT") {
+            authState.isGuest = false;
             if (typeof mpSairSala === "function" && modoAtual !== MODO.OFFLINE) {
                 mpSairSala();
             }
@@ -51,6 +53,7 @@ function renderAuthUI() {
     const loggedIn = document.getElementById("authLoggedIn");
     const userEmail = document.getElementById("authUserEmail");
     const authSection = document.getElementById("authSection");
+    const gameMenu = document.getElementById("gameMenuArea");
     if (!loggedOut || !loggedIn || !authSection) return;
 
     // Esconder error/success ao renderizar
@@ -59,15 +62,18 @@ function renderAuthUI() {
     if (errEl) errEl.style.display = "none";
     if (sucEl) sucEl.style.display = "none";
 
-    // Se ainda está carregando (logo após F5), não mostra nenhum estado ainda
+    // Se ainda está carregando (logo após F5), não mostra nada
     if (authState.loading) {
         loggedOut.style.display = "none";
         loggedIn.style.display = "none";
         authSection.style.display = "none";
+        if (gameMenu) gameMenu.style.display = "none";
         return;
     }
 
     authSection.style.display = "block";
+
+    const menuLiberado = authState.user || authState.isGuest;
 
     if (authState.user) {
         loggedOut.style.display = "none";
@@ -78,6 +84,10 @@ function renderAuthUI() {
     } else {
         loggedOut.style.display = "block";
         loggedIn.style.display = "none";
+    }
+
+    if (gameMenu) {
+        gameMenu.style.display = menuLiberado ? "block" : "none";
     }
 }
 
@@ -202,6 +212,14 @@ async function handleLogout() {
     const supabase = initSupabase();
     if (!supabase) return;
 
+    // Se for convidado, só desativa o modo
+    if (authState.isGuest) {
+        authState.isGuest = false;
+        renderAuthUI();
+        toast("Modo convidado desativado.", 2000);
+        return;
+    }
+
     setAuthLoading(true);
 
     const { error } = await supabase.auth.signOut();
@@ -215,6 +233,17 @@ async function handleLogout() {
     document.getElementById("authPassword").value = "";
     toast("Desconectado.", 2000);
     renderAuthUI();
+}
+
+// ─── CONVIDADO ───────────────────────────────────────────────────────────────
+
+function handleContinuarConvidado() {
+    authState.isGuest = true;
+    toast("🎮 Modo convidado ativado!", 2000);
+    renderAuthUI();
+    // Focar no input de nome
+    const inputNome = document.getElementById("prePlayerName");
+    if (inputNome) setTimeout(() => inputNome.focus(), 300);
 }
 
 // ─── GOOGLE OAUTH ────────────────────────────────────────────────────────────
@@ -258,6 +287,10 @@ document.addEventListener("click", function (e) {
     }
     if (e.target.id === "btnGoogleLogin" || e.target.closest("#btnGoogleLogin")) {
         handleGoogleLogin();
+        return;
+    }
+    if (e.target.id === "btnContinuarConvidado" || e.target.closest("#btnContinuarConvidado")) {
+        handleContinuarConvidado();
         return;
     }
 });
