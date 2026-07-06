@@ -4322,6 +4322,20 @@ document.addEventListener("click", function (e) {
         return;
     }
 
+    // Fechar sala (moderador)
+    if (e.target.id === "btnFecharSala" || e.target.closest("#btnFecharSala")) {
+        mpFecharSala();
+        return;
+    }
+
+    // Kickar jogador específico
+    if (e.target.classList.contains("lobby-kick-btn")) {
+        const playerId = e.target.dataset.playerId;
+        const playerName = e.target.dataset.playerName;
+        if (playerId) mpKickarJogadorEspecifico(playerId, playerName);
+        return;
+    }
+
     // Copiar código da sala ao clicar
     if (e.target.id === "lobbyCode") {
         const code = e.target.textContent;

@@ -244,6 +244,21 @@ function mpIniciarLobby() {
         mpAtualizarTurnoUI();
     });
 
+    // ── Fechar sala (moderador) ──
+    channel.on("broadcast", { event: "room_closed" }, () => {
+        toast("🔒 A sala foi fechada pelo moderador.", 3000);
+        mpKickarJogador();
+    });
+
+    // ── Kickar jogador específico ──
+    channel.on("broadcast", { event: "player_kicked" }, (payload) => {
+        const alvo = payload.payload;
+        if (alvo && alvo.player_id === mpState.playerId) {
+            toast(`👢 Você foi removido da sala por ${alvo.moderador_nome || "o moderador"}.`, 4000);
+            mpKickarJogador();
+        }
+    });
+
     // ── Postgres CDC (mudanças na sala) ──
     channel.on("postgres_changes", {
         event: "UPDATE",
@@ -333,6 +348,7 @@ function mpRenderizarLobby() {
             <div class="lobby-player">
                 <span>${p.player_name}</span>
                 ${p.is_moderator ? '<span class="lobby-player-moderator">🛡️ Moderador</span>' : ''}
+                ${mpState.isModerator && !p.is_moderator ? `<button class="lobby-kick-btn" data-player-id="${p.player_id}" data-player-name="${p.player_name}" title="Kickar ${p.player_name}">✕</button>` : ''}
                 <span style="margin-left:auto;font-size:12px;color:var(--muted);font-family:var(--body);">🟢 online</span>
             </div>
         `).join("");
@@ -807,6 +823,53 @@ function mpKickarJogador() {
     const stepsBar = document.getElementById("stepsBar");
     if (stepsBar) stepsBar.style.display = "none";
     iniciarPreMenu();
+}
+
+// ─── FECHAR SALA (moderador) ───────────────────────────────────────────────
+
+async function mpFecharSala() {
+    if (!mpState.isModerator) return;
+    if (!confirm("Tem certeza que deseja fechar a sala? Todos os jogadores serão removidos.")) return;
+
+    // Broadcast para todos
+    if (mpState.channel) {
+        mpState.channel.send({
+            type: "broadcast",
+            event: "room_closed",
+            payload: {}
+        });
+    }
+
+    // Tentar atualizar status no banco
+    try {
+        const supabase = initSupabase();
+        if (supabase && mpState.roomId) {
+            await supabase.from("rooms").update({ status: "closed" }).eq("id", mpState.roomId);
+        }
+    } catch (_) {}
+
+    toast("🔒 Sala fechada.", 2000);
+    mpKickarJogador();
+}
+
+// ─── KICKAR JOGADOR ESPECÍFICO (moderador) ─────────────────────────────────
+
+function mpKickarJogadorEspecifico(playerId, playerName) {
+    if (!mpState.isModerator) return;
+    if (!confirm(`Kickar ${playerName}?`)) return;
+
+    if (mpState.channel) {
+        mpState.channel.send({
+            type: "broadcast",
+            event: "player_kicked",
+            payload: {
+                player_id: playerId,
+                moderador_nome: localStorage.getItem(PRE_MENU_KEY) || "Moderador"
+            }
+        });
+    }
+
+    toast(`👢 ${playerName} foi removido da sala.`, 2000);
 }
 
 // ─── RECEPÇÃO DE PICKS (multiplayer) ──────────────────────────────────────────
