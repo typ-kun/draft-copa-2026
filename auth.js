@@ -230,7 +230,7 @@ async function handleLogin() {
     }
 
     document.getElementById("authPassword").value = "";
-    toast("✅ Login realizado!", 2000);
+    showAuthSuccess("✅ Login realizado!");
     renderAuthUI();
 }
 
