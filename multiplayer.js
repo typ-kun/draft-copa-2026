@@ -610,7 +610,6 @@ async function mpHandleCriarSala() {
     const autenticado = typeof isAuthenticated === "function" ? isAuthenticated() : false;
     if (!autenticado) {
         statusEl.textContent = "⚠️ Faça login para criar uma sala.";
-        toast("Faça login para criar salas (use email ou Google)", 3500);
         return;
     }
 
