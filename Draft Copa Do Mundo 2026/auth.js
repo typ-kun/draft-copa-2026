@@ -454,10 +454,17 @@ document.addEventListener("click", function (e) {
         return;
     }
     if (e.target.classList.contains("admin-level-select")) {
+        // Não fazer nada no click, apenas abrir o dropdown
+        return;
+    }
+});
+
+// Change nos selects de nível (dispara quando seleciona uma opção)
+document.addEventListener("change", function (e) {
+    if (e.target.classList.contains("admin-level-select")) {
         const profileId = e.target.dataset.profileId;
         const novoNivel = e.target.value;
         if (profileId && novoNivel) mpAlterarNivel(profileId, novoNivel);
-        return;
     }
 });
 
