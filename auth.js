@@ -48,7 +48,30 @@ function isAuthenticated() {
 
 // ─── UI ──────────────────────────────────────────────────────────────────────
 
+function atualizarStatusPreMenu() {
+    const statusEl = document.getElementById("preMenuAccountStatus");
+    const btnLabel = document.getElementById("btnLogarRegistrar");
+    if (!statusEl) return;
+
+    if (authState.user) {
+        const email = authState.user.email || "Logado";
+        statusEl.innerHTML = `✅ <strong>${email}</strong>`;
+        statusEl.style.display = "block";
+        if (btnLabel) btnLabel.textContent = "Conta";
+    } else if (authState.isGuest) {
+        statusEl.innerHTML = "🎮 <strong>Modo convidado</strong>";
+        statusEl.style.display = "block";
+        if (btnLabel) btnLabel.textContent = "Logar / Registrar";
+    } else {
+        statusEl.style.display = "none";
+        if (btnLabel) btnLabel.textContent = "Logar / Registrar";
+    }
+}
+
 function renderAuthUI() {
+    // Remove loading ao renderizar
+    setAuthLoading(false);
+
     const loggedOut = document.getElementById("authLoggedOut");
     const loggedIn = document.getElementById("authLoggedIn");
     const userEmail = document.getElementById("authUserEmail");
@@ -89,6 +112,9 @@ function renderAuthUI() {
     if (gameMenu) {
         gameMenu.style.display = menuLiberado ? "block" : "none";
     }
+
+    // Atualizar status no pré-menu
+    atualizarStatusPreMenu();
 }
 
 function showAuthError(msg) {
@@ -241,6 +267,7 @@ function handleContinuarConvidado() {
     authState.isGuest = true;
     toast("🎮 Modo convidado ativado!", 2000);
     renderAuthUI();
+    atualizarStatusPreMenu();
     // Focar no input de nome
     const inputNome = document.getElementById("prePlayerName");
     if (inputNome) setTimeout(() => inputNome.focus(), 300);
