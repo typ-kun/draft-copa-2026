@@ -610,10 +610,10 @@ function mpArrancarDraft(players, ordemEmbaralhada, settingsOverride) {
 async function mpHandleCriarSala() {
     const statusEl = document.getElementById("roomStatus");
 
-    // Bloquear criação sem login
-    const autenticado = typeof isAuthenticated === "function" ? isAuthenticated() : false;
-    if (!autenticado) {
-        statusEl.textContent = "⚠️ Faça login para criar uma sala.";
+    // Apenas ADMIN pode criar salas
+    const admin = typeof isAdmin === "function" ? isAdmin() : false;
+    if (!admin) {
+        statusEl.textContent = "⚠️ Apenas o ADMIN pode criar salas.";
         return;
     }
 
