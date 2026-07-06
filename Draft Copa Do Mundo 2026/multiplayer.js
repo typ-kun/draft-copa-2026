@@ -348,8 +348,10 @@ function mpRenderizarLobby() {
             <div class="lobby-player">
                 <span>${p.player_name}</span>
                 ${p.is_moderator ? '<span class="lobby-player-moderator">🛡️ Moderador</span>' : ''}
-                ${mpState.isModerator && !p.is_moderator ? `<button class="lobby-kick-btn" data-player-id="${p.player_id}" data-player-name="${p.player_name}" title="Kickar ${p.player_name}">✕</button>` : ''}
-                <span style="margin-left:auto;font-size:12px;color:var(--muted);font-family:var(--body);">🟢 online</span>
+                <span class="lobby-player-right">
+                    ${mpState.isModerator && !p.is_moderator ? `<button class="lobby-kick-btn" data-player-id="${p.player_id}" data-player-name="${p.player_name}" title="Kickar ${p.player_name}">✕</button>` : ''}
+                    <span class="lobby-player-status">🟢 online</span>
+                </span>
             </div>
         `).join("");
     }
