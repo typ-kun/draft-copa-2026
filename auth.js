@@ -297,6 +297,17 @@ document.addEventListener("click", function (e) {
         handleContinuarConvidado();
         return;
     }
+    if (e.target.id === "btnContaDCDM" || e.target.closest("#btnContaDCDM")) {
+        document.getElementById("preMenu").style.display = "none";
+        document.getElementById("authScreen").style.display = "block";
+        renderAuthUI();
+        return;
+    }
+    if (e.target.id === "btnVoltarDeAuth" || e.target.closest("#btnVoltarDeAuth")) {
+        document.getElementById("authScreen").style.display = "none";
+        document.getElementById("preMenu").style.display = "block";
+        return;
+    }
 });
 
 document.addEventListener("keydown", function (e) {
