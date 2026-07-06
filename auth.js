@@ -260,7 +260,11 @@ async function handleGoogleLogin() {
     });
 
     if (error) {
-        showAuthError(translateAuthError(error.message));
+        if (error.message && error.message.includes("provider is not enabled")) {
+            showAuthError("Login Google nao configurado no Supabase. Use email/senha ou configure em Authentication > Providers.");
+        } else {
+            showAuthError(translateAuthError(error.message));
+        }
     }
     // Se não houve erro, o navegador redireciona para o Google
     // Ao voltar, o onAuthStateChange tratará
