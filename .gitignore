@@ -34,3 +34,10 @@ tmp_*
 
 # Arquivos não utilizados
 arquivos-nao-utilizados/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
