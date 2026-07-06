@@ -123,6 +123,8 @@ async function mpEntrarSala(code, playerName) {
         mpState.roomCode = code;
         mpState.playerId = meuRegistroExistente.id;
         mpState.isModerator = meuRegistroExistente.is_moderator;
+        mpState.settings = room.settings || {};
+        mpState.roomStatus = room.status || "waiting";
         modoAtual = meuRegistroExistente.is_moderator ? MODO.ONLINE_MODERATOR : MODO.ONLINE_PLAYER;
         mpMarcarMultiplayer();
         return { room, player: meuRegistroExistente, code };
@@ -149,6 +151,8 @@ async function mpEntrarSala(code, playerName) {
     mpState.roomCode = code;
     mpState.playerId = player.id;
     mpState.isModerator = false;
+    mpState.settings = room.settings || {};
+    mpState.roomStatus = room.status || "waiting";
     modoAtual = MODO.ONLINE_PLAYER;
     mpMarcarMultiplayer();
 
@@ -231,6 +235,14 @@ function mpIniciarLobby() {
             setTimeout(() => {
                 mpKickarJogador();
             }, 2000);
+        }
+    });
+
+    channel.on("broadcast", { event: "settings_updated" }, (payload) => {
+        if (!mpState.isModerator && payload.payload) {
+            mpState.settings = payload.payload;
+            mpState.roomStatus = "configuring";
+            mpRenderizarLobby();
         }
     });
 
@@ -598,6 +610,16 @@ async function mpSalvarConfig() {
 
     mpState.settings = settings;
     mpState.roomStatus = "configuring";
+
+    // Notificar todos os jogadores na sala sobre as novas configs
+    if (mpState.channel) {
+        mpState.channel.send({
+            type: "broadcast",
+            event: "settings_updated",
+            payload: settings
+        });
+    }
+
     toast("✅ Configuração salva!", 2000);
     mpFecharConfig();
 }
