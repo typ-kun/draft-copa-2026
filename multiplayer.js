@@ -407,13 +407,16 @@ function mpRenderizarLobby() {
                     // Mostrar botão para P2 também
                     if (resumeBtn) resumeBtn.style.display = "block";
                 } else if (mpState.roomStatus === "configuring" || (mpState.settings && Object.keys(mpState.settings).length > 0)) {
-                    waitText.textContent = "O moderador está configurando o draft...";
+                    waitText.textContent = "O moderador já configurou o draft. Aguarde o início...";
                 } else {
                     waitText.textContent = "Aguardando o moderador configurar o draft...";
                 }
             }
         }
     }
+
+    // Renderizar painel de configurações
+    mpRenderizarConfigPanel();
 }
 
 // ─── NAVEGAÇÃO DE SALAS ───────────────────────────────────────────────────────
@@ -430,6 +433,57 @@ function mpAbrirMenuSalas() {
 function mpFecharMenuSalas() {
     document.getElementById("roomMenu").style.display = "none";
     document.getElementById("preMenu").style.display = "block";
+}
+
+function mpRenderizarConfigPanel() {
+    const panel = document.getElementById("lobbySettingsPanel");
+    const content = document.getElementById("lobbySettingsContent");
+    if (!panel || !content) return;
+
+    const s = mpState.settings;
+    const temConfig = s && Object.keys(s).length > 0 && !s.mataMata;
+    if (!temConfig) {
+        panel.style.display = "none";
+        return;
+    }
+
+    panel.style.display = "block";
+
+    const mapFase = {
+        round32: "Dezesseis-avos de final (32)",
+        round16: "Oitavas de final (16)",
+        quarterfinals: "Quartas de final (8)",
+        semifinals: "Semifinal (4)",
+        final: "Final (2)"
+    };
+
+    const mapIcons = {
+        none: "Nenhum",
+        icons: "Só Icons",
+        heroes: "Só Heroes",
+        both: "Icons + Heroes"
+    };
+
+    const itens = [
+        { label: "Formato", value: s.draftMode === "snake" ? "Snake" : "Circular" },
+        { label: "Fase inicial", value: mapFase[s.startingPhase] || s.startingPhase },
+        { label: "Regra goleiros", value: s.goalkeeperRule ? "Ativada" : "Desativada" },
+        { label: "Jogadores/elenco", value: String(s.playersPerTeam) },
+        { label: "Refreshes", value: String(s.refreshCount) },
+        { label: "Icons & Heroes", value: mapIcons[s.iconsHeroesMode] || s.iconsHeroesMode },
+    ];
+
+    if (s.iconsHeroesMode && s.iconsHeroesMode !== "none" && s.poolSpecialChance !== undefined) {
+        const pct = (s.poolSpecialChance * 100).toFixed(1);
+        itens.push({ label: "Chance especial", value: pct + "%" });
+    }
+
+    content.innerHTML = itens.map(item => `
+        <div class="lobby-setting-item">
+            <span class="lobby-setting-label">${item.label}</span>
+            <span class="lobby-setting-value">${item.value}</span>
+        </div>
+    `).join("");
 }
 
 function mpAbrirLobby() {

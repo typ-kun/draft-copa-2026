@@ -241,38 +241,48 @@
 
         <div class="lobby-wrap">
 
-            <div class="lobby-header">
-                <h1>🛡️ Sala de Espera</h1>
-                <div id="lobbyCode" class="lobby-code"></div>
+            <div class="lobby-left">
+
+                <div class="lobby-header">
+                    <h1>🛡️ Sala de Espera</h1>
+                    <div id="lobbyCode" class="lobby-code"></div>
+                </div>
+
+                <div class="lobby-card">
+                    <div class="lobby-section">
+                        <label class="pre-menu-label">JOGADORES NA SALA</label>
+                        <div id="lobbyPlayers" class="lobby-players">
+                            <div class="lobby-empty">Nenhum jogador conectado</div>
+                        </div>
+                    </div>
+
+                    <hr class="pre-menu-divider">
+
+                    <!-- Moderador: configurar / iniciar / fechar -->
+                    <div id="lobbyModArea" style="display:none;">
+                        <button id="btnConfigurarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;">⚙️ Configurar Draft</button>
+                        <button id="btnIniciarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🚀 Iniciar Draft</button>
+                        <button id="btnFecharSala" class="pre-menu-btn btn-back-setup" style="width:100%;margin-top:12px;">🔒 Fechar Sala</button>
+                    </div>
+                    <!-- Continuar mata-mata (visível para todos) -->
+                    <button id="btnResumeMataMata" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:18px;padding:14px 20px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🏆 Continuar Mata-Mata</button>
+
+                    <!-- Jogadores: aguardando -->
+                    <div id="lobbyWaitArea" style="display:block;">
+                        <p class="lobby-waiting">Aguardando o moderador configurar o draft...</p>
+                    </div>
+
+                    <hr class="pre-menu-divider">
+
+                    <button id="btnSairLobby" class="pre-menu-btn btn-back-setup">← Sair da sala</button>
+                </div>
+
             </div>
 
-            <div class="lobby-card">
-                <div class="lobby-section">
-                    <label class="pre-menu-label">JOGADORES NA SALA</label>
-                    <div id="lobbyPlayers" class="lobby-players">
-                        <div class="lobby-empty">Nenhum jogador conectado</div>
-                    </div>
-                </div>
-
-                <hr class="pre-menu-divider">
-
-                <!-- Moderador: configurar / iniciar / fechar -->
-                <div id="lobbyModArea" style="display:none;">
-                    <button id="btnConfigurarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;">⚙️ Configurar Draft</button>
-                    <button id="btnIniciarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🚀 Iniciar Draft</button>
-                    <button id="btnFecharSala" class="pre-menu-btn btn-back-setup" style="width:100%;margin-top:12px;">🔒 Fechar Sala</button>
-                </div>
-                <!-- Continuar mata-mata (visível para todos) -->
-                <button id="btnResumeMataMata" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:18px;padding:14px 20px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🏆 Continuar Mata-Mata</button>
-
-                <!-- Jogadores: aguardando -->
-                <div id="lobbyWaitArea" style="display:block;">
-                    <p class="lobby-waiting">Aguardando o moderador configurar o draft...</p>
-                </div>
-
-                <hr class="pre-menu-divider">
-
-                <button id="btnSairLobby" class="pre-menu-btn btn-back-setup">← Sair da sala</button>
+            <!-- Painel de configurações (visível para todos) -->
+            <div id="lobbySettingsPanel" class="lobby-settings" style="display:none;">
+                <div class="lobby-settings-header">⚙️ Configuração do Draft</div>
+                <div id="lobbySettingsContent" class="lobby-settings-content"></div>
             </div>
 
         </div>
