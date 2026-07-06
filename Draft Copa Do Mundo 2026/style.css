@@ -1361,15 +1361,21 @@ section.teams {
 }
 
 .open-room-enter-btn {
-    background: var(--accent);
-    color: var(--ink);
-    border: 2px solid var(--ink);
-    padding: 6px 16px;
-    border-radius: 6px;
+    background: transparent;
+    color: var(--muted);
+    border: 2px solid var(--line);
+    padding: 6px 14px;
+    border-radius: 2px;
     cursor: pointer;
-    font-size: 13px;
-    font-weight: 700;
-    transition: opacity .15s;
+    font-size: 12px;
+    font-weight: 600;
+    transition: color .15s, border-color .15s, background .15s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.open-room-enter-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
 }
 .open-room-enter-btn:hover {
     opacity: 0.85;
