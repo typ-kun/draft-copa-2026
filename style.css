@@ -1309,6 +1309,81 @@ section.teams {
     opacity: 0.9;
 }
 
+/* 🟢 SALAS ABERTAS */
+.open-rooms-empty {
+    text-align: center;
+    padding: 20px 16px;
+    color: var(--muted);
+    font-size: 14px;
+    font-family: var(--body);
+}
+
+.open-room-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    background: var(--surface-2);
+    border-radius: 8px;
+    transition: background .15s;
+}
+.open-room-item:hover {
+    background: var(--card-bg);
+}
+[data-theme="dark"] .open-room-item {
+    background: #2a2a2a;
+}
+[data-theme="dark"] .open-room-item:hover {
+    background: #3a3a3a;
+}
+
+.open-room-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.open-room-code {
+    font-family: var(--heading);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: 3px;
+}
+
+.open-room-players {
+    font-family: var(--body);
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.open-room-enter-btn {
+    background: var(--accent-1);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    padding: 6px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    transition: opacity .15s;
+}
+.open-room-enter-btn:hover {
+    opacity: 0.85;
+}
+
+#openRoomsList::-webkit-scrollbar {
+    width: 6px;
+}
+#openRoomsList::-webkit-scrollbar-track {
+    background: transparent;
+}
+#openRoomsList::-webkit-scrollbar-thumb {
+    background: var(--muted);
+    border-radius: 3px;
+}
+
 #backToDraft {
     background: #c0392b;
 }
@@ -2843,9 +2918,9 @@ section.teams {
 /* ====================== */
 
 #preMenu {
-    max-width: 440px;
+    max-width: 480px;
     margin: 0 auto;
-    padding: 60px 16px;
+    padding: 40px 16px;
 }
 
 #preMenu h1 {
@@ -2855,9 +2930,11 @@ section.teams {
     margin-bottom: 28px;
     color: var(--ink);
     text-shadow: 4px 4px 0 var(--accent-2);
+    text-align: center;
 }
 
 #preMenu .logo,
+#roomMenu .logo,
 #setup .logo {
     display: block;
     width: 100%;
@@ -3082,7 +3159,7 @@ section.teams {
 
 .room-wrap,
 .lobby-wrap {
-    max-width: 440px;
+    max-width: 480px;
     margin: 0 auto;
     padding: 40px 16px;
 }

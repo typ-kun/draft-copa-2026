@@ -86,9 +86,17 @@
                 <hr class="pre-menu-divider">
 
                 <div class="room-section">
-                    <label class="pre-menu-label">ENTRAR EM SALA</label>
-                    <input type="text" id="inputCodigoSala" class="pre-menu-input" placeholder="Código da sala" maxlength="6" style="text-transform:uppercase;text-align:center;font-size:24px;letter-spacing:8px;">
-                    <button id="btnEntrarSala" class="pre-menu-btn btn-back-setup">Entrar</button>
+                    <button id="btnListarSalas" class="pre-menu-btn btn-back-setup" style="width:100%;">Salas Abertas</button>
+                </div>
+
+                <hr class="pre-menu-divider">
+
+                <div class="room-section">
+                    <button id="btnMostrarEntrarCodigo" class="pre-menu-btn btn-back-setup" style="width:100%;">Entrar com código da sala</button>
+                    <div id="entrarCodigoContainer" style="display:none;margin-top:12px;">
+                        <input type="text" id="inputCodigoSala" class="pre-menu-input" placeholder="Código da sala" maxlength="6" style="text-transform:uppercase;text-align:center;font-size:24px;letter-spacing:8px;">
+                        <button id="btnEntrarSala" class="pre-menu-btn btn-back-setup" style="margin-top:8px;width:100%;">Entrar</button>
+                    </div>
                 </div>
 
                 <hr class="pre-menu-divider">
@@ -98,6 +106,38 @@
             </div>
 
             <div id="roomStatus" class="room-status"></div>
+
+        </div>
+
+    </div>
+
+    <!-- MULTIPLAYER - SALAS ABERTAS -->
+
+    <div id="openRoomsScreen" style="display:none;">
+
+        <div class="lobby-wrap">
+
+            <div class="lobby-header">
+                <h1>Salas Abertas</h1>
+            </div>
+
+            <div class="lobby-card">
+
+                <div class="room-section" style="padding:0;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                        <span style="font-size:14px;color:var(--muted);font-family:var(--body);font-weight:600;">Salas disponíveis</span>
+                        <button id="btnRefreshSalas" style="background:var(--accent-1);color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;transition:opacity .15s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">⟳ Atualizar</button>
+                    </div>
+                    <div id="openRoomsList" style="max-height:360px;overflow-y:auto;">
+                        <div class="open-rooms-empty">Clique em "Atualizar" para buscar salas.</div>
+                    </div>
+                </div>
+
+                <hr class="pre-menu-divider">
+
+                <button id="btnVoltarDeSalasAbertas" class="pre-menu-btn btn-back-setup">← Voltar</button>
+
+            </div>
 
         </div>
 
