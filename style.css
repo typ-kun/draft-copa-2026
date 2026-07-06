@@ -1324,15 +1324,17 @@ section.teams {
     justify-content: space-between;
     padding: 10px 12px;
     margin-bottom: 6px;
-    background: var(--surface-2);
+    background: var(--surface);
     border-radius: 8px;
     transition: background .15s;
+    border: 1px solid var(--line);
 }
 .open-room-item:hover {
-    background: var(--card-bg);
+    background: var(--surface-2);
 }
 [data-theme="dark"] .open-room-item {
     background: #2a2a2a;
+    border-color: transparent;
 }
 [data-theme="dark"] .open-room-item:hover {
     background: #3a3a3a;
@@ -1359,15 +1361,21 @@ section.teams {
 }
 
 .open-room-enter-btn {
-    background: var(--accent-1);
-    color: var(--ink);
-    border: 2px solid var(--ink);
-    padding: 6px 16px;
-    border-radius: 6px;
+    background: transparent;
+    color: var(--muted);
+    border: 2px solid var(--line);
+    padding: 6px 14px;
+    border-radius: 2px;
     cursor: pointer;
-    font-size: 13px;
-    font-weight: 700;
-    transition: opacity .15s;
+    font-size: 12px;
+    font-weight: 600;
+    transition: color .15s, border-color .15s, background .15s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.open-room-enter-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
 }
 .open-room-enter-btn:hover {
     opacity: 0.85;
@@ -3255,8 +3263,21 @@ section.teams {
     color: var(--accent-2);
     background: var(--ink);
     padding: 2px 8px;
-    margin-left: auto;
     text-transform: uppercase;
+}
+
+.lobby-player-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.lobby-player-status {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--body);
 }
 
 .lobby-empty {
@@ -3267,6 +3288,28 @@ section.teams {
     font-style: italic;
     text-align: center;
     padding: 12px;
+}
+
+.lobby-kick-btn {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .15s;
+    flex-shrink: 0;
+}
+.lobby-kick-btn:hover {
+    opacity: 0.8;
 }
 
 .lobby-waiting {
@@ -3311,4 +3354,12 @@ section.teams {
 
 #preMenu + #setup {
     padding-bottom: 80px;
+}
+
+/* ====================== */
+/* AUTH SECTION           */
+/* ====================== */
+
+#authSection .pre-menu-input {
+    box-sizing: border-box;
 }

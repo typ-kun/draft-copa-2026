@@ -29,14 +29,15 @@ async function mpCriarSala(playerName) {
 
     const code = gerarCodigoSala();
 
-    // Usar um UUID temporário pro moderator_id (o Supabase gera o id da room)
-    const tempModId = crypto.randomUUID();
+    // Usar ID do usuário autenticado se disponível
+    const authUser = typeof getAuthUser === "function" ? getAuthUser() : null;
+    const moderatorId = authUser ? authUser.id : crypto.randomUUID();
 
     const { data: room, error } = await supabase
         .from("rooms")
         .insert({
             code,
-            moderator_id: tempModId,
+            moderator_id: moderatorId,
             status: "waiting",
             settings: {}
         })
@@ -51,6 +52,7 @@ async function mpCriarSala(playerName) {
         .insert({
             room_id: room.id,
             player_name: playerName,
+            user_id: authUser?.id || null,
             is_moderator: true,
             player_order: 0
         })
@@ -104,8 +106,16 @@ async function mpEntrarSala(code, playerName) {
 
     if (eErr) return { erro: eErr.message };
 
-    // Verificar se já sou um jogador existente (reconexão)
-    const meuRegistroExistente = existing ? existing.find(p => p.player_name === playerName) : null;
+    // Verificar se já sou um jogador existente (reconexão após F5)
+    // Prioridade: user_id > player_name
+    const authUser = typeof getAuthUser === "function" ? getAuthUser() : null;
+    let meuRegistroExistente = null;
+    if (authUser && existing) {
+        meuRegistroExistente = existing.find(p => p.user_id === authUser.id);
+    }
+    if (!meuRegistroExistente && existing) {
+        meuRegistroExistente = existing.find(p => p.player_name === playerName);
+    }
 
     if (meuRegistroExistente) {
         // Já existia → reutilizar o registro (preserva is_moderator original)
@@ -126,6 +136,7 @@ async function mpEntrarSala(code, playerName) {
         .insert({
             room_id: room.id,
             player_name: playerName,
+            user_id: authUser?.id || null,
             is_moderator: false,
             player_order: playerOrder
         })
@@ -244,6 +255,21 @@ function mpIniciarLobby() {
         mpAtualizarTurnoUI();
     });
 
+    // ── Fechar sala (moderador) ──
+    channel.on("broadcast", { event: "room_closed" }, () => {
+        toast("🔒 A sala foi fechada pelo moderador.", 3000);
+        mpKickarJogador();
+    });
+
+    // ── Kickar jogador específico ──
+    channel.on("broadcast", { event: "player_kicked" }, (payload) => {
+        const alvo = payload.payload;
+        if (alvo && alvo.player_id === mpState.playerId) {
+            toast(`👢 Você foi removido da sala por ${alvo.moderador_nome || "o moderador"}.`, 4000);
+            mpKickarJogador();
+        }
+    });
+
     // ── Postgres CDC (mudanças na sala) ──
     channel.on("postgres_changes", {
         event: "UPDATE",
@@ -261,6 +287,7 @@ function mpIniciarLobby() {
             await channel.track({
                 player_id: mpState.playerId,
                 player_name: localStorage.getItem(PRE_MENU_KEY) || "Anônimo",
+                user_id: (typeof getAuthUser === "function" ? getAuthUser()?.id : null) || null,
                 is_moderator: mpState.isModerator
             });
         }
@@ -333,7 +360,10 @@ function mpRenderizarLobby() {
             <div class="lobby-player">
                 <span>${p.player_name}</span>
                 ${p.is_moderator ? '<span class="lobby-player-moderator">🛡️ Moderador</span>' : ''}
-                <span style="margin-left:auto;font-size:12px;color:var(--muted);font-family:var(--body);">🟢 online</span>
+                <span class="lobby-player-right">
+                    ${mpState.isModerator && !p.is_moderator ? `<button class="lobby-kick-btn" data-player-id="${p.player_id}" data-player-name="${p.player_name}" title="Kickar ${p.player_name}">✕</button>` : ''}
+                    <span class="lobby-player-status">🟢 online</span>
+                </span>
             </div>
         `).join("");
     }
@@ -575,6 +605,15 @@ function mpArrancarDraft(players, ordemEmbaralhada, settingsOverride) {
 
 async function mpHandleCriarSala() {
     const statusEl = document.getElementById("roomStatus");
+
+    // Bloquear criação sem login
+    const autenticado = typeof isAuthenticated === "function" ? isAuthenticated() : false;
+    if (!autenticado) {
+        statusEl.textContent = "⚠️ Faça login para criar uma sala.";
+        toast("Faça login para criar salas (use email ou Google)", 3500);
+        return;
+    }
+
     // Tentar ler do input do pré-menu primeiro, depois do localStorage
     const inputNome = document.getElementById("prePlayerName");
     const nome = (inputNome ? inputNome.value.trim() : "") || (localStorage.getItem(PRE_MENU_KEY) || "").trim();
@@ -809,6 +848,53 @@ function mpKickarJogador() {
     iniciarPreMenu();
 }
 
+// ─── FECHAR SALA (moderador) ───────────────────────────────────────────────
+
+async function mpFecharSala() {
+    if (!mpState.isModerator) return;
+    if (!confirm("Tem certeza que deseja fechar a sala? Todos os jogadores serão removidos.")) return;
+
+    // Broadcast para todos
+    if (mpState.channel) {
+        mpState.channel.send({
+            type: "broadcast",
+            event: "room_closed",
+            payload: {}
+        });
+    }
+
+    // Tentar atualizar status no banco
+    try {
+        const supabase = initSupabase();
+        if (supabase && mpState.roomId) {
+            await supabase.from("rooms").update({ status: "closed" }).eq("id", mpState.roomId);
+        }
+    } catch (_) {}
+
+    toast("🔒 Sala fechada.", 2000);
+    mpKickarJogador();
+}
+
+// ─── KICKAR JOGADOR ESPECÍFICO (moderador) ─────────────────────────────────
+
+function mpKickarJogadorEspecifico(playerId, playerName) {
+    if (!mpState.isModerator) return;
+    if (!confirm(`Kickar ${playerName}?`)) return;
+
+    if (mpState.channel) {
+        mpState.channel.send({
+            type: "broadcast",
+            event: "player_kicked",
+            payload: {
+                player_id: playerId,
+                moderador_nome: localStorage.getItem(PRE_MENU_KEY) || "Moderador"
+            }
+        });
+    }
+
+    toast(`👢 ${playerName} foi removido da sala.`, 2000);
+}
+
 // ─── RECEPÇÃO DE PICKS (multiplayer) ──────────────────────────────────────────
 
 function mpReceberPickPais(data) {
@@ -984,11 +1070,15 @@ async function mpListarSalasAbertas() {
 
     listEl.innerHTML = '<div class="open-rooms-empty">🔄 Buscando salas...</div>';
 
+    // Só mostrar salas criadas nas últimas 2 horas
+    const duasHorasAtras = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
+
     // Buscar salas com status "waiting"
     const { data: rooms, error } = await supabase
         .from("rooms")
         .select("id, code, created_at")
         .eq("status", "waiting")
+        .gte("created_at", duasHorasAtras)
         .order("created_at", { ascending: false });
 
     if (error) {

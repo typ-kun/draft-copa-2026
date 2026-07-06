@@ -1950,13 +1950,32 @@ function mostrarResultadoFinal() {
             "click",
             () => {
 
-                navigator
-                    .clipboard
-                    .writeText(
-                        area.innerText
-                    );
+                const texto = area.innerText;
 
-                toast("Resultado copiado!");
+                // Método mais compatível com mobile: criar textarea temporário
+                const textarea = document.createElement("textarea");
+                textarea.value = texto;
+                textarea.style.position = "fixed";
+                textarea.style.opacity = "0";
+                textarea.style.left = "-9999px";
+                document.body.appendChild(textarea);
+                textarea.select();
+                textarea.setSelectionRange(0, 99999);
+
+                try {
+                    document.execCommand("copy");
+                    toast("📋 Resultado copiado!");
+                } catch (err) {
+                    // Fallback para Clipboard API
+                    try {
+                        navigator.clipboard.writeText(texto);
+                        toast("📋 Resultado copiado!");
+                    } catch (_) {
+                        toast("❌ Não foi possível copiar. Selecione manualmente.", 3000);
+                    }
+                }
+
+                document.body.removeChild(textarea);
 
             }
         );
@@ -4319,6 +4338,20 @@ document.addEventListener("click", function (e) {
     // Continuar mata-mata (após F5)
     if (e.target.id === "btnResumeMataMata" || e.target.closest("#btnResumeMataMata")) {
         mostrarMataMata();
+        return;
+    }
+
+    // Fechar sala (moderador)
+    if (e.target.id === "btnFecharSala" || e.target.closest("#btnFecharSala")) {
+        mpFecharSala();
+        return;
+    }
+
+    // Kickar jogador específico
+    if (e.target.classList.contains("lobby-kick-btn")) {
+        const playerId = e.target.dataset.playerId;
+        const playerName = e.target.dataset.playerName;
+        if (playerId) mpKickarJogadorEspecifico(playerId, playerName);
         return;
     }
 

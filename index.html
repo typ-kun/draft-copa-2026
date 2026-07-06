@@ -33,6 +33,39 @@
 
             <hr class="pre-menu-divider">
 
+            <!-- Autenticação -->
+            <div class="pre-menu-section" id="authSection" style="display:none;">
+
+                <!-- Deslogado -->
+                <div id="authLoggedOut">
+                    <label class="pre-menu-label">ENTRAR / CADASTRAR</label>
+                    <input type="email" id="authEmail" class="pre-menu-input" placeholder="seu@email.com" autocomplete="email" style="margin-bottom:6px;">
+                    <input type="password" id="authPassword" class="pre-menu-input" placeholder="Senha" autocomplete="current-password" style="margin-bottom:4px;">
+                    <div style="display:flex; gap:6px; margin-bottom:4px;">
+                        <button id="btnLogin" class="pre-menu-btn" style="flex:1;font-size:14px;padding:10px;">Entrar</button>
+                        <button id="btnRegister" class="pre-menu-btn pre-menu-btn-secondary" style="flex:1;font-size:14px;padding:10px;">Cadastrar</button>
+                    </div>
+                    <div style="text-align:center;margin-bottom:4px;">
+                        <button id="btnGoogleLogin" style="background:none;border:2px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:2px;cursor:pointer;font-size:13px;font-weight:600;transition:color .15s,border-color .15s;width:100%;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">🔵 Entrar com Google</button>
+                    </div>
+                    <div id="authError" style="color:var(--accent);font-size:12px;font-weight:600;display:none;margin-top:4px;"></div>
+                    <div id="authSuccess" style="color:var(--win);font-size:12px;font-weight:600;display:none;margin-top:4px;"></div>
+                    <div id="authLoading" style="display:none;font-size:12px;color:var(--muted);text-align:center;margin-top:4px;">Aguarde...</div>
+                </div>
+
+                <!-- Logado -->
+                <div id="authLoggedIn" style="display:none;">
+                    <label class="pre-menu-label">CONTA</label>
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                        <span id="authUserEmail" style="font-weight:600;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink);"></span>
+                        <button id="btnLogout" class="pre-menu-btn" style="width:auto;padding:8px 16px;font-size:12px;flex-shrink:0;">Sair</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="pre-menu-divider">
+
             <!-- Modos de jogo -->
             <div class="pre-menu-section">
                 <button id="btnOffline" class="pre-menu-btn">Modo Offline</button>
@@ -126,7 +159,7 @@
                 <div class="room-section" style="padding:0;">
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
                         <span style="font-size:14px;color:var(--muted);font-family:var(--body);font-weight:600;">Salas disponíveis</span>
-                        <button id="btnRefreshSalas" style="background:var(--accent-1);color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;transition:opacity .15s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">⟳ Atualizar</button>
+                        <button id="btnRefreshSalas" style="background:var(--accent);color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;transition:opacity .15s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">⟳ Atualizar</button>
                     </div>
                     <div id="openRoomsList" style="max-height:360px;overflow-y:auto;">
                         <div class="open-rooms-empty">Clique em "Atualizar" para buscar salas.</div>
@@ -164,10 +197,11 @@
 
                 <hr class="pre-menu-divider">
 
-                <!-- Moderador: configurar / iniciar -->
+                <!-- Moderador: configurar / iniciar / fechar -->
                 <div id="lobbyModArea" style="display:none;">
                     <button id="btnConfigurarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;">⚙️ Configurar Draft</button>
                     <button id="btnIniciarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🚀 Iniciar Draft</button>
+                    <button id="btnFecharSala" class="pre-menu-btn btn-back-setup" style="width:100%;margin-top:12px;">🔒 Fechar Sala</button>
                 </div>
                 <!-- Continuar mata-mata (visível para todos) -->
                 <button id="btnResumeMataMata" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:18px;padding:14px 20px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🏆 Continuar Mata-Mata</button>
@@ -635,6 +669,7 @@
     <script src="supabase-config.js"></script>
     <script src="multiplayer.js"></script>
     <script src="script.js"></script>
+    <script src="auth.js"></script>
 
     <!-- FOOTER GLOBAL -->
 
