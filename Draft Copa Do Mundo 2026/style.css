@@ -2930,12 +2930,7 @@ section.teams {
 #preMenu {
     max-width: 480px;
     margin: 0 auto;
-    padding: 20px 16px 16px;
-    min-height: 100vh;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 24px 16px 16px;
 }
 
 #preMenu h1 {
@@ -3182,7 +3177,7 @@ section.teams {
 
 .room-wrap h1,
 .lobby-header h1 {
-    margin-bottom: 28px;
+    margin-bottom: 16px;
     text-align: center;
 }
 
