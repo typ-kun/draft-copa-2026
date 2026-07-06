@@ -122,6 +122,14 @@ function iniciarPreMenu() {
 }
 
 function entrarModoOffline() {
+    // Verificar se está logado ou em modo convidado
+    const authOk = (typeof isAuthenticated === "function" && isAuthenticated()) || (typeof getAuthUser === "function" && getAuthUser());
+    const guestOk = typeof authState !== "undefined" && authState && authState.isGuest;
+    if (!authOk && !guestOk) {
+        toast("Faça login ou clique em 'Logar / Registrar' primeiro.", 3500);
+        return;
+    }
+
     // Salvar nome
     const nome = document.getElementById("prePlayerName").value.trim();
     if (nome) {
