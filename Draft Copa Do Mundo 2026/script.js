@@ -2,6 +2,33 @@
 // DRAFT COPA DO MUNDO V2
 // ======================
 
+// ─── SOM DE CLIQUE ──────────────────────────────────────────────────────────
+
+let _audioCtx = null;
+
+function playClickSound() {
+    try {
+        if (!_audioCtx) {
+            _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        // Tocar o arquivo clicksound.mp3
+        const audio = new Audio("clicksound.mp3");
+        audio.volume = 0.5;
+        audio.play().catch(() => {});
+    } catch (_) {
+        // Ignora se não conseguir tocar
+    }
+}
+
+// Toca som em qualquer clique em botão
+document.addEventListener("click", function (e) {
+    if (e.target.tagName === "BUTTON" || e.target.closest("button")) {
+        playClickSound();
+    }
+}, true); // usar capture phase para pegar antes dos handlers
+
+// ─── TOAST ──────────────────────────────────────────────────────────────────
+
 let _toastTimer = null;
 function toast(msg, duration = 2500) {
     const el = document.getElementById("toast");
@@ -122,6 +149,19 @@ function iniciarPreMenu() {
 }
 
 function entrarModoOffline() {
+    // Verificar se está logado ou em modo convidado
+    const authOk = (typeof isAuthenticated === "function" && isAuthenticated()) || (typeof getAuthUser === "function" && getAuthUser());
+    const guestOk = typeof authState !== "undefined" && authState && authState.isGuest;
+    if (!authOk && !guestOk) {
+        const statusEl = document.getElementById("preMenuStatus");
+        if (statusEl) {
+            statusEl.textContent = "⚠️ Faça login ou clique em 'Logar / Registrar' primeiro.";
+            statusEl.classList.add("show");
+            setTimeout(() => { statusEl.classList.remove("show"); }, 4000);
+        }
+        return;
+    }
+
     // Salvar nome
     const nome = document.getElementById("prePlayerName").value.trim();
     if (nome) {
