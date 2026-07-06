@@ -3377,6 +3377,17 @@ section.teams {
     opacity: 1;
 }
 
+.pre-menu-account-status {
+    font-family: var(--body);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--win);
+    text-align: center;
+    padding: 4px 0 10px;
+    border-bottom: 1px solid var(--line);
+    margin: 0 0 10px;
+}
+
 /* ====================== */
 /* AUTH SECTION           */
 /* ====================== */
