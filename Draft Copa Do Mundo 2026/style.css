@@ -3272,6 +3272,17 @@ section.teams {
     text-transform: uppercase;
 }
 
+.lobby-player-admin {
+    font-family: var(--body);
+    font-weight: 800;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    background: var(--ink);
+    padding: 2px 8px;
+    text-transform: uppercase;
+}
+
 .lobby-player-right {
     display: flex;
     align-items: center;

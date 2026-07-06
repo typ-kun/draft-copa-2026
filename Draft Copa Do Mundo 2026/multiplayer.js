@@ -284,10 +284,12 @@ function mpIniciarLobby() {
 
     channel.subscribe(async (status) => {
         if (status === "SUBSCRIBED") {
+            const authEmail = typeof getAuthUser === "function" ? getAuthUser()?.email : null;
             await channel.track({
                 player_id: mpState.playerId,
                 player_name: localStorage.getItem(PRE_MENU_KEY) || "Anônimo",
                 user_id: (typeof getAuthUser === "function" ? getAuthUser()?.id : null) || null,
+                email: authEmail,
                 is_moderator: mpState.isModerator
             });
         }
@@ -356,10 +358,12 @@ function mpRenderizarLobby() {
     if (mpState.players.length === 0) {
         listEl.innerHTML = '<div class="lobby-empty">Nenhum jogador conectado</div>';
     } else {
+        const adminEmails = typeof ADMIN_EMAILS !== "undefined" ? ADMIN_EMAILS : [];
         listEl.innerHTML = mpState.players.map(p => `
             <div class="lobby-player">
                 <span>${p.player_name}</span>
                 ${p.is_moderator ? '<span class="lobby-player-moderator">🛡️ Moderador</span>' : ''}
+                ${adminEmails.includes(p.email) ? '<span class="lobby-player-admin">👑 ADMIN</span>' : ''}
                 <span class="lobby-player-right">
                     ${mpState.isModerator && !p.is_moderator ? `<button class="lobby-kick-btn" data-player-id="${p.player_id}" data-player-name="${p.player_name}" title="Kickar ${p.player_name}">✕</button>` : ''}
                     <span class="lobby-player-status">🟢 online</span>

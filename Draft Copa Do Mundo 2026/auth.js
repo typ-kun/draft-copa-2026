@@ -38,12 +38,18 @@ function initAuth() {
     });
 }
 
+const ADMIN_EMAILS = ["guilherme_marchese@hotmail.com"];
+
 function getAuthUser() {
     return authState.user;
 }
 
 function isAuthenticated() {
     return !!authState.user;
+}
+
+function isAdmin() {
+    return authState.user && ADMIN_EMAILS.includes(authState.user.email);
 }
 
 // ─── UI ──────────────────────────────────────────────────────────────────────
@@ -55,7 +61,8 @@ function atualizarStatusPreMenu() {
 
     if (authState.user) {
         const email = authState.user.email || "Logado";
-        statusEl.innerHTML = `✅ <strong>${email}</strong>`;
+        const adminBadge = isAdmin() ? ' 👑 ADMIN' : '';
+        statusEl.innerHTML = `✅ <strong>${email}</strong>${adminBadge ? ` <span style="color:var(--accent);font-weight:800;">${adminBadge}</span>` : ''}`;
         statusEl.style.display = "block";
         if (btnLabel) btnLabel.textContent = "Conta";
     } else if (authState.isGuest) {
