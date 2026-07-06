@@ -1,0 +1,111 @@
+🏆 DRAFT COPA DO MUNDO 2026
+
+────────────────────────────────────────
+  O QUE É ISSO?
+────────────────────────────────────────
+
+O Draft Copa do Mundo 2026 é um campeonato de futebol entre amigos
+que funciona em duas frentes:
+
+  1. Um site onde a gente organiza tudo — sorteio de seleções, draft
+     de jogadores, chaveamento do mata-mata.
+  2. O EA Sports FC 26 no PC, onde as partidas realmente acontecem.
+
+A ideia é simples: cada participante monta o próprio elenco escolhendo
+jogadores de QUALQUER nacionalidade. Quer colocar o Mbappé no Brasil?
+Pode. O Haaland na Argentina? Também. O que vale é montar o time mais
+forte possível e ganhar a Copa.
+
+────────────────────────────────────────
+  COMO FUNCIONA — PASSO A PASSO
+────────────────────────────────────────
+
+─── ETAPA 1: CONFIGURAÇÃO ───
+
+No site, o organizador define:
+  • Quantos participantes vão jogar (de 1 a 8).
+  • O formato do draft (Snake ou Circular).
+  • Quantos jogadores cada um vai escolher por elenco.
+  • Se a regra dos goleiros está ativa ou não.
+  • Em que fase o mata-mata começa.
+
+É aqui que a base do campeonato é montada.
+
+─── ETAPA 2: SORTEIO DAS SELEÇÕES ───
+
+Cada participante sorteia uma seleção da vida real (Brasil, Alemanha,
+Inglaterra, Japão, etc.). Você tem 10 segundos para escolher ou o
+sistema escolhe uma aleatória para você.
+
+A seleção sorteada define o país que você vai representar — mas NÃO
+limita quais jogadores você pode contratar.
+
+─── ETAPA 3: DRAFT DE JOGADORES ───
+
+Aqui é onde a estratégia entra. Em formato Snake Draft (o padrão):
+
+  Rodada 1: Jogador 1 → Jogador 2 → Jogador 3 → Jogador 4
+  Rodada 2: Jogador 4 → Jogador 3 → Jogador 2 → Jogador 1
+
+Cada participante escolhe um jogador por rodada. Você tem 15 segundos
+para decidir — se passar do tempo, o sistema escolhe um aleatório.
+
+O diferencial: você pode pegar qualquer jogador do banco de dados
+(~1237 jogadores convocados para a Copa 2026), independente da
+nacionalidade dele. É aqui que você monta um supertime.
+
+─── ETAPA 4: EXPORTAÇÃO ───
+
+Com os elencos definidos, o site gera um arquivo JSON com todos os
+jogadores selecionados e seus IDs do FC 26. Esse arquivo passa pelo
+conversor do projeto e se transforma em arquivos TXT que o jogo entende.
+
+Resumindo: o sistema mexe nos arquivos do FC 26 para trocar os jogadores
+das seleções pelos jogadores que você escolheu no draft.
+
+─── ETAPA 5: JOGAR NO FC 26 ───
+
+Com os arquivos gerados, você importa o elenco usando o
+Draft-Copa-Do-Mundo-SaveEditor. O resultado é um Squad File que você
+coloca na pasta do jogo.
+
+Agora é entrar no FC 26, carregar o squad e disputar as partidas contra
+os outros participantes — cada um com o time que montou.
+
+─── ETAPA 6: MATA-MATA ───
+
+Conforme os jogos acontecem, os resultados são registrados no
+chaveamento do site. O bracket vai da fase inicial até a grande final,
+mostrando quem avançou, os placares e o caminho até o título.
+
+────────────────────────────────────────
+  REGRAS PRINCIPAIS
+────────────────────────────────────────
+
+  • Jogadores por elenco: 26 (configurável).
+  • Regra dos goleiros: ativada — cada time precisa ter no mínimo
+    2 goleiros no elenco.
+  • Formato Snake Draft: a ordem inverte a cada rodada para
+    garantir equilíbrio nas escolhas.
+
+────────────────────────────────────────
+  O QUE VOCÊ PRECISA FAZER
+────────────────────────────────────────
+
+  1. Ter o EA Sports FC 26 instalado no PC.
+  2. Acessar o site do draft no horário combinado.
+  3. Escolher sua seleção e montar seu elenco nas rodadas do draft.
+  4. Aguardar a exportação e o organizador disponibilizar os arquivos.
+  5. Importar o Squad File no jogo.
+  6. Jogar suas partidas contra os adversários e informar os resultados.
+  7. Acompanhar o chaveamento e torcer para chegar na final.
+
+────────────────────────────────────────
+  LINKS
+────────────────────────────────────────
+
+  Site do Draft: [COLOCAR URL AQUI]
+  Repositório do Projeto: [OPCIONAL]
+
+────────────────────────────────────────
+Bom draft e boa sorte! Que o melhor time vença. 🏆

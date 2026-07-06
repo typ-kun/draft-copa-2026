@@ -1,0 +1,3 @@
+git add -A
+git commit -m "O que você mudou"
+git push
