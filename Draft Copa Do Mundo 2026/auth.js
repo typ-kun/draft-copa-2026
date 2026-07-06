@@ -260,7 +260,11 @@ async function handleGoogleLogin() {
     });
 
     if (error) {
-        showAuthError(translateAuthError(error.message));
+        if (error.message && error.message.includes("provider is not enabled")) {
+            showAuthError("Login Google nao configurado no Supabase. Use email/senha ou configure em Authentication > Providers.");
+        } else {
+            showAuthError(translateAuthError(error.message));
+        }
     }
     // Se não houve erro, o navegador redireciona para o Google
     // Ao voltar, o onAuthStateChange tratará
@@ -291,6 +295,17 @@ document.addEventListener("click", function (e) {
     }
     if (e.target.id === "btnContinuarConvidado" || e.target.closest("#btnContinuarConvidado")) {
         handleContinuarConvidado();
+        return;
+    }
+    if (e.target.id === "btnContaDCDM" || e.target.closest("#btnContaDCDM")) {
+        document.getElementById("preMenu").style.display = "none";
+        document.getElementById("authScreen").style.display = "block";
+        renderAuthUI();
+        return;
+    }
+    if (e.target.id === "btnVoltarDeAuth" || e.target.closest("#btnVoltarDeAuth")) {
+        document.getElementById("authScreen").style.display = "none";
+        document.getElementById("preMenu").style.display = "block";
         return;
     }
 });

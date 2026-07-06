@@ -25,6 +25,9 @@ Squads*
 *.log
 *.bak
 
+# Google OAuth secrets (NUNCA comitar)
+client_secret*.json
+
 # Arquivos de teste grandes
 *.bin
 tmp_*
