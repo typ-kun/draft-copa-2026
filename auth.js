@@ -6,7 +6,8 @@ let authState = {
     user: null,
     session: null,
     loading: true,
-    isGuest: false
+    isGuest: false,
+    userLevel: null
 };
 
 function initAuth() {
@@ -21,13 +22,20 @@ function initAuth() {
         authState.session = session;
         authState.user = session?.user ?? null;
         authState.loading = false;
-        renderAuthUI();
+        if (authState.user) fetchUserLevel(authState.user.id).then(() => renderAuthUI());
+        else renderAuthUI();
     });
 
     supabase.auth.onAuthStateChange((event, session) => {
         authState.session = session;
         authState.user = session?.user ?? null;
-        renderAuthUI();
+        authState.userLevel = null;
+
+        if (event === "SIGNED_IN" && session?.user) {
+            fetchUserLevel(session.user.id).then(() => renderAuthUI());
+        } else {
+            renderAuthUI();
+        }
 
         if (event === "SIGNED_OUT") {
             authState.isGuest = false;
@@ -56,8 +64,22 @@ function isAdmin() {
 function getUserLevel() {
     if (!authState.user) return authState.isGuest ? "guest" : null;
     if (ADMIN_EMAILS.includes(authState.user.email)) return "admin";
+    if (authState.userLevel) return authState.userLevel;
     if (PREMIUM_EMAILS.includes(authState.user.email)) return "premium";
     return "common";
+}
+
+async function fetchUserLevel(userId) {
+    const supabase = initSupabase();
+    if (!supabase || !userId) return;
+    const { data } = await supabase
+        .from("profiles")
+        .select("level")
+        .eq("id", userId)
+        .single();
+    if (data?.level) {
+        authState.userLevel = data.level;
+    }
 }
 
 function canPlayOffline() {
@@ -401,22 +423,39 @@ async function handleGoogleLogin() {
     setAuthLoading(true);
 
     const supabase = initSupabase();
-    const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-            redirectTo: window.location.origin + window.location.pathname
-        }
-    });
-
-    if (error) {
-        if (error.message && error.message.includes("provider is not enabled")) {
-            showAuthError("Login Google nao configurado no Supabase. Use email/senha ou configure em Authentication > Providers.");
-        } else {
-            showAuthError(translateAuthError(error.message));
-        }
+    if (!supabase) {
+        showAuthError("Supabase nao configurado.");
+        setAuthLoading(false);
+        return;
     }
-    // Se não houve erro, o navegador redireciona para o Google
-    // Ao voltar, o onAuthStateChange tratará
+
+    try {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: window.location.origin + window.location.pathname,
+                queryParams: {
+                    access_type: "offline",
+                    prompt: "consent"
+                }
+            }
+        });
+
+        if (error) {
+            console.error("[Google OAuth]", error);
+            if (error.message && error.message.includes("provider is not enabled")) {
+                showAuthError("Login Google nao configurado no Supabase. Use email/senha ou configure em Authentication > Providers.");
+            } else {
+                showAuthError("Erro: " + (error.message || "desconhecido"));
+            }
+            setAuthLoading(false);
+        }
+        // Se não houve erro, o navegador redireciona para o Google
+    } catch (err) {
+        console.error("[Google OAuth exception]", err);
+        showAuthError("Erro inesperado: " + (err.message || "desconhecido"));
+        setAuthLoading(false);
+    }
 }
 
 // ─── EVENTOS ─────────────────────────────────────────────────────────────────
