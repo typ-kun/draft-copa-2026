@@ -60,9 +60,7 @@ function atualizarStatusPreMenu() {
     if (!statusEl) return;
 
     if (authState.user) {
-        const email = authState.user.email || "Logado";
-        const adminBadge = isAdmin() ? ' 👑 ADMIN' : '';
-        statusEl.innerHTML = `✅ <strong>${email}</strong>${adminBadge ? ` <span style="color:var(--accent);font-weight:800;">${adminBadge}</span>` : ''}`;
+        statusEl.innerHTML = `✅ <strong>Logado</strong>`;
         statusEl.style.display = "block";
         if (btnLabel) btnLabel.textContent = "Conta";
     } else if (authState.isGuest) {
@@ -106,6 +104,11 @@ function renderAuthUI() {
         loggedIn.style.display = "block";
         if (userEmail) {
             userEmail.textContent = authState.user.email || authState.user.user_metadata?.full_name || "Logado";
+        }
+        const privEl = document.getElementById("authPrivilege");
+        if (privEl) {
+            const nivel = isAdmin() ? "👑 ADMIN" : "🎮 Jogador";
+            privEl.textContent = "Nível: " + nivel;
         }
     } else {
         loggedOut.style.display = "block";
