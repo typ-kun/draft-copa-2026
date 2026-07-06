@@ -230,8 +230,7 @@ async function handleLogin() {
     }
 
     document.getElementById("authPassword").value = "";
-    showAuthSuccess("✅ Login realizado!");
-    renderAuthUI();
+    // onAuthStateChange já chama renderAuthUI automaticamente
 }
 
 async function handleLogout() {
