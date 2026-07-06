@@ -3168,7 +3168,12 @@ section.teams {
 /* MULTIPLAYER - SALAS    */
 /* ====================== */
 
-.room-wrap,
+.room-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px 16px 16px;
+}
+
 .lobby-wrap {
     max-width: 820px;
     margin: 0 auto;
