@@ -1324,13 +1324,13 @@ section.teams {
     justify-content: space-between;
     padding: 10px 12px;
     margin-bottom: 6px;
-    background: var(--surface-2);
+    background: var(--surface);
     border-radius: 8px;
     transition: background .15s;
     border: 1px solid var(--line);
 }
 .open-room-item:hover {
-    background: var(--card-bg);
+    background: var(--surface-2);
 }
 [data-theme="dark"] .open-room-item {
     background: #2a2a2a;
