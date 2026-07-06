@@ -75,9 +75,8 @@ function renderAuthUI() {
     const loggedOut = document.getElementById("authLoggedOut");
     const loggedIn = document.getElementById("authLoggedIn");
     const userEmail = document.getElementById("authUserEmail");
-    const authSection = document.getElementById("authSection");
     const gameMenu = document.getElementById("gameMenuArea");
-    if (!loggedOut || !loggedIn || !authSection) return;
+    if (!loggedOut || !loggedIn) return;
 
     // Esconder error/success ao renderizar
     const errEl = document.getElementById("authError");
@@ -89,12 +88,9 @@ function renderAuthUI() {
     if (authState.loading) {
         loggedOut.style.display = "none";
         loggedIn.style.display = "none";
-        authSection.style.display = "none";
         if (gameMenu) gameMenu.style.display = "none";
         return;
     }
-
-    authSection.style.display = "block";
 
     const menuLiberado = authState.user || authState.isGuest;
 
