@@ -1415,6 +1415,14 @@ function gerarPool() {
     } else if (config.iconsHeroesMode === "both") {
         especiais = [...iconsHeroesBase];
     }
+    // Garantir que nao haja duplicatas nos especiais (pelo nome)
+    const vistos = new Set();
+    especiais = especiais.filter(j => {
+        const chave = j.nome.toLowerCase().trim();
+        if (vistos.has(chave)) return false;
+        vistos.add(chave);
+        return true;
+    });
 
     const gksDoJogador =
         contarGoleiros(
