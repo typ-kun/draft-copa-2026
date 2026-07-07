@@ -39,7 +39,7 @@ function initAuth() {
 
         if (event === "SIGNED_OUT") {
             authState.isGuest = false;
-            removerLevelUpSubscription();
+            pararLevelUpPolling();
             if (typeof mpSairSala === "function" && modoAtual !== MODO.OFFLINE) {
                 mpSairSala();
             }
@@ -60,7 +60,8 @@ function isAuthenticated() {
 
 // ─── LEVEL UP NOTIFICATION ───────────────────────────────────────────────────
 
-let levelUpChannel = null;
+let levelUpPollingId = null;
+let ultimoNivelConhecido = null;
 
 function playLevelUpSound() {
     try {
@@ -70,43 +71,45 @@ function playLevelUpSound() {
     } catch (_) {}
 }
 
-function inscreverLevelUp(userId) {
+function iniciarLevelUpPolling(userId) {
+    pararLevelUpPolling();
+
     const supabase = initSupabase();
     if (!supabase || !userId) return;
 
-    if (levelUpChannel) {
-        supabase.removeChannel(levelUpChannel);
-        levelUpChannel = null;
-    }
+    // Armazenar nivel atual como referencia
+    ultimoNivelConhecido = authState.userLevel;
 
-    levelUpChannel = supabase
-        .channel("profile-level-up")
-        .on("postgres_changes",
-            {
-                event: "UPDATE",
-                schema: "public",
-                table: "profiles",
-                filter: `id=eq.${userId}`
-            },
-            (payload) => {
-                const nivelAnterior = payload.old?.level;
-                const novoNivel = payload.new?.level;
-                if (!novoNivel || !nivelAnterior || novoNivel === nivelAnterior) return;
-                const ordem = { common: 0, premium: 1, admin: 2 };
-                if ((ordem[novoNivel] || 0) > (ordem[nivelAnterior] || 0)) {
-                    mostrarLevelUpNotification(novoNivel);
-                }
-            }
-        )
-        .subscribe();
+    levelUpPollingId = setInterval(async () => {
+        const { data } = await supabase
+            .from("profiles")
+            .select("level")
+            .eq("id", userId)
+            .single();
+        if (!data?.level) return;
+
+        const ordem = { common: 0, premium: 1, admin: 2 };
+        const nivelAtual = data.level;
+        if (
+            ultimoNivelConhecido &&
+            nivelAtual !== ultimoNivelConhecido &&
+            (ordem[nivelAtual] || 0) > (ordem[ultimoNivelConhecido] || 0)
+        ) {
+            ultimoNivelConhecido = nivelAtual;
+            authState.userLevel = nivelAtual;
+            mostrarLevelUpNotification(nivelAtual);
+        } else {
+            ultimoNivelConhecido = nivelAtual;
+        }
+    }, 8000);
 }
 
-function removerLevelUpSubscription() {
-    if (levelUpChannel) {
-        const supabase = initSupabase();
-        if (supabase) supabase.removeChannel(levelUpChannel);
-        levelUpChannel = null;
+function pararLevelUpPolling() {
+    if (levelUpPollingId) {
+        clearInterval(levelUpPollingId);
+        levelUpPollingId = null;
     }
+    ultimoNivelConhecido = null;
 }
 
 function mostrarLevelUpNotification(novoNivel) {
@@ -175,7 +178,7 @@ async function fetchUserLevel(userId) {
     if (data?.level) {
         authState.userLevel = data.level;
     }
-    inscreverLevelUp(userId);
+    iniciarLevelUpPolling(userId);
 }
 
 function canPlayOffline() {
