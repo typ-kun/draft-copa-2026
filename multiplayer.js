@@ -355,7 +355,44 @@ function mpSairSala() {
 
 // ─── LOBBY UI ────────────────────────────────────────────────────────────────
 
+let _mpUltimaBuscaSettings = 0;
+
+async function mpBuscarSettings() {
+    const supabase = initSupabase();
+    if (!supabase || !mpState.roomId) return;
+    const agora = Date.now();
+    if (agora - _mpUltimaBuscaSettings < 2000) return; // evitar spam
+    _mpUltimaBuscaSettings = agora;
+    const { data } = await supabase
+        .from("rooms")
+        .select("settings, status")
+        .eq("id", mpState.roomId)
+        .single();
+    if (data) {
+        mpState.settings = data.settings || {};
+        mpState.roomStatus = data.status;
+    }
+}
+
 function mpRenderizarLobby() {
+    // Buscar settings frescas do banco para nao-moderadores
+    if (!mpState.isModerator && mpState.roomId) {
+        mpBuscarSettings().then(() => {
+            // Re-renderiza o painel de config apos buscar
+            mpRenderizarConfigPanel();
+            // Atualizar texto de aguardo
+            const waitText = document.querySelector(".lobby-waiting");
+            if (waitText) {
+                const temConfig = mpState.settings && Object.keys(mpState.settings).length > 0;
+                if (temConfig && mpState.roomStatus !== "waiting") {
+                    waitText.textContent = "O moderador já configurou o draft. Aguarde o início...";
+                } else {
+                    waitText.textContent = "Aguardando o moderador configurar o draft...";
+                }
+            }
+        });
+    }
+
     // Código da sala
     const codeEl = document.getElementById("lobbyCode");
     if (codeEl && mpState.roomCode) {
