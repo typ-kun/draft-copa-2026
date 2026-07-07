@@ -72,7 +72,11 @@ function playLevelUpSound() {
 
 function iniciarLevelUpMonitor(userId) {
     const supabase = initSupabase();
-    if (!supabase || !userId) return;
+    if (!supabase || !userId) {
+        console.log("[LevelUp] initSupabase falhou ou sem userId", {supabase, userId});
+        return;
+    }
+    console.log("[LevelUp] Configurando monitor para userId:", userId);
 
     if (levelUpChannel) {
         supabase.removeChannel(levelUpChannel);
@@ -89,17 +93,22 @@ function iniciarLevelUpMonitor(userId) {
                 filter: `id=eq.${userId}`
             },
             (payload) => {
+                console.log("[LevelUp] Mudanca detectada!", payload);
                 const nivelAnterior = payload.old?.level;
                 const novoNivel = payload.new?.level;
+                console.log("[LevelUp]", {nivelAnterior, novoNivel});
                 if (!novoNivel || !nivelAnterior || novoNivel === nivelAnterior) return;
                 const ordem = { common: 0, premium: 1, admin: 2 };
                 if ((ordem[novoNivel] || 0) > (ordem[nivelAnterior] || 0)) {
+                    console.log("[LevelUp] LEVEL UP! ->", novoNivel);
                     authState.userLevel = novoNivel;
                     mostrarLevelUpNotification(novoNivel);
                 }
             }
         )
-        .subscribe();
+        .subscribe((status) => {
+            console.log("[LevelUp] Status da subscription:", status);
+        });
 }
 
 function pararLevelUpMonitor() {
@@ -485,12 +494,15 @@ async function mpAlterarNivel(profileId, novoNivel) {
     const supabase = initSupabase();
     if (!supabase) return;
 
-    const { error } = await supabase
+    console.log("[LevelUp] Admin alterando nivel do usuario", {profileId, novoNivel});
+
+    const { data, error } = await supabase
         .from("profiles")
         .update({ level: novoNivel })
-        .eq("id", profileId);
+        .eq("id", profileId)
+        .select();
 
-    if (error) {
+    console.log("[LevelUp] Resultado update:", {data, error});
         toast("❌ Erro ao alterar nível: " + error.message, 3000);
     } else {
         toast("✅ Nível alterado!", 2000);
