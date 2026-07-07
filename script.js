@@ -1549,7 +1549,11 @@ function gerarPool() {
             especiais = especiais.filter(p => p !== jogador);
         }
 
-        poolAtual.push(jogador);
+        // Garantir que nao haja nomes repetidos na pool
+        const nomeJaNaPool = poolAtual.some(p => p.nome === jogador.nome);
+        if (!nomeJaNaPool) {
+            poolAtual.push(jogador);
+        }
 
     }
 
