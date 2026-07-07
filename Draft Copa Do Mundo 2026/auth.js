@@ -46,7 +46,7 @@ function initAuth() {
 
         if (event === "SIGNED_OUT") {
             authState.isGuest = false;
-            pararLevelUpMonitor();
+            pararMonitorNivel();
             if (typeof mpSairSala === "function" && modoAtual !== MODO.OFFLINE) {
                 mpSairSala();
             }
@@ -65,11 +65,11 @@ function isAuthenticated() {
     return !!authState.user;
 }
 
-// ─── LEVEL UP NOTIFICATION ───────────────────────────────────────────────────
+// ─── MONITOR DE NÍVEL (alterações no perfil) ──────────────────────────────
 
-let levelUpChannel = null;
+let nivelChannel = null;
 
-function playLevelUpSound() {
+function tocarSomNivel() {
     try {
         const audio = new Audio("levelup.mp3");
         audio.volume = 0.7;
@@ -77,21 +77,17 @@ function playLevelUpSound() {
     } catch (_) {}
 }
 
-function iniciarLevelUpMonitor(userId) {
+function iniciarMonitorNivel(userId) {
     const supabase = initSupabase();
-    if (!supabase || !userId) {
-        console.log("[LevelUp] initSupabase falhou ou sem userId", {supabase, userId});
-        return;
-    }
-    console.log("[LevelUp] Configurando monitor para userId:", userId);
+    if (!supabase || !userId) return;
 
-    if (levelUpChannel) {
-        supabase.removeChannel(levelUpChannel);
-        levelUpChannel = null;
+    if (nivelChannel) {
+        supabase.removeChannel(nivelChannel);
+        nivelChannel = null;
     }
 
-    levelUpChannel = supabase
-        .channel("profile-level-up")
+    nivelChannel = supabase
+        .channel("profile-nivel")
         .on("postgres_changes",
             {
                 event: "UPDATE",
@@ -100,65 +96,62 @@ function iniciarLevelUpMonitor(userId) {
                 filter: `id=eq.${userId}`
             },
             (payload) => {
-                console.log("[LevelUp] Mudanca detectada!", payload);
                 const novoNivel = payload.new?.level;
                 const nivelAnterior = payload.old?.level || authState.userLevel;
-                console.log("[LevelUp]", {nivelAnterior, novoNivel, userLevel: authState.userLevel});
                 if (!novoNivel || novoNivel === nivelAnterior) return;
-                const ordem = { common: 0, premium: 1, admin: 2 };
-                if ((ordem[novoNivel] || 0) > (ordem[nivelAnterior] || 0)) {
-                    console.log("[LevelUp] LEVEL UP! ->", novoNivel);
-                    authState.userLevel = novoNivel;
-                    mostrarLevelUpNotification(novoNivel);
-                }
+
+                authState.userLevel = novoNivel;
+                mostrarAlteracaoNivel(novoNivel);
             }
         )
-        .subscribe((status) => {
-            console.log("[LevelUp] Status da subscription:", status);
-        });
+        .subscribe();
 }
 
-function pararLevelUpMonitor() {
-    if (levelUpChannel) {
+function pararMonitorNivel() {
+    if (nivelChannel) {
         const supabase = initSupabase();
-        if (supabase) supabase.removeChannel(levelUpChannel);
-        levelUpChannel = null;
+        if (supabase) supabase.removeChannel(nivelChannel);
+        nivelChannel = null;
     }
 }
 
-function mostrarLevelUpNotification(novoNivel) {
-    playLevelUpSound();
+function mostrarAlteracaoNivel(novoNivel) {
+    tocarSomNivel();
 
     const infos = {
-        premium: { nome: "Premium", icon: "⭐", cor: "#f1c40f" },
-        admin: { nome: "Admin", icon: "👑", cor: "#e74c3c" }
+        common:  { nome: "Comum",   icon: "🎮", cor: "var(--accent)" },
+        premium: { nome: "Premium", icon: "⭐", cor: "var(--accent-2)" },
+        admin:   { nome: "Admin",   icon: "👑", cor: "var(--accent)" }
     };
-    const info = infos[novoNivel] || infos.premium;
+    const info = infos[novoNivel] || infos.common;
 
     const overlay = document.createElement("div");
-    overlay.className = "level-up-overlay";
-    overlay.id = "levelUpOverlay";
+    overlay.className = "modal-overlay";
+    overlay.id = "nivelOverlay";
     overlay.addEventListener("click", (e) => {
-        if (e.target === overlay) fecharLevelUpNotification();
+        if (e.target === overlay) fecharAlteracaoNivel();
     });
 
     overlay.innerHTML = `
-        <div class="modal-card" style="border-color:${info.cor};text-align:center;">
-            <div class="modal-head" style="justify-content:center;padding-bottom:0;">
-                <span class="modal-title level-up-cor" style="--cor:${info.cor};">⬆️ Privilégios alterados!</span>
-                <button class="modal-close" onclick="fecharLevelUpNotification()" style="position:absolute;top:12px;right:12px;">×</button>
+        <div class="modal-card" style="text-align:center;">
+            <div class="modal-head" style="justify-content:center;">
+                <span class="modal-eyebrow">Conta</span>
+                <span class="modal-title">
+                    Nível alterado
+                </span>
+                <button class="modal-close" onclick="fecharAlteracaoNivel()">×</button>
             </div>
-            <div class="modal-body">
-                <span class="level-up-icon">${info.icon}</span>
-                <p class="modal-msg" style="font-size:18px;font-weight:700;">
-                    Parabéns! Você agora é
-                    <strong class="level-up-cor" style="--cor:${info.cor};display:block;font-size:24px;margin-top:4px;">
-                        ${info.nome}
-                    </strong>
+            <div class="modal-body" style="padding-bottom:18px;">
+                <span class="nivel-icon">${info.icon}</span>
+                <p class="modal-msg" style="font-size:16px;">
+                    Nível da conta alterado para:
                 </p>
+                <strong class="nivel-nome" style="color:${info.cor};">
+                    ${info.nome}
+                </strong>
             </div>
-            <div class="modal-footer" style="justify-content:center;border:none;">
-                <button class="btn-primary" style="background:${info.cor};color:#000;" onclick="fecharLevelUpNotification()">
+            <div class="modal-footer" style="justify-content:center;">
+                <button class="btn-primary" onclick="fecharAlteracaoNivel()">
                     Fechar
                 </button>
             </div>
@@ -166,14 +159,14 @@ function mostrarLevelUpNotification(novoNivel) {
     `;
 
     document.body.appendChild(overlay);
-    setTimeout(() => fecharLevelUpNotification(), 6000);
+    setTimeout(() => fecharAlteracaoNivel(), 5000);
 }
 
-function fecharLevelUpNotification() {
-    const el = document.getElementById("levelUpOverlay");
+function fecharAlteracaoNivel() {
+    const el = document.getElementById("nivelOverlay");
     if (el) {
-        el.style.animation = "fadeOut 0.3s ease";
-        setTimeout(() => el.remove(), 300);
+        el.style.animation = "fadeOut 0.2s ease";
+        setTimeout(() => el.remove(), 200);
     }
 }
 
@@ -200,7 +193,7 @@ async function fetchUserLevel(userId) {
     if (data?.level) {
         authState.userLevel = data.level;
     }
-    iniciarLevelUpMonitor(userId);
+    iniciarMonitorNivel(userId);
 }
 
 function canPlayOffline() {
