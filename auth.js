@@ -249,7 +249,8 @@ async function handleRegister() {
     });
 
     if (error) {
-        showAuthError(translateAuthError(error.message));
+        const msg = error?.message || error?.error_description || JSON.stringify(error);
+        showAuthError(translateAuthError(msg));
         return;
     }
 
@@ -275,7 +276,8 @@ async function handleLogin() {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-        showAuthError(translateAuthError(error.message));
+        const msg = error?.message || error?.error_description || JSON.stringify(error);
+        showAuthError(translateAuthError(msg));
         return;
     }
 
@@ -520,7 +522,8 @@ async function handleForgotPassword() {
     setAuthLoading(false);
 
     if (error) {
-        showAuthError(translateAuthError(error.message));
+        const msg = error?.message || error?.error_description || JSON.stringify(error);
+        showAuthError(translateAuthError(msg));
         return;
     }
 
