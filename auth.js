@@ -238,6 +238,12 @@ async function handleRegister() {
     setAuthLoading(true);
 
     const supabase = initSupabase();
+    if (!supabase) {
+        showAuthError("Erro de conexao. Tente novamente.");
+        setAuthLoading(false);
+        return;
+    }
+
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -249,7 +255,8 @@ async function handleRegister() {
     });
 
     if (error) {
-        const msg = error?.message || error?.error_description || JSON.stringify(error);
+        console.error("[Register error]", error);
+        const msg = typeof error === "string" ? error : error?.message || error?.error_description || "Erro desconhecido no cadastro.";
         showAuthError(translateAuthError(msg));
         return;
     }
