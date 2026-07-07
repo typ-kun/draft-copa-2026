@@ -477,6 +477,58 @@ async function handleGoogleLogin() {
     }
 }
 
+// ─── RECUPERACAO DE SENHA ────────────────────────────────────────────────────
+
+function authMostrarFormRecuperacao() {
+    document.getElementById("authLoginForm").style.display = "none";
+    document.getElementById("authResetPasswordForm").style.display = "block";
+    document.getElementById("authResetEmail").value = document.getElementById("authEmail").value;
+    const errEl = document.getElementById("authError");
+    const sucEl = document.getElementById("authSuccess");
+    if (errEl) errEl.style.display = "none";
+    if (sucEl) sucEl.style.display = "none";
+}
+
+function authVoltarAoLogin() {
+    document.getElementById("authResetPasswordForm").style.display = "none";
+    document.getElementById("authLoginForm").style.display = "block";
+    const errEl = document.getElementById("authError");
+    const sucEl = document.getElementById("authSuccess");
+    if (errEl) errEl.style.display = "none";
+    if (sucEl) sucEl.style.display = "none";
+}
+
+async function handleForgotPassword() {
+    const email = document.getElementById("authResetEmail")?.value.trim();
+
+    if (!email || !isValidEmail(email)) {
+        showAuthError("Digite um email valido.");
+        return;
+    }
+
+    setAuthLoading(true);
+
+    const supabase = initSupabase();
+    if (!supabase) {
+        setAuthLoading(false);
+        return;
+    }
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + window.location.pathname
+    });
+
+    setAuthLoading(false);
+
+    if (error) {
+        showAuthError(translateAuthError(error.message));
+        return;
+    }
+
+    authVoltarAoLogin();
+    showAuthSuccess("Email enviado! Verifique sua caixa de entrada (e a pasta de spam).");
+}
+
 // ─── EVENTOS ─────────────────────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -498,6 +550,20 @@ document.addEventListener("click", function (e) {
     }
     if (e.target.id === "btnGoogleLogin" || e.target.closest("#btnGoogleLogin")) {
         handleGoogleLogin();
+        return;
+    }
+    if (e.target.id === "authForgotPassword" || e.target.closest("#authForgotPassword")) {
+        e.preventDefault();
+        authMostrarFormRecuperacao();
+        return;
+    }
+    if (e.target.id === "authBackToLogin" || e.target.closest("#authBackToLogin")) {
+        e.preventDefault();
+        authVoltarAoLogin();
+        return;
+    }
+    if (e.target.id === "btnSendReset" || e.target.closest("#btnSendReset")) {
+        handleForgotPassword();
         return;
     }
     if (e.target.id === "btnContinuarConvidado" || e.target.closest("#btnContinuarConvidado")) {
