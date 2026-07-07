@@ -39,7 +39,7 @@ function initAuth() {
 
         if (event === "SIGNED_OUT") {
             authState.isGuest = false;
-            pararLevelUpPolling();
+            pararLevelUpMonitor();
             if (typeof mpSairSala === "function" && modoAtual !== MODO.OFFLINE) {
                 mpSairSala();
             }
@@ -60,8 +60,7 @@ function isAuthenticated() {
 
 // ─── LEVEL UP NOTIFICATION ───────────────────────────────────────────────────
 
-let levelUpPollingId = null;
-let ultimoNivelConhecido = null;
+let levelUpChannel = null;
 
 function playLevelUpSound() {
     try {
@@ -71,45 +70,44 @@ function playLevelUpSound() {
     } catch (_) {}
 }
 
-function iniciarLevelUpPolling(userId) {
-    pararLevelUpPolling();
-
+function iniciarLevelUpMonitor(userId) {
     const supabase = initSupabase();
     if (!supabase || !userId) return;
 
-    // Armazenar nivel atual como referencia
-    ultimoNivelConhecido = authState.userLevel;
+    if (levelUpChannel) {
+        supabase.removeChannel(levelUpChannel);
+        levelUpChannel = null;
+    }
 
-    levelUpPollingId = setInterval(async () => {
-        const { data } = await supabase
-            .from("profiles")
-            .select("level")
-            .eq("id", userId)
-            .single();
-        if (!data?.level) return;
-
-        const ordem = { common: 0, premium: 1, admin: 2 };
-        const nivelAtual = data.level;
-        if (
-            ultimoNivelConhecido &&
-            nivelAtual !== ultimoNivelConhecido &&
-            (ordem[nivelAtual] || 0) > (ordem[ultimoNivelConhecido] || 0)
-        ) {
-            ultimoNivelConhecido = nivelAtual;
-            authState.userLevel = nivelAtual;
-            mostrarLevelUpNotification(nivelAtual);
-        } else {
-            ultimoNivelConhecido = nivelAtual;
-        }
-    }, 8000);
+    levelUpChannel = supabase
+        .channel("profile-level-up")
+        .on("postgres_changes",
+            {
+                event: "UPDATE",
+                schema: "public",
+                table: "profiles",
+                filter: `id=eq.${userId}`
+            },
+            (payload) => {
+                const nivelAnterior = payload.old?.level;
+                const novoNivel = payload.new?.level;
+                if (!novoNivel || !nivelAnterior || novoNivel === nivelAnterior) return;
+                const ordem = { common: 0, premium: 1, admin: 2 };
+                if ((ordem[novoNivel] || 0) > (ordem[nivelAnterior] || 0)) {
+                    authState.userLevel = novoNivel;
+                    mostrarLevelUpNotification(novoNivel);
+                }
+            }
+        )
+        .subscribe();
 }
 
-function pararLevelUpPolling() {
-    if (levelUpPollingId) {
-        clearInterval(levelUpPollingId);
-        levelUpPollingId = null;
+function pararLevelUpMonitor() {
+    if (levelUpChannel) {
+        const supabase = initSupabase();
+        if (supabase) supabase.removeChannel(levelUpChannel);
+        levelUpChannel = null;
     }
-    ultimoNivelConhecido = null;
 }
 
 function mostrarLevelUpNotification(novoNivel) {
@@ -178,7 +176,7 @@ async function fetchUserLevel(userId) {
     if (data?.level) {
         authState.userLevel = data.level;
     }
-    iniciarLevelUpPolling(userId);
+    iniciarLevelUpMonitor(userId);
 }
 
 function canPlayOffline() {
