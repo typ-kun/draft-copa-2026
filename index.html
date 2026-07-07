@@ -94,11 +94,10 @@
                     <div class="room-section">
 
                         <!-- Tela normal: login/registro -->
-                        <div id="authLoginForm" style="display:block;">
+                        <div id="authLoginForm">
                             <label class="pre-menu-label">ENTRAR / REGISTRAR</label>
                             <input type="email" id="authEmail" class="pre-menu-input" placeholder="seu@email.com" autocomplete="email" style="margin-bottom:6px;">
-                            <input type="password" id="authPassword" class="pre-menu-input" placeholder="Senha" autocomplete="current-password" style="margin-bottom:0;">
-                            <button id="authForgotPassword" class="pre-menu-btn pre-menu-btn-secondary" style="margin-top:2px;margin-bottom:4px;font-size:11px;padding:4px 8px;width:100%;display:block;text-align:right;">Esqueci minha senha</button>
+                            <input type="password" id="authPassword" class="pre-menu-input" placeholder="Senha" autocomplete="current-password" style="margin-bottom:6px;">
                             <div style="display:flex; gap:6px; margin-bottom:4px;">
                                 <button id="btnLogin" class="pre-menu-btn pre-menu-btn-secondary" style="flex:1;font-size:14px;padding:10px;">Entrar</button>
                                 <button id="btnRegister" class="pre-menu-btn pre-menu-btn-secondary" style="flex:1;font-size:14px;padding:10px;">Registrar</button>
@@ -106,6 +105,7 @@
                             <div style="text-align:center;margin-bottom:4px;">
                                 <button id="btnGoogleLogin" style="background:none;border:2px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:2px;cursor:pointer;font-size:13px;font-weight:600;transition:color .15s,border-color .15s;width:100%;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">🔵 Entrar com Google</button>
                             </div>
+                            <span id="authForgotPassword" style="display:inline-block;color:var(--accent);font-size:11px;font-weight:600;cursor:pointer;text-align:center;width:100%;margin-top:2px;">Esqueci minha senha</span>
                         </div>
 
                         <!-- Tela de recuperacao de senha -->
