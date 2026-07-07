@@ -1,6 +1,0 @@
-{
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "draft-copa-2026",
-  "compatibility_date": "2026-07-07",
-  "pages_build_output_dir": "."
-}
