@@ -101,10 +101,10 @@ function iniciarLevelUpMonitor(userId) {
             },
             (payload) => {
                 console.log("[LevelUp] Mudanca detectada!", payload);
-                const nivelAnterior = payload.old?.level;
                 const novoNivel = payload.new?.level;
-                console.log("[LevelUp]", {nivelAnterior, novoNivel});
-                if (!novoNivel || !nivelAnterior || novoNivel === nivelAnterior) return;
+                const nivelAnterior = payload.old?.level || authState.userLevel;
+                console.log("[LevelUp]", {nivelAnterior, novoNivel, userLevel: authState.userLevel});
+                if (!novoNivel || novoNivel === nivelAnterior) return;
                 const ordem = { common: 0, premium: 1, admin: 2 };
                 if ((ordem[novoNivel] || 0) > (ordem[nivelAnterior] || 0)) {
                     console.log("[LevelUp] LEVEL UP! ->", novoNivel);
@@ -510,6 +510,7 @@ async function mpAlterarNivel(profileId, novoNivel) {
         .select();
 
     console.log("[LevelUp] Resultado update:", {data, error});
+    if (error) {
         toast("❌ Erro ao alterar nível: " + error.message, 3000);
     } else {
         toast("✅ Nível alterado!", 2000);
