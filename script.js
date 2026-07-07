@@ -1416,12 +1416,14 @@ function gerarPool() {
         especiais = [...iconsHeroesBase];
     }
     // Garantir que nao haja duplicatas nos especiais (pelo nome)
+    // E que o jogador ainda nao foi pickado (so existe em jogadoresDisponiveis)
     const vistos = new Set();
     especiais = especiais.filter(j => {
         const chave = j.nome.toLowerCase().trim();
         if (vistos.has(chave)) return false;
         vistos.add(chave);
-        return true;
+        // So incluir se o jogador ainda estiver disponivel (nao foi pickado)
+        return jogadoresDisponiveis.some(p => p.nome === j.nome && p.pais === j.pais);
     });
 
     const gksDoJogador =
