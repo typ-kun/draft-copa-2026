@@ -320,30 +320,12 @@ function atualizarBotaoAdmin() {
 }
 
 function mpAbrirAdminPanel() {
-    // Esconde a tela atual (preMenu, roomMenu, lobby, etc.)
-    const telas = ["preMenu", "roomMenu", "lobby", "setup", "countrySelection", "draftArea", "resultsArea", "mataMataArea", "draftConfig"];
-    telas.forEach(id => {
-        const el = document.getElementById(id);
-        if (el && el.style.display !== "none") {
-            el.dataset.adminAnterior = el.style.display;
-            el.style.display = "none";
-        }
-    });
     document.getElementById("adminPanel").style.display = "block";
     mpListarProfiles();
 }
 
 function mpFecharAdminPanel() {
     document.getElementById("adminPanel").style.display = "none";
-    // Restaura a tela que estava visível antes
-    const telas = ["preMenu", "roomMenu", "lobby", "setup", "countrySelection", "draftArea", "resultsArea", "mataMataArea", "draftConfig"];
-    telas.forEach(id => {
-        const el = document.getElementById(id);
-        if (el && el.dataset.adminAnterior !== undefined) {
-            el.style.display = el.dataset.adminAnterior || "none";
-            delete el.dataset.adminAnterior;
-        }
-    });
 }
 
 async function mpListarProfiles() {
@@ -538,6 +520,14 @@ document.addEventListener("click", function (e) {
         return;
     }
     if (e.target.id === "btnVoltarDeAdmin" || e.target.closest("#btnVoltarDeAdmin")) {
+        mpFecharAdminPanel();
+        return;
+    }
+    if (e.target.id === "btnFecharAdminDrawer" || e.target.closest("#btnFecharAdminDrawer")) {
+        mpFecharAdminPanel();
+        return;
+    }
+    if (e.target.id === "adminPanelBackdrop") {
         mpFecharAdminPanel();
         return;
     }

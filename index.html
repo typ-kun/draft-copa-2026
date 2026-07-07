@@ -131,35 +131,24 @@
 
     </div>
 
-    <!-- ADMIN PANEL -->
+    <!-- ADMIN PANEL (overlay lateral) -->
     <div id="adminPanel" style="display:none;">
-
-        <div class="room-wrap">
-
-            <div class="lobby-header">
-                <h1>🛡️ Painel Admin</h1>
+        <div id="adminPanelBackdrop" class="admin-backdrop"></div>
+        <div class="admin-drawer">
+            <div class="admin-drawer-header">
+                <h2>🛡️ Painel Admin</h2>
+                <button id="btnFecharAdminDrawer" class="admin-drawer-close">&times;</button>
             </div>
-
-            <div class="lobby-card">
-
-                <div class="room-section" style="padding:0;">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                        <span style="font-size:14px;color:var(--muted);font-family:var(--body);font-weight:600;">Usuários cadastrados</span>
-                        <button id="btnRefreshProfiles" style="background:var(--accent);color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">⟳ Atualizar</button>
-                    </div>
-                    <div id="adminProfilesList" style="max-height:400px;overflow-y:auto;">
-                        <div class="open-rooms-empty">Clique em "Atualizar" para carregar.</div>
-                    </div>
+            <div class="admin-drawer-body">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                    <span style="font-size:14px;color:var(--muted);font-family:var(--body);font-weight:600;">Usuários cadastrados</span>
+                    <button id="btnRefreshProfiles" style="background:var(--accent);color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">⟳ Atualizar</button>
                 </div>
-
-                <hr class="pre-menu-divider">
-
-                <button id="btnVoltarDeAdmin" class="pre-menu-btn btn-back-setup">← Voltar</button>
-
+                <div id="adminProfilesList" style="max-height:400px;overflow-y:auto;">
+                    <div class="open-rooms-empty">Clique em "Atualizar" para carregar.</div>
+                </div>
             </div>
-
         </div>
-
     </div>
 
     <!-- MULTIPLAYER - MENU DE SALAS -->
