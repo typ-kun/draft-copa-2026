@@ -145,7 +145,7 @@ function mostrarLevelUpNotification(novoNivel) {
     overlay.innerHTML = `
         <div class="modal-card" style="border-color:${info.cor};text-align:center;">
             <div class="modal-head" style="justify-content:center;padding-bottom:0;">
-                <span class="modal-title level-up-cor" style="--cor:${info.cor};">⬆️ LEVEL UP!</span>
+                <span class="modal-title level-up-cor" style="--cor:${info.cor};">⬆️ Privilégios alterados!</span>
                 <button class="modal-close" onclick="fecharLevelUpNotification()" style="position:absolute;top:12px;right:12px;">×</button>
             </div>
             <div class="modal-body">
