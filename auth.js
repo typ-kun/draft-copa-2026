@@ -556,11 +556,6 @@ document.addEventListener("click", function (e) {
         authMostrarFormRecuperacao();
         return;
     }
-    if (e.target.id === "authBackToLogin" || e.target.closest("#authBackToLogin")) {
-        e.preventDefault();
-        authVoltarAoLogin();
-        return;
-    }
     if (e.target.id === "btnSendReset" || e.target.closest("#btnSendReset")) {
         handleForgotPassword();
         return;
