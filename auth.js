@@ -510,6 +510,7 @@ async function mpAlterarNivel(profileId, novoNivel) {
         .select();
 
     console.log("[LevelUp] Resultado update:", {data, error});
+    if (error) {
         toast("❌ Erro ao alterar nível: " + error.message, 3000);
     } else {
         toast("✅ Nível alterado!", 2000);
