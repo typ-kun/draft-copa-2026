@@ -39,6 +39,7 @@ function initAuth() {
 
         if (event === "SIGNED_OUT") {
             authState.isGuest = false;
+            removerLevelUpSubscription();
             if (typeof mpSairSala === "function" && modoAtual !== MODO.OFFLINE) {
                 mpSairSala();
             }
@@ -55,6 +56,100 @@ function getAuthUser() {
 
 function isAuthenticated() {
     return !!authState.user;
+}
+
+// ─── LEVEL UP NOTIFICATION ───────────────────────────────────────────────────
+
+let levelUpChannel = null;
+
+function playLevelUpSound() {
+    try {
+        const audio = new Audio("levelup.mp3");
+        audio.volume = 0.7;
+        audio.play().catch(() => {});
+    } catch (_) {}
+}
+
+function inscreverLevelUp(userId) {
+    const supabase = initSupabase();
+    if (!supabase || !userId) return;
+
+    if (levelUpChannel) {
+        supabase.removeChannel(levelUpChannel);
+        levelUpChannel = null;
+    }
+
+    levelUpChannel = supabase
+        .channel("profile-level-up")
+        .on("postgres_changes",
+            {
+                event: "UPDATE",
+                schema: "public",
+                table: "profiles",
+                filter: `id=eq.${userId}`
+            },
+            (payload) => {
+                const nivelAnterior = payload.old?.level;
+                const novoNivel = payload.new?.level;
+                if (!novoNivel || !nivelAnterior || novoNivel === nivelAnterior) return;
+                const ordem = { common: 0, premium: 1, admin: 2 };
+                if ((ordem[novoNivel] || 0) > (ordem[nivelAnterior] || 0)) {
+                    mostrarLevelUpNotification(novoNivel);
+                }
+            }
+        )
+        .subscribe();
+}
+
+function removerLevelUpSubscription() {
+    if (levelUpChannel) {
+        const supabase = initSupabase();
+        if (supabase) supabase.removeChannel(levelUpChannel);
+        levelUpChannel = null;
+    }
+}
+
+function mostrarLevelUpNotification(novoNivel) {
+    playLevelUpSound();
+
+    const infos = {
+        premium: { nome: "Premium", cor: "#f1c40f" },
+        admin: { nome: "Admin", cor: "#e74c3c" }
+    };
+    const info = infos[novoNivel] || { nome: "Premium", cor: "#f1c40f" };
+
+    const overlay = document.createElement("div");
+    overlay.className = "level-up-overlay";
+    overlay.id = "levelUpOverlay";
+    overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) fecharLevelUpNotification();
+    });
+
+    overlay.innerHTML = `
+        <div class="level-up-card" style="--cor:${info.cor};border:2px solid ${info.cor};">
+            <div class="level-up-emoji">⬆️</div>
+            <div class="level-up-title" style="color:${info.cor};">LEVEL UP!</div>
+            <div class="level-up-icon">${novoNivel === "premium" ? "⭐" : "👑"}</div>
+            <div class="level-up-message">
+                Parabéns! Você agora é
+                <span class="level-up-badge" style="color:${info.cor};">${info.nome}</span>!
+            </div>
+            <button class="level-up-close-btn" style="background:${info.cor};color:#000;" onclick="fecharLevelUpNotification()">
+                Fechar
+            </button>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+    setTimeout(() => fecharLevelUpNotification(), 5000);
+}
+
+function fecharLevelUpNotification() {
+    const el = document.getElementById("levelUpOverlay");
+    if (el) {
+        el.style.animation = "fadeOut 0.3s ease";
+        setTimeout(() => el.remove(), 300);
+    }
 }
 
 function isAdmin() {
@@ -80,6 +175,7 @@ async function fetchUserLevel(userId) {
     if (data?.level) {
         authState.userLevel = data.level;
     }
+    inscreverLevelUp(userId);
 }
 
 function canPlayOffline() {
