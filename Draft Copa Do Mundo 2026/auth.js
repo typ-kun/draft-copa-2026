@@ -130,10 +130,10 @@ function mostrarLevelUpNotification(novoNivel) {
     playLevelUpSound();
 
     const infos = {
-        premium: { nome: "Premium", cor: "#f1c40f" },
-        admin: { nome: "Admin", cor: "#e74c3c" }
+        premium: { nome: "Premium", icon: "⭐", cor: "#f1c40f" },
+        admin: { nome: "Admin", icon: "👑", cor: "#e74c3c" }
     };
-    const info = infos[novoNivel] || { nome: "Premium", cor: "#f1c40f" };
+    const info = infos[novoNivel] || infos.premium;
 
     const overlay = document.createElement("div");
     overlay.className = "level-up-overlay";
@@ -143,22 +143,30 @@ function mostrarLevelUpNotification(novoNivel) {
     });
 
     overlay.innerHTML = `
-        <div class="level-up-card" style="--cor:${info.cor};border:2px solid ${info.cor};">
-            <div class="level-up-emoji">⬆️</div>
-            <div class="level-up-title" style="color:${info.cor};">LEVEL UP!</div>
-            <div class="level-up-icon">${novoNivel === "premium" ? "⭐" : "👑"}</div>
-            <div class="level-up-message">
-                Parabéns! Você agora é
-                <span class="level-up-badge" style="color:${info.cor};">${info.nome}</span>!
+        <div class="modal-card" style="border-color:${info.cor};text-align:center;">
+            <div class="modal-head" style="justify-content:center;padding-bottom:0;">
+                <span class="modal-title level-up-cor" style="--cor:${info.cor};">⬆️ LEVEL UP!</span>
+                <button class="modal-close" onclick="fecharLevelUpNotification()" style="position:absolute;top:12px;right:12px;">×</button>
             </div>
-            <button class="level-up-close-btn" style="background:${info.cor};color:#000;" onclick="fecharLevelUpNotification()">
-                Fechar
-            </button>
+            <div class="modal-body">
+                <span class="level-up-icon">${info.icon}</span>
+                <p class="modal-msg" style="font-size:18px;font-weight:700;">
+                    Parabéns! Você agora é
+                    <strong class="level-up-cor" style="--cor:${info.cor};display:block;font-size:24px;margin-top:4px;">
+                        ${info.nome}
+                    </strong>
+                </p>
+            </div>
+            <div class="modal-footer" style="justify-content:center;border:none;">
+                <button class="btn-primary" style="background:${info.cor};color:#000;" onclick="fecharLevelUpNotification()">
+                    Fechar
+                </button>
+            </div>
         </div>
     `;
 
     document.body.appendChild(overlay);
-    setTimeout(() => fecharLevelUpNotification(), 5000);
+    setTimeout(() => fecharLevelUpNotification(), 6000);
 }
 
 function fecharLevelUpNotification() {
