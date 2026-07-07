@@ -256,8 +256,9 @@ async function handleRegister() {
 
     if (error) {
         console.error("[Register error]", error);
-        const msg = typeof error === "string" ? error : error?.message || error?.error_description || "Erro desconhecido no cadastro.";
-        showAuthError(translateAuthError(msg));
+        const msg = error?.message || error?.error_description || error?.code || "Erro no servidor. Verifique se o Supabase esta ativo.";
+        if (msg === "{}") showAuthError("Erro no servidor. Verifique o console (F12) para detalhes.");
+        else showAuthError(translateAuthError(msg));
         return;
     }
 
@@ -283,8 +284,10 @@ async function handleLogin() {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-        const msg = error?.message || error?.error_description || JSON.stringify(error);
-        showAuthError(translateAuthError(msg));
+        console.error("[Login error]", error);
+        const msg = error?.message || error?.error_description || error?.code || "Erro no servidor. Verifique se o Supabase esta ativo.";
+        if (msg === "{}") showAuthError("Erro no servidor. Verifique o console (F12) para detalhes.");
+        else showAuthError(translateAuthError(msg));
         return;
     }
 
@@ -529,8 +532,10 @@ async function handleForgotPassword() {
     setAuthLoading(false);
 
     if (error) {
-        const msg = error?.message || error?.error_description || JSON.stringify(error);
-        showAuthError(translateAuthError(msg));
+        console.error("[ForgotPassword error]", error);
+        const msg = error?.message || error?.error_description || error?.code || "Erro no servidor. Verifique se o Supabase esta ativo.";
+        if (msg === "{}") showAuthError("Erro no servidor. Verifique o console (F12) para detalhes.");
+        else showAuthError(translateAuthError(msg));
         return;
     }
 
