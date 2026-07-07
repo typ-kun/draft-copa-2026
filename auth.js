@@ -572,6 +572,7 @@ document.addEventListener("click", function (e) {
     if (e.target.id === "btnLogarRegistrar" || e.target.closest("#btnLogarRegistrar")) {
         document.getElementById("preMenu").style.display = "none";
         document.getElementById("authScreen").style.display = "block";
+        authVoltarAoLogin();
         renderAuthUI();
         return;
     }
