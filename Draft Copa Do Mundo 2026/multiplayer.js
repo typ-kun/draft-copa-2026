@@ -943,7 +943,7 @@ document.addEventListener("click", function (e) {
     if (!alvo) return;
 
     // Botoes liberados para não-moderadores
-    const liberados = ["backToResults", "exportDraft", "goToMataMata", "resetFromResults"];
+    const liberados = ["backToResults", "exportDraft", "goToMataMata", "resetFromResults", "copyResults"];
     if (liberados.includes(e.target.id)) return;
 
     // Qualquer outro clique em área restrita → bloquear

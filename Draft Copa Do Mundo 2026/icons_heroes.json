@@ -1,168 +1,1150 @@
 [
-  { "nome": "Alan Shearer",             "pais": "Inglaterra",      "posicao": "FW", "playerid": 51,     "tipo": "icon" },
-  { "nome": "Iniesta",                  "pais": "Espanha",         "posicao": "MF", "playerid": 41,     "tipo": "icon" },
-  { "nome": "Roy Keane",                "pais": "Inglaterra",      "posicao": "MF", "playerid": 240,    "tipo": "icon" },
-  { "nome": "Paul Scholes",             "pais": "Inglaterra",      "posicao": "MF", "playerid": 246,    "tipo": "icon" },
-  { "nome": "David Beckham",            "pais": "Inglaterra",      "posicao": "MF", "playerid": 250,    "tipo": "icon" },
-  { "nome": "Oliver Kahn",              "pais": "Alemanha",        "posicao": "GK", "playerid": 488,    "tipo": "icon" },
-  { "nome": "Rui Costa",                "pais": "Portugal",        "posicao": "MF", "playerid": 1025,   "tipo": "icon" },
-  { "nome": "Javier Zanetti",           "pais": "Argentina",       "posicao": "DF", "playerid": 1041,   "tipo": "icon" },
-  { "nome": "Alessandro Nesta",         "pais": "Itália",          "posicao": "DF", "playerid": 1088,   "tipo": "icon" },
-  { "nome": "Roberto Baggio",           "pais": "Itália",          "posicao": "FW", "playerid": 1114,   "tipo": "icon" },
-  { "nome": "Marcel Desailly",          "pais": "França",          "posicao": "DF", "playerid": 1116,   "tipo": "icon" },
-  { "nome": "Gianluigi Buffon",         "pais": "Itália",          "posicao": "GK", "playerid": 1179,   "tipo": "icon" },
-  { "nome": "Fabio Cannavaro",          "pais": "Itália",          "posicao": "DF", "playerid": 1183,   "tipo": "icon" },
-  { "nome": "Gianfranco Zola",          "pais": "Itália",          "posicao": "FW", "playerid": 1201,   "tipo": "icon" },
-  { "nome": "Francesco Totti",          "pais": "Itália",          "posicao": "FW", "playerid": 1238,   "tipo": "icon" },
-  { "nome": "Zinedine Zidane",          "pais": "França",          "posicao": "MF", "playerid": 1397,   "tipo": "icon" },
-  { "nome": "Robert Pirès",             "pais": "França",          "posicao": "MF", "playerid": 1605,   "tipo": "icon" },
-  { "nome": "Lilian Thuram",            "pais": "França",          "posicao": "DF", "playerid": 1615,   "tipo": "icon" },
-  { "nome": "Emmanuel Petit",           "pais": "França",          "posicao": "MF", "playerid": 1620,   "tipo": "icon" },
-  { "nome": "Thierry Henry",            "pais": "França",          "posicao": "FW", "playerid": 1625,   "tipo": "icon" },
-  { "nome": "Claude Makélélé",          "pais": "França",          "posicao": "MF", "playerid": 1668,   "tipo": "icon" },
-  { "nome": "Ricardo Carvalho",         "pais": "Portugal",        "posicao": "DF", "playerid": 3622,   "tipo": "icon" },
-  { "nome": "Rivaldo",                  "pais": "Brasil",          "posicao": "FW", "playerid": 4231,   "tipo": "icon" },
-  { "nome": "Hristo Stoichkov",         "pais": "Bulgária",        "posicao": "FW", "playerid": 4833,   "tipo": "icon" },
-  { "nome": "Cafu",                     "pais": "Brasil",          "posicao": "DF", "playerid": 5003,   "tipo": "icon" },
-  { "nome": "Michael Owen",             "pais": "Inglaterra",      "posicao": "FW", "playerid": 5419,   "tipo": "icon" },
-  { "nome": "Bixente Lizarazu",         "pais": "França",          "posicao": "DF", "playerid": 5454,   "tipo": "icon" },
-  { "nome": "Jamie Carragher",          "pais": "Inglaterra",      "posicao": "DF", "playerid": 5467,   "tipo": "icon" },
-  { "nome": "Frank Lampard",            "pais": "Inglaterra",      "posicao": "MF", "playerid": 5471,   "tipo": "icon" },
-  { "nome": "Iker Casillas",            "pais": "Espanha",         "posicao": "GK", "playerid": 5479,   "tipo": "icon" },
-  { "nome": "Luís Figo",                "pais": "Portugal",        "posicao": "MF", "playerid": 5589,   "tipo": "icon" },
-  { "nome": "Fernando Morientes",       "pais": "Espanha",         "posicao": "FW", "playerid": 5661,   "tipo": "icon" },
-  { "nome": "Jari Litmanen",            "pais": "Finlândia",       "posicao": "MF", "playerid": 5673,   "tipo": "icon" },
-  { "nome": "Jaap Stam",                "pais": "Holanda",         "posicao": "DF", "playerid": 5740,   "tipo": "icon" },
-  { "nome": "Pavel Nedvěd",             "pais": "República Tcheca","posicao": "MF", "playerid": 6235,   "tipo": "icon" },
-  { "nome": "Freddie Ljungberg",        "pais": "Suécia",          "posicao": "MF", "playerid": 6975,   "tipo": "icon" },
-  { "nome": "Rio Ferdinand",            "pais": "Inglaterra",      "posicao": "DF", "playerid": 7289,   "tipo": "icon" },
-  { "nome": "Hernán Crespo",            "pais": "Argentina",       "posicao": "FW", "playerid": 7512,   "tipo": "icon" },
-  { "nome": "Landon Donovan",           "pais": "Estados Unidos",  "posicao": "MF", "playerid": 7743,   "tipo": "icon" },
-  { "nome": "Andrea Pirlo",             "pais": "Itália",          "posicao": "MF", "playerid": 7763,   "tipo": "icon" },
-  { "nome": "Tomáš Rosický",            "pais": "República Tcheca","posicao": "MF", "playerid": 8473,   "tipo": "icon" },
-  { "nome": "Samuel Eto'o",             "pais": "Camarões",        "posicao": "FW", "playerid": 9676,   "tipo": "icon" },
-  { "nome": "Ruud van Nistelrooy",      "pais": "Holanda",         "posicao": "FW", "playerid": 10264,  "tipo": "icon" },
-  { "nome": "Xavi",                     "pais": "Espanha",         "posicao": "MF", "playerid": 10535,  "tipo": "icon" },
-  { "nome": "Andriy Shevchenko",        "pais": "Ucrânia",         "posicao": "FW", "playerid": 13128,  "tipo": "icon" },
-  { "nome": "Steven Gerrard",           "pais": "Inglaterra",      "posicao": "MF", "playerid": 13743,  "tipo": "icon" },
-  { "nome": "Iván Córdoba",             "pais": "Colômbia",        "posicao": "DF", "playerid": 16619,  "tipo": "icon" },
-  { "nome": "Ronaldinho",               "pais": "Brasil",          "posicao": "FW", "playerid": 28130,  "tipo": "icon" },
-  { "nome": "Didier Drogba",            "pais": "Costa do Marfim", "posicao": "FW", "playerid": 31432,  "tipo": "icon" },
-  { "nome": "Ashley Cole",              "pais": "Inglaterra",      "posicao": "DF", "playerid": 34079,  "tipo": "icon" },
-  { "nome": "Ronaldo",                  "pais": "Brasil",          "posicao": "FW", "playerid": 37576,  "tipo": "icon" },
-  { "nome": "Zlatan Ibrahimović",       "pais": "Suécia",          "posicao": "FW", "playerid": 41236,  "tipo": "icon" },
-  { "nome": "Xabi Alonso",              "pais": "Espanha",         "posicao": "MF", "playerid": 45197,  "tipo": "icon" },
-  { "nome": "Raúl",                     "pais": "Espanha",         "posicao": "FW", "playerid": 45661,  "tipo": "icon" },
-  { "nome": "Michael Essien",           "pais": "Gana",            "posicao": "MF", "playerid": 45674,  "tipo": "icon" },
-  { "nome": "Petr Čech",                "pais": "República Tcheca","posicao": "GK", "playerid": 48940,  "tipo": "icon" },
-  { "nome": "Fernando Torres",          "pais": "Espanha",         "posicao": "FW", "playerid": 49369,  "tipo": "icon" },
-  { "nome": "Edwin van der Sar",        "pais": "Holanda",         "posicao": "GK", "playerid": 51539,  "tipo": "icon" },
-  { "nome": "Wayne Rooney",             "pais": "Inglaterra",      "posicao": "FW", "playerid": 54050,  "tipo": "icon" },
-  { "nome": "Gareth Bale",              "pais": "Gales",           "posicao": "FW", "playerid": 71557,  "tipo": "icon" },
-  { "nome": "Zlatan Ibrahimović",      "pais": "Suécia",          "posicao": "FW", "playerid": 79362,  "tipo": "icon" },
-  { "nome": "Philipp Lahm",             "pais": "Alemanha",        "posicao": "DF", "playerid": 121939, "tipo": "icon" },
-  { "nome": "Bastian Schweinsteiger",   "pais": "Alemanha",        "posicao": "MF", "playerid": 121944, "tipo": "icon" },
-  { "nome": "Maicon",                   "pais": "Brasil",          "posicao": "DF", "playerid": 135455, "tipo": "hero" },
-  { "nome": "Kaká",                     "pais": "Brasil",          "posicao": "MF", "playerid": 138449, "tipo": "icon" },
-  { "nome": "Giorgio Chiellini",        "pais": "Itália",          "posicao": "DF", "playerid": 138956, "tipo": "icon" },
-  { "nome": "Nemanja Vidić",            "pais": "Sérvia",          "posicao": "DF", "playerid": 140601, "tipo": "icon" },
-  { "nome": "Javier Mascherano",        "pais": "Argentina",       "posicao": "MF", "playerid": 142754, "tipo": "icon" },
-  { "nome": "Franck Ribéry",            "pais": "França",          "posicao": "MF", "playerid": 156616, "tipo": "icon" },
-  { "nome": "Fernando Hierro",          "pais": "Espanha",         "posicao": "DF", "playerid": 161840, "tipo": "icon" },
-  { "nome": "Gheorghe Hagi",            "pais": "Romênia",         "posicao": "MF", "playerid": 166124, "tipo": "icon" },
-  { "nome": "Hugo Sánchez",             "pais": "México",          "posicao": "FW", "playerid": 166149, "tipo": "icon" },
-  { "nome": "Rudi Völler",              "pais": "Alemanha",        "posicao": "FW", "playerid": 166676, "tipo": "icon" },
-  { "nome": "Zico",                     "pais": "Brasil",          "posicao": "MF", "playerid": 166691, "tipo": "icon" },
-  { "nome": "Franco Baresi",            "pais": "Itália",          "posicao": "DF", "playerid": 166906, "tipo": "icon" },
-  { "nome": "Jean-Pierre Papin",        "pais": "França",          "posicao": "FW", "playerid": 167134, "tipo": "hero" },
-  { "nome": "Carlos Alberto",           "pais": "Brasil",          "posicao": "DF", "playerid": 167135, "tipo": "icon" },
-  { "nome": "Eric Cantona",             "pais": "França",          "posicao": "FW", "playerid": 167198, "tipo": "icon" },
-  { "nome": "Abedi Pelé",               "pais": "Gana",            "posicao": "MF", "playerid": 167425, "tipo": "icon" },
-  { "nome": "Ronald Koeman",            "pais": "Holanda",         "posicao": "DF", "playerid": 167680, "tipo": "icon" },
-  { "nome": "Franz Beckenbauer",        "pais": "Alemanha",        "posicao": "DF", "playerid": 168473, "tipo": "icon" },
-  { "nome": "Marek Hamšík",             "pais": "Eslováquia",      "posicao": "MF", "playerid": 171877, "tipo": "icon" },
-  { "nome": "Marcelo",                  "pais": "Brasil",          "posicao": "DF", "playerid": 176676, "tipo": "icon" },
-  { "nome": "Toni Kroos",               "pais": "Alemanha",        "posicao": "MF", "playerid": 182521, "tipo": "icon" },
-  { "nome": "Diego Maradona",           "pais": "Argentina",       "posicao": "MF", "playerid": 190042, "tipo": "icon" },
-  { "nome": "Bobby Moore",              "pais": "Inglaterra",      "posicao": "DF", "playerid": 190044, "tipo": "icon" },
-  { "nome": "Johan Cruyff",             "pais": "Holanda",         "posicao": "FW", "playerid": 190045, "tipo": "icon" },
-  { "nome": "Sócrates",                 "pais": "Brasil",          "posicao": "MF", "playerid": 190046, "tipo": "icon" },
-  { "nome": "Gerd Müller",              "pais": "Alemanha",        "posicao": "FW", "playerid": 190048, "tipo": "icon" },
-  { "nome": "Cha Bum Kun",              "pais": "Coreia do Sul",   "posicao": "FW", "playerid": 191208, "tipo": "icon" },
-  { "nome": "Emilio Butragueño",        "pais": "Espanha",         "posicao": "FW", "playerid": 191695, "tipo": "icon" },
-  { "nome": "David Ginola",             "pais": "França",          "posicao": "MF", "playerid": 191972, "tipo": "icon" },
-  { "nome": "Marco van Basten",         "pais": "Holanda",         "posicao": "FW", "playerid": 192181, "tipo": "icon" },
-  { "nome": "Frank Rijkaard",           "pais": "Holanda",         "posicao": "MF", "playerid": 214098, "tipo": "icon" },
-  { "nome": "Ruud Gullit",              "pais": "Holanda",         "posicao": "MF", "playerid": 214100, "tipo": "icon" },
-  { "nome": "Paulo Futre",              "pais": "Portugal",        "posicao": "MF", "playerid": 214101, "tipo": "icon" },
-  { "nome": "Michael Laudrup",          "pais": "Dinamarca",       "posicao": "MF", "playerid": 222000, "tipo": "icon" },
-  { "nome": "George Best",              "pais": "Irlanda do Norte","posicao": "FW", "playerid": 226764, "tipo": "icon" },
-  { "nome": "Bobby Charlton",           "pais": "Inglaterra",      "posicao": "MF", "playerid": 230025, "tipo": "icon" },
-  { "nome": "Pelé",                     "pais": "Brasil",          "posicao": "FW", "playerid": 237067, "tipo": "icon" },
-  { "nome": "Lev Yashin",               "pais": "Rússia",          "posicao": "GK", "playerid": 238380, "tipo": "icon" },
-  { "nome": "Alessandro Del Piero",     "pais": "Itália",          "posicao": "FW", "playerid": 238382, "tipo": "icon" },
-  { "nome": "Carles Puyol",             "pais": "Espanha",         "posicao": "DF", "playerid": 238384, "tipo": "icon" },
-  { "nome": "Dennis Bergkamp",          "pais": "Holanda",         "posicao": "FW", "playerid": 238388, "tipo": "icon" },
-  { "nome": "Patrick Kluivert",         "pais": "Holanda",         "posicao": "FW", "playerid": 238424, "tipo": "icon" },
-  { "nome": "Patrick Vieira",           "pais": "França",          "posicao": "MF", "playerid": 238427, "tipo": "icon" },
-  { "nome": "Peter Schmeichel",         "pais": "Dinamarca",       "posicao": "GK", "playerid": 238428, "tipo": "icon" },
-  { "nome": "Roberto Carlos",           "pais": "Brasil",          "posicao": "DF", "playerid": 238430, "tipo": "icon" },
-  { "nome": "Lothar Matthäus",          "pais": "Alemanha",        "posicao": "MF", "playerid": 238435, "tipo": "icon" },
-  { "nome": "Paolo Maldini",            "pais": "Itália",          "posicao": "DF", "playerid": 238439, "tipo": "icon" },
-  { "nome": "Laurent Blanc",            "pais": "França",          "posicao": "DF", "playerid": 238443, "tipo": "icon" },
-  { "nome": "Henrik Larsson",           "pais": "Suécia",          "posicao": "FW", "playerid": 239261, "tipo": "icon" },
-  { "nome": "Miroslav Klose",           "pais": "Alemanha",        "posicao": "FW", "playerid": 242510, "tipo": "icon" },
-  { "nome": "Eusébio",                  "pais": "Portugal",        "posicao": "FW", "playerid": 242519, "tipo": "icon" },
-  { "nome": "Juan Sebastián Verón",     "pais": "Argentina",       "posicao": "MF", "playerid": 243027, "tipo": "icon" },
-  { "nome": "Sol Campbell",             "pais": "Inglaterra",      "posicao": "DF", "playerid": 243029, "tipo": "icon" },
-  { "nome": "Garrincha",                "pais": "Brasil",          "posicao": "FW", "playerid": 247553, "tipo": "icon" },
-  { "nome": "Kenny Dalglish",           "pais": "Escócia",         "posicao": "FW", "playerid": 247699, "tipo": "icon" },
-  { "nome": "Ian Rush",                 "pais": "Gales",           "posicao": "FW", "playerid": 247703, "tipo": "icon" },
-  { "nome": "Ian Wright",               "pais": "Inglaterra",      "posicao": "FW", "playerid": 248146, "tipo": "icon" },
-  { "nome": "Gianluca Zambrotta",       "pais": "Itália",          "posicao": "DF", "playerid": 250890, "tipo": "icon" },
-  { "nome": "Ferenc Puskás",            "pais": "Hungria",         "posicao": "FW", "playerid": 254642, "tipo": "icon" },
-  { "nome": "Jürgen Kohler",            "pais": "Alemanha",        "posicao": "DF", "playerid": 261593, "tipo": "hero" },
-  { "nome": "Robin van Persie",         "pais": "Holanda",         "posicao": "FW", "playerid": 262112, "tipo": "icon" },
-  { "nome": "Lúcio",                    "pais": "Brasil",          "posicao": "DF", "playerid": 266690, "tipo": "icon" },
-  { "nome": "Jairzinho",                "pais": "Brasil",          "posicao": "FW", "playerid": 268513, "tipo": "icon" },
-  { "nome": "Włodzimierz Smolarek",     "pais": "Polônia",         "posicao": "FW", "playerid": 269603, "tipo": "icon" },
-  { "nome": "Steve McManaman",          "pais": "Inglaterra",      "posicao": "MF", "playerid": 273812, "tipo": "icon" },
-  { "nome": "Enzo Francescoli",         "pais": "Uruguai",         "posicao": "MF", "playerid": 275049, "tipo": "icon" },
-
-  { "nome": "Joe Cole",                 "pais": "Inglaterra",      "posicao": "MF", "playerid": 27,     "tipo": "hero" },
-  { "nome": "Robbie Keane",             "pais": "Irlanda",         "posicao": "FW", "playerid": 350,    "tipo": "hero" },
-  { "nome": "Jay-Jay Okocha",           "pais": "Nigéria",         "posicao": "MF", "playerid": 570,    "tipo": "hero" },
-  { "nome": "Ludovic Giuly",            "pais": "França",          "posicao": "MF", "playerid": 1551,   "tipo": "hero" },
-  { "nome": "Ole Gunnar Solskjær",      "pais": "Noruega",         "posicao": "FW", "playerid": 1845,   "tipo": "hero" },
-  { "nome": "Dirk Kuyt",                "pais": "Holanda",         "posicao": "FW", "playerid": 15723,  "tipo": "hero" },
-  { "nome": "Tim Howard",               "pais": "Estados Unidos",  "posicao": "GK", "playerid": 16254,  "tipo": "hero" },
-  { "nome": "Yaya Touré",               "pais": "Costa do Marfim", "posicao": "MF", "playerid": 20289,  "tipo": "hero" },
-  { "nome": "Capdevila",                "pais": "Espanha",         "posicao": "DF", "playerid": 25924,  "tipo": "hero" },
-  { "nome": "Rafael Márquez",           "pais": "México",          "posicao": "DF", "playerid": 26709,  "tipo": "hero" },
-  { "nome": "Zé Roberto",               "pais": "Brasil",          "posicao": "MF", "playerid": 28765,  "tipo": "hero" },
-  { "nome": "Sidney Govou",             "pais": "França",          "posicao": "FW", "playerid": 40898,  "tipo": "hero" },
-  { "nome": "Jerzy Dudek",              "pais": "Polônia",         "posicao": "GK", "playerid": 44897,  "tipo": "hero" },
-  { "nome": "Peter Crouch",             "pais": "Inglaterra",      "posicao": "FW", "playerid": 51257,  "tipo": "hero" },
-  { "nome": "Daniele De Rossi",         "pais": "Itália",          "posicao": "MF", "playerid": 53302,  "tipo": "hero" },
-  { "nome": "Iván Zamorano",            "pais": "Chile",           "posicao": "FW", "playerid": 77787,  "tipo": "hero" },
-  { "nome": "Antonio Di Natale",        "pais": "Itália",          "posicao": "FW", "playerid": 120274, "tipo": "hero" },
-  { "nome": "Mario Gomez",              "pais": "Alemanha",        "posicao": "FW", "playerid": 150418, "tipo": "hero" },
-  { "nome": "Blaise Matuidi",           "pais": "França",          "posicao": "MF", "playerid": 170890, "tipo": "hero" },
-  { "nome": "Claudio Marchisio",        "pais": "Itália",          "posicao": "MF", "playerid": 173210, "tipo": "hero" },
-  { "nome": "Eden Hazard",              "pais": "Bélgica",         "posicao": "MF", "playerid": 183277, "tipo": "hero" },
-  { "nome": "Ramires",                  "pais": "Brasil",          "posicao": "MF", "playerid": 184943, "tipo": "hero" },
-  { "nome": "Davor Šuker",              "pais": "Croácia",         "posicao": "FW", "playerid": 214649, "tipo": "hero" },
-  { "nome": "Gianluca Vialli",          "pais": "Itália",          "posicao": "FW", "playerid": 233700, "tipo": "hero" },
-  { "nome": "John Barnes",              "pais": "Inglaterra",      "posicao": "MF", "playerid": 247515, "tipo": "hero" },
-  { "nome": "Vincent Kompany",          "pais": "Bélgica",         "posicao": "DF", "playerid": 251483, "tipo": "hero" },
-  { "nome": "Diego Milito",             "pais": "Argentina",       "posicao": "FW", "playerid": 262271, "tipo": "hero" },
-  { "nome": "Guti",                     "pais": "Espanha",         "posicao": "MF", "playerid": 262285, "tipo": "hero" },
-  { "nome": "Park Ji Sung",             "pais": "Coreia do Sul",   "posicao": "MF", "playerid": 266473, "tipo": "hero" },
-  { "nome": "Diego Forlán",             "pais": "Uruguai",         "posicao": "FW", "playerid": 266691, "tipo": "hero" },
-  { "nome": "Harry Kewell",             "pais": "Austrália",       "posicao": "MF", "playerid": 266801, "tipo": "hero" },
-  { "nome": "Wesley Sneijder",          "pais": "Holanda",         "posicao": "MF", "playerid": 274750, "tipo": "hero" },
-  { "nome": "Carlos Tévez",             "pais": "Argentina",       "posicao": "FW", "playerid": 274966, "tipo": "hero" },
-  { "nome": "John Arne Riise",          "pais": "Noruega",         "posicao": "DF", "playerid": 274967, "tipo": "hero" },
-  { "nome": "Roberto Rivellino",        "pais": "Brasil",          "posicao": "MF", "playerid": 191190, "tipo": "icon" },
-  { "nome": "Mario Kempes",             "pais": "Argentina",       "posicao": "FW", "playerid": 82092,  "tipo": "icon" }
+  {
+    "nome": "Alan Shearer",
+    "pais": "Inglaterra",
+    "posicao": "FW",
+    "playerid": 51,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Iniesta",
+    "pais": "Espanha",
+    "posicao": "MF",
+    "playerid": 41,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Roy Keane",
+    "pais": "Inglaterra",
+    "posicao": "MF",
+    "playerid": 240,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Paul Scholes",
+    "pais": "Inglaterra",
+    "posicao": "MF",
+    "playerid": 246,
+    "tipo": "icon"
+  },
+  {
+    "nome": "David Beckham",
+    "pais": "Inglaterra",
+    "posicao": "MF",
+    "playerid": 250,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Oliver Kahn",
+    "pais": "Alemanha",
+    "posicao": "GK",
+    "playerid": 488,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Rui Costa",
+    "pais": "Portugal",
+    "posicao": "MF",
+    "playerid": 1025,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Javier Zanetti",
+    "pais": "Argentina",
+    "posicao": "DF",
+    "playerid": 1041,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Alessandro Nesta",
+    "pais": "Itália",
+    "posicao": "DF",
+    "playerid": 1088,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Roberto Baggio",
+    "pais": "Itália",
+    "posicao": "FW",
+    "playerid": 1114,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Marcel Desailly",
+    "pais": "França",
+    "posicao": "DF",
+    "playerid": 1116,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Gianluigi Buffon",
+    "pais": "Itália",
+    "posicao": "GK",
+    "playerid": 1179,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Fabio Cannavaro",
+    "pais": "Itália",
+    "posicao": "DF",
+    "playerid": 1183,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Gianfranco Zola",
+    "pais": "Itália",
+    "posicao": "FW",
+    "playerid": 1201,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Francesco Totti",
+    "pais": "Itália",
+    "posicao": "FW",
+    "playerid": 1238,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Zinedine Zidane",
+    "pais": "França",
+    "posicao": "MF",
+    "playerid": 1397,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Robert Pirès",
+    "pais": "França",
+    "posicao": "MF",
+    "playerid": 1605,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Lilian Thuram",
+    "pais": "França",
+    "posicao": "DF",
+    "playerid": 1615,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Emmanuel Petit",
+    "pais": "França",
+    "posicao": "MF",
+    "playerid": 1620,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Thierry Henry",
+    "pais": "França",
+    "posicao": "FW",
+    "playerid": 1625,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Claude Makélélé",
+    "pais": "França",
+    "posicao": "MF",
+    "playerid": 1668,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Ricardo Carvalho",
+    "pais": "Portugal",
+    "posicao": "DF",
+    "playerid": 3622,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Rivaldo",
+    "pais": "Brasil",
+    "posicao": "FW",
+    "playerid": 4231,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Hristo Stoichkov",
+    "pais": "Bulgária",
+    "posicao": "FW",
+    "playerid": 4833,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Cafu",
+    "pais": "Brasil",
+    "posicao": "DF",
+    "playerid": 5003,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Michael Owen",
+    "pais": "Inglaterra",
+    "posicao": "FW",
+    "playerid": 5419,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Bixente Lizarazu",
+    "pais": "França",
+    "posicao": "DF",
+    "playerid": 5454,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Jamie Carragher",
+    "pais": "Inglaterra",
+    "posicao": "DF",
+    "playerid": 5467,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Frank Lampard",
+    "pais": "Inglaterra",
+    "posicao": "MF",
+    "playerid": 5471,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Iker Casillas",
+    "pais": "Espanha",
+    "posicao": "GK",
+    "playerid": 5479,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Luís Figo",
+    "pais": "Portugal",
+    "posicao": "MF",
+    "playerid": 5589,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Fernando Morientes",
+    "pais": "Espanha",
+    "posicao": "FW",
+    "playerid": 5661,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Jari Litmanen",
+    "pais": "Finlândia",
+    "posicao": "MF",
+    "playerid": 5673,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Jaap Stam",
+    "pais": "Holanda",
+    "posicao": "DF",
+    "playerid": 5740,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Pavel Nedvěd",
+    "pais": "República Tcheca",
+    "posicao": "MF",
+    "playerid": 6235,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Freddie Ljungberg",
+    "pais": "Suécia",
+    "posicao": "MF",
+    "playerid": 6975,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Rio Ferdinand",
+    "pais": "Inglaterra",
+    "posicao": "DF",
+    "playerid": 7289,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Hernán Crespo",
+    "pais": "Argentina",
+    "posicao": "FW",
+    "playerid": 7512,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Landon Donovan",
+    "pais": "Estados Unidos",
+    "posicao": "MF",
+    "playerid": 7743,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Andrea Pirlo",
+    "pais": "Itália",
+    "posicao": "MF",
+    "playerid": 7763,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Tomáš Rosický",
+    "pais": "República Tcheca",
+    "posicao": "MF",
+    "playerid": 8473,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Samuel Eto'o",
+    "pais": "Camarões",
+    "posicao": "FW",
+    "playerid": 9676,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Ruud van Nistelrooy",
+    "pais": "Holanda",
+    "posicao": "FW",
+    "playerid": 10264,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Xavi",
+    "pais": "Espanha",
+    "posicao": "MF",
+    "playerid": 10535,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Andriy Shevchenko",
+    "pais": "Ucrânia",
+    "posicao": "FW",
+    "playerid": 13128,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Steven Gerrard",
+    "pais": "Inglaterra",
+    "posicao": "MF",
+    "playerid": 13743,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Iván Córdoba",
+    "pais": "Colômbia",
+    "posicao": "DF",
+    "playerid": 16619,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Ronaldinho",
+    "pais": "Brasil",
+    "posicao": "FW",
+    "playerid": 28130,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Didier Drogba",
+    "pais": "Costa do Marfim",
+    "posicao": "FW",
+    "playerid": 31432,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Ashley Cole",
+    "pais": "Inglaterra",
+    "posicao": "DF",
+    "playerid": 34079,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Ronaldo",
+    "pais": "Brasil",
+    "posicao": "FW",
+    "playerid": 37576,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Zlatan Ibrahimović",
+    "pais": "Suécia",
+    "posicao": "FW",
+    "playerid": 18720,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Xabi Alonso",
+    "pais": "Espanha",
+    "posicao": "MF",
+    "playerid": 45197,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Raúl",
+    "pais": "Espanha",
+    "posicao": "FW",
+    "playerid": 45661,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Michael Essien",
+    "pais": "Gana",
+    "posicao": "MF",
+    "playerid": 45674,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Petr Čech",
+    "pais": "República Tcheca",
+    "posicao": "GK",
+    "playerid": 48940,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Fernando Torres",
+    "pais": "Espanha",
+    "posicao": "FW",
+    "playerid": 49369,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Edwin van der Sar",
+    "pais": "Holanda",
+    "posicao": "GK",
+    "playerid": 51539,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Wayne Rooney",
+    "pais": "Inglaterra",
+    "posicao": "FW",
+    "playerid": 54050,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Gareth Bale",
+    "pais": "Gales",
+    "posicao": "FW",
+    "playerid": 71557,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Philipp Lahm",
+    "pais": "Alemanha",
+    "posicao": "DF",
+    "playerid": 121939,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Bastian Schweinsteiger",
+    "pais": "Alemanha",
+    "posicao": "MF",
+    "playerid": 121944,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Maicon",
+    "pais": "Brasil",
+    "posicao": "DF",
+    "playerid": 135455,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Kaká",
+    "pais": "Brasil",
+    "posicao": "MF",
+    "playerid": 138449,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Giorgio Chiellini",
+    "pais": "Itália",
+    "posicao": "DF",
+    "playerid": 138956,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Nemanja Vidić",
+    "pais": "Sérvia",
+    "posicao": "DF",
+    "playerid": 140601,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Javier Mascherano",
+    "pais": "Argentina",
+    "posicao": "MF",
+    "playerid": 142754,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Franck Ribéry",
+    "pais": "França",
+    "posicao": "MF",
+    "playerid": 156616,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Fernando Hierro",
+    "pais": "Espanha",
+    "posicao": "DF",
+    "playerid": 161840,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Gheorghe Hagi",
+    "pais": "Romênia",
+    "posicao": "MF",
+    "playerid": 166124,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Hugo Sánchez",
+    "pais": "México",
+    "posicao": "FW",
+    "playerid": 166149,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Rudi Völler",
+    "pais": "Alemanha",
+    "posicao": "FW",
+    "playerid": 166676,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Zico",
+    "pais": "Brasil",
+    "posicao": "MF",
+    "playerid": 166691,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Franco Baresi",
+    "pais": "Itália",
+    "posicao": "DF",
+    "playerid": 166906,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Jean-Pierre Papin",
+    "pais": "França",
+    "posicao": "FW",
+    "playerid": 167134,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Carlos Alberto",
+    "pais": "Brasil",
+    "posicao": "DF",
+    "playerid": 167135,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Eric Cantona",
+    "pais": "França",
+    "posicao": "FW",
+    "playerid": 167198,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Abedi Pelé",
+    "pais": "Gana",
+    "posicao": "MF",
+    "playerid": 167425,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Ronald Koeman",
+    "pais": "Holanda",
+    "posicao": "DF",
+    "playerid": 167680,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Franz Beckenbauer",
+    "pais": "Alemanha",
+    "posicao": "DF",
+    "playerid": 168473,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Marek Hamšík",
+    "pais": "Eslováquia",
+    "posicao": "MF",
+    "playerid": 171877,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Marcelo",
+    "pais": "Brasil",
+    "posicao": "DF",
+    "playerid": 176676,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Toni Kroos",
+    "pais": "Alemanha",
+    "posicao": "MF",
+    "playerid": 182521,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Diego Maradona",
+    "pais": "Argentina",
+    "posicao": "MF",
+    "playerid": 190042,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Bobby Moore",
+    "pais": "Inglaterra",
+    "posicao": "DF",
+    "playerid": 190044,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Johan Cruyff",
+    "pais": "Holanda",
+    "posicao": "FW",
+    "playerid": 190045,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Sócrates",
+    "pais": "Brasil",
+    "posicao": "MF",
+    "playerid": 190046,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Gerd Müller",
+    "pais": "Alemanha",
+    "posicao": "FW",
+    "playerid": 190048,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Cha Bum Kun",
+    "pais": "Coreia do Sul",
+    "posicao": "FW",
+    "playerid": 191208,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Emilio Butragueño",
+    "pais": "Espanha",
+    "posicao": "FW",
+    "playerid": 191695,
+    "tipo": "icon"
+  },
+  {
+    "nome": "David Ginola",
+    "pais": "França",
+    "posicao": "MF",
+    "playerid": 191972,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Marco van Basten",
+    "pais": "Holanda",
+    "posicao": "FW",
+    "playerid": 192181,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Frank Rijkaard",
+    "pais": "Holanda",
+    "posicao": "MF",
+    "playerid": 214098,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Ruud Gullit",
+    "pais": "Holanda",
+    "posicao": "MF",
+    "playerid": 214100,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Paulo Futre",
+    "pais": "Portugal",
+    "posicao": "MF",
+    "playerid": 214101,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Michael Laudrup",
+    "pais": "Dinamarca",
+    "posicao": "MF",
+    "playerid": 222000,
+    "tipo": "icon"
+  },
+  {
+    "nome": "George Best",
+    "pais": "Irlanda do Norte",
+    "posicao": "FW",
+    "playerid": 226764,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Bobby Charlton",
+    "pais": "Inglaterra",
+    "posicao": "MF",
+    "playerid": 230025,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Pelé",
+    "pais": "Brasil",
+    "posicao": "FW",
+    "playerid": 237067,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Lev Yashin",
+    "pais": "Rússia",
+    "posicao": "GK",
+    "playerid": 238380,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Alessandro Del Piero",
+    "pais": "Itália",
+    "posicao": "FW",
+    "playerid": 238382,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Carles Puyol",
+    "pais": "Espanha",
+    "posicao": "DF",
+    "playerid": 238384,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Dennis Bergkamp",
+    "pais": "Holanda",
+    "posicao": "FW",
+    "playerid": 238388,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Patrick Kluivert",
+    "pais": "Holanda",
+    "posicao": "FW",
+    "playerid": 238424,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Patrick Vieira",
+    "pais": "França",
+    "posicao": "MF",
+    "playerid": 238427,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Peter Schmeichel",
+    "pais": "Dinamarca",
+    "posicao": "GK",
+    "playerid": 238428,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Roberto Carlos",
+    "pais": "Brasil",
+    "posicao": "DF",
+    "playerid": 238430,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Lothar Matthäus",
+    "pais": "Alemanha",
+    "posicao": "MF",
+    "playerid": 238435,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Paolo Maldini",
+    "pais": "Itália",
+    "posicao": "DF",
+    "playerid": 238439,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Laurent Blanc",
+    "pais": "França",
+    "posicao": "DF",
+    "playerid": 238443,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Henrik Larsson",
+    "pais": "Suécia",
+    "posicao": "FW",
+    "playerid": 239261,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Miroslav Klose",
+    "pais": "Alemanha",
+    "posicao": "FW",
+    "playerid": 242510,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Eusébio",
+    "pais": "Portugal",
+    "posicao": "FW",
+    "playerid": 242519,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Juan Sebastián Verón",
+    "pais": "Argentina",
+    "posicao": "MF",
+    "playerid": 243027,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Sol Campbell",
+    "pais": "Inglaterra",
+    "posicao": "DF",
+    "playerid": 243029,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Garrincha",
+    "pais": "Brasil",
+    "posicao": "FW",
+    "playerid": 247553,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Kenny Dalglish",
+    "pais": "Escócia",
+    "posicao": "FW",
+    "playerid": 247699,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Ian Rush",
+    "pais": "Gales",
+    "posicao": "FW",
+    "playerid": 247703,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Ian Wright",
+    "pais": "Inglaterra",
+    "posicao": "FW",
+    "playerid": 248146,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Gianluca Zambrotta",
+    "pais": "Itália",
+    "posicao": "DF",
+    "playerid": 250890,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Ferenc Puskás",
+    "pais": "Hungria",
+    "posicao": "FW",
+    "playerid": 254642,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Jürgen Kohler",
+    "pais": "Alemanha",
+    "posicao": "DF",
+    "playerid": 261593,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Robin van Persie",
+    "pais": "Holanda",
+    "posicao": "FW",
+    "playerid": 262112,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Lúcio",
+    "pais": "Brasil",
+    "posicao": "DF",
+    "playerid": 266690,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Jairzinho",
+    "pais": "Brasil",
+    "posicao": "FW",
+    "playerid": 268513,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Włodzimierz Smolarek",
+    "pais": "Polônia",
+    "posicao": "FW",
+    "playerid": 269603,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Steve McManaman",
+    "pais": "Inglaterra",
+    "posicao": "MF",
+    "playerid": 273812,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Enzo Francescoli",
+    "pais": "Uruguai",
+    "posicao": "MF",
+    "playerid": 275049,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Joe Cole",
+    "pais": "Inglaterra",
+    "posicao": "MF",
+    "playerid": 27,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Robbie Keane",
+    "pais": "Irlanda",
+    "posicao": "FW",
+    "playerid": 350,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Jay-Jay Okocha",
+    "pais": "Nigéria",
+    "posicao": "MF",
+    "playerid": 570,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Ludovic Giuly",
+    "pais": "França",
+    "posicao": "MF",
+    "playerid": 1551,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Ole Gunnar Solskjær",
+    "pais": "Noruega",
+    "posicao": "FW",
+    "playerid": 1845,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Dirk Kuyt",
+    "pais": "Holanda",
+    "posicao": "FW",
+    "playerid": 15723,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Tim Howard",
+    "pais": "Estados Unidos",
+    "posicao": "GK",
+    "playerid": 16254,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Yaya Touré",
+    "pais": "Costa do Marfim",
+    "posicao": "MF",
+    "playerid": 20289,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Capdevila",
+    "pais": "Espanha",
+    "posicao": "DF",
+    "playerid": 25924,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Rafael Márquez",
+    "pais": "México",
+    "posicao": "DF",
+    "playerid": 26709,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Zé Roberto",
+    "pais": "Brasil",
+    "posicao": "MF",
+    "playerid": 28765,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Sidney Govou",
+    "pais": "França",
+    "posicao": "FW",
+    "playerid": 40898,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Jerzy Dudek",
+    "pais": "Polônia",
+    "posicao": "GK",
+    "playerid": 44897,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Peter Crouch",
+    "pais": "Inglaterra",
+    "posicao": "FW",
+    "playerid": 51257,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Daniele De Rossi",
+    "pais": "Itália",
+    "posicao": "MF",
+    "playerid": 53302,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Iván Zamorano",
+    "pais": "Chile",
+    "posicao": "FW",
+    "playerid": 77787,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Antonio Di Natale",
+    "pais": "Itália",
+    "posicao": "FW",
+    "playerid": 120274,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Mario Gomez",
+    "pais": "Alemanha",
+    "posicao": "FW",
+    "playerid": 150418,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Blaise Matuidi",
+    "pais": "França",
+    "posicao": "MF",
+    "playerid": 170890,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Claudio Marchisio",
+    "pais": "Itália",
+    "posicao": "MF",
+    "playerid": 173210,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Eden Hazard",
+    "pais": "Bélgica",
+    "posicao": "MF",
+    "playerid": 183277,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Ramires",
+    "pais": "Brasil",
+    "posicao": "MF",
+    "playerid": 184943,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Davor Šuker",
+    "pais": "Croácia",
+    "posicao": "FW",
+    "playerid": 214649,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Gianluca Vialli",
+    "pais": "Itália",
+    "posicao": "FW",
+    "playerid": 233700,
+    "tipo": "hero"
+  },
+  {
+    "nome": "John Barnes",
+    "pais": "Inglaterra",
+    "posicao": "MF",
+    "playerid": 247515,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Vincent Kompany",
+    "pais": "Bélgica",
+    "posicao": "DF",
+    "playerid": 251483,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Diego Milito",
+    "pais": "Argentina",
+    "posicao": "FW",
+    "playerid": 262271,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Guti",
+    "pais": "Espanha",
+    "posicao": "MF",
+    "playerid": 262285,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Park Ji Sung",
+    "pais": "Coreia do Sul",
+    "posicao": "MF",
+    "playerid": 266473,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Diego Forlán",
+    "pais": "Uruguai",
+    "posicao": "FW",
+    "playerid": 266691,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Harry Kewell",
+    "pais": "Austrália",
+    "posicao": "MF",
+    "playerid": 266801,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Wesley Sneijder",
+    "pais": "Holanda",
+    "posicao": "MF",
+    "playerid": 274750,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Carlos Tévez",
+    "pais": "Argentina",
+    "posicao": "FW",
+    "playerid": 274966,
+    "tipo": "hero"
+  },
+  {
+    "nome": "John Arne Riise",
+    "pais": "Noruega",
+    "posicao": "DF",
+    "playerid": 274967,
+    "tipo": "hero"
+  },
+  {
+    "nome": "Roberto Rivellino",
+    "pais": "Brasil",
+    "posicao": "MF",
+    "playerid": 191190,
+    "tipo": "icon"
+  },
+  {
+    "nome": "Mario Kempes",
+    "pais": "Argentina",
+    "posicao": "FW",
+    "playerid": 82092,
+    "tipo": "icon"
+  }
 ]
