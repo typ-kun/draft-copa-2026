@@ -10,8 +10,12 @@ let authState = {
     userLevel: null
 };
 
+console.log("[LevelUp] auth.js carregado!");
+
 function initAuth() {
+    console.log("[LevelUp] initAuth() chamado");
     const supabase = initSupabase();
+    console.log("[LevelUp] supabase client:", !!supabase);
     if (!supabase) {
         authState.loading = false;
         renderAuthUI();
@@ -19,11 +23,14 @@ function initAuth() {
     }
 
     supabase.auth.getSession().then(({ data: { session } }) => {
+        console.log("[LevelUp] getSession resultado:", {temSession: !!session, user: session?.user?.id});
         authState.session = session;
         authState.user = session?.user ?? null;
         authState.loading = false;
-        if (authState.user) fetchUserLevel(authState.user.id).then(() => renderAuthUI());
-        else renderAuthUI();
+        if (authState.user) {
+            console.log("[LevelUp] chamando fetchUserLevel");
+            fetchUserLevel(authState.user.id).then(() => renderAuthUI());
+        } else renderAuthUI();
     });
 
     supabase.auth.onAuthStateChange((event, session) => {
