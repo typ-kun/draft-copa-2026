@@ -572,8 +572,13 @@ document.addEventListener("click", function (e) {
         return;
     }
     if (e.target.id === "btnVoltarDeAuth" || e.target.closest("#btnVoltarDeAuth")) {
-        document.getElementById("authScreen").style.display = "none";
-        document.getElementById("preMenu").style.display = "block";
+        const resetForm = document.getElementById("authResetPasswordForm");
+        if (resetForm && resetForm.style.display !== "none") {
+            authVoltarAoLogin();
+        } else {
+            document.getElementById("authScreen").style.display = "none";
+            document.getElementById("preMenu").style.display = "block";
+        }
         return;
     }
     if (e.target.id === "btnAdminPanel" || e.target.closest("#btnAdminPanel")) {
