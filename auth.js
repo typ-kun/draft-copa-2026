@@ -257,7 +257,6 @@ async function handleRegister() {
         showAuthSuccess("Email ja cadastrado. Faca login.");
     } else {
         showAuthSuccess("Cadastro realizado! Verifique seu email para confirmar.");
-        renderAuthUI();
     }
 }
 
