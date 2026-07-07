@@ -1415,6 +1415,16 @@ function gerarPool() {
     } else if (config.iconsHeroesMode === "both") {
         especiais = [...iconsHeroesBase];
     }
+    // Garantir que nao haja duplicatas nos especiais (pelo nome)
+    // E que o jogador ainda nao foi pickado (so existe em jogadoresDisponiveis)
+    const vistos = new Set();
+    especiais = especiais.filter(j => {
+        const chave = j.nome.toLowerCase().trim();
+        if (vistos.has(chave)) return false;
+        vistos.add(chave);
+        // So incluir se o jogador ainda estiver disponivel (nao foi pickado)
+        return jogadoresDisponiveis.some(p => p.nome === j.nome && p.pais === j.pais);
+    });
 
     const gksDoJogador =
         contarGoleiros(
@@ -1512,10 +1522,13 @@ function gerarPool() {
     }
 
     // Preenche os slots restantes com chance configurável de especial
+    let attempts = 0;
     while (
         poolAtual.length < 5 &&
-        (normais.length > 0 || especiais.length > 0)
+        (normais.length > 0 || especiais.length > 0) &&
+        attempts < 100
     ) {
+        attempts++;
 
         const sortearEspecial =
             especiais.length > 0 &&
@@ -1541,7 +1554,11 @@ function gerarPool() {
             especiais = especiais.filter(p => p !== jogador);
         }
 
-        poolAtual.push(jogador);
+        // Garantir que nao haja nomes repetidos na pool
+        const nomeJaNaPool = poolAtual.some(p => p.nome === jogador.nome);
+        if (!nomeJaNaPool) {
+            poolAtual.push(jogador);
+        }
 
     }
 
@@ -2103,9 +2120,9 @@ function mostrarResultadoFinal() {
                 for (let idx = 0; idx < times.length; idx++) {
                     const teamName = paisParticipante[idx] || "";
                     const teamId = TEAM_MAP[teamName.toLowerCase()] || TEAM_MAP[teamName] || 0;
-                    if (!teamId) { toast("Teamid não encontrado para: " + teamName); return; }
+                    if (!teamId) { toast("⚠️ Teamid não encontrado para: " + teamName + " — time pulado"); continue; }
                     for (const j of times[idx]) {
-                        if (!j.playerid) { toast("Jogador sem playerid: " + j.nome); return; }
+                        if (!j.playerid) { toast("⚠️ Jogador sem playerid: " + j.nome + " — time pulado"); continue; }
                     }
                     draftTeams.set(String(teamId), times[idx]);
                 }

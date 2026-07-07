@@ -17,12 +17,14 @@
 
 <body>
 
+    <!-- BOTÃO ADMIN GLOBAL (fora de qualquer tela) -->
+    <button id="btnAdminPanel" class="admin-float-btn" style="display:none;">🛡️ Admin</button>
+
     <!-- PRÉ-MENU -->
 
     <div id="preMenu">
 
         <h1><img src="assets/logo.svg" alt="Draft Copa do Mundo 2026" class="logo" width="480"></h1>
-        <button id="btnAdminPanel" class="admin-float-btn" style="display:none;">🛡️ Admin</button>
 
         <div class="pre-menu-card">
 
@@ -74,8 +76,6 @@
 
     </div>
 
-    </div>
-
     <!-- AUTH SCREEN -->
     <div id="authScreen" style="display:none;">
 
@@ -90,16 +90,30 @@
                 <!-- Deslogado -->
                 <div id="authLoggedOut">
                     <div class="room-section">
-                        <label class="pre-menu-label">ENTRAR / CADASTRAR</label>
-                        <input type="email" id="authEmail" class="pre-menu-input" placeholder="seu@email.com" autocomplete="email" style="margin-bottom:6px;">
-                        <input type="password" id="authPassword" class="pre-menu-input" placeholder="Senha" autocomplete="current-password" style="margin-bottom:4px;">
-                        <div style="display:flex; gap:6px; margin-bottom:4px;">
-                            <button id="btnLogin" class="pre-menu-btn pre-menu-btn-secondary" style="flex:1;font-size:14px;padding:10px;">Entrar</button>
-                            <button id="btnRegister" class="pre-menu-btn pre-menu-btn-secondary" style="flex:1;font-size:14px;padding:10px;">Cadastrar</button>
+
+                        <!-- Tela normal: login/registro -->
+                        <div id="authLoginForm">
+                            <label class="pre-menu-label">ENTRAR / REGISTRAR</label>
+                            <input type="email" id="authEmail" class="pre-menu-input" placeholder="seu@email.com" autocomplete="email" style="margin-bottom:6px;">
+                            <input type="password" id="authPassword" class="pre-menu-input" placeholder="Senha" autocomplete="current-password" style="margin-bottom:6px;">
+                            <div style="display:flex; gap:6px; margin-bottom:4px;">
+                                <button id="btnLogin" class="pre-menu-btn pre-menu-btn-secondary" style="flex:1;font-size:14px;padding:10px;">Entrar</button>
+                                <button id="btnRegister" class="pre-menu-btn pre-menu-btn-secondary" style="flex:1;font-size:14px;padding:10px;">Registrar</button>
+                            </div>
+                            <div style="text-align:center;margin-bottom:4px;">
+                                <button id="btnGoogleLogin" style="background:none;border:2px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:2px;cursor:pointer;font-size:13px;font-weight:600;transition:color .15s,border-color .15s;width:100%;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">🔵 Entrar com Google</button>
+                            </div>
+                            <button id="authForgotPassword" style="background:var(--ink);color:var(--surface);border:2px solid var(--ink);font-size:12px;padding:8px;display:block;width:100%;cursor:pointer;border-radius:2px;text-transform:uppercase;font-weight:700;letter-spacing:0.06em;transition:transform .12s ease, box-shadow .12s ease, background .12s ease, color .12s ease;" onmouseover="this.style.background='var(--surface)';this.style.color='var(--ink)'" onmouseout="this.style.background='var(--ink)';this.style.color='var(--surface)'">Esqueci minha senha</button>
                         </div>
-                        <div style="text-align:center;margin-bottom:4px;">
-                            <button id="btnGoogleLogin" style="background:none;border:2px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:2px;cursor:pointer;font-size:13px;font-weight:600;transition:color .15s,border-color .15s;width:100%;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">🔵 Entrar com Google</button>
+
+                        <!-- Tela de recuperacao de senha -->
+                        <div id="authResetPasswordForm" style="display:none;">
+                            <label class="pre-menu-label">RECUPERAR SENHA</label>
+                            <p style="font-size:13px;color:var(--muted);margin:0 0 8px;line-height:1.4;">Digite seu email e enviaremos um link para redefinir sua senha.</p>
+                            <input type="email" id="authResetEmail" class="pre-menu-input" placeholder="seu@email.com" autocomplete="email" style="margin-bottom:6px;">
+                            <button id="btnSendReset" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:16px;padding:12px 20px;font-weight:700;border:none;cursor:pointer;width:100%;margin-bottom:4px;">Enviar link de recuperacao</button>
                         </div>
+
                         <div id="authError" style="color:var(--accent);font-size:12px;font-weight:600;display:none;margin-top:4px;"></div>
                         <div id="authSuccess" style="color:var(--win);font-size:12px;font-weight:600;display:none;margin-top:4px;"></div>
                         <div id="authLoading" style="display:none;font-size:12px;color:var(--muted);text-align:center;margin-top:4px;">Aguarde...</div>
@@ -129,35 +143,24 @@
 
     </div>
 
-    <!-- ADMIN PANEL -->
+    <!-- ADMIN PANEL (overlay lateral) -->
     <div id="adminPanel" style="display:none;">
-
-        <div class="room-wrap">
-
-            <div class="lobby-header">
-                <h1>🛡️ Painel Admin</h1>
+        <div id="adminPanelBackdrop" class="admin-backdrop"></div>
+        <div class="admin-drawer">
+            <div class="admin-drawer-header">
+                <h2>🛡️ Painel Admin</h2>
+                <button id="btnFecharAdminDrawer" class="admin-drawer-close">&times;</button>
             </div>
-
-            <div class="lobby-card">
-
-                <div class="room-section" style="padding:0;">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                        <span style="font-size:14px;color:var(--muted);font-family:var(--body);font-weight:600;">Usuários cadastrados</span>
-                        <button id="btnRefreshProfiles" style="background:var(--accent);color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">⟳ Atualizar</button>
-                    </div>
-                    <div id="adminProfilesList" style="max-height:400px;overflow-y:auto;">
-                        <div class="open-rooms-empty">Clique em "Atualizar" para carregar.</div>
-                    </div>
+            <div class="admin-drawer-body">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                    <span style="font-size:14px;color:var(--muted);font-family:var(--body);font-weight:600;">Usuários cadastrados</span>
+                    <button id="btnRefreshProfiles" style="background:var(--accent);color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;">⟳ Atualizar</button>
                 </div>
-
-                <hr class="pre-menu-divider">
-
-                <button id="btnVoltarDeAdmin" class="pre-menu-btn btn-back-setup">← Voltar</button>
-
+                <div id="adminProfilesList" style="max-height:400px;overflow-y:auto;">
+                    <div class="open-rooms-empty">Clique em "Atualizar" para carregar.</div>
+                </div>
             </div>
-
         </div>
-
     </div>
 
     <!-- MULTIPLAYER - MENU DE SALAS -->
@@ -241,38 +244,48 @@
 
         <div class="lobby-wrap">
 
-            <div class="lobby-header">
-                <h1>🛡️ Sala de Espera</h1>
-                <div id="lobbyCode" class="lobby-code"></div>
+            <div class="lobby-left">
+
+                <div class="lobby-header">
+                    <h1>🛡️ Sala de Espera</h1>
+                    <div id="lobbyCode" class="lobby-code"></div>
+                </div>
+
+                <div class="lobby-card">
+                    <div class="lobby-section">
+                        <label class="pre-menu-label">JOGADORES NA SALA</label>
+                        <div id="lobbyPlayers" class="lobby-players">
+                            <div class="lobby-empty">Nenhum jogador conectado</div>
+                        </div>
+                    </div>
+
+                    <hr class="pre-menu-divider">
+
+                    <!-- Moderador: configurar / iniciar / fechar -->
+                    <div id="lobbyModArea" style="display:none;">
+                        <button id="btnConfigurarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;">⚙️ Configurar Draft</button>
+                        <button id="btnIniciarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🚀 Iniciar Draft</button>
+                        <button id="btnFecharSala" class="pre-menu-btn btn-back-setup" style="width:100%;margin-top:12px;">🔒 Fechar Sala</button>
+                    </div>
+                    <!-- Continuar mata-mata (visível para todos) -->
+                    <button id="btnResumeMataMata" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:18px;padding:14px 20px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🏆 Continuar Mata-Mata</button>
+
+                    <!-- Jogadores: aguardando -->
+                    <div id="lobbyWaitArea" style="display:block;">
+                        <p class="lobby-waiting">Aguardando o moderador configurar o draft...</p>
+                    </div>
+
+                    <hr class="pre-menu-divider">
+
+                    <button id="btnSairLobby" class="pre-menu-btn btn-back-setup">← Sair da sala</button>
+                </div>
+
             </div>
 
-            <div class="lobby-card">
-                <div class="lobby-section">
-                    <label class="pre-menu-label">JOGADORES NA SALA</label>
-                    <div id="lobbyPlayers" class="lobby-players">
-                        <div class="lobby-empty">Nenhum jogador conectado</div>
-                    </div>
-                </div>
-
-                <hr class="pre-menu-divider">
-
-                <!-- Moderador: configurar / iniciar / fechar -->
-                <div id="lobbyModArea" style="display:none;">
-                    <button id="btnConfigurarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;">⚙️ Configurar Draft</button>
-                    <button id="btnIniciarDraft" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:20px;padding:16px 24px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🚀 Iniciar Draft</button>
-                    <button id="btnFecharSala" class="pre-menu-btn btn-back-setup" style="width:100%;margin-top:12px;">🔒 Fechar Sala</button>
-                </div>
-                <!-- Continuar mata-mata (visível para todos) -->
-                <button id="btnResumeMataMata" class="pre-menu-btn" style="background:#c0392b;color:#fff;box-shadow:4px 4px 0 var(--shadow);font-size:18px;padding:14px 20px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;display:none;">🏆 Continuar Mata-Mata</button>
-
-                <!-- Jogadores: aguardando -->
-                <div id="lobbyWaitArea" style="display:block;">
-                    <p class="lobby-waiting">Aguardando o moderador configurar o draft...</p>
-                </div>
-
-                <hr class="pre-menu-divider">
-
-                <button id="btnSairLobby" class="pre-menu-btn btn-back-setup">← Sair da sala</button>
+            <!-- Painel de configurações (visível para todos) -->
+            <div id="lobbySettingsPanel" class="lobby-settings" style="display:none;">
+                <div class="lobby-settings-header">⚙️ Configuração do Draft</div>
+                <div id="lobbySettingsContent" class="lobby-settings-content"></div>
             </div>
 
         </div>
@@ -347,8 +360,13 @@
                         </select>
                     </div>
                     <div class="setting-field" id="mpSpecialChanceContainer" style="display:none; margin-top:6px;">
-                        <label>Chance de Icon/Hero (%)</label>
-                        <input type="number" id="mpSpecialChance" min="0" max="100" value="1" step="0.5">
+                        <label>Chance de Icon/Hero</label>
+                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                            <input type="number" id="mpSpecialChance" min="0" max="100" step="0.5" value="1.00" style="width:65px; text-align:center; padding:4px;">
+                            <span style="font-weight:700; color:var(--ink);">%</span>
+                        </div>
+                        <input type="range" id="mpSpecialChanceSlider" min="0" max="10000" value="100" style="width:100%;">
+                        <div id="mpSpecialChanceEstimate" style="font-size:10px; color:var(--muted); margin-top:4px; line-height:1.3; font-weight:600;"></div>
                     </div>
                 </div>
 

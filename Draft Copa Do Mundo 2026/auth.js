@@ -6,7 +6,8 @@ let authState = {
     user: null,
     session: null,
     loading: true,
-    isGuest: false
+    isGuest: false,
+    userLevel: null
 };
 
 function initAuth() {
@@ -21,13 +22,20 @@ function initAuth() {
         authState.session = session;
         authState.user = session?.user ?? null;
         authState.loading = false;
-        renderAuthUI();
+        if (authState.user) fetchUserLevel(authState.user.id).then(() => renderAuthUI());
+        else renderAuthUI();
     });
 
     supabase.auth.onAuthStateChange((event, session) => {
         authState.session = session;
         authState.user = session?.user ?? null;
-        renderAuthUI();
+        authState.userLevel = null;
+
+        if (event === "SIGNED_IN" && session?.user) {
+            fetchUserLevel(session.user.id).then(() => renderAuthUI());
+        } else {
+            renderAuthUI();
+        }
 
         if (event === "SIGNED_OUT") {
             authState.isGuest = false;
@@ -56,8 +64,22 @@ function isAdmin() {
 function getUserLevel() {
     if (!authState.user) return authState.isGuest ? "guest" : null;
     if (ADMIN_EMAILS.includes(authState.user.email)) return "admin";
+    if (authState.userLevel) return authState.userLevel;
     if (PREMIUM_EMAILS.includes(authState.user.email)) return "premium";
     return "common";
+}
+
+async function fetchUserLevel(userId) {
+    const supabase = initSupabase();
+    if (!supabase || !userId) return;
+    const { data } = await supabase
+        .from("profiles")
+        .select("level")
+        .eq("id", userId)
+        .single();
+    if (data?.level) {
+        authState.userLevel = data.level;
+    }
 }
 
 function canPlayOffline() {
@@ -216,6 +238,12 @@ async function handleRegister() {
     setAuthLoading(true);
 
     const supabase = initSupabase();
+    if (!supabase) {
+        showAuthError("Erro de conexao. Tente novamente.");
+        setAuthLoading(false);
+        return;
+    }
+
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -227,7 +255,10 @@ async function handleRegister() {
     });
 
     if (error) {
-        showAuthError(translateAuthError(error.message));
+        console.error("[Register error]", error);
+        const msg = error?.message || error?.error_description || error?.code || "Erro no servidor. Verifique se o Supabase esta ativo.";
+        if (msg === "{}") showAuthError("Erro no servidor. Verifique o console (F12) para detalhes.");
+        else showAuthError(translateAuthError(msg));
         return;
     }
 
@@ -235,7 +266,6 @@ async function handleRegister() {
         showAuthSuccess("Email ja cadastrado. Faca login.");
     } else {
         showAuthSuccess("Cadastro realizado! Verifique seu email para confirmar.");
-        renderAuthUI();
     }
 }
 
@@ -254,7 +284,10 @@ async function handleLogin() {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-        showAuthError(translateAuthError(error.message));
+        console.error("[Login error]", error);
+        const msg = error?.message || error?.error_description || error?.code || "Erro no servidor. Verifique se o Supabase esta ativo.";
+        if (msg === "{}") showAuthError("Erro no servidor. Verifique o console (F12) para detalhes.");
+        else showAuthError(translateAuthError(msg));
         return;
     }
 
@@ -298,14 +331,12 @@ function atualizarBotaoAdmin() {
 }
 
 function mpAbrirAdminPanel() {
-    document.getElementById("preMenu").style.display = "none";
     document.getElementById("adminPanel").style.display = "block";
     mpListarProfiles();
 }
 
 function mpFecharAdminPanel() {
     document.getElementById("adminPanel").style.display = "none";
-    document.getElementById("preMenu").style.display = "block";
 }
 
 async function mpListarProfiles() {
@@ -341,11 +372,14 @@ async function mpListarProfiles() {
                     ${profile.created_at ? " • " + new Date(profile.created_at).toLocaleDateString("pt-BR") : ""}
                 </span>
             </div>
-            ${profile.email !== "guilherme_marchese@hotmail.com" ? `
-            <select class="admin-level-select" data-profile-id="${profile.id}" data-current="${profile.level}">
-                <option value="common" ${profile.level === "common" ? "selected" : ""}>🎮 Comum</option>
-                <option value="premium" ${profile.level === "premium" ? "selected" : ""}>⭐ Premium</option>
-            </select>` : '<span style="font-size:11px;color:var(--accent);font-weight:700;">👑 ADMIN</span>'}
+            <div style="display:flex;align-items:center;gap:6px;">
+                ${profile.email !== "guilherme_marchese@hotmail.com" ? `
+                <select class="admin-level-select" data-profile-id="${profile.id}" data-current="${profile.level}">
+                    <option value="common" ${profile.level === "common" ? "selected" : ""}>🎮 Comum</option>
+                    <option value="premium" ${profile.level === "premium" ? "selected" : ""}>⭐ Premium</option>
+                </select>
+                <button class="admin-delete-btn" data-profile-id="${profile.id}" data-profile-email="${profile.email}" title="Deletar ${profile.email}">✕</button>` : '<span style="font-size:11px;color:var(--accent);font-weight:700;">👑 ADMIN</span>'}
+            </div>
         </div>
     `).join("");
 }
@@ -363,6 +397,40 @@ async function mpAlterarNivel(profileId, novoNivel) {
         toast("❌ Erro ao alterar nível: " + error.message, 3000);
     } else {
         toast("✅ Nível alterado!", 2000);
+        mpListarProfiles();
+    }
+}
+
+async function mpDeletarProfile(profileId, email) {
+    if (!confirm(`Tem certeza que deseja deletar "${email}"?\n\nIsso remove o perfil e a conta de usuário permanentemente.`)) return;
+
+    const supabase = initSupabase();
+    if (!supabase) return;
+
+    // Tenta usar a função RPC admin_delete_user (se existir no banco)
+    const { error: rpcError } = await supabase.rpc("admin_delete_user", {
+        target_user_id: profileId
+    });
+
+    if (rpcError) {
+        // Fallback: tenta deletar só da tabela profiles
+        if (rpcError.message && rpcError.message.includes("function not found")) {
+            const { error: delError } = await supabase
+                .from("profiles")
+                .delete()
+                .eq("id", profileId);
+
+            if (delError) {
+                toast("❌ Erro ao deletar: " + delError.message, 3000);
+            } else {
+                toast("✅ Perfil deletado! O usuario ainda existe em auth.users — delete manualmente no Supabase Dashboard se necessario.", 4000);
+                mpListarProfiles();
+            }
+        } else {
+            toast("❌ Erro ao deletar: " + rpcError.message, 3000);
+        }
+    } else {
+        toast("✅ Usuário deletado com sucesso!", 2000);
         mpListarProfiles();
     }
 }
@@ -385,22 +453,94 @@ async function handleGoogleLogin() {
     setAuthLoading(true);
 
     const supabase = initSupabase();
-    const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-            redirectTo: window.location.origin + window.location.pathname
+    if (!supabase) {
+        showAuthError("Supabase nao configurado.");
+        setAuthLoading(false);
+        return;
+    }
+
+    try {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: window.location.origin + window.location.pathname,
+                queryParams: {
+                    access_type: "offline",
+                    prompt: "consent"
+                }
+            }
+        });
+
+        if (error) {
+            console.error("[Google OAuth]", error);
+            if (error.message && error.message.includes("provider is not enabled")) {
+                showAuthError("Login Google nao configurado no Supabase. Use email/senha ou configure em Authentication > Providers.");
+            } else {
+                showAuthError("Erro: " + (error.message || "desconhecido"));
+            }
+            setAuthLoading(false);
         }
+        // Se não houve erro, o navegador redireciona para o Google
+    } catch (err) {
+        console.error("[Google OAuth exception]", err);
+        showAuthError("Erro inesperado: " + (err.message || "desconhecido"));
+        setAuthLoading(false);
+    }
+}
+
+// ─── RECUPERACAO DE SENHA ────────────────────────────────────────────────────
+
+function authMostrarFormRecuperacao() {
+    document.getElementById("authLoginForm").style.display = "none";
+    document.getElementById("authResetPasswordForm").style.display = "block";
+    document.getElementById("authResetEmail").value = document.getElementById("authEmail").value;
+    const errEl = document.getElementById("authError");
+    const sucEl = document.getElementById("authSuccess");
+    if (errEl) errEl.style.display = "none";
+    if (sucEl) sucEl.style.display = "none";
+}
+
+function authVoltarAoLogin() {
+    document.getElementById("authResetPasswordForm").style.display = "none";
+    document.getElementById("authLoginForm").style.display = "block";
+    const errEl = document.getElementById("authError");
+    const sucEl = document.getElementById("authSuccess");
+    if (errEl) errEl.style.display = "none";
+    if (sucEl) sucEl.style.display = "none";
+}
+
+async function handleForgotPassword() {
+    const email = document.getElementById("authResetEmail")?.value.trim();
+
+    if (!email || !isValidEmail(email)) {
+        showAuthError("Digite um email valido.");
+        return;
+    }
+
+    setAuthLoading(true);
+
+    const supabase = initSupabase();
+    if (!supabase) {
+        setAuthLoading(false);
+        return;
+    }
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + window.location.pathname
     });
 
+    setAuthLoading(false);
+
     if (error) {
-        if (error.message && error.message.includes("provider is not enabled")) {
-            showAuthError("Login Google nao configurado no Supabase. Use email/senha ou configure em Authentication > Providers.");
-        } else {
-            showAuthError(translateAuthError(error.message));
-        }
+        console.error("[ForgotPassword error]", error);
+        const msg = error?.message || error?.error_description || error?.code || "Erro no servidor. Verifique se o Supabase esta ativo.";
+        if (msg === "{}") showAuthError("Erro no servidor. Verifique o console (F12) para detalhes.");
+        else showAuthError(translateAuthError(msg));
+        return;
     }
-    // Se não houve erro, o navegador redireciona para o Google
-    // Ao voltar, o onAuthStateChange tratará
+
+    authVoltarAoLogin();
+    showAuthSuccess("Email enviado! Verifique sua caixa de entrada (e a pasta de spam).");
 }
 
 // ─── EVENTOS ─────────────────────────────────────────────────────────────────
@@ -426,6 +566,15 @@ document.addEventListener("click", function (e) {
         handleGoogleLogin();
         return;
     }
+    if (e.target.id === "authForgotPassword" || e.target.closest("#authForgotPassword")) {
+        e.preventDefault();
+        authMostrarFormRecuperacao();
+        return;
+    }
+    if (e.target.id === "btnSendReset" || e.target.closest("#btnSendReset")) {
+        handleForgotPassword();
+        return;
+    }
     if (e.target.id === "btnContinuarConvidado" || e.target.closest("#btnContinuarConvidado")) {
         handleContinuarConvidado();
         return;
@@ -433,19 +582,29 @@ document.addEventListener("click", function (e) {
     if (e.target.id === "btnLogarRegistrar" || e.target.closest("#btnLogarRegistrar")) {
         document.getElementById("preMenu").style.display = "none";
         document.getElementById("authScreen").style.display = "block";
+        authVoltarAoLogin();
         renderAuthUI();
         return;
     }
     if (e.target.id === "btnVoltarDeAuth" || e.target.closest("#btnVoltarDeAuth")) {
-        document.getElementById("authScreen").style.display = "none";
-        document.getElementById("preMenu").style.display = "block";
+        const resetForm = document.getElementById("authResetPasswordForm");
+        if (resetForm && resetForm.style.display !== "none") {
+            authVoltarAoLogin();
+        } else {
+            document.getElementById("authScreen").style.display = "none";
+            document.getElementById("preMenu").style.display = "block";
+        }
         return;
     }
     if (e.target.id === "btnAdminPanel" || e.target.closest("#btnAdminPanel")) {
         mpAbrirAdminPanel();
         return;
     }
-    if (e.target.id === "btnVoltarDeAdmin" || e.target.closest("#btnVoltarDeAdmin")) {
+    if (e.target.id === "btnFecharAdminDrawer" || e.target.closest("#btnFecharAdminDrawer")) {
+        mpFecharAdminPanel();
+        return;
+    }
+    if (e.target.id === "adminPanelBackdrop") {
         mpFecharAdminPanel();
         return;
     }
@@ -455,6 +614,12 @@ document.addEventListener("click", function (e) {
     }
     if (e.target.classList.contains("admin-level-select")) {
         // Não fazer nada no click, apenas abrir o dropdown
+        return;
+    }
+    if (e.target.classList.contains("admin-delete-btn")) {
+        const profileId = e.target.dataset.profileId;
+        const profileEmail = e.target.dataset.profileEmail;
+        if (profileId) mpDeletarProfile(profileId, profileEmail);
         return;
     }
 });

@@ -123,6 +123,8 @@ async function mpEntrarSala(code, playerName) {
         mpState.roomCode = code;
         mpState.playerId = meuRegistroExistente.id;
         mpState.isModerator = meuRegistroExistente.is_moderator;
+        mpState.settings = room.settings || {};
+        mpState.roomStatus = room.status || "waiting";
         modoAtual = meuRegistroExistente.is_moderator ? MODO.ONLINE_MODERATOR : MODO.ONLINE_PLAYER;
         mpMarcarMultiplayer();
         return { room, player: meuRegistroExistente, code };
@@ -149,6 +151,8 @@ async function mpEntrarSala(code, playerName) {
     mpState.roomCode = code;
     mpState.playerId = player.id;
     mpState.isModerator = false;
+    mpState.settings = room.settings || {};
+    mpState.roomStatus = room.status || "waiting";
     modoAtual = MODO.ONLINE_PLAYER;
     mpMarcarMultiplayer();
 
@@ -231,6 +235,14 @@ function mpIniciarLobby() {
             setTimeout(() => {
                 mpKickarJogador();
             }, 2000);
+        }
+    });
+
+    channel.on("broadcast", { event: "settings_updated" }, (payload) => {
+        if (!mpState.isModerator && payload.payload) {
+            mpState.settings = payload.payload;
+            mpState.roomStatus = "configuring";
+            mpRenderizarLobby();
         }
     });
 
@@ -343,7 +355,44 @@ function mpSairSala() {
 
 // ─── LOBBY UI ────────────────────────────────────────────────────────────────
 
+let _mpUltimaBuscaSettings = 0;
+
+async function mpBuscarSettings() {
+    const supabase = initSupabase();
+    if (!supabase || !mpState.roomId) return;
+    const agora = Date.now();
+    if (agora - _mpUltimaBuscaSettings < 2000) return; // evitar spam
+    _mpUltimaBuscaSettings = agora;
+    const { data } = await supabase
+        .from("rooms")
+        .select("settings, status")
+        .eq("id", mpState.roomId)
+        .single();
+    if (data) {
+        mpState.settings = data.settings || {};
+        mpState.roomStatus = data.status;
+    }
+}
+
 function mpRenderizarLobby() {
+    // Buscar settings frescas do banco para nao-moderadores
+    if (!mpState.isModerator && mpState.roomId) {
+        mpBuscarSettings().then(() => {
+            // Re-renderiza o painel de config apos buscar
+            mpRenderizarConfigPanel();
+            // Atualizar texto de aguardo
+            const waitText = document.querySelector(".lobby-waiting");
+            if (waitText) {
+                const temConfig = mpState.settings && Object.keys(mpState.settings).length > 0;
+                if (temConfig && mpState.roomStatus !== "waiting") {
+                    waitText.textContent = "O moderador já configurou o draft. Aguarde o início...";
+                } else {
+                    waitText.textContent = "Aguardando o moderador configurar o draft...";
+                }
+            }
+        });
+    }
+
     // Código da sala
     const codeEl = document.getElementById("lobbyCode");
     if (codeEl && mpState.roomCode) {
@@ -390,7 +439,8 @@ function mpRenderizarLobby() {
             // Se já tem configuração salva, mostrar "Iniciar Draft"
             const temConfig = mpState.settings && Object.keys(mpState.settings).length > 0;
             const temMataMata = mpState.settings && mpState.settings.mataMata;
-            if (configBtn) configBtn.style.display = temConfig && !temMataMata ? "none" : "block";
+            // Mostra ambos os botões se tem config, para permitir re-editar
+            if (configBtn) configBtn.style.display = temMataMata ? "none" : "block";
             if (startBtn) startBtn.style.display = temConfig && !temMataMata ? "block" : "none";
             // Mostrar botão de continuar mata-mata para todos se houver dados
             if (resumeBtn) {
@@ -406,13 +456,16 @@ function mpRenderizarLobby() {
                     // Mostrar botão para P2 também
                     if (resumeBtn) resumeBtn.style.display = "block";
                 } else if (mpState.roomStatus === "configuring" || (mpState.settings && Object.keys(mpState.settings).length > 0)) {
-                    waitText.textContent = "O moderador está configurando o draft...";
+                    waitText.textContent = "O moderador já configurou o draft. Aguarde o início...";
                 } else {
                     waitText.textContent = "Aguardando o moderador configurar o draft...";
                 }
             }
         }
     }
+
+    // Renderizar painel de configurações
+    mpRenderizarConfigPanel();
 }
 
 // ─── NAVEGAÇÃO DE SALAS ───────────────────────────────────────────────────────
@@ -429,6 +482,57 @@ function mpAbrirMenuSalas() {
 function mpFecharMenuSalas() {
     document.getElementById("roomMenu").style.display = "none";
     document.getElementById("preMenu").style.display = "block";
+}
+
+function mpRenderizarConfigPanel() {
+    const panel = document.getElementById("lobbySettingsPanel");
+    const content = document.getElementById("lobbySettingsContent");
+    if (!panel || !content) return;
+
+    const s = mpState.settings;
+    const temConfig = s && Object.keys(s).length > 0 && !s.mataMata;
+    if (!temConfig) {
+        panel.style.display = "none";
+        return;
+    }
+
+    panel.style.display = "block";
+
+    const mapFase = {
+        round32: "Dezesseis-avos de final (32)",
+        round16: "Oitavas de final (16)",
+        quarterfinals: "Quartas de final (8)",
+        semifinals: "Semifinal (4)",
+        final: "Final (2)"
+    };
+
+    const mapIcons = {
+        none: "Nenhum",
+        icons: "Só Icons",
+        heroes: "Só Heroes",
+        both: "Icons + Heroes"
+    };
+
+    const itens = [
+        { label: "Formato", value: s.draftMode === "snake" ? "Snake" : "Circular" },
+        { label: "Fase inicial", value: mapFase[s.startingPhase] || s.startingPhase },
+        { label: "Regra goleiros", value: s.goalkeeperRule ? "Ativada" : "Desativada" },
+        { label: "Jogadores/elenco", value: String(s.playersPerTeam) },
+        { label: "Refreshes", value: String(s.refreshCount) },
+        { label: "Icons & Heroes", value: mapIcons[s.iconsHeroesMode] || s.iconsHeroesMode },
+    ];
+
+    if (s.iconsHeroesMode && s.iconsHeroesMode !== "none" && s.poolSpecialChance !== undefined) {
+        const pct = (s.poolSpecialChance * 100).toFixed(1);
+        itens.push({ label: "Chance especial", value: pct + "%" });
+    }
+
+    content.innerHTML = itens.map(item => `
+        <div class="lobby-setting-item">
+            <span class="lobby-setting-label">${item.label}</span>
+            <span class="lobby-setting-value">${item.value}</span>
+        </div>
+    `).join("");
 }
 
 function mpAbrirLobby() {
@@ -452,6 +556,26 @@ function mpFecharLobby() {
 
 // ─── CONFIGURAÇÃO DO DRAFT (moderador) ────────────────────────────────────────
 
+let _mpConfigHandlersSet = false;
+
+function mpAtualizarEstimativaIconsHeroes() {
+    const estimateEl = document.getElementById("mpSpecialChanceEstimate");
+    const iconsSelect = document.getElementById("mpIconsHeroesMode");
+    const slider = document.getElementById("mpSpecialChanceSlider");
+    if (!estimateEl || !slider || !iconsSelect) return;
+    const modo = iconsSelect.value;
+    if (modo === "none") {
+        estimateEl.textContent = "";
+        return;
+    }
+    const chance = parseInt(slider.value, 10) / 100; // 0-10000 → 0-100 (%)
+    const porElenco = parseInt(document.getElementById("mpPlayersPerTeam")?.value || "18", 10);
+    const mediaPorElenco = (porElenco * chance) / 100;
+    const formatado = mediaPorElenco.toFixed(1);
+    const tipoLabel = modo === "icons" ? "icones" : modo === "heroes" ? "herois" : "icones+herois";
+    estimateEl.textContent = "Média estimada: ~" + formatado + " " + tipoLabel + " por equipe";
+}
+
 function mpAbrirConfig() {
     document.getElementById("lobby").style.display = "none";
     document.getElementById("draftConfig").style.display = "block";
@@ -462,8 +586,34 @@ function mpAbrirConfig() {
         chanceContainer.style.display = iconsSelect.value === "none" ? "none" : "block";
         iconsSelect.addEventListener("change", () => {
             chanceContainer.style.display = iconsSelect.value === "none" ? "none" : "block";
+            mpAtualizarEstimativaIconsHeroes();
         });
     }
+
+    // Sincronizar slider <-> input (apenas uma vez)
+    if (!_mpConfigHandlersSet) {
+        _mpConfigHandlersSet = true;
+        const slider = document.getElementById("mpSpecialChanceSlider");
+        const input = document.getElementById("mpSpecialChance");
+        if (slider && input) {
+            slider.addEventListener("input", () => {
+                const pct = parseInt(slider.value, 10) / 100;
+                input.value = pct.toFixed(2);
+                mpAtualizarEstimativaIconsHeroes();
+            });
+            input.addEventListener("input", () => {
+                const pct = Math.min(100, Math.max(0, parseFloat(input.value) || 0));
+                slider.value = Math.round(pct * 100);
+                mpAtualizarEstimativaIconsHeroes();
+            });
+        }
+        // Atualizar estimativa ao mudar jogadores/elenco
+        const playersPerTeam = document.getElementById("mpPlayersPerTeam");
+        if (playersPerTeam) {
+            playersPerTeam.addEventListener("change", mpAtualizarEstimativaIconsHeroes);
+        }
+    }
+    mpAtualizarEstimativaIconsHeroes();
 }
 
 function mpFecharConfig() {
@@ -497,8 +647,20 @@ async function mpSalvarConfig() {
 
     mpState.settings = settings;
     mpState.roomStatus = "configuring";
+
+    // Notificar todos os jogadores na sala sobre as novas configs
+    if (mpState.channel) {
+        mpState.channel.send({
+            type: "broadcast",
+            event: "settings_updated",
+            payload: settings
+        });
+    }
+
     toast("✅ Configuração salva!", 2000);
     mpFecharConfig();
+    // Re-renderizar lobby pra mostrar botao "Iniciar Draft" e painel de config
+    mpRenderizarLobby();
 }
 
 async function mpIniciarDraftOnline() {
@@ -552,9 +714,13 @@ function mpArrancarDraft(players, ordemEmbaralhada, settingsOverride) {
     const nomes = players.map(p => p.player_name);
     const qtd = nomes.length;
 
-    // Descobrir qual índice sou eu
-    const meuNome = (document.getElementById("prePlayerName")?.value || localStorage.getItem(PRE_MENU_KEY) || "").trim();
-    mpState.myPlayerIndex = players.findIndex(p => p.player_name === meuNome);
+    // Descobrir qual índice sou eu pelo ID único (room_players.id)
+    mpState.myPlayerIndex = players.findIndex(p => String(p.id) === String(mpState.playerId));
+    if (mpState.myPlayerIndex < 0) {
+        // Fallback: buscar pelo nome (para salas antigas sem ID)
+        const meuNome = (document.getElementById("prePlayerName")?.value || localStorage.getItem(PRE_MENU_KEY) || "").trim();
+        mpState.myPlayerIndex = players.findIndex(p => p.player_name === meuNome);
+    }
     if (mpState.myPlayerIndex < 0) mpState.myPlayerIndex = 0;
 
     // Usar settings do broadcast (multiplayer) ou do mpState
@@ -769,7 +935,7 @@ function mpDesabilitarResults() {
 // ─── INTERCEPTADOR GLOBAL: bloqueia cliques no mata-mata para não-moderadores ──
 
 document.addEventListener("click", function (e) {
-    if (modoAtual === MODO.OFFLINE || mpState.isModerator) return;
+    if (modoAtual !== MODO.ONLINE_PLAYER || mpState.isModerator) return;
     // Se clicou em algo dentro do mata-mata ou resultados, bloquear ação
     const areaMata = document.getElementById("mataMataArea");
     const areaResults = document.getElementById("resultsArea");
@@ -1081,11 +1247,11 @@ async function mpListarSalasAbertas() {
     // Só mostrar salas criadas nas últimas 2 horas
     const duasHorasAtras = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
 
-    // Buscar salas com status "waiting"
+    // Buscar salas com status "waiting" ou "configuring"
     const { data: rooms, error } = await supabase
         .from("rooms")
-        .select("id, code, created_at")
-        .eq("status", "waiting")
+        .select("id, code, created_at, status")
+        .in("status", ["waiting", "configuring"])
         .gte("created_at", duasHorasAtras)
         .order("created_at", { ascending: false });
 
@@ -1113,6 +1279,7 @@ async function mpListarSalasAbertas() {
             <div class="open-room-info">
                 <span class="open-room-code">${room.code}</span>
                 <span class="open-room-players">👤 ${room.playerCount}</span>
+                ${room.status === "configuring" ? '<span style="font-size:10px;color:var(--accent-2);font-weight:700;margin-left:6px;">⚙️</span>' : ''}
             </div>
             <button class="open-room-enter-btn" data-code="${room.code}">Entrar</button>
         </div>
