@@ -714,9 +714,13 @@ function mpArrancarDraft(players, ordemEmbaralhada, settingsOverride) {
     const nomes = players.map(p => p.player_name);
     const qtd = nomes.length;
 
-    // Descobrir qual índice sou eu
-    const meuNome = (document.getElementById("prePlayerName")?.value || localStorage.getItem(PRE_MENU_KEY) || "").trim();
-    mpState.myPlayerIndex = players.findIndex(p => p.player_name === meuNome);
+    // Descobrir qual índice sou eu pelo ID único (room_players.id)
+    mpState.myPlayerIndex = players.findIndex(p => String(p.id) === String(mpState.playerId));
+    if (mpState.myPlayerIndex < 0) {
+        // Fallback: buscar pelo nome (para salas antigas sem ID)
+        const meuNome = (document.getElementById("prePlayerName")?.value || localStorage.getItem(PRE_MENU_KEY) || "").trim();
+        mpState.myPlayerIndex = players.findIndex(p => p.player_name === meuNome);
+    }
     if (mpState.myPlayerIndex < 0) mpState.myPlayerIndex = 0;
 
     // Usar settings do broadcast (multiplayer) ou do mpState
@@ -931,7 +935,7 @@ function mpDesabilitarResults() {
 // ─── INTERCEPTADOR GLOBAL: bloqueia cliques no mata-mata para não-moderadores ──
 
 document.addEventListener("click", function (e) {
-    if (modoAtual === MODO.OFFLINE || mpState.isModerator) return;
+    if (modoAtual !== MODO.ONLINE_PLAYER || mpState.isModerator) return;
     // Se clicou em algo dentro do mata-mata ou resultados, bloquear ação
     const areaMata = document.getElementById("mataMataArea");
     const areaResults = document.getElementById("resultsArea");
@@ -939,7 +943,7 @@ document.addEventListener("click", function (e) {
     if (!alvo) return;
 
     // Botoes liberados para não-moderadores
-    const liberados = ["backToResults", "exportDraft", "goToMataMata", "resetFromResults"];
+    const liberados = ["backToResults", "exportDraft", "goToMataMata", "resetFromResults", "copyResults"];
     if (liberados.includes(e.target.id)) return;
 
     // Qualquer outro clique em área restrita → bloquear

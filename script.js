@@ -1522,10 +1522,13 @@ function gerarPool() {
     }
 
     // Preenche os slots restantes com chance configurável de especial
+    let attempts = 0;
     while (
         poolAtual.length < 5 &&
-        (normais.length > 0 || especiais.length > 0)
+        (normais.length > 0 || especiais.length > 0) &&
+        attempts < 100
     ) {
+        attempts++;
 
         const sortearEspecial =
             especiais.length > 0 &&
@@ -2117,9 +2120,9 @@ function mostrarResultadoFinal() {
                 for (let idx = 0; idx < times.length; idx++) {
                     const teamName = paisParticipante[idx] || "";
                     const teamId = TEAM_MAP[teamName.toLowerCase()] || TEAM_MAP[teamName] || 0;
-                    if (!teamId) { toast("Teamid não encontrado para: " + teamName); return; }
+                    if (!teamId) { toast("⚠️ Teamid não encontrado para: " + teamName + " — time pulado"); continue; }
                     for (const j of times[idx]) {
-                        if (!j.playerid) { toast("Jogador sem playerid: " + j.nome); return; }
+                        if (!j.playerid) { toast("⚠️ Jogador sem playerid: " + j.nome + " — time pulado"); continue; }
                     }
                     draftTeams.set(String(teamId), times[idx]);
                 }
