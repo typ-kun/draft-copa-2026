@@ -79,7 +79,11 @@ function tocarSomNivel() {
 
 function iniciarMonitorNivel(userId) {
     const supabase = initSupabase();
-    if (!supabase || !userId) return;
+    if (!supabase || !userId) {
+        console.log("[Nivel] initSupabase falhou ou sem userId", {supabase, userId});
+        return;
+    }
+    console.log("[Nivel] Configurando monitor para userId:", userId);
 
     if (nivelChannel) {
         supabase.removeChannel(nivelChannel);
@@ -96,15 +100,19 @@ function iniciarMonitorNivel(userId) {
                 filter: `id=eq.${userId}`
             },
             (payload) => {
+                console.log("[Nivel] Mudanca detectada!", payload);
                 const novoNivel = payload.new?.level;
                 const nivelAnterior = payload.old?.level || authState.userLevel;
+                console.log("[Nivel]", {userId, nivelAnterior, novoNivel, userLevel: authState.userLevel});
                 if (!novoNivel || novoNivel === nivelAnterior) return;
 
                 authState.userLevel = novoNivel;
                 mostrarAlteracaoNivel(novoNivel);
             }
         )
-        .subscribe();
+        .subscribe((status) => {
+            console.log("[Nivel] Status da subscription:", status);
+        });
 }
 
 function pararMonitorNivel() {
