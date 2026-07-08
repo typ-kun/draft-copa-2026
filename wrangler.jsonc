@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "draft-copa-2026",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-07-08",
+  "assets": {
+    "directory": "Draft Copa Do Mundo 2026",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  }
+}
