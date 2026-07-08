@@ -37,7 +37,7 @@ Sistema completo para organizar campeonatos Fantasy de futebol entre amigos, int
 
 ### Painel Admin
 - Lista de usuários cadastrados
-- Alterar nível (Comum ↔ Premium)
+- Alterar nível (Comum ↔ Premium) com notificação em tempo real
 - Apenas o Admin tem acesso
 
 ---
@@ -47,7 +47,69 @@ Sistema completo para organizar campeonatos Fantasy de futebol entre amigos, int
 - **Frontend:** HTML + CSS + JavaScript puro
 - **Backend:** Supabase (Auth, Realtime, PostgreSQL)
 - **Estilo:** Design próprio, suporte a dark/light mode
+- **Hospedagem:** Cloudflare Workers + Static Assets
 - **Som:** Clique sonoro toggleável
+
+---
+
+## ☁️ Cloudflare Workers (Deploy)
+
+O site é hospedado no **Cloudflare Workers** usando **Static Assets**.
+
+### URL do Worker
+```
+https://draft-copa-2026.typkun.workers.dev
+```
+
+### Domínio customizado
+```
+https://draft26.com.br/
+```
+
+### Configuração (`wrangler.jsonc`)
+
+```jsonc
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "draft-copa-2026",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-07-08",
+  "assets": {
+    "directory": "Draft Copa Do Mundo 2026",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  }
+}
+```
+
+A pasta `Draft Copa Do Mundo 2026/` contém todos os arquivos estáticos do site (HTML, CSS, JS, imagens). O Worker (`src/worker.js`) apenas serve esses assets:
+
+```js
+export default {
+  async fetch(request, env, ctx) {
+    return env.ASSETS.fetch(request);
+  }
+};
+```
+
+### Como fazer deploy manual
+
+```bash
+cd C:\draft-copa-do-mundo-2026
+npx wrangler deploy
+```
+
+### Deploy automático via GitHub
+
+Um token de API do Cloudflare está configurado no repositório para deploy via GitHub Actions (opcional).
+
+### Migração do Cloudflare Pages
+
+> **Histórico:** O site estava originalmente no Cloudflare Pages, mas o Pages não estava publicando os arquivos estáticos corretamente via Git Integration (os builds passavam mas os deployments ficavam vazios). Migramos para Workers Static Assets, que é a abordagem recomendada atualmente pela Cloudflare para projetos novos. A migration incluiu:
+> - Criação do `wrangler.jsonc` com configuração de assets
+> - Criação do `src/worker.js` (servidor HTTP mínimo)
+> - Deploy via `npx wrangler deploy`
+> - Domínio `draft26.com.br` apontado para o Worker
 
 ---
 
@@ -55,12 +117,14 @@ Sistema completo para organizar campeonatos Fantasy de futebol entre amigos, int
 
 ```
 draft-copa-do-mundo-2026/
-├── Draft Copa Do Mundo 2026/
+├── wrangler.jsonc              → Config do Cloudflare Worker
+├── src/worker.js               → Worker script (serve assets)
+├── Draft Copa Do Mundo 2026/   → Site (HTML/CSS/JS)
 │   ├── index.html              → Página principal
 │   ├── script.js               → Lógica do jogo (draft, mata-mata)
 │   ├── multiplayer.js          → Modo multiplayer (Supabase Realtime)
-│   ├── auth.js                 → Login, registro, admin
-│   ├── style.css               → Estilos completos
+│   ├── auth.js                 → Login, registro, admin, monitor de nível
+│   ├── style.css               → Estilos completos (light/dark)
 │   ├── supabase-config.js      → Configuração do Supabase
 │   ├── auth.sql                → SQL para configurar o banco
 │   └── assets/                 → Logos, ícones, bandeiras
@@ -72,10 +136,10 @@ draft-copa-do-mundo-2026/
 
 ## ⚡ Como Usar
 
-1. **Abrir o app** — `Abrir Draft.bat` ou pelo GitHub Pages
+1. **Abrir o app** — `https://draft26.com.br/`
 2. **Logar / Registrar** — ou continuar como convidado
 3. **Offline** — configurar draft local com amigos no mesmo PC
-4. **Multiplayer** — criar sala (Admin/Premium) ou entrar com código
+4. **Multiplayer** — criar sala (Admin apenas) ou entrar com código
 5. **Draft** — cada participante escolhe jogadores para seu time
 6. **Exportar** — gerar JSON e importar no EA FC 26 via SaveEditor
 
@@ -91,31 +155,57 @@ Isso cria:
 - RLS policies para segurança
 - Define o Admin pelo email
 
+### Publicações Realtime
+
+Para as notificações de nível e multiplayer funcionarem, a publicação `supabase_realtime` precisa ter as tabelas marcadas:
+
+- ✅ `profiles`
+- ✅ `rooms`
+- ✅ `room_players`
+
+(Vá em **Supabase Dashboard → Database → Publications → supabase_realtime**)
+
 ---
 
 ## 🔧 Manutenção
 
 **Adicionar Premium:**
-Edite `auth.js` e adicione o email no array `PREMIUM_EMAILS`, ou use o Painel Admin.
+No Painel Admin (botão 👑 flutuante), ou no Supabase SQL Editor:
+```sql
+UPDATE profiles SET level = 'premium' WHERE email = 'email@exemplo.com';
+```
 
 **Adicionar Admin:**
-No Supabase SQL Editor:
 ```sql
 UPDATE profiles SET level = 'admin' WHERE email = 'email@exemplo.com';
 ```
 
+**Obter API Token do Cloudflare:**
+O token de API pode ser gerenciado em [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens). Permissões necessárias:
+- `Workers Scripts:Edit`
+- `Workers R2 Storage:Edit`
+- `Cloudflare Pages:Edit` (caso ainda use Pages)
+
 ---
 
-## 📝 Changelog (06/07/2026)
+## 📝 Changelog
 
+### 08/07/2026
+- ✅ Migração de Cloudflare Pages → Workers Static Assets
+- ✅ Notificação de nível refatorada (agora notifica qualquer alteração, não só level up)
+- ✅ Designs dos modais padronizados com o tema do site
+- ✅ Monitor de nível via Realtime (com logs de debug no console)
+
+### 06-07/07/2026
 - ✅ Sistema de login/registro (email + Google)
 - ✅ 3 níveis de privilégio (Admin, Premium, Comum)
 - ✅ Painel Admin para gerenciar usuários
 - ✅ Tela dedicada "Salas Abertas" com refresh
-- ✅ Botão "Fechar Sala" e "Kickar jogador" no lobby
-- ✅ Som de clique toggleável
-- ✅ Toast melhor posicionado e estilizado
-- ✅ Logo consistente entre telas
-- ✅ Modo offline e criar sala bloqueados sem permissão
-- ✅ Corrigido Neuer como jogador normal
-- ✅ Copiar escalações funciona em mobile
+- ✅ Som de clique e notificação de level up
+
+---
+
+## 👤 Créditos
+
+Desenvolvido por: **Guilherme (@typ-kun)**  
+Julho de 2026
